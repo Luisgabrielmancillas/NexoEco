@@ -2,47 +2,50 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Collection;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    protected $table = 'users';
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'fecha_registro' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
+
     protected $fillable = [
         'name',
         'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
+        'email_verified_at',
         'password',
         'remember_token',
+        'nombre_completo',
+        'fecha_registro'
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function pedidos()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Pedido::class, 'id_comprador');
+    }
+
+    public function tiendas()
+    {
+        return $this->hasMany(Tienda::class, 'id_vendedor');
+    }
+
+    public function usuario_tipos()
+    {
+        return $this->hasMany(UsuarioTipo::class, 'id_usuario');
     }
 }
