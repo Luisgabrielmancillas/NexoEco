@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Collection;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -34,6 +33,7 @@ class User extends Authenticatable
         'fecha_registro'
     ];
 
+    // Relación otros módulos
     public function pedidos()
     {
         return $this->hasMany(Pedido::class, 'id_comprador');
@@ -44,8 +44,14 @@ class User extends Authenticatable
         return $this->hasMany(Tienda::class, 'id_vendedor');
     }
 
-    public function usuario_tipos()
+    // 🔥 RELACIÓN CORRECTA DE ROLES (many-to-many)
+    public function tipos_usuario()
     {
-        return $this->hasMany(UsuarioTipo::class, 'id_usuario');
+        return $this->belongsToMany(
+            TiposUsuario::class,
+            'usuario_tipo',
+            'id_usuario',
+            'id_tipo_usuario'
+        );
     }
 }

@@ -10,10 +10,12 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| WEB ROUTES
 |--------------------------------------------------------------------------
 */
 
@@ -26,27 +28,24 @@ Route::get('/', function () {
 });
 
 // =====================
-// DASHBOARD
+// DASHBOARD (ADMIN PANEL BASE)
 // =====================
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 // =====================
-// LOGIN
+// AUTH (LOGIN)
 // =====================
 
-// Mostrar formulario login
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
     ->name('login');
 
-// Procesar login
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
 
-// Logout
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
@@ -55,28 +54,36 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 // REGISTER
 // =====================
 
-// Mostrar formulario registro
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware('guest')
     ->name('register');
 
-// Procesar registro
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
 // =====================
-// RECUPERAR PASSWORD
+// PASSWORD RESET
 // =====================
 
-// Mostrar formulario recuperación
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
     ->middleware('guest')
     ->name('password.request');
 
-// Enviar correo de recuperación
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
     ->middleware('guest')
     ->name('password.email');
+
+Route::get('/reset-password/{token}', function (Request $request, string $token) {
+    return view('auth.reset-password', [
+        'request' => $request,
+        'token' => $token,
+    ]);
+})->middleware('guest')
+  ->name('password.reset');
+
+Route::post('/reset-password', [NewPasswordController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.store');
 
 // =====================
 // PROFILE + PASSWORD
@@ -84,7 +91,6 @@ Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
 
 Route::middleware('auth')->group(function () {
 
-    // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
@@ -94,10 +100,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
-    // Cambiar password
     Route::put('/password', [PasswordController::class, 'update'])
         ->name('password.update');
-
 });
 
 // =====================
@@ -106,12 +110,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    // Aviso verificación
     Route::get('/email/verify', function () {
         return view('auth.verify-email');
     })->name('verification.notice');
 
-    // Verificar email
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
 
@@ -119,7 +121,6 @@ Route::middleware('auth')->group(function () {
     })->middleware(['signed', 'throttle:6,1'])
       ->name('verification.verify');
 
-    // Reenviar correo
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
 

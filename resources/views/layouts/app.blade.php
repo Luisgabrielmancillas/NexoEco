@@ -14,8 +14,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+
+    <body
+        class="font-sans antialiased"
+        x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }"
+        :class="{ 'dark': darkMode }"
+        x-init="$watch('darkMode', value => localStorage.setItem('darkMode', value))"
+    >
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -31,6 +38,7 @@
             <main>
                 {{ $slot }}
             </main>
+
         </div>
     </body>
 </html>
