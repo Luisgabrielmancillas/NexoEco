@@ -7,22 +7,41 @@
     <title>NexoEco - Dashboard Comprador</title>
 
     @vite(['resources/css/app.css'])
+    <style>
+
+        :root{
+
+            --buyer: #2F7EE8;
+            
+            --buyer-soft: #6BA8F4;
+
+            --seller: #E85D2F;
+
+            --cream: #FAF7F2;
+
+            --ink: #1E1E1E;
+
+            --border: #E6E6E6;
+
+        }
+
+    </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-[var(--cream)]">
 
     <div class="flex min-h-screen">
 
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-lg">
+        <aside class="w-64 bg-[var(--ink)] text-white shadow-lg">
 
-            <div class="p-6 border-b">
+            <div class="p-6">
 
                 <h2 class="text-xl font-bold">
                     NexoEco
                 </h2>
 
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-gray-300">
                     Menú
                 </p>
 
@@ -33,7 +52,7 @@
 
                 <a
                     href="/"
-                    class="block p-3 rounded hover:bg-gray-100"
+                    class="block p-3 rounded hover:bg-[var(--buyer)] transition"
                 >
 
                     ← Volver al inicio
@@ -47,14 +66,14 @@
         <div class="flex-1">
 
             <!-- Barra superior -->
-            <header class="bg-white shadow">
+            <header class="bg-[var(--ink)] border-b border-[var(--border)] text-white">
 
                 <div class="flex items-center justify-between px-6 py-4">
 
                     <!-- Logo / Nombre -->
                     <div>
 
-                        <p class="text-sm text-gray-500">
+                        <p class="text-sm text-gray-300">
                             Panel del comprador
                         </p>
 
@@ -68,7 +87,7 @@
                         <input
                             type="text"
                             placeholder="Buscar productos o servicios..."
-                            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring"
+                            class="w-full border border-[var(--border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--buyer)]"
                         >
 
                     </div>
@@ -78,7 +97,7 @@
 
                     <div class="flex items-center gap-4">
 
-                        <button class="border px-3 py-2 rounded">
+                        <button class="px-4 py-2 rounded bg-[var(--buyer)] text-white hover:opacity-90 transition">
 
                             Notificaciones
 
@@ -108,7 +127,7 @@
                 <!-- Tarjetas resumen -->
                 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-                    <div class="bg-white rounded-lg shadow p-5">
+                    <div class="bg-white border-l-4 border-[var(--buyer)] rounded-lg shadow p-5">
 
                         <h2 class="text-gray-500 text-sm">
                             Pedidos realizados
@@ -120,7 +139,7 @@
 
                     </div>
 
-                    <div class="bg-white rounded-lg shadow p-5">
+                    <div class="bg-white border-l-4 border-[var(--seller)] rounded-lg shadow p-5">
 
                         <h2 class="text-gray-500 text-sm">
                             Servicios disponibles
@@ -133,7 +152,7 @@
                     </div>
 
 
-                    <div class="bg-white rounded-lg shadow p-5">
+                    <div class="bg-white border-l-4 border-purple-400 rounded-lg shadow p-5">
 
                         <h2 class="text-gray-500 text-sm">
                             Productos favoritos
@@ -146,7 +165,7 @@
                     </div>
 
 
-                    <div class="bg-white rounded-lg shadow p-5">
+                    <div class="bg-white border-l-4 border-green-400 rounded-lg shadow p-5">
 
                         <h2 class="text-gray-500 text-sm">
                             Carrito activo
@@ -164,7 +183,7 @@
 
                 <!-- Actividad reciente -->
 
-                <section class="bg-white rounded-lg shadow mt-8 p-6">
+                <section class="bg-white border border-[var(--border)] rounded-xl shadow mt-8 p-6">
 
                     <h2 class="text-xl font-semibold mb-4">
                         Actividad reciente
@@ -188,7 +207,7 @@
 
                 <!-- Recomendaciones -->
 
-                <section class="bg-white rounded-lg shadow mt-8 p-6">
+                <section class="bg-white border border-[var(--border)] rounded-xl shadow mt-8 p-6">
 
                     <h2 class="text-xl font-semibold mb-4">
                         Productos recomendados
