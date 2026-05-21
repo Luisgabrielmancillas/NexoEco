@@ -11,177 +11,212 @@
 
 <body class="bg-gray-100">
 
-    <!-- Barra superior -->
-    <header class="bg-white shadow">
+    <div class="flex min-h-screen">
 
-        <div class="flex items-center justify-between px-6 py-4">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-lg">
 
-            <!-- Logo / Nombre -->
-            <div>
+            <div class="p-6 border-b">
 
-                <h1 class="text-2xl font-bold">
+                <h2 class="text-xl font-bold">
                     NexoEco
-                </h1>
+                </h2>
 
                 <p class="text-sm text-gray-500">
-                    Panel del comprador
+                    Menú
                 </p>
 
             </div>
 
 
-            <!-- Barra de búsqueda -->
+            <nav class="p-4">
 
-            <div class="w-full md:w-1/3">
-
-                <input class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring"
-                    type="text"
-                    placeholder="Buscar productos o servicios..."
-                    class="w-full border rounded-lg px-4 py-2 focus:outline-none"
+                <a
+                    href="/"
+                    class="block p-3 rounded hover:bg-gray-100"
                 >
 
-            </div>
+                    ← Volver al inicio
+
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <div class="flex-1">
+
+            <!-- Barra superior -->
+            <header class="bg-white shadow">
+
+                <div class="flex items-center justify-between px-6 py-4">
+
+                    <!-- Logo / Nombre -->
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+                            Panel del comprador
+                        </p>
+
+                    </div>
 
 
-            <!-- Usuario -->
+                    <!-- Barra de búsqueda -->
 
-            <div class="flex items-center gap-4">
+                    <div class="w-full md:w-1/3">
 
-                <button class="border px-3 py-2 rounded">
+                        <input
+                            type="text"
+                            placeholder="Buscar productos o servicios..."
+                            class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring"
+                        >
 
-                    Notificaciones
+                    </div>
 
-                </button>
 
-                <div class="text-right">
+                    <!-- Usuario -->
 
-                    <p class="font-semibold">
-                        Usuario
-                    </p>
+                    <div class="flex items-center gap-4">
 
-                    <p class="text-sm text-gray-500">
-                        Comprador
-                    </p>
+                        <button class="border px-3 py-2 rounded">
+
+                            Notificaciones
+
+                        </button>
+
+                        <div class="text-right">
+
+                            <p class="font-semibold">
+                                Usuario
+                            </p>
+
+                            <p class="text-sm text-gray-500">
+                                Comprador
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </header>
+
+
+            <main class="p-6">
+
+                <!-- Tarjetas resumen -->
+                <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                    <div class="bg-white rounded-lg shadow p-5">
+
+                        <h2 class="text-gray-500 text-sm">
+                            Pedidos realizados
+                        </h2>
+
+                        <p class="text-3xl font-bold mt-2">
+                            0
+                        </p>
+
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow p-5">
+
+                        <h2 class="text-gray-500 text-sm">
+                            Servicios disponibles
+                        </h2>
+
+                        <p class="text-3xl font-bold mt-2">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="bg-white rounded-lg shadow p-5">
+
+                        <h2 class="text-gray-500 text-sm">
+                            Productos favoritos
+                        </h2>
+
+                        <p class="text-3xl font-bold mt-2">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="bg-white rounded-lg shadow p-5">
+
+                        <h2 class="text-gray-500 text-sm">
+                            Carrito activo
+                        </h2>
+
+                        <p class="text-3xl font-bold mt-2">
+                            0
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- Actividad reciente -->
+
+                <section class="bg-white rounded-lg shadow mt-8 p-6">
+
+                    <h2 class="text-xl font-semibold mb-4">
+                        Actividad reciente
+                    </h2>
+
+                    <div class="border-b py-3">
+
+                        <p class="font-medium">
+                            Pedido #001
+                        </p>
+
+                        <p class="text-gray-500 text-sm">
+                            No hay actividad todavía
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- Recomendaciones -->
+
+                <section class="bg-white rounded-lg shadow mt-8 p-6">
+
+                    <h2 class="text-xl font-semibold mb-4">
+                        Productos recomendados
+                    </h2>
+
+                    <ul class="space-y-2">
+
+                        <li class="border p-3 rounded">
+                            Producto ejemplo 1
+                        </li>
+
+                        <li class="border p-3 rounded">
+                            Producto ejemplo 2
+                        </li>
+
+                        <li class="border p-3 rounded">
+                            Producto ejemplo 3
+                        </li>
+
+                    </ul>
+
+                </section>
+
+            </main>
 
         </div>
 
-    </header>
-
-
-    <main class="p-6">
-
-        <!-- Tarjetas resumen -->
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-            <div class="bg-white rounded-lg shadow p-5">
-
-                <h2 class="text-gray-500 text-sm">
-                    Pedidos realizados
-                </h2>
-
-                <p class="text-3xl font-bold mt-2">
-                    0
-                </p>
-
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-5">
-
-                <h2 class="text-gray-500 text-sm">
-                    Servicios disponibles
-                </h2>
-
-                <p class="text-3xl font-bold mt-2">
-                    0
-                </p>
-
-            </div>
-
-
-            <div class="bg-white rounded-lg shadow p-5">
-
-                <h2 class="text-gray-500 text-sm">
-                    Productos favoritos
-                </h2>
-
-                <p class="text-3xl font-bold mt-2">
-                    0
-                </p>
-
-            </div>
-
-
-            <div class="bg-white rounded-lg shadow p-5">
-
-                <h2 class="text-gray-500 text-sm">
-                    Carrito activo
-                </h2>
-
-                <p class="text-3xl font-bold mt-2">
-                    0
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- Actividad reciente -->
-
-        <section class="bg-white rounded-lg shadow mt-8 p-6">
-
-            <h2 class="text-xl font-semibold mb-4">
-                Actividad reciente
-            </h2>
-
-            <div class="border-b py-3">
-
-                <p class="font-medium">
-                    Pedido #001
-                </p>
-
-                <p class="text-gray-500 text-sm">
-                    No hay actividad todavía
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- Recomendaciones -->
-
-        <section class="bg-white rounded-lg shadow mt-8 p-6">
-
-            <h2 class="text-xl font-semibold mb-4">
-                Productos recomendados
-            </h2>
-
-            <ul class="space-y-2">
-
-                <li class="border p-3 rounded">
-                    Producto ejemplo 1
-                </li>
-
-                <li class="border p-3 rounded">
-                    Producto ejemplo 2
-                </li>
-
-                <li class="border p-3 rounded">
-                    Producto ejemplo 3
-                </li>
-
-            </ul>
-
-        </section>
-
-    </main>
+    </div>
 
 </body>
 </html>
