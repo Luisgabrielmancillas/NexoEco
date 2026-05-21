@@ -129,3 +129,11 @@ Route::middleware('auth')->group(function () {
       ->name('verification.send');
 
 });
+
+// =====================
+// DASHBOARD (BUYER)
+// =====================
+
+Route::get('/dashboard-comprador', function () {
+    return view('dashboard-comprador');
+});
