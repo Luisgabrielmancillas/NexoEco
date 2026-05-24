@@ -1,52 +1,88 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro - NexoEco</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        :root {
+            --buyer: #2F7EE8;
+            --seller: #E85D2F;
+            --ink: #1E1E1E;
+        }
+        /* Forzamos el fondo oscuro en todo el documento */
+        html, body {
+            background-color: #111827 !important; /* bg-gray-900 */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="antialiased text-white font-sans">
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4 bg-gray-900">
+        
+        <div class="mb-8">
+            <a href="/">
+                <x-application-logo class="w-20 h-20 fill-current text-blue-500" />
             </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
         </div>
-    </form>
-</x-guest-layout>
+
+        <form method="POST" action="{{ route('register') }}" class="w-full max-w-2xl">
+            @csrf
+
+            <div class="bg-[var(--ink)] rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
+                <div class="p-8 border-b border-gray-700">
+                    <h1 class="text-3xl font-bold">Crear cuenta</h1>
+                    <p class="text-gray-400 mt-1">Únete a NexoEco</p>
+                </div>
+
+                <div class="p-8 space-y-6">
+                    <div class="grid md:grid-cols-3 items-center gap-4">
+                        <x-input-label for="name" :value="'Nombre'" class="text-gray-200" />
+                        <div class="md:col-span-2">
+                            <x-text-input id="name" class="block w-full bg-gray-800 border-gray-700 text-white focus:border-[var(--buyer)] focus:ring-[var(--buyer)]" type="text" name="name" :value="old('name')" required autofocus />
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 items-center gap-4">
+                        <x-input-label for="email" :value="'Correo'" class="text-gray-200" />
+                        <div class="md:col-span-2">
+                            <x-text-input id="email" class="block w-full bg-gray-800 border-gray-700 text-white focus:border-[var(--buyer)] focus:ring-[var(--buyer)]" type="email" name="email" :value="old('email')" required />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 items-center gap-4">
+                        <x-input-label for="password" :value="'Contraseña'" class="text-gray-200" />
+                        <div class="md:col-span-2">
+                            <x-text-input id="password" class="block w-full bg-gray-800 border-gray-700 text-white focus:border-[var(--buyer)] focus:ring-[var(--buyer)]" type="password" name="password" required />
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 items-center gap-4">
+                        <x-input-label for="password_confirmation" :value="'Confirmar contraseña'" class="text-gray-200" />
+                        <div class="md:col-span-2">
+                            <x-text-input id="password_confirmation" class="block w-full bg-gray-800 border-gray-700 text-white focus:border-[var(--buyer)] focus:ring-[var(--buyer)]" type="password" name="password_confirmation" required />
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-6 border-t border-gray-700">
+                        <a href="{{ route('login') }}" class="text-[var(--buyer)] hover:underline text-sm">
+                            ¿Ya tienes cuenta?
+                        </a>
+                        <x-primary-button class="bg-[var(--seller)] hover:bg-orange-600 px-6 py-2 rounded-lg">
+                            Registrarse
+                        </x-primary-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
