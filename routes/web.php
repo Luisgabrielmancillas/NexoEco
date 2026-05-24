@@ -28,12 +28,25 @@ Route::get('/', function () {
 });
 
 // =====================
-// DASHBOARD (ADMIN PANEL BASE)
+// DASHBOARDS (Rutas por Rol)
 // =====================
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+
+    // 1. Dashboard de Comprador (El base)
+    Route::prefix('comprador')->name('comprador.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('comprador.dashboard');
+        })->name('dashboard');
+    });
+
+    // 2. Dashboard de Administrador
+    Route::prefix('administrador')->name('administrador.')->group(function () {
+        // Usamos tu DashboardController que ya tiene la tabla del panel de admin
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+});
 
 // =====================
 // AUTH (LOGIN)
@@ -117,7 +130,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
 
-        return redirect('/dashboard');
+        // Corregido: Ahora manda al dashboard de comprador al verificar el correo
+        return redirect()->route('comprador.dashboard');
     })->middleware(['signed', 'throttle:6,1'])
       ->name('verification.verify');
 
