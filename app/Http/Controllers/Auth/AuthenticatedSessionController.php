@@ -28,7 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Validamos si el usuario autenticado tiene el rol de administrador
+        if ($request->user()->role === 'administrador') {
+            return redirect()->route('administrador.dashboard');
+        }
+
+        // Si es comprador, vendedor, o cualquier otro, va al dashboard base
+        return redirect()->route('comprador.dashboard');
     }
 
     /**
