@@ -9,11 +9,13 @@
         :root {
             --buyer: #2F7EE8;
             --seller: #E85D2F;
+            --sellerhov: #ca542c;
             --ink: #1E1E1E;
+            --cream: #FAF7F2;
         }
-        /* Forzamos el fondo oscuro en todo el documento */
+
         html, body {
-            background-color: #111827 !important; /* bg-gray-900 */
+            background-color: var(--cream) !important; /* bg-gray-900 */
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -22,7 +24,7 @@
 </head>
 <body class="antialiased text-white font-sans">
 
-    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4 bg-gray-900">
+    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4">
         
         <div class="mb-8">
             <a href="/">

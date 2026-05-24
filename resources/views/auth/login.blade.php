@@ -9,19 +9,22 @@
         :root {
             --buyer: #2F7EE8;
             --seller: #E85D2F;
+            --sellerhov: #c54b22; 
             --ink: #1E1E1E;
+            --cream: #FAF7F2;
         }
         html, body {
-            background-color: #111827 !important; /* bg-gray-900 */
+            /* Ahora el fondo crema funcionará al quitar la clase bg-gray-900 de abajo */
+            background-color: var(--cream) !important; 
             margin: 0;
             padding: 0;
             min-height: 100vh;
         }
     </style>
 </head>
-<body class="antialiased text-white font-sans">
+<body class="antialiased text-gray-900 font-sans">
 
-    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4 bg-gray-900">
+    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4">
         
         <div class="mb-8">
             <a href="/">
@@ -38,7 +41,7 @@
 
             <div class="bg-[var(--ink)] rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
                 <div class="p-8 border-b border-gray-700">
-                    <h1 class="text-3xl font-bold">Bienvenido</h1>
+                    <h1 class="text-3xl font-bold text-white">Bienvenido</h1>
                     <p class="text-gray-400 mt-1">Ingresa a tu cuenta de NexoEco</p>
                 </div>
 
@@ -76,7 +79,7 @@
                         <a href="{{ route('register') }}" class="text-[var(--buyer)] hover:underline text-sm">
                             ¿No tienes cuenta? Regístrate
                         </a>
-                        <x-primary-button class="bg-[var(--seller)] hover:bg-orange-600 px-8 py-2 rounded-lg">
+                        <x-primary-button class="bg-[var(--seller)] hover:bg-[var(--sellerhov)] transition-colors duration-300 px-8 py-2 rounded-lg">
                             {{ __('Log in') }}
                         </x-primary-button>
                     </div>
