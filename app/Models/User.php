@@ -54,4 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'id_tipo_usuario'
         );
     }
+
+    public function tieneTipo(string $tipo): bool
+    {
+        return $this->tipos_usuario()
+            ->where('nombre_tipo', $tipo)
+            ->exists();
+    }
 }

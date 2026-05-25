@@ -7,59 +7,70 @@ use Illuminate\Http\Request;
 
 class TipoUsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $tipos = TiposUsuario::orderBy('id_tipo_usuario', 'desc')->get();
+
+        return view('tipos_usuario.index', compact('tipos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('tipos_usuario.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre_tipo' => 'required|string|max:100|unique:tipos_usuario,nombre_tipo',
+        ]);
+
+        TiposUsuario::create([
+            'nombre_tipo' => $request->nombre_tipo,
+        ]);
+
+        return redirect()
+            ->route('tipos-usuario.index')
+            ->with('success', 'Tipo de usuario creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(TiposUsuario $tiposUsuario)
     {
-        //
+        return view('tipos_usuario.show', compact('tiposUsuario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(TiposUsuario $tiposUsuario)
     {
-        //
+        return view('tipos_usuario.edit', compact('tiposUsuario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, TiposUsuario $tiposUsuario)
     {
-        //
+        $request->validate([
+            'nombre_tipo' => 'required|string|max:100|unique:tipos_usuario,nombre_tipo,' . $tiposUsuario->id_tipo_usuario . ',id_tipo_usuario',
+        ]);
+
+        $tiposUsuario->update([
+            'nombre_tipo' => $request->nombre_tipo,
+        ]);
+
+        return redirect()
+            ->route('tipos-usuario.index')
+            ->with('success', 'Tipo de usuario actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(TiposUsuario $tiposUsuario)
     {
-        //
+        if ($tiposUsuario->users()->exists()) {
+            return redirect()
+                ->route('tipos-usuario.index')
+                ->with('error', 'No puedes eliminar este tipo porque tiene usuarios asignados.');
+        }
+
+        $tiposUsuario->delete();
+
+        return redirect()
+            ->route('tipos-usuario.index')
+            ->with('success', 'Tipo de usuario eliminado correctamente.');
     }
 }

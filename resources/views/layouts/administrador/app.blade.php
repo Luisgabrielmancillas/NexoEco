@@ -23,7 +23,30 @@
     >
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
-            @include('layouts.navigation')
+            @php
+                $navigation = 'layouts.comprador.navigation';
+
+                if (Auth::check()) {
+
+                    if (Auth::user()->tieneTipo('Administrador')) {
+                        $navigation = 'layouts.administrador.navigation';
+                    }
+
+                    elseif (Auth::user()->tieneTipo('Moderador')) {
+                        $navigation = 'layouts.moderador.navigation';
+                    }
+
+                    elseif (Auth::user()->tieneTipo('Vendedor')) {
+                        $navigation = 'layouts.vendedor.navigation';
+                    }
+
+                    elseif (Auth::user()->tieneTipo('Comprador')) {
+                        $navigation = 'layouts.comprador.navigation';
+                    }
+                }
+            @endphp
+
+            @include($navigation)
 
             <!-- Page Heading -->
             @isset($header)

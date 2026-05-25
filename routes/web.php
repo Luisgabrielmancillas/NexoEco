@@ -11,7 +11,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dashboard_Admin_Controller;
+use App\Http\Controllers\TipoUsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,39 +20,70 @@ use App\Http\Controllers\DashboardController;
 |--------------------------------------------------------------------------
 */
 
-// =====================
 // HOME
-// =====================
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-// =====================
-// DASHBOARDS (Rutas por Rol)
-// =====================
-
+// DASHBOARDS + RUTAS PROTEGIDAS
 Route::middleware(['auth'])->group(function () {
 
-    // 1. Dashboard de Comprador (El base)
+    // Dashboard Comprador
     Route::prefix('comprador')->name('comprador.')->group(function () {
         Route::get('/dashboard', function () {
             return view('comprador.dashboard');
         })->name('dashboard');
     });
 
-    // 2. Dashboard de Administrador
-    Route::prefix('administrador')->name('administrador.')->group(function () {
-        // Usamos tu DashboardController que ya tiene la tabla del panel de admin
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Dashboard Vendedor
+    Route::prefix('vendedor')->name('vendedor.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('vendedor.dashboard');
+        })->name('dashboard');
     });
 
+    // Dashboard Administrador
+    Route::prefix('administrador')->name('administrador.')->group(function () {
+        Route::get('/dashboard', [Dashboard_Admin_Controller::class, 'index'])->name('dashboard');
+    });
+
+    // Tipos de Usuario
+    Route::resource('tipos-usuario', TipoUsuarioController::class);
+
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
+
+    Route::put('/password', [PasswordController::class, 'update'])
+        ->name('password.update');
+
+    // Email Verification
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect()->route('comprador.dashboard');
+    })->middleware(['signed', 'throttle:6,1'])
+      ->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
+    })->middleware('throttle:6,1')
+      ->name('verification.send');
 });
 
-// =====================
-// AUTH (LOGIN)
-// =====================
-
+// AUTH LOGIN
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
     ->name('login');
@@ -63,10 +95,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
-// =====================
 // REGISTER
-// =====================
-
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware('guest')
     ->name('register');
@@ -74,10 +103,7 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
-// =====================
 // PASSWORD RESET
-// =====================
-
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
     ->middleware('guest')
     ->name('password.request');
@@ -97,57 +123,3 @@ Route::get('/reset-password/{token}', function (Request $request, string $token)
 Route::post('/reset-password', [NewPasswordController::class, 'store'])
     ->middleware('guest')
     ->name('password.store');
-
-// =====================
-// PROFILE + PASSWORD
-// =====================
-
-Route::middleware('auth')->group(function () {
-
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
-
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
-
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
-
-    Route::put('/password', [PasswordController::class, 'update'])
-        ->name('password.update');
-});
-
-// =====================
-// EMAIL VERIFICATION
-// =====================
-
-Route::middleware('auth')->group(function () {
-
-    Route::get('/email/verify', function () {
-        return view('auth.verify-email');
-    })->name('verification.notice');
-
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-
-        // Corregido: Ahora manda al dashboard de comprador al verificar el correo
-        return redirect()->route('comprador.dashboard');
-    })->middleware(['signed', 'throttle:6,1'])
-      ->name('verification.verify');
-
-    Route::post('/email/verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-
-        return back()->with('status', 'verification-link-sent');
-    })->middleware('throttle:6,1')
-      ->name('verification.send');
-
-});
-
-// =====================
-// DASHBOARD (BUYER)
-// =====================
-
-Route::get('/dashboard-comprador', function () {
-    return view('dashboard-comprador');
-});
