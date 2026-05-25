@@ -9,12 +9,12 @@
         :root {
             --buyer: #2F7EE8;
             --seller: #E85D2F;
-            --sellerhov: #c54b22; 
+            --sellerhov: #ca542c; 
             --ink: #1E1E1E;
             --cream: #FAF7F2;
         }
+        
         html, body {
-            /* Ahora el fondo crema funcionará al quitar la clase bg-gray-900 de abajo */
             background-color: var(--cream) !important; 
             margin: 0;
             padding: 0;
@@ -26,12 +26,6 @@
 
     <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4">
         
-        <div class="mb-8">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-blue-500" />
-            </a>
-        </div>
-
         <div class="w-full max-w-2xl mb-4">
             <x-auth-session-status :status="session('status')" />
         </div>
@@ -39,48 +33,55 @@
         <form method="POST" action="{{ route('login') }}" class="w-full max-w-2xl">
             @csrf
 
-            <div class="bg-[var(--ink)] rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
-                <div class="p-8 border-b border-gray-700">
-                    <h1 class="text-3xl font-bold text-white">Bienvenido</h1>
-                    <p class="text-gray-400 mt-1">Ingresa a tu cuenta de NexoEco</p>
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                
+                <div class="bg-[var(--seller)] p-10 flex flex-col items-center text-white">
+                    <div class="mb-4 bg-white px-2 py-1 rounded-full shadow-lg flex items-center justify-center">
+                        <a href="/">
+                            <x-application-logo class="w-32 h-auto min-h-[3rem] fill-current text-[var(--seller)]" />
+                        </a>
+                    </div>
+                    <h1 class="text-3xl font-bold mt-2">Bienvenido</h1>
+                    <p class="text-orange-100 mt-1">Ingresa a tu cuenta de NexoEco</p>
                 </div>
 
-                <div class="p-8 space-y-6">
+                <div class="p-10 space-y-6">
+                    
                     <div class="grid md:grid-cols-3 items-center gap-4">
-                        <x-input-label for="email" :value="'Correo'" class="text-gray-200" />
+                        <x-input-label for="email" :value="'Correo'" class="text-gray-700 font-medium" />
                         <div class="md:col-span-2">
-                            <x-text-input id="email" class="block w-full bg-gray-800 border-gray-700 text-white focus:border-[var(--buyer)] focus:ring-[var(--buyer)]" type="email" name="email" :value="old('email')" required autofocus />
+                            <x-text-input id="email" class="block w-full bg-gray-50 border-gray-300 text-gray-900 focus:border-[var(--buyer)] focus:ring-[var(--buyer)] rounded-xl" type="email" name="email" :value="old('email')" required autofocus />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                     </div>
 
                     <div class="grid md:grid-cols-3 items-center gap-4">
-                        <x-input-label for="password" :value="'Contraseña'" class="text-gray-200" />
+                        <x-input-label for="password" :value="'Contraseña'" class="text-gray-700 font-medium" />
                         <div class="md:col-span-2">
-                            <x-text-input id="password" class="block w-full bg-gray-800 border-gray-700 text-white focus:border-[var(--buyer)] focus:ring-[var(--buyer)]" type="password" name="password" required autocomplete="current-password" />
+                            <x-text-input id="password" class="block w-full bg-gray-50 border-gray-300 text-gray-900 focus:border-[var(--buyer)] focus:ring-[var(--buyer)] rounded-xl" type="password" name="password" required autocomplete="current-password" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between">
-                        <label for="remember_me" class="inline-flex items-center">
-                            <input id="remember_me" type="checkbox" class="rounded bg-gray-800 border-gray-700 text-[var(--buyer)] shadow-sm focus:ring-[var(--buyer)]" name="remember">
-                            <span class="ms-2 text-sm text-gray-400">Recordarme</span>
+                    <div class="flex items-center justify-between pt-2">
+                        <label for="remember_me" class="inline-flex items-center cursor-pointer">
+                            <input id="remember_me" type="checkbox" class="rounded bg-gray-50 border-gray-300 text-[var(--buyer)] shadow-sm focus:ring-[var(--buyer)]" name="remember">
+                            <span class="ms-2 text-sm text-gray-600">Recordarme</span>
                         </label>
 
                         @if (Route::has('password.request'))
-                            <a class="text-sm text-gray-400 hover:text-[var(--buyer)] transition-colors" href="{{ route('password.request') }}">
+                            <a class="text-sm text-gray-600 font-medium hover:text-[var(--buyer)] transition-colors" href="{{ route('password.request') }}">
                                 ¿Olvidaste tu contraseña?
                             </a>
                         @endif
                     </div>
 
-                    <div class="flex justify-between items-center pt-6 border-t border-gray-700">
-                        <a href="{{ route('register') }}" class="text-[var(--buyer)] hover:underline text-sm">
+                    <div class="flex justify-between items-center pt-8">
+                        <a href="{{ route('register') }}" class="text-[var(--buyer)] hover:underline text-sm font-semibold">
                             ¿No tienes cuenta? Regístrate
                         </a>
-                        <x-primary-button class="bg-[var(--seller)] hover:bg-[var(--sellerhov)] transition-colors duration-300 px-8 py-2 rounded-lg">
-                            {{ __('Log in') }}
+                        <x-primary-button class="bg-[var(--seller)] hover:bg-[var(--sellerhov)] text-white px-8 py-3 rounded-xl transition-colors shadow-lg">
+                            {{ __('Iniciar sesión') }}
                         </x-primary-button>
                     </div>
                 </div>
