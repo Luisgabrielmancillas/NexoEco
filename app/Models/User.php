@@ -30,7 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
         'nombre_completo',
-        'fecha_registro'
+        'fecha_registro',
+        'activo'
     ];
 
     // Relación otros módulos
