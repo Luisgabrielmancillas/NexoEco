@@ -14,6 +14,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Dashboard_Admin_Controller;
 use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\MarketplaceController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\TiendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +24,78 @@ use App\Http\Controllers\AdminUserController;
 |--------------------------------------------------------------------------
 */
 
-// HOME
-Route::get('/', function () {
-    return view('welcome');
-});
 
-// RUTAS PROTEGIDAS
+/*
+|--------------------------------------------------------------------------
+| MARKETPLACE PÚBLICO
+|--------------------------------------------------------------------------
+|
+| Página principal de NexoEco.
+|
+| Puede ser visitada sin iniciar sesión.
+|
+*/
+
+Route::get(
+    '/',
+    [MarketplaceController::class, 'index']
+)->name('marketplace.index');
+
+
+/*
+|--------------------------------------------------------------------------
+| PRODUCTOS PÚBLICOS
+|--------------------------------------------------------------------------
+|
+| El visitante puede revisar la ficha de cualquier producto.
+| No se requiere autenticación para consultar el catálogo.
+|
+*/
+
+Route::get(
+    '/productos/{producto}',
+    [ProductoController::class, 'show']
+)
+    ->whereNumber('producto')
+    ->name('productos.show');
+
+
+/*
+|--------------------------------------------------------------------------
+| TIENDAS PÚBLICAS
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/tiendas/{tienda}',
+    [TiendaController::class, 'show']
+)
+    ->whereNumber('tienda')
+    ->name('tiendas.show');
+
+
+/*
+|--------------------------------------------------------------------------
+| LANDING / VENDER EN NEXOECO
+|--------------------------------------------------------------------------
+|
+| Conservamos la antigua landing.
+| Más adelante se especializará como página de captación
+| para vendedores.
+|
+*/
+
+Route::get('/vender', function () {
+    return view('welcome');
+})->name('vender');
+
+
+/*
+|--------------------------------------------------------------------------
+| RUTAS PROTEGIDAS
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware(['auth'])->group(function () {
 
     /*
@@ -43,12 +112,18 @@ Route::middleware(['auth'])->group(function () {
                 return view('comprador.dashboard');
             })->name('dashboard');
 
-    });
+        });
+
 
     /*
     |--------------------------------------------------------------------------
     | DASHBOARD VENDEDOR
     |--------------------------------------------------------------------------
+    |
+    | IMPORTANTE:
+    | Posteriormente agregaremos middleware de autorización
+    | específico para vendedores.
+    |
     */
 
     Route::prefix('vendedor')
@@ -59,26 +134,33 @@ Route::middleware(['auth'])->group(function () {
                 return view('vendedor.dashboard');
             })->name('dashboard');
 
-    });
+        });
+
 
     /*
     |--------------------------------------------------------------------------
     | DASHBOARD ADMINISTRADOR
     |--------------------------------------------------------------------------
+    |
+    | Posteriormente agregaremos middleware administrativo.
+    |
     */
 
     Route::prefix('administrador')
         ->name('administrador.')
         ->group(function () {
 
-            Route::get('/dashboard', [Dashboard_Admin_Controller::class, 'index'])
-                ->name('dashboard');
+            Route::get(
+                '/dashboard',
+                [Dashboard_Admin_Controller::class, 'index']
+            )->name('dashboard');
 
-    });
+        });
+
 
     /*
     |--------------------------------------------------------------------------
-    | CRUD USUARIOS ADMIN PANEL
+    | CRUD USUARIOS ADMIN
     |--------------------------------------------------------------------------
     */
 
@@ -86,19 +168,43 @@ Route::middleware(['auth'])->group(function () {
         ->name('admin.')
         ->group(function () {
 
-            // CREAR USUARIO
-            Route::post('/users', [AdminUserController::class, 'store'])
-                ->name('users.store');
+            /*
+            |--------------------------------------------------------------------------
+            | CREAR
+            |--------------------------------------------------------------------------
+            */
 
-            // ACTUALIZAR USUARIO
-            Route::put('/users/{user}', [AdminUserController::class, 'update'])
-                ->name('users.update');
+            Route::post(
+                '/users',
+                [AdminUserController::class, 'store']
+            )->name('users.store');
 
-            // DESACTIVAR USUARIO
-            Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])
-                ->name('users.destroy');
 
-    });
+            /*
+            |--------------------------------------------------------------------------
+            | ACTUALIZAR
+            |--------------------------------------------------------------------------
+            */
+
+            Route::put(
+                '/users/{user}',
+                [AdminUserController::class, 'update']
+            )->name('users.update');
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | DESACTIVAR / REACTIVAR
+            |--------------------------------------------------------------------------
+            */
+
+            Route::delete(
+                '/users/{user}',
+                [AdminUserController::class, 'destroy']
+            )->name('users.destroy');
+
+        });
+
 
     /*
     |--------------------------------------------------------------------------
@@ -106,22 +212,35 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::resource('tipos-usuario', TipoUsuarioController::class);
+    Route::resource(
+        'tipos-usuario',
+        TipoUsuarioController::class
+    );
+
 
     /*
     |--------------------------------------------------------------------------
-    | PROFILE
+    | PERFIL
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
+    Route::get(
+        '/profile',
+        [ProfileController::class, 'edit']
+    )->name('profile.edit');
 
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
+    Route::patch(
+        '/profile',
+        [ProfileController::class, 'update']
+    )->name('profile.update');
+
+
+    Route::delete(
+        '/profile',
+        [ProfileController::class, 'destroy']
+    )->name('profile.destroy');
+
 
     /*
     |--------------------------------------------------------------------------
@@ -129,8 +248,11 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::put('/password', [PasswordController::class, 'update'])
-        ->name('password.update');
+    Route::put(
+        '/password',
+        [PasswordController::class, 'update']
+    )->name('password.update');
+
 
     /*
     |--------------------------------------------------------------------------
@@ -139,83 +261,147 @@ Route::middleware(['auth'])->group(function () {
     */
 
     Route::get('/email/verify', function () {
+
         return view('auth.verify-email');
+
     })->name('verification.notice');
 
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
 
-        $request->fulfill();
+    Route::get(
+        '/email/verify/{id}/{hash}',
+        function (EmailVerificationRequest $request) {
 
-        return redirect()->route('comprador.dashboard');
+            $request->fulfill();
 
-    })->middleware(['signed', 'throttle:6,1'])
-      ->name('verification.verify');
+            return redirect()
+                ->route('comprador.dashboard');
 
-    Route::post('/email/verification-notification', function (Request $request) {
+        }
+    )
+        ->middleware([
+            'signed',
+            'throttle:6,1',
+        ])
+        ->name('verification.verify');
 
-        $request->user()->sendEmailVerificationNotification();
 
-        return back()->with('status', 'verification-link-sent');
+    Route::post(
+        '/email/verification-notification',
+        function (Request $request) {
 
-    })->middleware('throttle:6,1')
-      ->name('verification.send');
+            $request
+                ->user()
+                ->sendEmailVerificationNotification();
+
+            return back()->with(
+                'status',
+                'verification-link-sent'
+            );
+
+        }
+    )
+        ->middleware('throttle:6,1')
+        ->name('verification.send');
 
 });
 
+
 /*
 |--------------------------------------------------------------------------
-| AUTH LOGIN
+| LOGIN
 |--------------------------------------------------------------------------
 */
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+Route::get(
+    '/login',
+    [AuthenticatedSessionController::class, 'create']
+)
     ->middleware('guest')
     ->name('login');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+
+Route::post(
+    '/login',
+    [AuthenticatedSessionController::class, 'store']
+)
     ->middleware('guest');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+
+/*
+|--------------------------------------------------------------------------
+| LOGOUT
+|--------------------------------------------------------------------------
+*/
+
+Route::post(
+    '/logout',
+    [AuthenticatedSessionController::class, 'destroy']
+)
     ->middleware('auth')
     ->name('logout');
 
+
 /*
 |--------------------------------------------------------------------------
-| REGISTER
+| REGISTRO
 |--------------------------------------------------------------------------
 */
 
-Route::get('/register', [RegisteredUserController::class, 'create'])
+Route::get(
+    '/register',
+    [RegisteredUserController::class, 'create']
+)
     ->middleware('guest')
     ->name('register');
 
-Route::post('/register', [RegisteredUserController::class, 'store'])
+
+Route::post(
+    '/register',
+    [RegisteredUserController::class, 'store']
+)
     ->middleware('guest');
+
 
 /*
 |--------------------------------------------------------------------------
-| PASSWORD RESET
+| RECUPERAR CONTRASEÑA
 |--------------------------------------------------------------------------
 */
 
-Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+Route::get(
+    '/forgot-password',
+    [PasswordResetLinkController::class, 'create']
+)
     ->middleware('guest')
     ->name('password.request');
 
-Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+
+Route::post(
+    '/forgot-password',
+    [PasswordResetLinkController::class, 'store']
+)
     ->middleware('guest')
     ->name('password.email');
 
-Route::get('/reset-password/{token}', function (Request $request, string $token) {
 
-    return view('auth.reset-password', [
-        'request' => $request,
-        'token' => $token,
-    ]);
+Route::get(
+    '/reset-password/{token}',
+    function (Request $request, string $token) {
 
-})->middleware('guest')
-  ->name('password.reset');
+        return view('auth.reset-password', [
+            'request' => $request,
+            'token' => $token,
+        ]);
 
-Route::post('/reset-password', [NewPasswordController::class, 'store'])
+    }
+)
+    ->middleware('guest')
+    ->name('password.reset');
+
+
+Route::post(
+    '/reset-password',
+    [NewPasswordController::class, 'store']
+)
     ->middleware('guest')
     ->name('password.store');

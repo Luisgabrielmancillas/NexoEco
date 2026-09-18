@@ -2,64 +2,152 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use App\Models\Tienda;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 
 class TiendaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar la página pública de una tienda.
      */
-    public function index()
+    public function show(Tienda $tienda): View
     {
-        //
+        /*
+        |--------------------------------------------------------------------------
+        | PRODUCTOS DE LA TIENDA
+        |--------------------------------------------------------------------------
+        |
+        | No usamos $tienda->productos directamente porque necesitamos
+        | paginación y eager loading.
+        |
+        */
+
+        $productos = Producto::query()
+            ->select([
+                'id_producto',
+                'id_tienda',
+                'id_categoria',
+                'codigo_producto',
+                'nombre_producto',
+                'descripcion',
+                'precio',
+                'imagen_url',
+                'fecha_publicacion',
+            ])
+            ->where(
+                'id_tienda',
+                $tienda->id_tienda
+            )
+            ->with([
+                'categoria' => function ($query) {
+                    $query->select([
+                        'id_categoria',
+                        'nombre_categoria',
+                    ]);
+                },
+
+                'imagenPrincipal' => function ($query) {
+                    $query->select([
+                        'id_imagen',
+                        'id_producto',
+                        'imagen_url',
+                        'es_principal',
+                        'orden',
+                    ]);
+                },
+            ])
+            ->orderByDesc('fecha_publicacion')
+            ->orderByDesc('id_producto')
+            ->paginate(24)
+            ->withQueryString();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | RESOLVER IMÁGENES
+        |--------------------------------------------------------------------------
+        */
+
+        $productos->getCollection()->transform(
+            function (Producto $producto) {
+
+                $ruta =
+                    $producto->imagenPrincipal?->imagen_url
+                    ?: $producto->imagen_url;
+
+                $producto->setAttribute(
+                    'imagen_resuelta',
+                    $this->resolverImagen($ruta)
+                );
+
+                return $producto;
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | LOGO
+        |--------------------------------------------------------------------------
+        */
+
+        $logoTienda = $this->resolverImagen(
+            $tienda->logo_tienda
+        );
+
+
+        return view(
+            'marketplace.tienda',
+            compact(
+                'tienda',
+                'productos',
+                'logoTienda'
+            )
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
+     * Convertir una ruta almacenada en BD en una URL pública.
      */
-    public function store(Request $request)
+    private function resolverImagen(?string $ruta): ?string
     {
-        //
-    }
+        if (!$ruta) {
+            return null;
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tienda $tienda)
-    {
-        //
-    }
+        $ruta = trim($ruta);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tienda $tienda)
-    {
-        //
-    }
+        if ($ruta === '') {
+            return null;
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tienda $tienda)
-    {
-        //
-    }
+        if (
+            Str::startsWith(
+                $ruta,
+                [
+                    'http://',
+                    'https://',
+                ]
+            )
+        ) {
+            return $ruta;
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Tienda $tienda)
-    {
-        //
+        if (Str::startsWith($ruta, '/')) {
+            return asset(
+                ltrim($ruta, '/')
+            );
+        }
+
+        if (Str::startsWith($ruta, 'storage/')) {
+            return asset($ruta);
+        }
+
+        return asset(
+            'storage/' . ltrim($ruta, '/')
+        );
     }
 }
