@@ -11,12 +11,16 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
+
 use App\Http\Controllers\Dashboard_Admin_Controller;
 use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\AdminUserController;
+
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\TiendaController;
+use App\Http\Controllers\SolicitudVendedorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +36,7 @@ use App\Http\Controllers\TiendaController;
 |
 | Página principal de NexoEco.
 |
-| Puede ser visitada sin iniciar sesión.
+| Puede visitarse sin iniciar sesión.
 |
 */
 
@@ -47,8 +51,7 @@ Route::get(
 | PRODUCTOS PÚBLICOS
 |--------------------------------------------------------------------------
 |
-| El visitante puede revisar la ficha de cualquier producto.
-| No se requiere autenticación para consultar el catálogo.
+| Cualquier visitante puede consultar la ficha de un producto.
 |
 */
 
@@ -64,6 +67,9 @@ Route::get(
 |--------------------------------------------------------------------------
 | TIENDAS PÚBLICAS
 |--------------------------------------------------------------------------
+|
+| Página pública de cada emprendimiento.
+|
 */
 
 Route::get(
@@ -79,14 +85,14 @@ Route::get(
 | LANDING / VENDER EN NEXOECO
 |--------------------------------------------------------------------------
 |
-| Conservamos la antigua landing.
-| Más adelante se especializará como página de captación
-| para vendedores.
+| Página pública informativa para personas interesadas en vender.
 |
 */
 
 Route::get('/vender', function () {
+
     return view('welcome');
+
 })->name('vender');
 
 
@@ -100,17 +106,79 @@ Route::middleware(['auth'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
+    | SOLICITUD PARA VENDER
+    |--------------------------------------------------------------------------
+    |
+    | IMPORTANTE:
+    |
+    | Tener una solicitud NO significa tener rol vendedor.
+    |
+    | Durante este proceso el usuario continúa siendo comprador.
+    | El rol vendedor solamente será otorgado por un moderador
+    | después de aprobar la documentación.
+    |
+    */
+
+    Route::middleware(['verified'])
+        ->prefix('vender')
+        ->name('vendedor.solicitud.')
+        ->group(function () {
+
+            /*
+            |--------------------------------------------------------------------------
+            | FORMULARIO / ESTADO DE LA SOLICITUD
+            |--------------------------------------------------------------------------
+            */
+
+            Route::get(
+                '/solicitud',
+                [SolicitudVendedorController::class, 'create']
+            )->name('create');
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ENVIAR SOLICITUD Y DOCUMENTOS
+            |--------------------------------------------------------------------------
+            |
+            | Limitamos intentos para evitar abuso y cargas masivas
+            | de archivos.
+            |
+            */
+
+            Route::post(
+                '/solicitud',
+                [SolicitudVendedorController::class, 'store']
+            )
+                ->middleware('throttle:5,1')
+                ->name('store');
+
+        });
+
+
+    /*
+    |--------------------------------------------------------------------------
     | DASHBOARD COMPRADOR
     |--------------------------------------------------------------------------
+    |
+    | Posteriormente agregaremos autorización formal por rol.
+    |
     */
 
     Route::prefix('comprador')
         ->name('comprador.')
         ->group(function () {
 
-            Route::get('/dashboard', function () {
-                return view('comprador.dashboard');
-            })->name('dashboard');
+            Route::get(
+                '/dashboard',
+                function () {
+
+                    return view(
+                        'comprador.dashboard'
+                    );
+
+                }
+            )->name('dashboard');
 
         });
 
@@ -121,8 +189,12 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     |
     | IMPORTANTE:
-    | Posteriormente agregaremos middleware de autorización
-    | específico para vendedores.
+    |
+    | Este dashboard NO debe utilizarse para solicitudes pendientes.
+    |
+    | Posteriormente se protegerá con middleware de rol vendedor:
+    |
+    | rol:vendedor
     |
     */
 
@@ -130,9 +202,16 @@ Route::middleware(['auth'])->group(function () {
         ->name('vendedor.')
         ->group(function () {
 
-            Route::get('/dashboard', function () {
-                return view('vendedor.dashboard');
-            })->name('dashboard');
+            Route::get(
+                '/dashboard',
+                function () {
+
+                    return view(
+                        'vendedor.dashboard'
+                    );
+
+                }
+            )->name('dashboard');
 
         });
 
@@ -142,7 +221,8 @@ Route::middleware(['auth'])->group(function () {
     | DASHBOARD ADMINISTRADOR
     |--------------------------------------------------------------------------
     |
-    | Posteriormente agregaremos middleware administrativo.
+    | Posteriormente agregaremos middleware específico para
+    | administración.
     |
     */
 
@@ -152,7 +232,10 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get(
                 '/dashboard',
-                [Dashboard_Admin_Controller::class, 'index']
+                [
+                    Dashboard_Admin_Controller::class,
+                    'index'
+                ]
             )->name('dashboard');
 
         });
@@ -162,6 +245,9 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     | CRUD USUARIOS ADMIN
     |--------------------------------------------------------------------------
+    |
+    | Posteriormente estas rutas deben recibir middleware administrativo.
+    |
     */
 
     Route::prefix('admin')
@@ -170,38 +256,51 @@ Route::middleware(['auth'])->group(function () {
 
             /*
             |--------------------------------------------------------------------------
-            | CREAR
+            | CREAR USUARIO
             |--------------------------------------------------------------------------
             */
 
             Route::post(
                 '/users',
-                [AdminUserController::class, 'store']
+                [
+                    AdminUserController::class,
+                    'store'
+                ]
             )->name('users.store');
 
 
             /*
             |--------------------------------------------------------------------------
-            | ACTUALIZAR
+            | ACTUALIZAR USUARIO
             |--------------------------------------------------------------------------
             */
 
             Route::put(
                 '/users/{user}',
-                [AdminUserController::class, 'update']
-            )->name('users.update');
+                [
+                    AdminUserController::class,
+                    'update'
+                ]
+            )
+                ->whereNumber('user')
+                ->name('users.update');
 
 
             /*
             |--------------------------------------------------------------------------
-            | DESACTIVAR / REACTIVAR
+            | DESACTIVAR / REACTIVAR USUARIO
             |--------------------------------------------------------------------------
             */
 
             Route::delete(
                 '/users/{user}',
-                [AdminUserController::class, 'destroy']
-            )->name('users.destroy');
+                [
+                    AdminUserController::class,
+                    'destroy'
+                ]
+            )
+                ->whereNumber('user')
+                ->name('users.destroy');
 
         });
 
@@ -210,6 +309,10 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     | TIPOS DE USUARIO
     |--------------------------------------------------------------------------
+    |
+    | Posteriormente debe quedar disponible únicamente para los
+    | roles administrativos correspondientes.
+    |
     */
 
     Route::resource(
@@ -226,19 +329,28 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get(
         '/profile',
-        [ProfileController::class, 'edit']
+        [
+            ProfileController::class,
+            'edit'
+        ]
     )->name('profile.edit');
 
 
     Route::patch(
         '/profile',
-        [ProfileController::class, 'update']
+        [
+            ProfileController::class,
+            'update'
+        ]
     )->name('profile.update');
 
 
     Route::delete(
         '/profile',
-        [ProfileController::class, 'destroy']
+        [
+            ProfileController::class,
+            'destroy'
+        ]
     )->name('profile.destroy');
 
 
@@ -250,31 +362,110 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put(
         '/password',
-        [PasswordController::class, 'update']
+        [
+            PasswordController::class,
+            'update'
+        ]
     )->name('password.update');
 
 
     /*
     |--------------------------------------------------------------------------
-    | EMAIL VERIFICATION
+    | VERIFICACIÓN DE EMAIL
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/email/verify', function () {
+    Route::get(
+        '/email/verify',
+        function () {
 
-        return view('auth.verify-email');
+            return view(
+                'auth.verify-email'
+            );
 
-    })->name('verification.notice');
+        }
+    )->name('verification.notice');
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | CONFIRMAR VERIFICACIÓN
+    |--------------------------------------------------------------------------
+    |
+    | Si el usuario tiene una solicitud para vender y todavía no
+    | cuenta con el rol vendedor, después de verificar el email
+    | lo enviamos al proceso de solicitud.
+    |
+    */
 
     Route::get(
         '/email/verify/{id}/{hash}',
-        function (EmailVerificationRequest $request) {
+        function (
+            EmailVerificationRequest $request
+        ) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | VERIFICAR EMAIL
+            |--------------------------------------------------------------------------
+            */
 
             $request->fulfill();
 
+
+            /*
+            |--------------------------------------------------------------------------
+            | RECARGAR USUARIO
+            |--------------------------------------------------------------------------
+            */
+
+            $user = $request
+                ->user()
+                ->fresh();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | SOLICITUD DE VENDEDOR
+            |--------------------------------------------------------------------------
+            |
+            | Si seleccionó "Quiero vender" durante el registro,
+            | RegisteredUserController habrá creado una solicitud.
+            |
+            | Todavía NO debe tener rol vendedor.
+            |
+            */
+
+            $tieneSolicitudVendedor = $user
+                ->solicitudVendedor()
+                ->exists();
+
+
+            $yaEsVendedor = $user
+                ->tieneTipo('vendedor');
+
+
+            if (
+                $tieneSolicitudVendedor
+                && !$yaEsVendedor
+            ) {
+                return redirect()
+                    ->route(
+                        'vendedor.solicitud.create'
+                    );
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | COMPRADOR NORMAL
+            |--------------------------------------------------------------------------
+            */
+
             return redirect()
-                ->route('comprador.dashboard');
+                ->route(
+                    'comprador.dashboard'
+                );
 
         }
     )
@@ -285,13 +476,44 @@ Route::middleware(['auth'])->group(function () {
         ->name('verification.verify');
 
 
+    /*
+    |--------------------------------------------------------------------------
+    | REENVIAR VERIFICACIÓN
+    |--------------------------------------------------------------------------
+    */
+
     Route::post(
         '/email/verification-notification',
         function (Request $request) {
 
+            /*
+            |--------------------------------------------------------------------------
+            | EVITAR REENVÍO INNECESARIO
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                $request
+                    ->user()
+                    ->hasVerifiedEmail()
+            ) {
+                return redirect()
+                    ->route(
+                        'marketplace.index'
+                    );
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | ENVIAR CORREO
+            |--------------------------------------------------------------------------
+            */
+
             $request
                 ->user()
                 ->sendEmailVerificationNotification();
+
 
             return back()->with(
                 'status',
@@ -300,8 +522,12 @@ Route::middleware(['auth'])->group(function () {
 
         }
     )
-        ->middleware('throttle:6,1')
-        ->name('verification.send');
+        ->middleware(
+            'throttle:6,1'
+        )
+        ->name(
+            'verification.send'
+        );
 
 });
 
@@ -314,7 +540,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get(
     '/login',
-    [AuthenticatedSessionController::class, 'create']
+    [
+        AuthenticatedSessionController::class,
+        'create'
+    ]
 )
     ->middleware('guest')
     ->name('login');
@@ -322,9 +551,15 @@ Route::get(
 
 Route::post(
     '/login',
-    [AuthenticatedSessionController::class, 'store']
+    [
+        AuthenticatedSessionController::class,
+        'store'
+    ]
 )
-    ->middleware('guest');
+    ->middleware([
+        'guest',
+        'throttle:10,1',
+    ]);
 
 
 /*
@@ -335,7 +570,10 @@ Route::post(
 
 Route::post(
     '/logout',
-    [AuthenticatedSessionController::class, 'destroy']
+    [
+        AuthenticatedSessionController::class,
+        'destroy'
+    ]
 )
     ->middleware('auth')
     ->name('logout');
@@ -349,7 +587,10 @@ Route::post(
 
 Route::get(
     '/register',
-    [RegisteredUserController::class, 'create']
+    [
+        RegisteredUserController::class,
+        'create'
+    ]
 )
     ->middleware('guest')
     ->name('register');
@@ -357,9 +598,15 @@ Route::get(
 
 Route::post(
     '/register',
-    [RegisteredUserController::class, 'store']
+    [
+        RegisteredUserController::class,
+        'store'
+    ]
 )
-    ->middleware('guest');
+    ->middleware([
+        'guest',
+        'throttle:5,1',
+    ]);
 
 
 /*
@@ -370,7 +617,10 @@ Route::post(
 
 Route::get(
     '/forgot-password',
-    [PasswordResetLinkController::class, 'create']
+    [
+        PasswordResetLinkController::class,
+        'create'
+    ]
 )
     ->middleware('guest')
     ->name('password.request');
@@ -378,20 +628,38 @@ Route::get(
 
 Route::post(
     '/forgot-password',
-    [PasswordResetLinkController::class, 'store']
+    [
+        PasswordResetLinkController::class,
+        'store'
+    ]
 )
-    ->middleware('guest')
+    ->middleware([
+        'guest',
+        'throttle:5,1',
+    ])
     ->name('password.email');
 
 
+/*
+|--------------------------------------------------------------------------
+| FORMULARIO NUEVA CONTRASEÑA
+|--------------------------------------------------------------------------
+*/
+
 Route::get(
     '/reset-password/{token}',
-    function (Request $request, string $token) {
+    function (
+        Request $request,
+        string $token
+    ) {
 
-        return view('auth.reset-password', [
-            'request' => $request,
-            'token' => $token,
-        ]);
+        return view(
+            'auth.reset-password',
+            [
+                'request' => $request,
+                'token' => $token,
+            ]
+        );
 
     }
 )
@@ -399,9 +667,21 @@ Route::get(
     ->name('password.reset');
 
 
+/*
+|--------------------------------------------------------------------------
+| GUARDAR NUEVA CONTRASEÑA
+|--------------------------------------------------------------------------
+*/
+
 Route::post(
     '/reset-password',
-    [NewPasswordController::class, 'store']
+    [
+        NewPasswordController::class,
+        'store'
+    ]
 )
-    ->middleware('guest')
+    ->middleware([
+        'guest',
+        'throttle:5,1',
+    ])
     ->name('password.store');
