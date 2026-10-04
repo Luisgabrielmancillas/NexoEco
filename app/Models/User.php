@@ -13,16 +13,20 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $table = 'users';
 
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'fecha_registro' => 'datetime',
         'password' => 'hashed',
+        'activo' => 'boolean',
     ];
+
 
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
     ];
+
 
     protected $fillable = [
         'name',
@@ -32,19 +36,28 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
         'nombre_completo',
         'fecha_registro',
-        'activo'
+        'activo',
     ];
 
+    // Relación otros módulos
     public function pedidos()
     {
-        return $this->hasMany(Pedido::class, 'id_comprador');
+        return $this->hasMany(
+            Pedido::class,
+            'id_comprador'
+        );
     }
+
 
     public function tiendas()
     {
-        return $this->hasMany(Tienda::class, 'id_vendedor');
+        return $this->hasMany(
+            Tienda::class,
+            'id_vendedor'
+        );
     }
 
+    // 🔥 RELACIÓN CORRECTA DE ROLES (many-to-many)
     public function tipos_usuario()
     {
         return $this->belongsToMany(
@@ -55,10 +68,63 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
+
+    public function solicitudVendedor()
+    {
+        return $this->hasOne(
+            SolicitudVendedor::class,
+            'id_usuario'
+        );
+    }
+
+
+    public function solicitudesModeradas()
+    {
+        return $this->hasMany(
+            SolicitudVendedor::class,
+            'id_moderador'
+        );
+    }
+
+
     public function tieneTipo(string $tipo): bool
     {
-        return $this->tipos_usuario()
-            ->where('nombre_tipo', $tipo)
+        return $this
+            ->tipos_usuario()
+            ->where(
+                'nombre_tipo',
+                mb_strtolower(trim($tipo))
+            )
+            ->exists();
+    }
+
+
+    public function tieneAlgunTipo(array $tipos): bool
+    {
+        $tipos = collect($tipos)
+            ->map(
+                fn ($tipo) =>
+                    mb_strtolower(
+                        trim((string) $tipo)
+                    )
+            )
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
+
+
+        if (empty($tipos)) {
+            return false;
+        }
+
+
+        return $this
+            ->tipos_usuario()
+            ->whereIn(
+                'nombre_tipo',
+                $tipos
+            )
             ->exists();
     }
 }

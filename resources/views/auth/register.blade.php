@@ -1,518 +1,1232 @@
-<x-guest-layout>
+@extends('layouts.marketplace')
+
+@section('title', 'Crear cuenta - NexoEco')
+
+@push('styles')
 
 <style>
-    :root {
-        --cream: #FAF7F2;
-        --orange: #E85D2F;
-        --orange-dark: #ca542c;
-        --ink: #1C1917;
-        --muted: #8C8279;
-        --border: #E8E0D4;
-    }
+    /* =========================================================
+       REGISTRO NEXOECO
+    ========================================================== */
 
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden;
-        background:
-            radial-gradient(circle at 10% 20%, rgba(232,93,47,.22), transparent 28%),
-            radial-gradient(circle at 90% 80%, rgba(232,93,47,.10), transparent 30%),
-            linear-gradient(135deg,#fff 0%,#fff7f3 100%) !important;
-    }
-
-    body > div > div:first-child {
-        display: none !important;
-    }
-
-    body > div {
-        padding: 0 !important;
-        margin: 0 !important;
-        max-width: none !important;
-        width: 100% !important;
-        min-height: 100vh !important;
-        background: transparent !important;
-    }
-
-    body > div > div {
-        margin: 0 !important;
-        padding: 0 !important;
-        max-width: none !important;
-        width: 100% !important;
-        background: transparent !important;
-        box-shadow: none !important;
-    }
-
-    .nexo-register {
-        position: fixed;
-        inset: 0;
+    .register-page {
         width: 100%;
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 1.05fr .95fr;
-        overflow: hidden;
-    }
+        min-height: calc(100vh - 140px);
 
-    .nexo-brand {
-        position: absolute;
-        top: 28px;
-        left: 42px;
-        z-index: 50;
         display: flex;
-        align-items: center;
-        gap: .7rem;
-        text-decoration: none;
-        font-size: 34px;
-        font-weight: 950;
-        letter-spacing: -1px;
-        color: var(--orange);
-        transition: .25s ease;
+        align-items: flex-start;
+        justify-content: center;
+
+        padding: 22px 0 40px;
     }
 
-    .nexo-brand:hover {
-        transform: translateY(-2px);
+    .register-container {
+        width: 100%;
+        max-width: 1080px;
+
+        margin-inline: auto;
     }
 
-    .nexo-brand .dot {
-        width: 14px;
-        height: 14px;
-        border-radius: 999px;
-        background: var(--orange);
-        box-shadow: 0 0 18px rgba(232,93,47,.55);
+    .register-layout {
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+
+        gap: 16px;
     }
 
-    .bubble {
+    /* =========================================================
+       INTRO
+    ========================================================== */
+
+    .register-intro {
+        position: relative;
+
+        overflow: hidden;
+
+        padding: 22px 20px;
+
+        border-radius: 22px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #E85D2F 0%,
+                #F06A3F 58%,
+                #FF8759 100%
+            );
+
+        color: #ffffff;
+
+        box-shadow:
+            0 12px 30px rgba(232, 93, 47, .16);
+    }
+
+    .register-intro::before {
+        content: "";
+
         position: absolute;
+
+        width: 190px;
+        height: 190px;
+
+        right: -70px;
+        top: -90px;
+
         border-radius: 50%;
-        z-index: 1;
-        animation: float 6s ease-in-out infinite;
+
+        background:
+            rgba(255, 255, 255, .09);
     }
 
-    .bubble-1 {
-        width: 240px;
-        height: 240px;
-        background: rgba(232,93,47,.14);
-        top: -80px;
-        right: 34%;
-    }
+    .register-intro::after {
+        content: "";
 
-    .bubble-2 {
+        position: absolute;
+
         width: 150px;
         height: 150px;
-        background: rgba(232,93,47,.10);
-        bottom: 60px;
-        left: 42%;
-        animation-delay: 1s;
+
+        left: -60px;
+        bottom: -90px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255, 255, 255, .07);
     }
 
-    .bubble-3 {
-        width: 90px;
-        height: 90px;
-        background: rgba(232,93,47,.18);
-        top: 110px;
-        right: 70px;
-        animation-delay: 2s;
-    }
-
-    .nexo-left {
-        padding: 120px 70px 70px;
-        display: flex;
-        align-items: center;
+    .register-intro-content {
         position: relative;
         z-index: 2;
+
+        width: 100%;
     }
 
-    .nexo-left-content {
-        max-width: 690px;
-        animation: slideLeft .7s ease both;
-    }
+    .register-badge {
+        display: inline-flex;
+        align-items: center;
 
-    .nexo-badge {
-        display: inline-block;
-        padding: 11px 18px;
+        gap: 6px;
+
+        padding: 6px 10px;
+
+        border:
+            1px solid rgba(255, 255, 255, .2);
+
         border-radius: 999px;
-        background: rgba(255,255,255,.82);
-        color: var(--orange);
+
+        background:
+            rgba(255, 255, 255, .12);
+
+        font-size: 11px;
         font-weight: 900;
-        margin-bottom: 28px;
-        box-shadow: 0 12px 28px rgba(232,93,47,.10);
     }
 
-    .nexo-left h1 {
-        margin: 0;
-        font-size: clamp(42px, 5vw, 76px);
-        line-height: 1;
+    .register-intro-title {
+        max-width: 480px;
+
+        margin: 13px 0 0;
+
+        font-size: clamp(25px, 7vw, 39px);
+        line-height: 1.05;
+
         font-weight: 950;
-        color: var(--ink);
-        letter-spacing: -3px;
+        letter-spacing: -.8px;
     }
 
-    .nexo-left h1 span {
-        color: var(--orange);
+    .register-intro-text {
+        max-width: 520px;
+
+        margin: 11px 0 0;
+
+        color:
+            rgba(255, 255, 255, .9);
+
+        font-size: 13px;
+        line-height: 1.55;
     }
 
-    .nexo-left p {
-        margin-top: 26px;
-        max-width: 570px;
-        font-size: 18px;
-        line-height: 1.7;
-        color: var(--muted);
+    .register-benefits {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+        margin-top: 18px;
     }
 
-    .nexo-cards {
+    .register-benefit {
         display: flex;
-        gap: 16px;
-        margin-top: 36px;
-        flex-wrap: wrap;
-    }
+        align-items: center;
 
-    .nexo-mini-card {
-        background: rgba(255,255,255,.86);
-        border: 1px solid rgba(255,255,255,.9);
-        border-radius: 22px;
-        padding: 18px 22px;
-        min-width: 150px;
-        box-shadow: 0 15px 35px rgba(232,93,47,.10);
-        transition: .25s ease;
-    }
+        gap: 9px;
 
-    .nexo-mini-card:hover {
-        transform: translateY(-6px);
-    }
+        padding: 9px 11px;
 
-    .nexo-mini-card strong {
-        display: block;
-        color: var(--orange);
-        font-size: 25px;
-        font-weight: 900;
-    }
+        border:
+            1px solid rgba(255, 255, 255, .16);
 
-    .nexo-mini-card small {
-        color: var(--muted);
+        border-radius: 12px;
+
+        background:
+            rgba(255, 255, 255, .09);
+
+        font-size: 11px;
         font-weight: 800;
     }
 
-    .nexo-right {
+    .register-benefit-icon {
+        width: 28px;
+        height: 28px;
+
+        flex-shrink: 0;
+
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 50px;
-        position: relative;
-        z-index: 3;
+
+        border-radius: 8px;
+
+        background:
+            rgba(255, 255, 255, .15);
+
+        font-size: 14px;
     }
 
-    .register-box {
+    /* =========================================================
+       FORMULARIO
+    ========================================================== */
+
+    .register-card {
         width: 100%;
-        max-width: 470px;
-        background: rgba(255,255,255,.90);
-        backdrop-filter: blur(18px);
-        border-radius: 34px;
-        padding: 38px;
-        box-shadow: 0 30px 70px rgba(232,93,47,.16);
-        border: 1px solid rgba(255,255,255,.9);
-        animation: slideUp .7s ease both;
+
+        padding: 19px 16px 20px;
+
+        border:
+            1px solid var(--nexo-border);
+
+        border-radius: 22px;
+
+        background: #ffffff;
+
+        box-shadow:
+            0 8px 28px rgba(28, 25, 23, .055);
     }
 
-    .register-box h2 {
-        margin: 0 0 8px;
-        font-size: 34px;
+    .register-card-header {
+        margin-bottom: 17px;
+    }
+
+    .register-card-title {
+        margin: 0;
+
+        color: var(--nexo-text);
+
+        font-size: 22px;
+        line-height: 1.1;
+
         font-weight: 950;
-        color: var(--ink);
+        letter-spacing: -.4px;
     }
 
-    .register-box .subtitle {
-        margin: 0 0 28px;
-        color: var(--muted);
-        line-height: 1.5;
+    .register-card-subtitle {
+        margin: 5px 0 0;
+
+        color: var(--nexo-muted);
+
+        font-size: 12px;
+        line-height: 1.45;
     }
 
-    .field {
-        margin-bottom: 16px;
+    /* =========================================================
+       FORM GROUP
+    ========================================================== */
+
+    .form-group {
+        margin-top: 14px;
     }
 
-    .field label {
+    .form-group:first-of-type {
+        margin-top: 0;
+    }
+
+    .form-label {
         display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 850;
-        color: var(--ink);
+
+        margin-bottom: 6px;
+
+        color: var(--nexo-text);
+
+        font-size: 12px;
+        font-weight: 900;
     }
 
-    .field input {
+    .form-input {
         width: 100%;
-        border: 2px solid var(--border);
-        background: var(--cream);
-        border-radius: 17px;
-        padding: 15px 16px;
+        min-height: 44px;
+
+        padding: 0 13px;
+
+        border:
+            1px solid var(--nexo-border);
+
+        border-radius: 12px;
+
+        background: #ffffff;
+        color: var(--nexo-text);
+
         outline: none;
-        color: var(--ink);
-        transition: .25s ease;
+
+        font-family: inherit;
+        font-size: 13px;
+
+        transition:
+            border-color .2s ease,
+            box-shadow .2s ease,
+            background .2s ease;
     }
 
-    .field input:focus {
-        background: #fff;
-        border-color: var(--orange);
-        box-shadow: 0 0 0 5px rgba(232,93,47,.12);
+    .form-input::placeholder {
+        color: #A49B95;
     }
 
-    .register-btn {
-        width: 100%;
-        border: none;
-        border-radius: 999px;
-        padding: 16px;
-        background: linear-gradient(135deg, var(--orange), #ff7b47);
-        color: white;
-        font-weight: 950;
-        font-size: 16px;
-        cursor: pointer;
-        box-shadow: 0 18px 35px rgba(232,93,47,.30);
-        transition: .25s ease;
-        margin-top: 10px;
+    .form-input:hover {
+        border-color: #DCCFC3;
     }
 
-    .register-btn:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 24px 45px rgba(232,93,47,.42);
+    .form-input:focus {
+        border-color:
+            var(--nexo-primary);
+
+        box-shadow:
+            0 0 0 3px rgba(232, 93, 47, .10);
     }
 
-    .login-text {
-        margin-top: 22px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 14px;
+    .form-input.has-error {
+        border-color: #DC6868;
+        background: #FFF9F9;
+    }
+
+    .form-error {
+        margin-top: 5px;
+
+        color: #B42318;
+
+        font-size: 10px;
+        line-height: 1.4;
         font-weight: 700;
     }
 
-    .login-text a {
-        color: var(--orange);
+    /* =========================================================
+       TIPO DE CUENTA
+    ========================================================== */
+
+    .account-type-title {
+        margin-bottom: 7px;
+
+        color: var(--nexo-text);
+
+        font-size: 12px;
         font-weight: 900;
-        text-decoration: none;
     }
 
-    .login-text a:hover {
+    .account-type-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .account-option {
+        position: relative;
+
+        display: flex;
+        align-items: flex-start;
+
+        gap: 11px;
+
+        padding: 12px;
+
+        border:
+            1px solid var(--nexo-border);
+
+        border-radius: 14px;
+
+        background: #ffffff;
+
+        cursor: pointer;
+
+        transition:
+            border-color .2s ease,
+            background .2s ease,
+            box-shadow .2s ease,
+            transform .2s ease;
+    }
+
+    .account-option:hover {
+        border-color:
+            rgba(232, 93, 47, .55);
+
+        transform: translateY(-1px);
+    }
+
+    .account-option:has(
+        input[type="radio"]:checked
+    ) {
+        border-color:
+            var(--nexo-primary);
+
+        background:
+            var(--nexo-primary-soft);
+
+        box-shadow:
+            0 0 0 2px rgba(232, 93, 47, .07);
+    }
+
+    .account-option input[type="radio"] {
+        width: 17px;
+        height: 17px;
+
+        flex-shrink: 0;
+
+        margin: 2px 0 0;
+
+        accent-color:
+            var(--nexo-primary);
+    }
+
+    .account-option-content {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .account-option-title {
+        display: flex;
+        align-items: center;
+
+        gap: 6px;
+
+        color: var(--nexo-text);
+
+        font-size: 13px;
+        font-weight: 900;
+    }
+
+    .account-option-description {
+        display: block;
+
+        margin-top: 3px;
+
+        color: var(--nexo-muted);
+
+        font-size: 10px;
+        line-height: 1.45;
+    }
+
+    .seller-note {
+        display: inline-flex;
+        align-items: center;
+
+        gap: 4px;
+
+        margin-top: 5px;
+        padding: 3px 7px;
+
+        border-radius: 999px;
+
+        background: #ffffff;
+
+        color: var(--nexo-primary);
+
+        font-size: 9px;
+        font-weight: 900;
+    }
+
+    /* =========================================================
+       PASSWORD
+    ========================================================== */
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .password-wrapper .form-input {
+        padding-right: 60px;
+    }
+
+    .password-toggle {
+        position: absolute;
+
+        top: 50%;
+        right: 8px;
+
+        transform: translateY(-50%);
+
+        min-width: 42px;
+        height: 30px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0 7px;
+
+        border: 0;
+        border-radius: 8px;
+
+        background: transparent;
+        color: var(--nexo-muted);
+
+        cursor: pointer;
+
+        font-family: inherit;
+        font-size: 10px;
+        font-weight: 900;
+    }
+
+    .password-toggle:hover {
+        background: var(--nexo-bg);
+        color: var(--nexo-primary);
+    }
+
+    /* =========================================================
+       BOTÓN
+    ========================================================== */
+
+    .register-submit {
+        width: 100%;
+        min-height: 46px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 18px;
+        padding: 0 16px;
+
+        border: 0;
+        border-radius: 999px;
+
+        background:
+            var(--nexo-primary);
+
+        color: #ffffff;
+
+        cursor: pointer;
+
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 900;
+
+        transition:
+            background .2s ease,
+            transform .2s ease,
+            box-shadow .2s ease;
+    }
+
+    .register-submit:hover {
+        background:
+            var(--nexo-primary-dark);
+
+        transform: translateY(-1px);
+
+        box-shadow:
+            0 6px 16px rgba(232, 93, 47, .18);
+    }
+
+    .register-submit:active {
+        transform: translateY(0);
+    }
+
+    /* =========================================================
+       LOGIN
+    ========================================================== */
+
+    .register-login {
+        margin-top: 15px;
+
+        color: var(--nexo-muted);
+
+        font-size: 11px;
+
+        text-align: center;
+    }
+
+    .register-login a {
+        color: var(--nexo-primary);
+
+        font-weight: 900;
+    }
+
+    .register-login a:hover {
         text-decoration: underline;
     }
 
-    @keyframes float {
-        0%,100% {
-            transform: translateY(0);
+    .register-terms {
+        max-width: 420px;
+
+        margin:
+            10px auto 0;
+
+        color: #918882;
+
+        font-size: 9px;
+        line-height: 1.45;
+
+        text-align: center;
+    }
+
+    /* =========================================================
+       TABLET
+    ========================================================== */
+
+    @media (min-width: 700px) {
+
+        .register-page {
+            padding:
+                28px 0 48px;
         }
 
-        50% {
-            transform: translateY(-20px);
+        .register-card {
+            padding: 25px;
+        }
+
+        .account-type-grid {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+        }
+
+        .register-benefits {
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
         }
     }
 
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(25px);
+    /* =========================================================
+       DESKTOP
+    ========================================================== */
+
+    @media (min-width: 950px) {
+
+        .register-page {
+            width: 100%;
+
+            align-items: flex-start;
+            justify-content: center;
+
+            padding:
+                34px 0 55px;
         }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+        .register-container {
+            width: 100%;
+            max-width: 1080px;
 
-    @keyframes slideLeft {
-        from {
-            opacity: 0;
-            transform: translateX(-25px);
+            margin-inline: auto;
         }
 
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
+        .register-layout {
+            width: 100%;
 
-    @media (max-width: 980px) {
-        .nexo-register {
-            position: relative;
-            min-height: 100vh;
-            height: auto;
+            grid-template-columns:
+                minmax(0, .92fr)
+                minmax(440px, 1.08fr);
+
+            align-items: stretch;
+
+            gap: 20px;
+        }
+
+        .register-intro {
+            min-height: 100%;
+
+            display: flex;
+            align-items: center;
+
+            padding: 34px;
+        }
+
+        .register-benefits {
             grid-template-columns: 1fr;
-            overflow-y: auto;
+
+            margin-top: 24px;
         }
 
-        .nexo-left {
-            padding: 110px 26px 30px;
+        .register-card {
+            padding: 27px;
         }
 
-        .nexo-right {
-            padding: 20px 20px 45px;
-        }
-
-        .nexo-left p {
-            font-size: 16px;
+        .register-card-title {
+            font-size: 25px;
         }
     }
 
-    @media (max-width: 560px) {
-        .nexo-brand {
-            top: 20px;
-            left: 24px;
-            font-size: 29px;
+    /* =========================================================
+       DESKTOP GRANDE
+    ========================================================== */
+
+    @media (min-width: 1250px) {
+
+        .register-container {
+            max-width: 1120px;
         }
 
-        .nexo-left h1 {
-            letter-spacing: -1.5px;
+        .register-layout {
+            grid-template-columns:
+                minmax(430px, .95fr)
+                minmax(500px, 1.05fr);
+
+            gap: 22px;
+        }
+    }
+
+    /* =========================================================
+       MÓVILES PEQUEÑOS
+    ========================================================== */
+
+    @media (max-width: 420px) {
+
+        .register-page {
+            padding:
+                14px 0 30px;
         }
 
-        .register-box {
-            padding: 28px 22px;
-            border-radius: 26px;
+        .register-intro {
+            padding:
+                19px 16px;
+
+            border-radius: 18px;
         }
 
-        .nexo-cards {
-            display: none;
+        .register-card {
+            padding:
+                18px 14px;
+
+            border-radius: 18px;
+        }
+
+        .register-intro-title {
+            font-size: 27px;
+        }
+
+        .account-option {
+            padding: 11px;
         }
     }
 </style>
 
-<div class="nexo-register">
+@endpush
 
-    <a href="{{ url('/') }}" class="nexo-brand">
-        <span class="dot"></span>
-        NexoEco
-    </a>
 
-    <div class="bubble bubble-1"></div>
-    <div class="bubble bubble-2"></div>
-    <div class="bubble bubble-3"></div>
+@section('content')
 
-    <section class="nexo-left">
-        <div class="nexo-left-content">
+<div class="register-page">
 
-            <div class="nexo-badge">
-                Crea tu cuenta gratis
-            </div>
+    <div class="nexo-container">
 
-            <h1>
-                Únete a <span>NexoEco</span>
-            </h1>
+        <div class="register-container">
 
-            <p>
-                Regístrate para comprar productos locales, vender como emprendedor
-                o comenzar a administrar tu presencia dentro del marketplace.
-            </p>
+            <div class="register-layout">
 
-            <div class="nexo-cards">
-                <div class="nexo-mini-card">
-                    <strong>🛍️</strong>
-                    <small>Compra fácil</small>
-                </div>
 
-                <div class="nexo-mini-card">
-                    <strong>🏪</strong>
-                    <small>Vende rápido</small>
-                </div>
+                {{-- =================================================
+                    PRESENTACIÓN
+                ================================================== --}}
 
-                <div class="nexo-mini-card">
-                    <strong>📦</strong>
-                    <small>Gestiona pedidos</small>
-                </div>
+                <section class="register-intro">
+
+                    <div class="register-intro-content">
+
+                        <span class="register-badge">
+                            ✨ Únete a NexoEco
+                        </span>
+
+
+                        <h1 class="register-intro-title">
+                            Compra y vende dentro de tu comunidad
+                        </h1>
+
+
+                        <p class="register-intro-text">
+                            Crea tu cuenta para descubrir productos
+                            locales o comenzar a vender dentro de
+                            NexoEco.
+                        </p>
+
+
+                        <div class="register-benefits">
+
+                            <div class="register-benefit">
+
+                                <div class="register-benefit-icon">
+                                    🛍️
+                                </div>
+
+                                <span>
+                                    Compra productos locales
+                                </span>
+
+                            </div>
+
+
+                            <div class="register-benefit">
+
+                                <div class="register-benefit-icon">
+                                    🏪
+                                </div>
+
+                                <span>
+                                    Crea tu tienda como vendedor
+                                </span>
+
+                            </div>
+
+
+                            <div class="register-benefit">
+
+                                <div class="register-benefit-icon">
+                                    🤝
+                                </div>
+
+                                <span>
+                                    Conecta con tu comunidad
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                {{-- =================================================
+                    FORMULARIO
+                ================================================== --}}
+
+                <section class="register-card">
+
+                    <div class="register-card-header">
+
+                        <h2 class="register-card-title">
+                            Crear cuenta
+                        </h2>
+
+                        <p class="register-card-subtitle">
+                            Completa tus datos. Te tomará menos
+                            de un minuto.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        method="POST"
+                        action="{{ route('register') }}"
+                    >
+
+                        @csrf
+
+
+                        {{-- =========================================
+                            NOMBRE COMPLETO
+                        ========================================== --}}
+
+                        <div class="form-group">
+
+                            <label
+                                for="nombre_completo"
+                                class="form-label"
+                            >
+                                Nombre completo
+                            </label>
+
+
+                            <input
+                                id="nombre_completo"
+                                type="text"
+                                name="nombre_completo"
+                                value="{{ old('nombre_completo') }}"
+                                class="
+                                    form-input
+                                    @error('nombre_completo')
+                                        has-error
+                                    @enderror
+                                "
+                                placeholder="Ej. María López"
+                                autocomplete="name"
+                                maxlength="255"
+                                required
+                                autofocus
+                            >
+
+
+                            @error('nombre_completo')
+
+                                <div class="form-error">
+                                    {{ $message }}
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                        {{-- =========================================
+                            CORREO
+                        ========================================== --}}
+
+                        <div class="form-group">
+
+                            <label
+                                for="email"
+                                class="form-label"
+                            >
+                                Correo electrónico
+                            </label>
+
+
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                class="
+                                    form-input
+                                    @error('email')
+                                        has-error
+                                    @enderror
+                                "
+                                placeholder="tu@correo.com"
+                                autocomplete="email"
+                                maxlength="255"
+                                required
+                            >
+
+
+                            @error('email')
+
+                                <div class="form-error">
+                                    {{ $message }}
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                        {{-- =========================================
+                            TIPO DE REGISTRO
+                        ========================================== --}}
+
+                        <div class="form-group">
+
+                            <div class="account-type-title">
+                                ¿Cómo quieres usar NexoEco?
+                            </div>
+
+
+                            <div class="account-type-grid">
+
+                                {{-- COMPRADOR --}}
+
+                                <label class="account-option">
+
+                                    <input
+                                        type="radio"
+                                        name="tipo_registro"
+                                        value="comprador"
+                                        required
+                                        {{
+                                            old(
+                                                'tipo_registro',
+                                                'comprador'
+                                            ) === 'comprador'
+                                                ? 'checked'
+                                                : ''
+                                        }}
+                                    >
+
+
+                                    <span class="account-option-content">
+
+                                        <span class="account-option-title">
+                                            🛍️ Comprar
+                                        </span>
+
+                                        <span class="account-option-description">
+                                            Explora productos y compra
+                                            a emprendedores locales.
+                                        </span>
+
+                                    </span>
+
+                                </label>
+
+
+                                {{-- VENDEDOR --}}
+
+                                <label class="account-option">
+
+                                    <input
+                                        type="radio"
+                                        name="tipo_registro"
+                                        value="vendedor"
+                                        required
+                                        {{
+                                            old(
+                                                'tipo_registro'
+                                            ) === 'vendedor'
+                                                ? 'checked'
+                                                : ''
+                                        }}
+                                    >
+
+
+                                    <span class="account-option-content">
+
+                                        <span class="account-option-title">
+                                            🏪 Vender
+                                        </span>
+
+                                        <span class="account-option-description">
+                                            Solicita acceso para vender. Revisaremos tus datos antes de habilitar tu tienda.
+                                        </span>
+
+                                        <span class="seller-note">
+                                            ✓ También podrás comprar
+                                        </span>
+
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+
+                            @error('tipo_registro')
+
+                                <div class="form-error">
+                                    {{ $message }}
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                        {{-- =========================================
+                            CONTRASEÑA
+                        ========================================== --}}
+
+                        <div class="form-group">
+
+                            <label
+                                for="password"
+                                class="form-label"
+                            >
+                                Contraseña
+                            </label>
+
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    class="
+                                        form-input
+                                        @error('password')
+                                            has-error
+                                        @enderror
+                                    "
+                                    placeholder="Crea una contraseña segura"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    data-password-toggle="password"
+                                    aria-label="Mostrar contraseña"
+                                >
+                                    Ver
+                                </button>
+
+                            </div>
+
+
+                            @error('password')
+
+                                <div class="form-error">
+                                    {{ $message }}
+                                </div>
+
+                            @enderror
+
+                        </div>
+
+
+                        {{-- =========================================
+                            CONFIRMAR CONTRASEÑA
+                        ========================================== --}}
+
+                        <div class="form-group">
+
+                            <label
+                                for="password_confirmation"
+                                class="form-label"
+                            >
+                                Confirmar contraseña
+                            </label>
+
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    id="password_confirmation"
+                                    type="password"
+                                    name="password_confirmation"
+                                    class="form-input"
+                                    placeholder="Escribe nuevamente tu contraseña"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    data-password-toggle="password_confirmation"
+                                    aria-label="Mostrar confirmación de contraseña"
+                                >
+                                    Ver
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- =========================================
+                            CREAR CUENTA
+                        ========================================== --}}
+
+                        <button
+                            type="submit"
+                            class="register-submit"
+                        >
+                            Crear mi cuenta
+                        </button>
+
+
+                        {{-- =========================================
+                            LOGIN
+                        ========================================== --}}
+
+                        <div class="register-login">
+
+                            ¿Ya tienes una cuenta?
+
+                            <a href="{{ route('login') }}">
+                                Iniciar sesión
+                            </a>
+
+                        </div>
+
+
+                        <div class="register-terms">
+                            Al crear tu cuenta podrás acceder a
+                            las funciones disponibles según el
+                            tipo de cuenta seleccionado.
+                        </div>
+
+                    </form>
+
+                </section>
+
             </div>
 
         </div>
-    </section>
 
-    <section class="nexo-right">
-        <div class="register-box">
-
-            <h2>Crear cuenta</h2>
-
-            <p class="subtitle">
-                Completa tus datos para empezar en NexoEco.
-            </p>
-
-            <form method="POST" action="{{ route('register') }}" autocomplete="off">
-                @csrf
-
-                <div class="field">
-                    <label for="name">Nombre</label>
-
-                    <input
-                        id="name"
-                        type="text"
-                        name="name"
-                        value="{{ old('name') }}"
-                        required
-                        autofocus
-                        autocomplete="name"
-                        maxlength="120"
-                        placeholder="Tu nombre"
-                    >
-
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-
-                <div class="field">
-                    <label for="email">Correo electrónico</label>
-
-                    <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value="{{ old('email') }}"
-                        required
-                        autocomplete="username"
-                        maxlength="120"
-                        spellcheck="false"
-                        placeholder="ejemplo@correo.com"
-                    >
-
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                </div>
-
-                <div class="field">
-                    <label for="password">Contraseña</label>
-
-                    <input
-                        id="password"
-                        type="password"
-                        name="password"
-                        required
-                        autocomplete="new-password"
-                        maxlength="255"
-                        placeholder="Crea una contraseña"
-                    >
-
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
-
-                <div class="field">
-                    <label for="password_confirmation">Confirmar contraseña</label>
-
-                    <input
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        required
-                        autocomplete="new-password"
-                        maxlength="255"
-                        placeholder="Confirma tu contraseña"
-                    >
-
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                </div>
-
-                <button type="submit" class="register-btn">
-                    Crear cuenta
-                </button>
-
-                <div class="login-text">
-                    ¿Ya tienes cuenta?
-                    <a href="{{ route('login') }}">
-                        Inicia sesión aquí
-                    </a>
-                </div>
-
-            </form>
-
-        </div>
-    </section>
+    </div>
 
 </div>
 
-</x-guest-layout>
+@endsection
+
+
+@push('scripts')
+
+<script>
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+
+            const buttons =
+                document.querySelectorAll(
+                    '[data-password-toggle]'
+                );
+
+
+            buttons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        'click',
+                        function () {
+
+                            const inputId =
+                                this.dataset.passwordToggle;
+
+                            const input =
+                                document.getElementById(
+                                    inputId
+                                );
+
+
+                            if (!input) {
+                                return;
+                            }
+
+
+                            const passwordVisible =
+                                input.type === 'text';
+
+
+                            input.type =
+                                passwordVisible
+                                    ? 'password'
+                                    : 'text';
+
+
+                            this.textContent =
+                                passwordVisible
+                                    ? 'Ver'
+                                    : 'Ocultar';
+
+
+                            this.setAttribute(
+                                'aria-label',
+                                passwordVisible
+                                    ? 'Mostrar contraseña'
+                                    : 'Ocultar contraseña'
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+</script>
+
+@endpush
