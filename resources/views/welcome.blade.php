@@ -834,7 +834,7 @@
             <h1 class="hero-title" style="color:#fff">Lanza tu tienda virtual y vende desde hoy</h1>
             <p class="hero-sub">Crea tu microtienda, carga tus productos y empieza a vender a miles de compradores registrados. Sin conocimientos técnicos.</p>
             <div class="hero-actions">
-                <a href="{{ route('register') }}" class="btn btn-accent btn-lg">
+                <a href="{{ route('vendedor.register') }}" class="btn btn-accent btn-lg">
                     <i class="fas fa-store"></i> Crear mi tienda
                 </a>
                 <a href="#precios" class="btn btn-lg" style="border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);background:transparent">Ver planes</a>
@@ -1120,7 +1120,7 @@
                     <li class="off"><i class="fas fa-times"></i> Reportes avanzados</li>
                     <li class="off"><i class="fas fa-times"></i> Tienda personalizada</li>
                 </ul>
-                <a href="{{ route('register') }}" class="btn btn-ghost" style="width:100%;justify-content:center">Comenzar gratis</a>
+                <a href="{{ route('vendedor.register') }}" class="btn btn-ghost" style="width:100%;justify-content:center">Comenzar gratis</a>
             </div>
 
             <!-- Profesional -->
@@ -1137,7 +1137,7 @@
                     <li><i class="fas fa-check"></i> Acceso a API</li>
                     <li><i class="fas fa-check"></i> Gestión de envíos</li>
                 </ul>
-                <a href="{{ route('register') }}" class="btn btn-accent" style="width:100%;justify-content:center">Prueba 14 días gratis</a>
+                <a href="{{ route('vendedor.register') }}" class="btn btn-accent" style="width:100%;justify-content:center">Prueba 14 días gratis</a>
             </div>
 
             <!-- Empresarial -->
@@ -1176,7 +1176,7 @@
             <div class="cta-card-icon">🏪</div>
             <div class="cta-card-title">Quiero vender</div>
             <div class="cta-card-sub">14 días gratis, sin tarjeta</div>
-            <a href="{{ route('register') }}" class="btn btn-accent" style="width:100%;justify-content:center">Crear mi tienda</a>
+            <a href="{{ route('vendedor.register') }}" class="btn btn-accent" style="width:100%;justify-content:center">Crear mi tienda</a>
         </div>
     </div>
 </section>

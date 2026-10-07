@@ -10,22 +10,51 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    public function sendEmailVerificationNotification(): void
+    {
+        app(\App\Services\EmailVerificationCodeService::class)->send($this);
+    }
+
     protected $table = 'users';
 
+    public function profilePhotoUrl(): ?string
+    {
+        return $this->profile_photo_path ? route('profile.photo.show', ['user' => $this->id, 'v' => substr(hash('sha256', $this->profile_photo_path), 0, 12)]) : null;
+    }
+
+    public function productosFavoritos()
+    {
+        return $this->belongsToMany(Producto::class, 'productos_favoritos', 'id_usuario', 'id_producto')->withTimestamps();
+    }
+
+    public function tiendasFavoritas()
+    {
+        return $this->belongsToMany(Tienda::class, 'tiendas_favoritas', 'id_usuario', 'id_tienda')->withTimestamps();
+    }
+
+    public function opiniones()
+    {
+        return $this->hasMany(Opinion::class, 'id_usuario');
+    }
+
+    public function solicitudesSoporte()
+    {
+        return $this->hasMany(SolicitudSoporte::class, 'id_usuario');
+    }
 
     protected $casts = [
+        'ubicacion_comprador' => 'array',
         'email_verified_at' => 'datetime',
         'fecha_registro' => 'datetime',
         'password' => 'hashed',
         'activo' => 'boolean',
     ];
 
-
     protected $hidden = [
+        'ubicacion_comprador',
         'password',
         'remember_token',
     ];
-
 
     protected $fillable = [
         'name',
@@ -38,7 +67,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'activo',
     ];
 
-
     public function pedidos()
     {
         return $this->hasMany(
@@ -47,7 +75,6 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-
     public function tiendas()
     {
         return $this->hasMany(
@@ -55,7 +82,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'id_vendedor'
         );
     }
-
 
     public function tipos_usuario()
     {
@@ -67,7 +93,6 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-
     public function solicitudVendedor()
     {
         return $this->hasOne(
@@ -75,7 +100,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'id_usuario'
         );
     }
-
 
     public function solicitudesModeradas()
     {
@@ -85,43 +109,35 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-
     public function tieneTipo(string $tipo): bool
     {
         return $this
             ->tipos_usuario()
-            ->where(
-                'nombre_tipo',
-                mb_strtolower(trim($tipo))
-            )
+            ->whereRaw('LOWER(nombre_tipo) = ?', [mb_strtolower(trim($tipo))])
             ->exists();
     }
-
 
     public function tieneAlgunTipo(array $tipos): bool
     {
         $tipos = collect($tipos)
             ->map(
-                fn ($tipo) =>
-                    mb_strtolower(
-                        trim((string) $tipo)
-                    )
+                fn ($tipo) => mb_strtolower(
+                    trim((string) $tipo)
+                )
             )
             ->filter()
             ->unique()
             ->values()
             ->all();
 
-
         if (empty($tipos)) {
             return false;
         }
 
-
         return $this
             ->tipos_usuario()
             ->whereIn(
-                'nombre_tipo',
+                \Illuminate\Support\Facades\DB::raw('LOWER(nombre_tipo)'),
                 $tipos
             )
             ->exists();

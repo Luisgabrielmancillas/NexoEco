@@ -1,0 +1,2 @@
+@foreach($respuestas->reverse() as $respuesta)<article class="support-message {{ $respuesta->es_administrador ? 'from-support' : '' }}"><div class="buyer-row"><h3>{{ $respuesta->es_administrador ? 'Equipo de soporte' : 'Mensaje del usuario' }}</h3><span class="buyer-muted">{{ $respuesta->created_at->format('d/m/Y H:i') }}</span></div><p>{{ $respuesta->mensaje }}</p></article>@endforeach
+@if($respuestas->hasPages())<div style="margin-top:20px;">{{ $respuestas->links() }}</div>@endif

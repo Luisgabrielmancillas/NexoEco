@@ -637,6 +637,8 @@
 
     <div class="nexo-container">
 
+
+
         {{-- =====================================================
             BREADCRUMB
         ====================================================== --}}
@@ -695,6 +697,7 @@
                 <section class="product-gallery">
 
                     <div class="product-main-image">
+                        @if($producto->tienda)<a href="{{ route('tiendas.show', $producto->tienda) }}" class="market-back-button public-image-back" data-back-store><x-market-icon name="arrow"/>Volver a la tienda</a>@endif
 
                         @if ($imagenes->isNotEmpty())
 
@@ -1067,6 +1070,11 @@
 
 </div>
 
+<div class="nexo-container">
+    <div class="buyer-panel buyer-row"><span>Guarda este producto para encontrarlo después.</span>@include('marketplace.partials.favorite-button', ['tipo' => 'productos', 'item' => $producto])</div>
+    @include('marketplace.partials.content-report', ['reportType'=>'productos', 'reportId'=>$producto->getKey()])
+        @include('marketplace.partials.opiniones', ['tipo' => 'productos', 'item' => $producto])
+</div>
 @endsection
 
 

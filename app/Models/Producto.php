@@ -22,17 +22,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $precio
  * @property string|null $imagen_url
  * @property Carbon|null $fecha_publicacion
- *
  * @property Tienda $tienda
  * @property Categoria $categoria
  * @property Collection|DetallePedido[] $detalle_pedidos
  * @property Collection|ProductoImagen[] $imagenes
  * @property ProductoImagen|null $imagenPrincipal
- *
- * @package App\Models
  */
 class Producto extends Model
 {
+    use \Illuminate\Database\Eloquent\SoftDeletes;
     /*
     |--------------------------------------------------------------------------
     | CONFIGURACIÓN DEL MODELO
@@ -45,6 +43,15 @@ class Producto extends Model
 
     public $timestamps = false;
 
+    public function opiniones()
+    {
+        return $this->hasMany(Opinion::class, 'id_producto');
+    }
+
+    public function scopePublicados($query)
+    {
+        return $query;
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -57,8 +64,9 @@ class Producto extends Model
         'id_categoria' => 'int',
         'precio' => 'float',
         'fecha_publicacion' => 'datetime',
+        'fecha_moderacion' => 'datetime',
+        'revision_contenido' => 'integer',
     ];
-
 
     /*
     |--------------------------------------------------------------------------
@@ -76,7 +84,6 @@ class Producto extends Model
         'imagen_url',
         'fecha_publicacion',
     ];
-
 
     /*
     |--------------------------------------------------------------------------
@@ -96,7 +103,6 @@ class Producto extends Model
         );
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | CATEGORÍA
@@ -115,7 +121,6 @@ class Producto extends Model
         );
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | DETALLES DE PEDIDO
@@ -133,7 +138,6 @@ class Producto extends Model
             'id_producto'
         );
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -154,10 +158,9 @@ class Producto extends Model
             'id_producto',
             'id_producto'
         )
-        ->orderBy('orden', 'asc')
-        ->orderBy('id_imagen', 'asc');
+            ->orderBy('orden', 'asc')
+            ->orderBy('id_imagen', 'asc');
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -178,8 +181,8 @@ class Producto extends Model
             'id_producto',
             'id_producto'
         )
-        ->where('es_principal', true)
-        ->orderBy('orden', 'asc')
-        ->orderBy('id_imagen', 'asc');
+            ->where('es_principal', true)
+            ->orderBy('orden', 'asc')
+            ->orderBy('id_imagen', 'asc');
     }
 }

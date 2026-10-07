@@ -51,12 +51,11 @@ class ProductoController extends Controller
                     'orden',
                     'fecha_creacion',
                 ])
-                ->orderByDesc('es_principal')
-                ->orderBy('orden')
-                ->orderBy('id_imagen');
+                    ->orderByDesc('es_principal')
+                    ->orderBy('orden')
+                    ->orderBy('id_imagen');
             },
         ]);
-
 
         /*
         |--------------------------------------------------------------------------
@@ -83,11 +82,9 @@ class ProductoController extends Controller
                 ];
             })
             ->filter(
-                fn (array $imagen) =>
-                    !empty($imagen['url'])
+                fn (array $imagen) => ! empty($imagen['url'])
             )
             ->values();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -110,16 +107,20 @@ class ProductoController extends Controller
             }
         }
 
+        $producto->loadCount(['opiniones' => fn ($q) => $q->publicadas()])->loadAvg(['opiniones' => fn ($q) => $q->publicadas()], 'calificacion');
+        $opiniones = $producto->opiniones()->publicadas()->with('usuario:id,name,nombre_completo')->latest()->paginate(5, ['*'], 'pagina_opiniones');
+        $miOpinion = auth()->user()?->opiniones()->where('id_producto', $producto->id_producto)->first();
 
         return view(
             'marketplace.producto',
             compact(
                 'producto',
-                'imagenes'
+                'imagenes',
+                'opiniones',
+                'miOpinion'
             )
         );
     }
-
 
     /**
      * Resolver una ruta almacenada en la base de datos
@@ -127,7 +128,7 @@ class ProductoController extends Controller
      */
     private function resolverImagen(?string $ruta): ?string
     {
-        if (!$ruta) {
+        if (! $ruta) {
             return null;
         }
 
@@ -136,7 +137,6 @@ class ProductoController extends Controller
         if ($ruta === '') {
             return null;
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -161,7 +161,6 @@ class ProductoController extends Controller
             return $ruta;
         }
 
-
         /*
         |--------------------------------------------------------------------------
         | URL ABSOLUTA LOCAL
@@ -174,7 +173,6 @@ class ProductoController extends Controller
             );
         }
 
-
         /*
         |--------------------------------------------------------------------------
         | YA INCLUYE STORAGE/
@@ -185,7 +183,6 @@ class ProductoController extends Controller
             return asset($ruta);
         }
 
-
         /*
         |--------------------------------------------------------------------------
         | RUTA RELATIVA DE STORAGE
@@ -193,7 +190,7 @@ class ProductoController extends Controller
         */
 
         return asset(
-            'storage/' . ltrim($ruta, '/')
+            'storage/'.ltrim($ruta, '/')
         );
     }
 }

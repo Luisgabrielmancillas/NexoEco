@@ -12,13 +12,19 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        
+        $middleware->alias(['administrator' => \App\Http\Middleware\EnsureAdministrator::class, 'seller' => \App\Http\Middleware\EnsureSeller::class, 'moderator' => \App\Http\Middleware\EnsureModerator::class]);
+        $middleware->web(append: [\App\Http\Middleware\EnsureActiveAccount::class, \App\Http\Middleware\EnsureAccountArea::class, \App\Http\Middleware\RecordStaffActivity::class]);
+
         // Redirección para usuarios que ya tienen sesión activa
-        $middleware->redirectUsersTo(fn (Request $request) => 
-            $request->user()->role === 'administrador' 
-                ? route('administrador.dashboard') 
-                : route('comprador.dashboard')
-        );
+        $middleware->redirectUsersTo(function (Request $request) {
+            if (! $request->user()->hasVerifiedEmail()) {
+                return route('verification.notice');
+            }
+
+            return $request->user()->tieneTipo('administrador')
+                ? route('administrador.dashboard')
+                : route($request->user()->tieneTipo('moderador') ? 'moderador.dashboard' : 'comprador.dashboard');
+        });
 
     })
     ->withExceptions(function (Exceptions $exceptions): void {

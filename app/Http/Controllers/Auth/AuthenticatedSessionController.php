@@ -24,23 +24,31 @@ class AuthenticatedSessionController extends Controller
 
         $user = $request->user();
 
+        if (! $user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
+
         if ($user->tieneTipo('Administrador')) {
+            $request->session()->forget('url.intended');
+
             return redirect()->route('administrador.dashboard');
         }
 
         if ($user->tieneTipo('Moderador')) {
+            $request->session()->forget('url.intended');
+
             return redirect()->route('moderador.dashboard');
         }
 
         if ($user->tieneTipo('Vendedor')) {
-            return redirect()->route('comprador.dashboard');
+            return redirect()->intended(route('comprador.dashboard'));
         }
 
         if ($user->tieneTipo('Comprador')) {
-            return redirect()->route('comprador.dashboard');
+            return redirect()->intended(route('comprador.dashboard'));
         }
 
-        return redirect()->route('comprador.dashboard');
+        return redirect()->intended(route('comprador.dashboard'));
     }
 
     public function destroy(Request $request): RedirectResponse

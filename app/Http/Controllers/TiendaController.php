@@ -24,7 +24,7 @@ class TiendaController extends Controller
         |
         */
 
-        $productos = Producto::query()
+        $productos = Producto::publicados()
             ->select([
                 'id_producto',
                 'id_tienda',
@@ -41,6 +41,7 @@ class TiendaController extends Controller
                 $tienda->id_tienda
             )
             ->with([
+                'tienda:id_tienda,nombre_tienda',
                 'categoria' => function ($query) {
                     $query->select([
                         'id_categoria',
@@ -62,7 +63,6 @@ class TiendaController extends Controller
             ->orderByDesc('id_producto')
             ->paginate(24)
             ->withQueryString();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -86,7 +86,6 @@ class TiendaController extends Controller
             }
         );
 
-
         /*
         |--------------------------------------------------------------------------
         | LOGO
@@ -97,24 +96,28 @@ class TiendaController extends Controller
             $tienda->logo_tienda
         );
 
+        $tienda->loadCount(['opiniones' => fn ($q) => $q->publicadas()])->loadAvg(['opiniones' => fn ($q) => $q->publicadas()], 'calificacion');
+        $opiniones = $tienda->opiniones()->publicadas()->with('usuario:id,name,nombre_completo')->latest()->paginate(5, ['*'], 'pagina_opiniones');
+        $miOpinion = auth()->user()?->opiniones()->where('id_tienda', $tienda->id_tienda)->first();
 
         return view(
             'marketplace.tienda',
             compact(
                 'tienda',
                 'productos',
-                'logoTienda'
+                'logoTienda',
+                'opiniones',
+                'miOpinion'
             )
         );
     }
-
 
     /**
      * Convertir una ruta almacenada en BD en una URL pública.
      */
     private function resolverImagen(?string $ruta): ?string
     {
-        if (!$ruta) {
+        if (! $ruta) {
             return null;
         }
 
@@ -147,7 +150,7 @@ class TiendaController extends Controller
         }
 
         return asset(
-            'storage/' . ltrim($ruta, '/')
+            'storage/'.ltrim($ruta, '/')
         );
     }
 }

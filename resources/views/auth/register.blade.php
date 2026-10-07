@@ -5,6 +5,13 @@
 @push('styles')
 
 <style>
+    .register-seller-cta { margin-top: 32px; padding: 24px; border: 1px solid rgba(255,255,255,.4); border-radius: 18px; background: rgba(255,255,255,.12); }
+    .register-seller-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 1.8px; }
+    .register-seller-cta h2 { margin: 10px 0 8px; font-size: 24px; font-weight: 800; }
+    .register-seller-cta p { margin: 0 0 20px; font-size: 13px; line-height: 1.7; color: rgba(255,255,255,.92); }
+    .register-seller-cta a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; background: white; color: #B63C18; border-radius: 11px; font-size: 13px; font-weight: 800; }
+    .register-seller-cta a:hover { background: #FFF0EA; }
+    .register-seller-cta a:focus-visible { outline: 3px solid white; outline-offset: 4px; }
     /* =========================================================
        REGISTRO NEXOECO
     ========================================================== */
@@ -320,131 +327,6 @@
     }
 
     /* =========================================================
-       TIPO DE CUENTA
-    ========================================================== */
-
-    .account-type-title {
-        margin-bottom: 7px;
-
-        color: var(--nexo-text);
-
-        font-size: 12px;
-        font-weight: 900;
-    }
-
-    .account-type-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-    }
-
-    .account-option {
-        position: relative;
-
-        display: flex;
-        align-items: flex-start;
-
-        gap: 11px;
-
-        padding: 12px;
-
-        border:
-            1px solid var(--nexo-border);
-
-        border-radius: 14px;
-
-        background: #ffffff;
-
-        cursor: pointer;
-
-        transition:
-            border-color .2s ease,
-            background .2s ease,
-            box-shadow .2s ease,
-            transform .2s ease;
-    }
-
-    .account-option:hover {
-        border-color:
-            rgba(232, 93, 47, .55);
-
-        transform: translateY(-1px);
-    }
-
-    .account-option:has(
-        input[type="radio"]:checked
-    ) {
-        border-color:
-            var(--nexo-primary);
-
-        background:
-            var(--nexo-primary-soft);
-
-        box-shadow:
-            0 0 0 2px rgba(232, 93, 47, .07);
-    }
-
-    .account-option input[type="radio"] {
-        width: 17px;
-        height: 17px;
-
-        flex-shrink: 0;
-
-        margin: 2px 0 0;
-
-        accent-color:
-            var(--nexo-primary);
-    }
-
-    .account-option-content {
-        min-width: 0;
-        flex: 1;
-    }
-
-    .account-option-title {
-        display: flex;
-        align-items: center;
-
-        gap: 6px;
-
-        color: var(--nexo-text);
-
-        font-size: 13px;
-        font-weight: 900;
-    }
-
-    .account-option-description {
-        display: block;
-
-        margin-top: 3px;
-
-        color: var(--nexo-muted);
-
-        font-size: 10px;
-        line-height: 1.45;
-    }
-
-    .seller-note {
-        display: inline-flex;
-        align-items: center;
-
-        gap: 4px;
-
-        margin-top: 5px;
-        padding: 3px 7px;
-
-        border-radius: 999px;
-
-        background: #ffffff;
-
-        color: var(--nexo-primary);
-
-        font-size: 9px;
-        font-weight: 900;
-    }
-
-    /* =========================================================
        PASSWORD
     ========================================================== */
 
@@ -593,10 +475,7 @@
             padding: 25px;
         }
 
-        .account-type-grid {
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-        }
+
 
         .register-benefits {
             grid-template-columns:
@@ -711,9 +590,7 @@
             font-size: 27px;
         }
 
-        .account-option {
-            padding: 11px;
-        }
+
     }
 </style>
 
@@ -745,14 +622,12 @@
 
 
                         <h1 class="register-intro-title">
-                            Compra y vende dentro de tu comunidad
+                            Descubre lo mejor de tu comunidad
                         </h1>
 
 
                         <p class="register-intro-text">
-                            Crea tu cuenta para descubrir productos
-                            locales o comenzar a vender dentro de
-                            NexoEco.
+                            Crea tu cuenta de comprador y descubre productos locales en NexoEco.
                         </p>
 
 
@@ -778,7 +653,7 @@
                                 </div>
 
                                 <span>
-                                    Crea tu tienda como vendedor
+                                    Apoya a los negocios locales
                                 </span>
 
                             </div>
@@ -798,6 +673,13 @@
 
                         </div>
 
+                        <div class="register-seller-cta">
+                            <span class="register-seller-eyebrow">PARA EMPRENDEDORES</span>
+                            <h2>Vende con nosotros</h2>
+                            <p>Haz crecer tu negocio en NexoEco. Crea tu cuenta de vendedor y completa tu documentación paso a paso.</p>
+                            <a href="{{ route('vendedor.register') }}">Regístrate como vendedor <span aria-hidden="true">→</span></a>
+                        </div>
+
                     </div>
 
                 </section>
@@ -812,7 +694,7 @@
                     <div class="register-card-header">
 
                         <h2 class="register-card-title">
-                            Crear cuenta
+                            Crear cuenta de comprador
                         </h2>
 
                         <p class="register-card-subtitle">
@@ -858,7 +740,7 @@
                                 "
                                 placeholder="Ej. María López"
                                 autocomplete="name"
-                                maxlength="255"
+                                maxlength="150"
                                 required
                                 autofocus
                             >
@@ -908,106 +790,6 @@
 
 
                             @error('email')
-
-                                <div class="form-error">
-                                    {{ $message }}
-                                </div>
-
-                            @enderror
-
-                        </div>
-
-
-                        {{-- =========================================
-                            TIPO DE REGISTRO
-                        ========================================== --}}
-
-                        <div class="form-group">
-
-                            <div class="account-type-title">
-                                ¿Cómo quieres usar NexoEco?
-                            </div>
-
-
-                            <div class="account-type-grid">
-
-                                {{-- COMPRADOR --}}
-
-                                <label class="account-option">
-
-                                    <input
-                                        type="radio"
-                                        name="tipo_registro"
-                                        value="comprador"
-                                        required
-                                        {{
-                                            old(
-                                                'tipo_registro',
-                                                'comprador'
-                                            ) === 'comprador'
-                                                ? 'checked'
-                                                : ''
-                                        }}
-                                    >
-
-
-                                    <span class="account-option-content">
-
-                                        <span class="account-option-title">
-                                            🛍️ Comprar
-                                        </span>
-
-                                        <span class="account-option-description">
-                                            Explora productos y compra
-                                            a emprendedores locales.
-                                        </span>
-
-                                    </span>
-
-                                </label>
-
-
-                                {{-- VENDEDOR --}}
-
-                                <label class="account-option">
-
-                                    <input
-                                        type="radio"
-                                        name="tipo_registro"
-                                        value="vendedor"
-                                        required
-                                        {{
-                                            old(
-                                                'tipo_registro'
-                                            ) === 'vendedor'
-                                                ? 'checked'
-                                                : ''
-                                        }}
-                                    >
-
-
-                                    <span class="account-option-content">
-
-                                        <span class="account-option-title">
-                                            🏪 Vender
-                                        </span>
-
-                                        <span class="account-option-description">
-                                            Solicita acceso para vender. Revisaremos tus datos antes de habilitar tu tienda.
-                                        </span>
-
-                                        <span class="seller-note">
-                                            ✓ También podrás comprar
-                                        </span>
-
-                                    </span>
-
-                                </label>
-
-                            </div>
-
-
-                            @error('tipo_registro')
 
                                 <div class="form-error">
                                     {{ $message }}
@@ -1142,9 +924,7 @@
 
 
                         <div class="register-terms">
-                            Al crear tu cuenta podrás acceder a
-                            las funciones disponibles según el
-                            tipo de cuenta seleccionado.
+                            Al crear tu cuenta podrás descubrir y comprar productos de tu comunidad.
                         </div>
 
                     </form>

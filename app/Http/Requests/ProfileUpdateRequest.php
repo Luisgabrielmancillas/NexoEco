@@ -16,7 +16,7 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:150'],
             'email' => [
                 'required',
                 'string',
@@ -25,6 +25,26 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+        ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => is_string($this->input('name')) ? trim($this->input('name')) : $this->input('name'),
+            'email' => is_string($this->input('email')) ? mb_strtolower(trim($this->input('email'))) : $this->input('email'),
+        ]);
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Escribe tu nombre completo.',
+            'name.max' => 'Tu nombre debe contener como máximo 150 caracteres.',
+            'email.required' => 'Escribe tu correo electrónico.',
+            'email.email' => 'Escribe un correo electrónico válido.',
+            'email.unique' => 'Este correo ya está registrado en otra cuenta.',
+            'email.max' => 'El correo debe contener como máximo 255 caracteres.',
         ];
     }
 }

@@ -14,6 +14,7 @@ class MarketplaceIndexRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'seccion' => ['nullable', \Illuminate\Validation\Rule::in(array_keys(\App\Support\MarketplaceDepartments::ALL))],
             'q' => [
                 'nullable',
                 'string',

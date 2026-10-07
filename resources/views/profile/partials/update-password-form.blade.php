@@ -1,48 +1,14 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Update Password') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
-
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('put')
-
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+<section class="buyer-panel account-panel" id="seguridad-cuenta">
+    <div class="account-panel-heading"><span class="account-panel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v2" stroke-linecap="round"/></svg></span><h2>Seguridad</h2></div>
+    <p>Usa una contraseña de al menos 8 caracteres para proteger tu cuenta.</p>
+    @if(session('status') === 'password-updated')<div class="buyer-notice account-success" role="status">Tu contraseña se actualizó correctamente.</div>@endif
+    <form method="POST" action="{{ route('password.update') }}" class="buyer-form">
+        @csrf @method('PUT')
+        <div class="buyer-field"><label for="current_password">Contraseña actual</label><input id="current_password" name="current_password" type="password" required autocomplete="current-password" @if($errors->updatePassword->has('current_password')) aria-invalid="true" aria-describedby="current-password-error" @endif>@if($errors->updatePassword->has('current_password'))<p id="current-password-error" class="buyer-field-error" role="alert">{{ $errors->updatePassword->first('current_password') }}</p>@endif</div>
+        <div class="account-fields">
+            <div class="buyer-field"><label for="new_password">Nueva contraseña</label><input id="new_password" name="password" type="password" minlength="8" required autocomplete="new-password" @if($errors->updatePassword->has('password')) aria-invalid="true" aria-describedby="new-password-error" @endif>@if($errors->updatePassword->has('password'))<p id="new-password-error" class="buyer-field-error" role="alert">{{ $errors->updatePassword->first('password') }}</p>@endif</div>
+            <div class="buyer-field"><label for="password_confirmation">Confirma la nueva contraseña</label><input id="password_confirmation" name="password_confirmation" type="password" minlength="8" required autocomplete="new-password"></div>
         </div>
-
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-        </div>
-
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
+        <button class="buyer-button" type="submit">Actualizar contraseña</button>
     </form>
 </section>

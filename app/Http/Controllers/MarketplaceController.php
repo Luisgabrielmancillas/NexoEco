@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MarketplaceIndexRequest;
 use App\Models\Categoria;
 use App\Models\Producto;
+use App\Models\Tienda;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -25,11 +26,11 @@ class MarketplaceController extends Controller
         $datos = $request->validated();
 
         $busqueda = $datos['q'] ?? null;
+        $seccionSeleccionada = $datos['seccion'] ?? null;
 
         $categoriaSeleccionada = isset($datos['categoria'])
             ? (int) $datos['categoria']
             : null;
-
 
         /*
         |--------------------------------------------------------------------------
@@ -46,6 +47,9 @@ class MarketplaceController extends Controller
             ->orderBy('nombre_categoria')
             ->get();
 
+        $categoriasDeSeccion = $seccionSeleccionada
+            ? $categorias->filter(fn ($categoria) => \App\Support\MarketplaceDepartments::forCategory($categoria->nombre_categoria) === $seccionSeleccionada)->modelKeys()
+            : [];
 
         /*
         |--------------------------------------------------------------------------
@@ -53,7 +57,7 @@ class MarketplaceController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $productos = Producto::query()
+        $productos = Producto::publicados()
 
             /*
             |--------------------------------------------------------------------------
@@ -72,7 +76,6 @@ class MarketplaceController extends Controller
                 'imagen_url',
                 'fecha_publicacion',
             ])
-
 
             /*
             |--------------------------------------------------------------------------
@@ -110,7 +113,6 @@ class MarketplaceController extends Controller
                 },
             ])
 
-
             /*
             |--------------------------------------------------------------------------
             | BÚSQUEDA
@@ -130,19 +132,19 @@ class MarketplaceController extends Controller
                                 ->where(
                                     'nombre_producto',
                                     'like',
-                                    '%' . $busqueda . '%'
+                                    '%'.$busqueda.'%'
                                 )
 
                                 ->orWhere(
                                     'codigo_producto',
                                     'like',
-                                    '%' . $busqueda . '%'
+                                    '%'.$busqueda.'%'
                                 )
 
                                 ->orWhere(
                                     'descripcion',
                                     'like',
-                                    '%' . $busqueda . '%'
+                                    '%'.$busqueda.'%'
                                 )
 
                                 ->orWhereHas(
@@ -152,7 +154,7 @@ class MarketplaceController extends Controller
                                         $tiendaQuery->where(
                                             'nombre_tienda',
                                             'like',
-                                            '%' . $busqueda . '%'
+                                            '%'.$busqueda.'%'
                                         );
                                     }
                                 )
@@ -164,7 +166,7 @@ class MarketplaceController extends Controller
                                         $categoriaQuery->where(
                                             'nombre_categoria',
                                             'like',
-                                            '%' . $busqueda . '%'
+                                            '%'.$busqueda.'%'
                                         );
                                     }
                                 );
@@ -172,7 +174,6 @@ class MarketplaceController extends Controller
                     );
                 }
             )
-
 
             /*
             |--------------------------------------------------------------------------
@@ -193,16 +194,15 @@ class MarketplaceController extends Controller
                 }
             )
 
-
             /*
             |--------------------------------------------------------------------------
             | ORDEN
             |--------------------------------------------------------------------------
             */
 
+            ->when($seccionSeleccionada, fn ($query) => $query->whereIn('id_categoria', $categoriasDeSeccion))
             ->orderByDesc('fecha_publicacion')
             ->orderByDesc('id_producto')
-
 
             /*
             |--------------------------------------------------------------------------
@@ -213,12 +213,22 @@ class MarketplaceController extends Controller
             ->paginate(24)
             ->withQueryString();
 
-
         /*
         |--------------------------------------------------------------------------
         | VISTA
         |--------------------------------------------------------------------------
         */
+
+        $catalogRoute = $request->routeIs('comprador.dashboard') ? 'comprador.dashboard' : 'marketplace.index';
+        $tiendas = Tienda::query()->withCount(['productos' => fn ($q) => $q->publicados()])
+            ->when($busqueda, fn ($query) => $query->where(function ($query) use ($busqueda) {
+                $query->where('nombre_tienda', 'like', '%'.$busqueda.'%')->orWhere('descripcion_tienda', 'like', '%'.$busqueda.'%');
+            }))
+            ->when($categoriaSeleccionada, fn ($query) => $query->whereHas('productos', fn ($query) => $query->where('id_categoria', $categoriaSeleccionada)))
+            ->when($seccionSeleccionada, fn ($query) => $query->whereHas('productos', fn ($query) => $query->whereIn('id_categoria', $categoriasDeSeccion)))
+            ->orderByDesc('fecha_creacion')->orderByDesc('id_tienda')
+            ->paginate(8, ['*'], 'pagina_tiendas')->withQueryString();
+        $solicitudVendedor = $request->user()?->solicitudVendedor()->first();
 
         return view(
             'marketplace.index',
@@ -226,7 +236,11 @@ class MarketplaceController extends Controller
                 'categorias',
                 'productos',
                 'busqueda',
-                'categoriaSeleccionada'
+                'categoriaSeleccionada',
+                'catalogRoute',
+                'tiendas',
+                'solicitudVendedor',
+                'seccionSeleccionada'
             )
         );
     }

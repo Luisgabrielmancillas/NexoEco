@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TiposUsuario;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class TipoUsuarioController extends Controller
 {
@@ -47,8 +48,14 @@ class TipoUsuarioController extends Controller
     public function update(Request $request, TiposUsuario $tiposUsuario)
     {
         $request->validate([
-            'nombre_tipo' => 'required|string|max:100|unique:tipos_usuario,nombre_tipo,' . $tiposUsuario->id_tipo_usuario . ',id_tipo_usuario',
+            'nombre_tipo' => 'required|string|max:100|unique:tipos_usuario,nombre_tipo,'.$tiposUsuario->id_tipo_usuario.',id_tipo_usuario',
         ]);
+
+        $oldRole = mb_strtolower(trim($tiposUsuario->nombre_tipo));
+        $newRole = mb_strtolower(trim($request->nombre_tipo));
+        if ($oldRole !== $newRole && in_array('administrador', [$oldRole, $newRole], true)) {
+            throw ValidationException::withMessages(['nombre_tipo' => 'El rol de administrador no puede asignarse ni quitarse cambiando el nombre de otro rol. Usa la creación de cuentas, limitada a 3 administradores.']);
+        }
 
         $tiposUsuario->update([
             'nombre_tipo' => $request->nombre_tipo,
@@ -62,6 +69,8 @@ class TipoUsuarioController extends Controller
     public function destroy(TiposUsuario $tiposUsuario)
     {
         if ($tiposUsuario->users()->exists()) {
+            request()->attributes->set('staff_activity_skip', true);
+
             return redirect()
                 ->route('tipos-usuario.index')
                 ->with('error', 'No puedes eliminar este tipo porque tiene usuarios asignados.');

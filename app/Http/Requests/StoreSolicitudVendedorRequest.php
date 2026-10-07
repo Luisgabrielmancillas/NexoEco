@@ -11,7 +11,6 @@ class StoreSolicitudVendedorRequest extends FormRequest
         return auth()->check();
     }
 
-
     public function rules(): array
     {
         return [
@@ -74,7 +73,6 @@ class StoreSolicitudVendedorRequest extends FormRequest
         ];
     }
 
-
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -102,24 +100,44 @@ class StoreSolicitudVendedorRequest extends FormRequest
         ]);
     }
 
-
     public function messages(): array
     {
         return [
-            'rfc.regex' =>
-                'Ingresa un RFC con formato válido.',
+            'required' => 'El campo :attribute es obligatorio.',
+            'string' => 'El campo :attribute debe ser un texto válido.',
+            'max' => 'El campo :attribute debe contener como máximo :max caracteres.',
+            'min' => 'El campo :attribute debe contener al menos :min caracteres.',
+            'file' => 'Adjunta un archivo válido en :attribute.',
+            'telefono.regex' => 'Ingresa un teléfono con formato válido.',
+            'rfc.regex' => 'Ingresa un RFC con formato válido.',
 
-            'curp.regex' =>
-                'Ingresa una CURP con formato válido.',
+            'curp.regex' => 'Ingresa una CURP con formato válido.',
 
-            'curp.size' =>
-                'La CURP debe contener 18 caracteres.',
+            'curp.size' => 'La CURP debe contener 18 caracteres.',
 
-            '*.mimes' =>
-                'Solo se permiten archivos JPG, PNG o PDF.',
+            '*.mimes' => 'Solo se permiten archivos JPG, PNG o PDF.',
 
-            '*.max' =>
-                'Cada archivo debe pesar como máximo 5 MB.',
+            'identificacion_frente.max' => 'Cada archivo debe pesar como máximo 5 MB.',
+            'identificacion_reverso.max' => 'Cada archivo debe pesar como máximo 5 MB.',
+            'constancia_fiscal.max' => 'Cada archivo debe pesar como máximo 5 MB.',
+            'comprobante_domicilio.max' => 'Cada archivo debe pesar como máximo 5 MB.',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'nombre_completo' => 'nombre completo',
+            'email' => 'correo electrónico',
+            'password' => 'contraseña',
+            'rfc' => 'RFC',
+            'curp' => 'CURP',
+            'telefono' => 'teléfono',
+            'domicilio_fiscal' => 'domicilio fiscal',
+            'identificacion_frente' => 'identificación oficial (frente)',
+            'identificacion_reverso' => 'identificación oficial (reverso)',
+            'constancia_fiscal' => 'constancia de situación fiscal',
+            'comprobante_domicilio' => 'comprobante de domicilio',
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\SolicitudVendedor;
 use App\Models\User;
 use App\Services\UsuarioRolService;
 use Illuminate\Auth\Events\Registered;
@@ -11,12 +10,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use RuntimeException;
+use Throwable;
 
 class RegisteredUserController extends Controller
 {
@@ -25,150 +23,47 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-
-    public function store(
-        Request $request,
-        UsuarioRolService $usuarioRolService
-    ): RedirectResponse {
-        $request->validate([
-            'nombre_completo' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                'unique:users,email',
-            ],
-
-            'password' => [
-                'required',
-                'confirmed',
-                Rules\Password::defaults(),
-            ],
-
-            'tipo_registro' => [
-                'required',
-                Rule::in([
-                    'comprador',
-                    'vendedor',
-                ]),
-            ],
+    public function store(Request $request, UsuarioRolService $roles): RedirectResponse
+    {
+        $data = $request->validate([
+            'nombre_completo' => ['required', 'string', 'max:150'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'tipo_registro' => ['sometimes', 'in:comprador'],
         ]);
 
-
         try {
+            $user = DB::transaction(function () use ($data, $roles) {
+                $user = User::create([
+                    'name' => trim($data['nombre_completo']),
+                    'nombre_completo' => trim($data['nombre_completo']),
+                    'email' => $data['email'],
+                    'password' => $data['password'],
+                    'fecha_registro' => now(),
+                    'activo' => true,
+                ]);
+                $roles->asignarRolesRegistro($user, 'comprador');
 
-            $user = DB::transaction(
-                function () use (
-                    $request,
-                    $usuarioRolService
-                ) {
-                    $nombre = trim(
-                        $request->string(
-                            'nombre_completo'
-                        )->toString()
-                    );
-
-
-                    $user = User::create([
-                        'name' => $nombre,
-
-                        'nombre_completo' => $nombre,
-
-                        'email' => mb_strtolower(
-                            trim(
-                                $request->string(
-                                    'email'
-                                )->toString()
-                            )
-                        ),
-
-                        'password' => Hash::make(
-                            $request->string(
-                                'password'
-                            )->toString()
-                        ),
-
-                        'fecha_registro' => now(),
-
-                        'activo' => true,
-                    ]);
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | SIEMPRE COMPRADOR
-                    |--------------------------------------------------------------------------
-                    */
-
-                    $usuarioRolService
-                        ->asignarRolesRegistro(
-                            $user,
-                            $request->string(
-                                'tipo_registro'
-                            )->toString()
-                        );
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | INTENCIÓN DE VENDER
-                    |--------------------------------------------------------------------------
-                    |
-                    | NO asignamos vendedor.
-                    |
-                    | Solamente abrimos una solicitud pendiente.
-                    |
-                    */
-
-                    if (
-                        $request->string(
-                            'tipo_registro'
-                        )->toString()
-                        === 'vendedor'
-                    ) {
-                        SolicitudVendedor::create([
-                            'id_usuario' => $user->id,
-
-                            'estado' =>
-                                SolicitudVendedor::ESTADO_PENDIENTE_DOCUMENTOS,
-
-                            'fecha_solicitud' => now(),
-                        ]);
-                    }
-
-
-                    return $user;
-                }
-            );
-
+                return $user;
+            });
         } catch (RuntimeException $exception) {
-
             report($exception);
-
-
             throw ValidationException::withMessages([
-                'tipo_registro' =>
-                    'No fue posible completar el registro. Intenta nuevamente.',
+                'nombre_completo' => 'No fue posible completar el registro. Intenta nuevamente.',
             ]);
         }
 
-
-        event(
-            new Registered($user)
-        );
-
-
         Auth::login($user);
+        $request->session()->regenerate();
 
+        try {
+            event(new Registered($user));
+        } catch (Throwable $exception) {
+            report($exception);
 
-        return redirect()
-            ->route('verification.notice');
+            return redirect()->route('verification.notice')->with('status', 'verification-send-failed');
+        }
+
+        return redirect()->route('verification.notice');
     }
 }

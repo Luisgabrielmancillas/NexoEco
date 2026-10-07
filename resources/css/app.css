@@ -1,3 +1,9 @@
+@import './buyer.css';
+@import './admin.css';
+@import './seller.css';
+@import './marketplace.css';
+@import './moderator.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

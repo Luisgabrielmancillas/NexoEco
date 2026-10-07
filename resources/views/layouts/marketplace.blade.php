@@ -1,326 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="csrf-token"
-        content="{{ csrf_token() }}"
-    >
-
-    <title>
-        @yield('title', 'NexoEco - Marketplace local')
-    </title>
-
-    @vite([
-        'resources/css/app.css',
-        'resources/js/app.js'
-    ])
-
-    <style>
-        :root {
-            --nexo-bg: #FAF7F2;
-            --nexo-white: #FFFFFF;
-            --nexo-text: #1C1917;
-            --nexo-muted: #746C66;
-            --nexo-border: #E8E0D4;
-            --nexo-primary: #E85D2F;
-            --nexo-primary-dark: #D94F25;
-            --nexo-primary-soft: #FFF0EA;
-            --nexo-blue: #2F7EE8;
-            --nexo-yellow: #E9A400;
-
-            --nexo-radius-sm: 10px;
-            --nexo-radius: 16px;
-            --nexo-radius-lg: 22px;
-
-            --nexo-shadow:
-                0 6px 20px rgba(28, 25, 23, 0.06);
-
-            --nexo-shadow-hover:
-                0 14px 30px rgba(232, 93, 47, 0.12);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: var(--nexo-bg);
-            color: var(--nexo-text);
-
-            font-family:
-                Inter,
-                ui-sans-serif,
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        .nexo-container {
-            width: min(100% - 24px, 1280px);
-            margin-inline: auto;
-        }
-
-        /* =====================================================
-           HEADER
-        ====================================================== */
-
-        .market-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-
-            background: rgba(255, 255, 255, 0.97);
-            border-bottom: 1px solid var(--nexo-border);
-
-            backdrop-filter: blur(12px);
-        }
-
-        .market-header-main {
-            min-height: 64px;
-
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .market-brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            flex-shrink: 0;
-
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-        }
-
-        .market-brand-dot {
-            width: 11px;
-            height: 11px;
-
-            flex-shrink: 0;
-
-            border-radius: 50%;
-            background: var(--nexo-primary);
-        }
-
-        .market-search {
-            flex: 1;
-
-            display: flex;
-            align-items: center;
-
-            max-width: 680px;
-            margin-inline: auto;
-
-            background: white;
-            border: 2px solid var(--nexo-primary);
-            border-radius: 999px;
-
-            overflow: hidden;
-        }
-
-        .market-search input {
-            min-width: 0;
-            flex: 1;
-
-            padding: 11px 16px;
-
-            border: 0;
-            outline: 0;
-
-            color: var(--nexo-text);
-            background: transparent;
-        }
-
-        .market-search input::placeholder {
-            color: #A49C95;
-        }
-
-        .market-search button {
-            align-self: stretch;
-
-            padding: 0 20px;
-
-            border: 0;
-            cursor: pointer;
-
-            background: var(--nexo-primary);
-            color: white;
-
-            font-weight: 800;
-
-            transition: background .2s ease;
-        }
-
-        .market-search button:hover {
-            background: var(--nexo-primary-dark);
-        }
-
-        .market-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            flex-shrink: 0;
-        }
-
-        .market-header-button {
-            min-height: 40px;
-
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 0 15px;
-
-            border: 1px solid var(--nexo-border);
-            border-radius: 999px;
-
-            background: white;
-            color: var(--nexo-text);
-
-            font-size: 14px;
-            font-weight: 800;
-
-            transition:
-                border-color .2s ease,
-                background .2s ease,
-                color .2s ease;
-        }
-
-        .market-header-button:hover {
-            border-color: var(--nexo-primary);
-            color: var(--nexo-primary);
-        }
-
-        .market-header-button.primary {
-            border-color: var(--nexo-primary);
-            background: var(--nexo-primary);
-            color: white;
-        }
-
-        .market-header-button.primary:hover {
-            background: var(--nexo-primary-dark);
-            color: white;
-        }
-
-        .market-mobile-search {
-            display: none;
-            padding-bottom: 11px;
-        }
-
-        /* =====================================================
-           FOOTER
-        ====================================================== */
-
-        .market-footer {
-            margin-top: 42px;
-
-            background: white;
-            border-top: 1px solid var(--nexo-border);
-        }
-
-        .market-footer-inner {
-            min-height: 76px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 16px;
-
-            color: var(--nexo-muted);
-            font-size: 13px;
-        }
-
-        /* =====================================================
-           RESPONSIVE
-        ====================================================== */
-
-        @media (max-width: 760px) {
-
-            .nexo-container {
-                width: min(100% - 20px, 1280px);
-            }
-
-            .market-header-main {
-                min-height: 58px;
-            }
-
-            .market-search {
-                display: none;
-            }
-
-            .market-mobile-search {
-                display: block;
-            }
-
-            .market-mobile-search .market-search {
-                display: flex;
-                max-width: none;
-                width: 100%;
-            }
-
-            .market-header-button.desktop-login {
-                display: none;
-            }
-
-            .market-header-button {
-                min-height: 36px;
-
-                padding: 0 12px;
-
-                font-size: 12px;
-            }
-
-            .market-brand {
-                font-size: 18px;
-            }
-
-            .market-footer-inner {
-                min-height: auto;
-
-                flex-direction: column;
-
-                padding-block: 22px;
-
-                text-align: center;
-            }
-        }
-    </style>
-
-    @stack('styles')
-</head>
-
-<body>
+@extends('layouts.base')
+@section('body-class', auth()->user()?->tieneTipo('administrador') ? '' : 'market-workspace')
+@section('site-header')
+@if(auth()->user()?->tieneTipo('administrador'))
+    @include('layouts.administrador.panel-header')
+@else
+
+    @php($marketHome = auth()->check() ? 'comprador.dashboard' : 'marketplace.index')
 
     {{-- =====================================================
         HEADER
@@ -330,9 +15,11 @@
 
         <div class="nexo-container market-header-main">
 
+            <button type="button" class="market-header-menu-toggle" data-mobile-nav-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="buyer-navigation-links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg></button>
+
             {{-- LOGO --}}
             <a
-                href="{{ route('marketplace.index') }}"
+                href="{{ route($marketHome) }}"
                 class="market-brand"
             >
                 <span class="market-brand-dot"></span>
@@ -341,13 +28,16 @@
             </a>
 
 
+            <div class="market-desktop-location">@include('marketplace.partials.location-button')</div>
             {{-- BUSCADOR DESKTOP --}}
             <form
-                action="{{ route('marketplace.index') }}"
+                action="{{ route($marketHome) }}"
                 method="GET"
                 class="market-search"
                 role="search"
             >
+                @if(request('seccion'))<input type="hidden" name="seccion" value="{{ request('seccion') }}">@endif
+                @if(request('categoria'))<input type="hidden" name="categoria" value="{{ request('categoria') }}">@endif
 
                 <input
                     type="search"
@@ -386,11 +76,16 @@
 
                 @else
 
+                    <a href="{{ route('comprador.notificaciones') }}" class="market-notifications" data-notification-bell data-count-url="{{ route('comprador.notificaciones.count') }}" aria-label="Notificaciones{{ ($notificacionesSinLeer ?? 0) ? ': '.$notificacionesSinLeer.' sin leer' : '' }}" title="Notificaciones">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="notification-count" aria-hidden="true" @if(($notificacionesSinLeer ?? 0) === 0) hidden @endif>{{ $notificacionesSinLeer > 99 ? '99+' : $notificacionesSinLeer }}</span>
+                    </a>
                     <a
                         href="{{ route('profile.edit') }}"
-                        class="market-header-button"
+                        class="market-header-button market-account-button {{ request()->routeIs('profile.*') ? 'is-active' : '' }}"
+                        aria-label="Mi cuenta" title="Mi cuenta"
                     >
-                        👤 Mi cuenta
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2" stroke-linecap="round"/></svg><span class="market-account-label">Mi cuenta</span>
                     </a>
 
                 @endguest
@@ -403,12 +98,16 @@
         {{-- BUSCADOR MÓVIL --}}
         <div class="nexo-container market-mobile-search">
 
+            @include('marketplace.partials.location-button')
+
             <form
-                action="{{ route('marketplace.index') }}"
+                action="{{ route($marketHome) }}"
                 method="GET"
                 class="market-search"
                 role="search"
             >
+                @if(request('seccion'))<input type="hidden" name="seccion" value="{{ request('seccion') }}">@endif
+                @if(request('categoria'))<input type="hidden" name="categoria" value="{{ request('categoria') }}">@endif
 
                 <input
                     type="search"
@@ -432,36 +131,22 @@
 
     </header>
 
+    @include('marketplace.partials.location-dialog')
+
+        @hasSection('account-navigation')
+            @yield('account-navigation')
+        @else
+            @include('layouts.comprador.navigation')
+        @endif
+    @if(session('status') && ! request()->routeIs('verification.*', 'vendedor.register', 'profile.*'))
+        <div class="nexo-container"><div class="buyer-notice" role="status">{{ session('status') }}</div></div>
+    @endif
+
 
     {{-- =====================================================
         CONTENIDO
     ====================================================== --}}
 
-    @yield('content')
 
-
-    {{-- =====================================================
-        FOOTER
-    ====================================================== --}}
-
-    <footer class="market-footer">
-
-        <div class="nexo-container market-footer-inner">
-
-            <span>
-                © {{ date('Y') }} NexoEco.
-                Todos los derechos reservados.
-            </span>
-
-            <span>
-                Marketplace local de Manzanillo
-            </span>
-
-        </div>
-
-    </footer>
-
-    @stack('scripts')
-
-</body>
-</html>
+@endif
+@endsection
