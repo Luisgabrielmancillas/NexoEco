@@ -238,30 +238,6 @@
         }
 
         /* =====================================================
-           FOOTER
-        ====================================================== */
-
-        .market-footer {
-            margin-top: 42px;
-
-            background: white;
-            border-top: 1px solid var(--nexo-border);
-        }
-
-        .market-footer-inner {
-            min-height: 76px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 16px;
-
-            color: var(--nexo-muted);
-            font-size: 13px;
-        }
-
-        /* =====================================================
            RESPONSIVE
         ====================================================== */
 
@@ -305,41 +281,17 @@
                 font-size: 18px;
             }
 
-            .market-footer-inner {
-                min-height: auto;
-
-                flex-direction: column;
-
-                padding-block: 22px;
-
-                text-align: center;
-            }
         }
     </style>
 
     @stack('styles')
 </head>
 
-<body class="@yield('body-class')">
+<body class="nexo-site @yield('body-class')">
     @yield('site-header')
-    @yield('content')
-
-    <footer class="market-footer">
-
-        <div class="nexo-container market-footer-inner">
-
-            <span>
-                © {{ date('Y') }} NexoEco.
-                Todos los derechos reservados.
-            </span>
-
-            <span>
-                Marketplace local de Manzanillo
-            </span>
-
-        </div>
-
-    </footer>
+    <div class="site-content">
+        @yield('content')
+    </div>
 
     @stack('scripts')
 

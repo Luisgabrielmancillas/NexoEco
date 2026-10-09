@@ -17,6 +17,7 @@
         <button type="button" class="store-info-tile" data-dialog-open="store-contact-dialog" aria-haspopup="dialog"><span class="store-tile-icon"><x-seller-icon name="pin"/></span><span><strong>Visita y contacta al negocio</strong><small>{{ $tienda->ciudad ? $tienda->ciudad.($tienda->estado ? ', '.$tienda->estado : '') : 'Ubicación y contacto' }}</small></span><x-market-icon name="chevron"/></button>
         <button type="button" class="store-info-tile" data-dialog-open="store-hours-dialog" aria-haspopup="dialog"><span class="store-tile-icon"><x-seller-icon name="clock"/></span><span><strong>Horarios de atención</strong><small>Consulta los días y las horas de atención</small></span><x-market-icon name="chevron"/></button>
     </div>
+    @include('marketplace.partials.store-directions')
     <section id="productos" class="public-store-products"><div class="buyer-section-heading"><div><h2>Productos de la tienda</h2><p>Explora el catálogo de {{ $tienda->nombre_tienda }}.</p></div></div>
         @if($productos->count())<div class="buyer-grid marketplace-products-grid">@foreach($productos as $producto)@include('marketplace.partials.product-card')@endforeach</div>@if($productos->hasPages())<div class="market-pagination">{{ $productos->links() }}</div>@endif
         @else<div class="buyer-empty"><h2>Esta tienda todavía no tiene productos</h2><p>Puedes seguir explorando otros emprendimientos de NexoEco.</p><a class="buyer-button" href="{{ route($marketRoute) }}">Volver al marketplace</a></div>@endif

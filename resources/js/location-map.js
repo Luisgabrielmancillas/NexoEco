@@ -63,7 +63,8 @@ export async function initializeLocationMap(form, { container, status, locate, r
             status.textContent = restricted && inside === false ? 'Esta ubicación está fuera de Manzanillo. NexoEco apoya a los microemprendimientos de este municipio; elige un punto dentro de la zona marcada para crear tu tienda.' : restricted ? 'Ubicación seleccionada. El servidor verificará que tu negocio esté dentro de Manzanillo.' : inside ? 'Ubicación en Manzanillo seleccionada. Completa colonia, calle, número y código postal; puedes ajustar el marcador.' : 'Ubicación seleccionada. Completa ciudad, estado y los detalles de tu domicilio; puedes ajustar el marcador.';
             container.dataset.selected = 'true';
         };
-        if (valid()) selectPoint({ lat: Number(lat.value), lng: Number(lng.value) });
+        if (valid()) selectPoint({ lat: Number(lat.value), lng: Number(lng.value) }, false, form.dataset.locationPrefill === 'true');
+        delete form.dataset.locationPrefill;
         map.on('click', event => selectPoint(event.latlng, false, true));
         [lat, lng].forEach(input => input.addEventListener('change', () => { if (valid()) selectPoint({ lat: Number(lat.value), lng: Number(lng.value) }, true, true); }));
         new ResizeObserver(() => map.invalidateSize()).observe(container);

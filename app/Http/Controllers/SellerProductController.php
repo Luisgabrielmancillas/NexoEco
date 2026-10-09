@@ -74,11 +74,17 @@ class SellerProductController extends Controller
             'nombre_producto' => ['required', 'string', 'max:150'],
             'descripcion' => ['required', 'string', 'max:5000'],
             'precio' => ['required', 'numeric', 'min:0.01', 'max:99999999.99', 'decimal:0,2'],
+            'apartados_activos' => ['sometimes', 'boolean'],
+            'apartado_monto' => ['exclude_unless:apartados_activos,1', 'required', 'numeric', 'min:0.01', 'lt:precio', 'decimal:0,2'],
+            'apartado_condiciones' => ['exclude_unless:apartados_activos,1', 'required', 'string', 'max:3000'],
             'id_categoria' => ['required_without:nueva_categoria', 'nullable', 'integer', Rule::exists('categorias', 'id_categoria')],
             'nueva_categoria' => ['nullable', 'string', 'max:100'],
             'imagen' => [$producto ? 'nullable' : 'required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120', 'dimensions:min_width=64,min_height=64,max_width=6000,max_height=6000'],
         ]);
         $uploaded = null;
+        if ($request->boolean('apartados_activos') && ! app(\App\Services\MercadoPagoConnection::class)->available($request->user()->mercadoPagoAccount()->first())) {
+            throw \Illuminate\Validation\ValidationException::withMessages(['apartados_activos' => 'Conecta tu cuenta de Mercado Pago desde Apartados recibidos antes de activar esta opción.']);
+        }
         try {
             DB::transaction(function () use ($request, $media, $tienda, &$producto, &$uploaded, $data) {
                 // Scope every field to the authenticated seller's store; never accept ownership or SKU from the form.
@@ -88,6 +94,11 @@ class SellerProductController extends Controller
                     $category = Categoria::firstOrCreate(['nombre_categoria' => $name])->getKey();
                 }
                 $fields = ['nombre_producto' => $data['nombre_producto'], 'descripcion' => $data['descripcion'], 'precio' => $data['precio'], 'id_categoria' => $category];
+                $fields += [
+                    'apartados_activos' => $request->boolean('apartados_activos'),
+                    'apartado_monto' => $data['apartado_monto'] ?? null,
+                    'apartado_condiciones' => $data['apartado_condiciones'] ?? null,
+                ];
                 if ($request->hasFile('imagen')) {
                     $fields['imagen_url'] = $uploaded = $media->upload($tienda, $request->file('imagen'));
                 }

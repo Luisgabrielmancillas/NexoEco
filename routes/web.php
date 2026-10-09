@@ -27,6 +27,30 @@ use App\Http\Controllers\TipoUsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/mercadopago/webhook', [\App\Http\Controllers\ApartadoController::class, 'webhook'])
+    ->middleware('throttle:120,1')->name('mercadopago.webhook');
+
+Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureMarketplaceMember::class])->group(function () {
+    Route::get('/tiendas/{tienda}/ruta', [\App\Http\Controllers\StoreRouteController::class, 'show'])->whereNumber('tienda')->middleware('throttle:10,1')->name('tiendas.ruta');
+    Route::get('/mensajes', [\App\Http\Controllers\ProductChatController::class, 'index'])->name('chat.index');
+    Route::post('/productos/{producto}/chat', [\App\Http\Controllers\ProductChatController::class, 'start'])->whereNumber('producto')->middleware('throttle:20,1')->name('chat.start');
+    Route::get('/mensajes/{chat}', [\App\Http\Controllers\ProductChatController::class, 'show'])->whereNumber('chat')->name('chat.show');
+    Route::get('/mensajes/{chat}/mensajes', [\App\Http\Controllers\ProductChatController::class, 'messages'])->whereNumber('chat')->middleware('throttle:90,1')->name('chat.messages');
+    Route::post('/mensajes/{chat}/mensajes', [\App\Http\Controllers\ProductChatController::class, 'send'])->whereNumber('chat')->middleware('throttle:30,1')->name('chat.send');
+    Route::get('/apartados', [\App\Http\Controllers\ApartadoController::class, 'index'])->name('apartados.index');
+    Route::post('/productos/{producto}/apartados', [\App\Http\Controllers\ApartadoController::class, 'store'])->whereNumber('producto')->middleware('throttle:10,1')->name('apartados.store');
+    Route::get('/apartados/{apartado}/retorno', [\App\Http\Controllers\ApartadoController::class, 'returned'])->name('apartados.return');
+    Route::post('/apartados/{apartado}/continuar', [\App\Http\Controllers\ApartadoController::class, 'resume'])->middleware('throttle:10,1')->name('apartados.resume');
+    Route::post('/apartados/{apartado}/actualizar', [\App\Http\Controllers\ApartadoController::class, 'sync'])->middleware('throttle:10,1')->name('apartados.sync');
+    Route::middleware('seller')->prefix('vendedor')->name('vendedor.')->group(function () {
+        Route::get('/mensajes', [\App\Http\Controllers\ProductChatController::class, 'index'])->name('mensajes.index');
+        Route::get('/apartados', [\App\Http\Controllers\ApartadoController::class, 'index'])->name('apartados.index');
+        Route::get('/notificaciones', [BuyerNotificationController::class, 'index'])->name('notificaciones');
+        Route::post('/mercadopago/conectar', [\App\Http\Controllers\MercadoPagoConnectionController::class, 'connect'])->middleware('throttle:10,1')->name('mercadopago.connect');
+        Route::get('/mercadopago/retorno', [\App\Http\Controllers\MercadoPagoConnectionController::class, 'callback'])->middleware('throttle:10,1')->name('mercadopago.callback');
+    });
+});
+
 /*
 |--------------------------------------------------------------------------
 | WEB ROUTES

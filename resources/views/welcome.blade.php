@@ -651,51 +651,6 @@
         .cta-card-title { font-family: 'Comic Sans', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.375rem; }
         .cta-card-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.4); margin-bottom: 1.25rem; }
 
-        /* ── FOOTER ── */
-        footer {
-            background: #111;
-            padding: 4rem 2rem 2rem;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-        }
-        .footer-brand p { font-size: 0.875rem; color: rgba(255,255,255,0.35); line-height: 1.7; margin-top: 0.875rem; max-width: 280px; }
-        .footer-socials { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
-        .social-btn {
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.07);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.8rem;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
-        .social-btn:hover { background: var(--accent); color: #fff; }
-
-        .footer-col h5 { font-family: 'Comic Sans', sans-serif; font-size: 0.875rem; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 1rem; }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
-        .footer-col a { font-size: 0.8125rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-        .footer-col a:hover { color: rgba(255,255,255,0.8); }
-
-        .footer-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
-
         /* Container */
         .container { max-width: 1100px; margin: 0 auto; }
 
@@ -719,8 +674,6 @@
             .testi-grid { grid-template-columns: 1fr; max-width: 480px; }
             .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
             .preview-grid { grid-template-columns: repeat(2, 1fr); }
             .dash-stats { grid-template-columns: repeat(2, 1fr); }
             .cta-duo { flex-direction: column; }
@@ -1180,55 +1133,6 @@
         </div>
     </div>
 </section>
-
-<!-- FOOTER -->
-<footer>
-    <div class="footer-grid">
-        <div class="footer-brand">
-            <a href="#" class="nav-logo" style="color:#fff">
-                <span class="nav-logo-dot"></span>
-                NexoEco
-            </a>
-            <p>El marketplace de los microemprendedores. Conectamos vendedores con compradores en todo Manzanillo.</p>
-            <div class="footer-socials">
-                <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
-            </div>
-        </div>
-        <div class="footer-col">
-            <h5>Plataforma</h5>
-            <ul>
-                <li><a href="#caracteristicas">Características</a></li>
-                <li><a href="#precios">Precios</a></li>
-                <li><a href="#como-funciona">Cómo funciona</a></li>
-                <li><a href="#">Demo</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h5>Compañía</h5>
-            <ul>
-                <li><a href="#">Sobre nosotros</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Prensa</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h5>Legal</h5>
-            <ul>
-                <li><a href="#">Términos de uso</a></li>
-                <li><a href="#">Privacidad</a></li>
-                <li><a href="#">Cookies</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; {{ date('Y') }} NexoEco. Todos los derechos reservados.</p>
-        <p>Hecho con ❤️ para emprendedores de Manzanillo</p>
-    </div>
-</footer>
 
 <script>
     // Navbar scroll shadow

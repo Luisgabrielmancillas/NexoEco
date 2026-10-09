@@ -10,11 +10,12 @@
         <div class="hero-content"><span class="hero-tag">Marketplace local</span><h1 class="hero-title">Productos de emprendedores cerca de ti</h1><p class="hero-description">Descubre productos locales, compara opciones y conecta directamente con emprendedores de tu comunidad.</p><a href="#productos" class="hero-button">Ver productos <x-market-icon name="chevron"/></a></div>
         <div class="hero-decoration" aria-hidden="true"><x-market-icon name="store"/></div>
     </section>
+    @include('marketplace.partials.nearby-stores')
     @if($busqueda || $categoriaSeleccionada || $seccionSeleccionada)
         <div class="market-filter-summary"><span>Mostrando {{ $seccionSeleccionada ? \App\Support\MarketplaceDepartments::ALL[$seccionSeleccionada]['label'] : ($categoriaSeleccionada ? $categorias->firstWhere('id_categoria', $categoriaSeleccionada)?->nombre_categoria : 'todo el catálogo') }}@if($busqueda) · “{{ $busqueda }}”@endif</span><a href="{{ route($catalogRoute) }}">Limpiar filtros <x-market-icon name="close"/></a></div>
     @endif
     <section id="tiendas" aria-label="Tiendas del marketplace" class="market-discovery-section">
-        <div class="buyer-section-heading"><div><span class="buyer-eyebrow">Conoce a tu comunidad</span><h2>Tiendas locales</h2><p>Encuentra tu próximo negocio favorito.</p></div><span class="market-result-count">{{ $tiendas->total() }} {{ $tiendas->total() === 1 ? 'tienda' : 'tiendas' }}</span></div>
+        <div class="buyer-section-heading"><div><span class="buyer-eyebrow">Conoce a tu comunidad</span><h2>Tiendas locales</h2><p>Encuentra tu próximo negocio favorito.</p></div></div>
         @if($tiendas->count())
             <div class="market-store-row">@foreach($tiendas as $tienda)@include('marketplace.partials.store-card')@endforeach</div>
             @if($tiendas->hasPages())<div class="market-pagination">{{ $tiendas->links() }}</div>@endif
@@ -23,7 +24,7 @@
         @endif
     </section>
     <section id="productos" aria-label="Productos del marketplace" class="market-discovery-section">
-        <div class="buyer-section-heading"><div><span class="buyer-eyebrow">Descubre el catálogo</span><h2>Productos para ti</h2><p>Explora lo que ofrecen los negocios de tu comunidad.</p></div><span class="market-result-count">{{ $productos->total() }} {{ $productos->total() === 1 ? 'producto' : 'productos' }}</span></div>
+        <div class="buyer-section-heading"><div><span class="buyer-eyebrow">Descubre el catálogo</span><h2>Productos para ti</h2><p>Explora lo que ofrecen los negocios de tu comunidad.</p></div></div>
         @if($productos->count())
             <div class="buyer-grid marketplace-products-grid">@foreach($productos as $producto)@include('marketplace.partials.product-card')@endforeach</div>
             @if($productos->hasPages())<div class="market-pagination">{{ $productos->links() }}</div>@endif

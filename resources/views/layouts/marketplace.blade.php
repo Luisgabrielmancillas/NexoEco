@@ -76,10 +76,7 @@
 
                 @else
 
-                    <a href="{{ route('comprador.notificaciones') }}" class="market-notifications" data-notification-bell data-count-url="{{ route('comprador.notificaciones.count') }}" aria-label="Notificaciones{{ ($notificacionesSinLeer ?? 0) ? ': '.$notificacionesSinLeer.' sin leer' : '' }}" title="Notificaciones">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <span class="notification-count" aria-hidden="true" @if(($notificacionesSinLeer ?? 0) === 0) hidden @endif>{{ $notificacionesSinLeer > 99 ? '99+' : $notificacionesSinLeer }}</span>
-                    </a>
+                    <x-notification-bell :notificaciones-sin-leer="$notificacionesSinLeer" :notificacion-reciente="$notificacionReciente" />
                     <a
                         href="{{ route('profile.edit') }}"
                         class="market-header-button market-account-button {{ request()->routeIs('profile.*') ? 'is-active' : '' }}"
@@ -132,6 +129,7 @@
     </header>
 
     @include('marketplace.partials.location-dialog')
+    @include('marketplace.partials.route-dialog')
 
         @hasSection('account-navigation')
             @yield('account-navigation')
@@ -141,6 +139,7 @@
     @if(session('status') && ! request()->routeIs('verification.*', 'vendedor.register', 'profile.*'))
         <div class="nexo-container"><div class="buyer-notice" role="status">{{ session('status') }}</div></div>
     @endif
+    @include('marketplace.partials.location-awareness')
 
 
     {{-- =====================================================

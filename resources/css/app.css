@@ -3,6 +3,7 @@
 @import './seller.css';
 @import './marketplace.css';
 @import './moderator.css';
+@import './site-shell.css';
 
 @tailwind base;
 @tailwind components;

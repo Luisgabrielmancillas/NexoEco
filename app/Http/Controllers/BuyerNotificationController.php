@@ -11,12 +11,23 @@ class BuyerNotificationController extends Controller
 {
     public function count(Request $request): JsonResponse
     {
-        return response()->json(['unread' => $request->user()->unreadNotifications()->count()])->header('Cache-Control', 'no-store, private');
+        if (! $request->boolean('details')) {
+            return response()->json(['unread' => $request->user()->unreadNotifications()->count()])->header('Cache-Control', 'no-store, private');
+        }
+        $latest = $request->user()->notifications()->latest()->first();
+
+        return response()->json([
+            'unread' => $request->user()->unreadNotifications()->count(),
+            'latest' => $latest ? ['id' => $latest->id, 'title' => $latest->data['titulo'] ?? 'Novedad en tu cuenta', 'url' => $latest->data['url'] ?? '', 'unread' => $latest->read_at === null] : null,
+        ])->header('Cache-Control', 'no-store, private');
     }
 
     public function index(Request $request): View
     {
-        return view('comprador.notificaciones', ['notificaciones' => $request->user()->notifications()->latest()->paginate(15)]);
+        return view('comprador.notificaciones', [
+            'notificaciones' => $request->user()->notifications()->latest()->paginate(15),
+            'sellerArea' => $request->routeIs('vendedor.*'),
+        ]);
     }
 
     public function read(Request $request, string $notification): RedirectResponse

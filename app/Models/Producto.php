@@ -60,6 +60,8 @@ class Producto extends Model
     */
 
     protected $casts = [
+        'apartados_activos' => 'boolean',
+        'apartado_monto' => 'decimal:2',
         'id_tienda' => 'int',
         'id_categoria' => 'int',
         'precio' => 'float',
@@ -75,6 +77,9 @@ class Producto extends Model
     */
 
     protected $fillable = [
+        'apartados_activos',
+        'apartado_monto',
+        'apartado_condiciones',
         'id_tienda',
         'id_categoria',
         'codigo_producto',

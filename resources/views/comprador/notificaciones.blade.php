@@ -1,11 +1,11 @@
-@extends('layouts.marketplace')
+@extends($sellerArea ? 'layouts.seller-panel' : 'layouts.marketplace')
 @section('title', 'Notificaciones · NexoEco')
-@section('content')
+@section($sellerArea ? 'seller-content' : 'content')
 <div class="nexo-container"><main class="buyer-page">
     <div class="buyer-row"><div><span class="buyer-eyebrow">Al día con tu cuenta</span><h1>Notificaciones</h1></div>
         @if($notificacionesSinLeer)<form method="POST" action="{{ route('comprador.notificaciones.readAll') }}">@csrf<button class="buyer-button secondary" type="submit">Marcar todas como leídas</button></form>@endif
     </div>
-    <p class="buyer-description">Aquí aparecen las novedades de tu cuenta, tus opiniones y tus solicitudes de soporte.</p>
+    <p class="buyer-description">Mensajes nuevos, solicitudes de apartado, confirmaciones de anticipos y novedades de soporte. Cada aviso te lleva al detalle correspondiente.</p>
     @forelse($notificaciones as $notificacion)
         @php
             $destino = $notificacion->data['url'] ?? '';

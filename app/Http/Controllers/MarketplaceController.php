@@ -229,6 +229,9 @@ class MarketplaceController extends Controller
             ->orderByDesc('fecha_creacion')->orderByDesc('id_tienda')
             ->paginate(8, ['*'], 'pagina_tiendas')->withQueryString();
         $solicitudVendedor = $request->user()?->solicitudVendedor()->first();
+        $discovery = app(\App\Services\LocalDiscovery::class);
+        $ubicacionMapa = $discovery->position($discovery->location($request));
+        $tiendasCercanas = $discovery->nearby($discovery->location($request));
 
         return view(
             'marketplace.index',
@@ -240,6 +243,8 @@ class MarketplaceController extends Controller
                 'catalogRoute',
                 'tiendas',
                 'solicitudVendedor',
+                'ubicacionMapa',
+                'tiendasCercanas',
                 'seccionSeleccionada'
             )
         );

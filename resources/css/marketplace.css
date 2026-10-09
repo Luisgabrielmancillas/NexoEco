@@ -31,7 +31,6 @@
 .market-filter-summary svg { width: 15px; height: 15px; }
 .market-discovery-section { margin-top: 36px; scroll-margin-top: 105px; }
 .market-discovery .buyer-section-heading h2 { margin-top: 8px; font-size: 25px; }
-.market-result-count { white-space: nowrap; color: #9B8D7F; font-size: 11px; }
 .market-store-row { display: flex; align-items: start; gap: 28px; flex-wrap: wrap; padding: 8px 0 6px; }
 .market-store-card.catalog-store { padding: 0; min-height: 0; width: 124px; max-width: 100%; background: none; text-align: center; border: 0; }
 .market-store-image-wrap { position: relative; width: 108px; height: 108px; margin: 0 auto 12px; }

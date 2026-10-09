@@ -20,7 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        \Illuminate\Support\Facades\View::composer(['layouts.marketplace', 'layouts.comprador.app', 'marketplace.*', 'comprador.*'], function ($view) {
+        \Chatify\Models\Message::observe(\App\Observers\ProductMessageObserver::class);
+        \App\Models\Apartado::observe(\App\Observers\ApartadoObserver::class);
+        \Illuminate\Support\Facades\View::composer(['layouts.marketplace', 'layouts.seller-panel', 'layouts.comprador.app', 'marketplace.*', 'comprador.*'], function ($view) {
             $view->with(app(\App\Services\BuyerAccountContext::class)->data());
         });
         // Registramos que 'layouts.comprador.app' es un componente basado en tu archivo

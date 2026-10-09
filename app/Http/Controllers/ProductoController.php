@@ -31,6 +31,12 @@ class ProductoController extends Controller
                     'descripcion_tienda',
                     'logo_tienda',
                     'fecha_creacion',
+                    'latitud',
+                    'longitud',
+                    'direccion',
+                    'colonia',
+                    'ciudad',
+                    'estado',
                 ]);
             },
 

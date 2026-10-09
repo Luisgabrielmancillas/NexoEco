@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use \Chatify\Traits\InteractsWithChatify;
     use Notifiable;
 
     public function sendEmailVerificationNotification(): void
@@ -16,6 +17,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     protected $table = 'users';
+
+    public function mercadoPagoAccount()
+    {
+        return $this->hasOne(MercadoPagoAccount::class);
+    }
 
     public function profilePhotoUrl(): ?string
     {

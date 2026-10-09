@@ -60,6 +60,7 @@ class SellerRegistrationService
                         'documentos' => 'Tu solicitud ya fue enviada y no puede modificarse en este momento.',
                     ]);
                 }
+                $correction = $solicitud->estado === SolicitudVendedor::ESTADO_REQUIERE_CORRECCION;
 
                 $solicitud->update([
                     'rfc' => $data['rfc'],
@@ -110,6 +111,14 @@ class SellerRegistrationService
                     'Recibimos tus datos y documentos. Puedes comprar mientras revisamos tu solicitud.',
                     route('vendedor.register')
                 ));
+                DB::afterCommit(function () use ($solicitud, $correction) {
+                    try {
+                        app(SellerReviewNotifier::class)->notifyReview($solicitud->id_solicitud, $correction);
+                    } catch (Throwable $exception) {
+                        // A mail failure must never undo saved documents or the account.
+                        report($exception);
+                    }
+                });
 
                 return $user;
             });

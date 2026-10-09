@@ -5,6 +5,8 @@
         <span class="market-side-label">Tu comunidad, cerca</span>
         <a href="{{ route(auth()->check() ? 'comprador.dashboard' : 'marketplace.index') }}" class="buyer-nav-link {{ request()->routeIs('comprador.dashboard', 'marketplace.index') ? 'active' : '' }}" @if(request()->routeIs('comprador.dashboard', 'marketplace.index')) aria-current="page" @endif><x-market-icon name="home"/>Inicio</a>
         @auth
+        <a href="{{ route('chat.index') }}" class="buyer-nav-link {{ request()->routeIs('chat.*') ? 'active' : '' }}"><x-market-icon name="chat"/>Mis mensajes</a>
+        <a href="{{ route('apartados.index') }}" class="buyer-nav-link {{ request()->routeIs('apartados.*') ? 'active' : '' }}"><x-market-icon name="bookmark"/>Mis apartados</a>
         <details data-nav-dropdown>
             <summary class="{{ request()->routeIs('comprador.favoritos*') ? 'active' : '' }}"><x-market-icon name="heart"/>Favoritos<x-market-icon name="chevron-down" class="nav-dropdown-arrow"/></summary>
             <div class="buyer-dropdown">
@@ -23,7 +25,15 @@
         </details>
         <div class="buyer-nav-account-actions">
         @if(auth()->user()->tieneTipo('vendedor'))
-            <a href="{{ route('vendedor.dashboard') }}" class="buyer-nav-link buyer-store-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 10h18l-2-6H5l-2 6Zm2 0v10h14V10M9 20v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>Mi tienda</a>
+            <details data-nav-dropdown class="buyer-store-menu">
+                <summary class="buyer-store-link"><x-market-icon name="store"/>Mi tienda<x-market-icon name="chevron-down" class="nav-dropdown-arrow"/></summary>
+                <div class="buyer-dropdown">
+                    <a href="{{ route('vendedor.dashboard') }}">Resumen de mi tienda</a>
+                    <a href="{{ route('vendedor.productos.index') }}">Productos de mi tienda</a>
+                    <a href="{{ route('vendedor.mensajes.index') }}">Mensajes de mi tienda</a>
+                    <a href="{{ route('vendedor.apartados.index') }}">Apartados recibidos</a>
+                </div>
+            </details>
         @endif
         <form method="POST" action="{{ route('logout') }}" class="buyer-nav-logout">
             @csrf

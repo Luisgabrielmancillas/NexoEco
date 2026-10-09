@@ -30,11 +30,8 @@ export function initializeBuyerLocation() {
             document.querySelectorAll('.market-location-value').forEach((label) => { label.textContent = result.label; });
             document.querySelectorAll('[data-dialog-open="buyer-location-dialog"]').forEach((button) => button.setAttribute('aria-label', `Cambiar ubicación: ${result.label}`));
             dialog.close();
-            let feedback = document.querySelector('[data-location-feedback]');
-            if (!feedback) { feedback = document.createElement('p'); feedback.className = 'favorite-feedback'; feedback.dataset.locationFeedback = ''; feedback.setAttribute('role', 'status'); document.body.append(feedback); }
-            feedback.textContent = result.message;
-            feedback.hidden = false;
-            setTimeout(() => { feedback.hidden = true; }, 3500);
+            // Recompute distances, nearby stores and routing origins from the saved account.
+            window.location.reload();
         } catch (exception) {
             error.textContent = exception.message;
             error.hidden = false;

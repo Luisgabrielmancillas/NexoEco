@@ -1,5 +1,7 @@
 @props(['name' => 'home'])
 @php($paths = [
+    'chat' => 'M21 11a8 8 0 0 1-8 8H7l-4 3V5a2 2 0 0 1 2-2h8a8 8 0 0 1 8 8ZM7 8h10M7 12h7',
+    'bookmark' => 'M6 3h12v19l-6-4-6 4V3Z',
     'home' => 'm3 11 9-8 9 8M5 10v11h14V10M9 21v-7h6v7',
     'food' => 'M3 12h18a9 9 0 0 1-18 0ZM5 21h14M7 3v5M12 2v6M17 3v5',
     'cart' => 'M2 3h3l3 12h11l3-9H6M9 21a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM18 21a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z',

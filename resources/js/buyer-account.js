@@ -16,6 +16,34 @@ export function initializeBuyerAccount() {
     if (bell) {
         let refreshing = false;
         let sessionActive = true;
+        let latestId = bell.dataset.latestId || null;
+        let previousUnread = Number(bell.dataset.unreadCount) || 0;
+        let notificationTimer;
+        const announce = (latest) => {
+            let notice = document.querySelector('[data-notification-toast]');
+            if (!notice) {
+                notice = document.createElement('aside');
+                notice.className = 'notification-toast';
+                notice.dataset.notificationToast = '';
+                notice.setAttribute('role', 'status');
+                notice.setAttribute('aria-live', 'polite');
+                const link = document.createElement('a');
+                const close = document.createElement('button');
+                close.type = 'button';
+                close.textContent = '×';
+                close.setAttribute('aria-label', 'Cerrar aviso');
+                close.addEventListener('click', () => { notice.hidden = true; });
+                notice.append(link, close);
+                document.body.append(notice);
+            }
+            const link = notice.querySelector('a');
+            link.textContent = latest?.title || 'Tienes nuevas notificaciones';
+            const destination = new URL(latest?.url || bell.href, window.location.origin);
+            link.href = destination.origin === window.location.origin ? destination.href : bell.href;
+            notice.hidden = false;
+            clearTimeout(notificationTimer);
+            notificationTimer = setTimeout(() => { notice.hidden = true; }, 8000);
+        };
         const refreshUnread = async () => {
             if (document.hidden || refreshing || !sessionActive) return;
             refreshing = true;
@@ -23,8 +51,12 @@ export function initializeBuyerAccount() {
                 const response = await fetch(bell.dataset.countUrl, { credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'application/json' } });
                 if ([401, 403, 419].includes(response.status)) sessionActive = false;
                 if (!response.ok) return;
-                const { unread } = await response.json();
+                const { unread, latest } = await response.json();
                 if (!Number.isInteger(unread) || unread < 0) return;
+                const newLatest = latest?.id && latest.id !== latestId && latest.unread;
+                if (newLatest || unread > previousUnread) announce(newLatest ? latest : null);
+                latestId = latest?.id || latestId;
+                previousUnread = unread;
                 const badge = bell.querySelector('.notification-count');
                 badge.textContent = unread > 99 ? '99+' : String(unread);
                 badge.hidden = unread === 0;
@@ -35,7 +67,7 @@ export function initializeBuyerAccount() {
                 refreshing = false;
             }
         };
-        setInterval(refreshUnread, 45000);
+        setInterval(refreshUnread, 8000);
         window.addEventListener('focus', refreshUnread);
         document.addEventListener('visibilitychange', refreshUnread);
     }
