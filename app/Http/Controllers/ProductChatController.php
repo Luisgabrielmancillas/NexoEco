@@ -14,10 +14,12 @@ class ProductChatController extends Controller
     public function index(Request $request)
     {
         $sellerArea = $request->routeIs('vendedor.*');
+        $request->validate(['estado' => ['nullable', \Illuminate\Validation\Rule::in(array_keys(ProductChat::NEGOTIATION_STATES))]]);
         $chats = ProductChat::where($sellerArea ? 'seller_id' : 'buyer_id', $request->user()->id)->with(['producto', 'buyer', 'seller'])
+            ->when($sellerArea && $request->filled('estado'), fn ($q) => $q->where('negotiation_status', $request->query('estado')))
             ->withCount(['messages as unread_count' => fn ($q) => $q->where('user_id', '!=', $request->user()->id)
                 ->whereRaw('ch_messages.created_at > COALESCE((SELECT last_read_at FROM ch_conversation_participants WHERE conversation_id = product_chats.conversation_id AND user_id = ?), ?)', [$request->user()->id, '1970-01-01 00:00:00'])])
-            ->latest('updated_at')->paginate(20);
+            ->latest('updated_at')->paginate(20)->withQueryString();
 
         return view('chat.index', compact('chats', 'sellerArea'));
     }
@@ -38,7 +40,10 @@ class ProductChatController extends Controller
                 $conversation->participants()->create(['user_id' => $id, 'role' => 'member']);
             }
 
-            return ProductChat::create(['id_producto' => $producto->getKey(), 'buyer_id' => $request->user()->id, 'seller_id' => $seller->id, 'conversation_id' => $conversation->id]);
+            $chat = ProductChat::create(['id_producto' => $producto->getKey(), 'buyer_id' => $request->user()->id, 'seller_id' => $seller->id, 'conversation_id' => $conversation->id]);
+            app(\App\Services\SellerChatAutomation::class)->deliver($chat, 'welcome');
+
+            return $chat;
         });
 
         return redirect()->route('chat.show', $chat);
@@ -56,7 +61,11 @@ class ProductChatController extends Controller
 
         $sellerArea = $chat->seller_id === $request->user()->id;
 
-        return view('chat.show', compact('chat', 'sellerArea'));
+        $subscription = $sellerArea ? app(\App\Services\SellerBenefits::class)->subscription($request->user()) : null;
+        $quickReplies = $subscription ? \App\Models\SellerQuickReply::where('user_id', $request->user()->id)->orderBy('id')
+            ->when($subscription->plan === 'impulso', fn ($q) => $q->limit(5))->get() : collect();
+
+        return view('chat.show', compact('chat', 'sellerArea', 'subscription', 'quickReplies'));
     }
 
     public function messages(Request $request, ProductChat $chat)
@@ -84,7 +93,11 @@ class ProductChatController extends Controller
         $data = $request->validate(['body' => ['required', 'string', 'max:5000']]);
         abort_unless($chat->buyer->activo && $chat->seller->activo, 403);
         DB::transaction(function () use ($send, $chat, $request, $data) {
+            ProductChat::whereKey($chat->id)->lockForUpdate()->firstOrFail();
             $send->handle($chat->conversation, $request->user(), $data['body']);
+            if ($request->user()->id === $chat->buyer_id) {
+                app(\App\Services\SellerChatAutomation::class)->deliver($chat, 'away');
+            }
             $chat->touch();
         });
 

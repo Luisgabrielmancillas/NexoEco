@@ -13,6 +13,8 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto): View
     {
+        app(\App\Services\SellerAnalytics::class)->visit(request(), $producto);
+        app(\App\Services\SellerPromotion::class)->record(request(), 'product', $producto, 'visits');
         /*
         |--------------------------------------------------------------------------
         | RELACIONES
@@ -23,6 +25,7 @@ class ProductoController extends Controller
         */
 
         $producto->load([
+            'activeOffer',
             'tienda' => function ($query) {
                 $query->select([
                     'id_tienda',

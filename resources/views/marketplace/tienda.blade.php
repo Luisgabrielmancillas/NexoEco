@@ -1,7 +1,8 @@
 @extends('layouts.marketplace')
 @section('title', $tienda->nombre_tienda.' | NexoEco')
 @section('content')
-<main class="nexo-container public-store-page">
+<main class="nexo-container public-store-page store-theme-{{ $storeDesign && array_key_exists($storeDesign->theme, \App\Models\SellerStoreDesign::THEMES) ? $storeDesign->theme : 'terracota' }} {{ $storeSubscription?->plan === 'pro' && $storeDesign?->layout === 'compacto' ? 'store-layout-compact' : '' }}">
+    @if(session('success'))<p class="commerce-alert" role="status">{{ session('success') }}</p>@endif
     @php($marketRoute = auth()->check() ? 'comprador.dashboard' : 'marketplace.index')
 
     <section class="public-store-hero">
@@ -11,6 +12,8 @@
             <div class="public-store-title"><h1>{{ $tienda->nombre_tienda }}</h1>@include('marketplace.partials.favorite-button', ['tipo' => 'tiendas', 'item' => $tienda])</div>
             <div class="public-store-meta"><span><x-market-icon name="star"/>{{ $tienda->opiniones_count ? number_format($tienda->opiniones_avg_calificacion, 1).' / 5 · '.$tienda->opiniones_count.' opiniones' : 'Sin calificaciones' }}</span><span><x-seller-icon name="box"/>{{ $productos->total() }} {{ $productos->total() === 1 ? 'producto' : 'productos' }}</span>@if($tienda->fecha_creacion)<span><x-seller-icon name="clock"/>Desde {{ $tienda->fecha_creacion->format('Y') }}</span>@endif @if($tienda->user?->tieneTipo('vendedor'))<span class="public-store-approved"><x-seller-icon name="shield"/>Vendedor autorizado</span>@endif</div>
             <p class="public-store-description">{{ $tienda->descripcion_tienda ?: 'Conoce los productos de este negocio de tu comunidad.' }}</p>
+            @if($storeDesign?->tagline)<p class="store-custom-tagline">{{ $storeDesign->tagline }}</p>@endif
+            @if(auth()->id() !== $tienda->id_vendedor)<form method="POST" action="{{ route('tiendas.follow', $tienda) }}" class="store-follow-action">@csrf<input type="hidden" name="following" value="{{ $following ? 0 : 1 }}"><button class="seller-button secondary small" type="submit">{{ $following ? 'Dejar de seguir' : 'Seguir tienda' }}</button><span>Recibe avisos de nuevos productos, ofertas y novedades en NexoEco.</span></form>@endif
         </div>
     </section>
     <div class="store-info-tiles" aria-label="Información del negocio">
@@ -18,6 +21,8 @@
         <button type="button" class="store-info-tile" data-dialog-open="store-hours-dialog" aria-haspopup="dialog"><span class="store-tile-icon"><x-seller-icon name="clock"/></span><span><strong>Horarios de atención</strong><small>Consulta los días y las horas de atención</small></span><x-market-icon name="chevron"/></button>
     </div>
     @include('marketplace.partials.store-directions')
+    @if($storeSubscription?->plan === 'pro' && $storeDesign?->story)<section class="seller-card growth-section store-custom-story"><span class="buyer-eyebrow">Las personas detrás del negocio</span><h2>Nuestra historia</h2><p class="growth-preline">{{ $storeDesign->story }}</p></section>@endif
+    @if($storeUpdates->isNotEmpty())<section id="novedades" class="growth-section"><div class="buyer-section-heading"><div><span class="buyer-eyebrow">Lo más reciente</span><h2>Novedades de la tienda</h2></div></div><div class="growth-two-columns">@foreach($storeUpdates as $update)<article class="seller-card"><time class="seller-help" datetime="{{ $update->published_at->toIso8601String() }}">{{ $update->published_at->timezone('America/Mexico_City')->format('d/m/Y') }}</time><h3>{{ $update->title }}</h3><p class="growth-preline">{{ $update->body }}</p></article>@endforeach</div></section>@endif
     <section id="productos" class="public-store-products"><div class="buyer-section-heading"><div><h2>Productos de la tienda</h2><p>Explora el catálogo de {{ $tienda->nombre_tienda }}.</p></div></div>
         @if($productos->count())<div class="buyer-grid marketplace-products-grid">@foreach($productos as $producto)@include('marketplace.partials.product-card')@endforeach</div>@if($productos->hasPages())<div class="market-pagination">{{ $productos->links() }}</div>@endif
         @else<div class="buyer-empty"><h2>Esta tienda todavía no tiene productos</h2><p>Puedes seguir explorando otros emprendimientos de NexoEco.</p><a class="buyer-button" href="{{ route($marketRoute) }}">Volver al marketplace</a></div>@endif

@@ -11,6 +11,9 @@
         <div class="hero-decoration" aria-hidden="true"><x-market-icon name="store"/></div>
     </section>
     @include('marketplace.partials.nearby-stores')
+    @if($tiendasRecomendadas->isNotEmpty())
+    <section class="market-discovery-section" aria-labelledby="recommended-stores-title"><div class="buyer-section-heading"><div><span class="buyer-eyebrow">Negocios para descubrir</span><h2 id="recommended-stores-title">Tiendas recomendadas</h2><p>Espacios patrocinados por negocios de tu comunidad.</p></div></div><div class="market-store-row">@foreach($tiendasRecomendadas as $tienda)@include('marketplace.partials.store-card', ['sponsored' => true])@endforeach</div></section>
+    @endif
     @if($busqueda || $categoriaSeleccionada || $seccionSeleccionada)
         <div class="market-filter-summary"><span>Mostrando {{ $seccionSeleccionada ? \App\Support\MarketplaceDepartments::ALL[$seccionSeleccionada]['label'] : ($categoriaSeleccionada ? $categorias->firstWhere('id_categoria', $categoriaSeleccionada)?->nombre_categoria : 'todo el catálogo') }}@if($busqueda) · “{{ $busqueda }}”@endif</span><a href="{{ route($catalogRoute) }}">Limpiar filtros <x-market-icon name="close"/></a></div>
     @endif

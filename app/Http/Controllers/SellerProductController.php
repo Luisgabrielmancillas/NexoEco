@@ -70,6 +70,7 @@ class SellerProductController extends Controller
 
     private function save(Request $request, ShopMedia $media, Tienda $tienda, ?Producto $producto)
     {
+        $creating = ! $producto;
         $data = $request->validate([
             'nombre_producto' => ['required', 'string', 'max:150'],
             'descripcion' => ['required', 'string', 'max:5000'],
@@ -86,7 +87,7 @@ class SellerProductController extends Controller
             throw \Illuminate\Validation\ValidationException::withMessages(['apartados_activos' => 'Conecta tu cuenta de Mercado Pago desde Apartados recibidos antes de activar esta opción.']);
         }
         try {
-            DB::transaction(function () use ($request, $media, $tienda, &$producto, &$uploaded, $data) {
+            DB::transaction(function () use ($request, $media, $tienda, &$producto, &$uploaded, $data, $creating) {
                 // Scope every field to the authenticated seller's store; never accept ownership or SKU from the form.
                 $category = $data['id_categoria'] ?? null;
                 if (! empty($data['nueva_categoria'])) {
@@ -114,6 +115,9 @@ class SellerProductController extends Controller
                     $producto = $tienda->productos()->create($fields + ['codigo_producto' => 'NE-'.Str::uuid(), 'fecha_publicacion' => now()]);
                 }
                 $producto->forceFill(['estado_moderacion' => 'aprobada', 'motivo_moderacion' => null, 'id_moderador' => null, 'fecha_moderacion' => null, 'revision_contenido' => ($producto->revision_contenido ?? 1) + 1])->save();
+                if ($creating) {
+                    app(\App\Services\StoreAudience::class)->productPublished($producto);
+                }
             });
         } catch (Throwable $exception) {
             $media->remove($tienda, $uploaded);

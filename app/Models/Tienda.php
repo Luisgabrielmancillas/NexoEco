@@ -25,6 +25,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tienda extends Model
 {
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'store_follows', 'id_tienda', 'user_id')->withTimestamps();
+    }
+
+    public function updates()
+    {
+        return $this->hasMany(StoreUpdate::class, 'id_tienda');
+    }
+
     protected $table = 'tiendas';
 
     protected $primaryKey = 'id_tienda';

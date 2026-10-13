@@ -7,6 +7,7 @@
     $approved = $solicitud?->estaAprobada();
     $rating = $tienda->opiniones_avg_calificacion;
 @endphp
+<aside class="seller-card subscription-dashboard-link"><div><h2>Dale más visibilidad a tu tienda</h2><p>Promociona tus productos y aparece en recomendaciones. Planes desde $149 MXN al mes.</p></div><a class="seller-button secondary" href="{{ route('vendedor.suscripcion.index') }}">Ver planes y promoción ↗</a></aside>
 <section class="seller-store-hero">
     <div class="seller-cover">@if($cover)<img src="{{ $cover }}" alt="Portada de {{ $tienda->nombre_tienda }}">@else<div class="seller-cover-empty"><x-seller-icon/><span>El espacio de tu negocio</span></div>@endif<a class="seller-cover-edit" href="{{ route('vendedor.tienda.edit') }}#imagenes"><x-seller-icon name="edit"/>Editar portada</a><span class="seller-cover-label">TU TIENDA EN NEXOECO</span></div>
     <div class="seller-store-identity"><div class="seller-store-logo">@if($logo)<img src="{{ $logo }}" alt="Logo de {{ $tienda->nombre_tienda }}">@else<x-seller-icon/>@endif<a href="{{ route('vendedor.tienda.edit') }}#imagenes" aria-label="Editar logo"><x-seller-icon name="edit"/></a></div>

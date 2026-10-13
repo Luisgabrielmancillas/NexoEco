@@ -14,6 +14,12 @@ class TiendaController extends Controller
      */
     public function show(Tienda $tienda): View
     {
+        app(\App\Services\SellerAnalytics::class)->visit(request(), $tienda);
+        $storeSubscription = $tienda->user ? app(\App\Services\SellerBenefits::class)->subscription($tienda->user) : null;
+        $storeDesign = $storeSubscription ? \App\Models\SellerStoreDesign::where('user_id', $tienda->id_vendedor)->first() : null;
+        $following = auth()->user()?->followedStores()->where('tiendas.id_tienda', $tienda->getKey())->exists() ?? false;
+        $storeUpdates = $tienda->updates()->where('status', 'published')->latest('published_at')->limit(5)->get();
+        app(\App\Services\SellerPromotion::class)->record(request(), 'store', $tienda, 'visits');
         /*
         |--------------------------------------------------------------------------
         | PRODUCTOS DE LA TIENDA
@@ -41,6 +47,7 @@ class TiendaController extends Controller
                 $tienda->id_tienda
             )
             ->with([
+                'activeOffer',
                 'tienda:id_tienda,nombre_tienda',
                 'categoria' => function ($query) {
                     $query->select([
@@ -59,6 +66,8 @@ class TiendaController extends Controller
                     ]);
                 },
             ])
+            ->selectSub(\Illuminate\Support\Facades\DB::table('product_pins')->selectRaw('COUNT(*)')->where('subscription_id', $storeSubscription?->id ?? '')->whereColumn('id_producto', 'productos.id_producto'), 'is_pinned')
+            ->orderByDesc('is_pinned')
             ->orderByDesc('fecha_publicacion')
             ->orderByDesc('id_producto')
             ->paginate(24)
@@ -107,7 +116,11 @@ class TiendaController extends Controller
                 'productos',
                 'logoTienda',
                 'opiniones',
-                'miOpinion'
+                'miOpinion',
+                'storeSubscription',
+                'storeDesign',
+                'following',
+                'storeUpdates'
             )
         );
     }

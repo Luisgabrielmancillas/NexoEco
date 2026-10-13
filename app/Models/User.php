@@ -18,6 +18,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $table = 'users';
 
+    public function sellerSubscriptions()
+    {
+        return $this->hasMany(SellerSubscription::class);
+    }
+
+    public function followedStores()
+    {
+        return $this->belongsToMany(Tienda::class, 'store_follows', 'user_id', 'id_tienda')->withTimestamps();
+    }
+
     public function mercadoPagoAccount()
     {
         return $this->hasOne(MercadoPagoAccount::class);

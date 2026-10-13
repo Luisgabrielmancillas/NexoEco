@@ -17,11 +17,13 @@ class ApartadoController extends Controller
 {
     public function index(Request $request)
     {
+        $request->validate(['apartado' => ['nullable', 'uuid']]);
         $sellerArea = $request->routeIs('vendedor.*');
-        $apartados = Apartado::where($sellerArea ? 'seller_id' : 'buyer_id', $request->user()->id)->with(['buyer', 'seller', 'producto'])->latest()->paginate(20);
+        $apartados = Apartado::where($sellerArea ? 'seller_id' : 'buyer_id', $request->user()->id)->when($request->filled('apartado'), fn ($q) => $q->whereKey($request->query('apartado')))->with(['buyer', 'seller', 'producto'])->latest()->paginate(20)->withQueryString();
         $account = $sellerArea ? $request->user()->mercadoPagoAccount : null;
+        $subscription = $sellerArea ? app(\App\Services\SellerBenefits::class)->subscription($request->user()) : null;
 
-        return view('apartados.index', compact('apartados', 'sellerArea', 'account'));
+        return view('apartados.index', compact('apartados', 'sellerArea', 'account', 'subscription'));
     }
 
     public function store(Request $request, Producto $producto, MercadoPagoReservations $payments, MercadoPagoConnection $connection)

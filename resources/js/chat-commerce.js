@@ -18,6 +18,22 @@ export function initializeChatCommerce() {
         const form = room.querySelector('[data-chat-form]');
         const status = room.querySelector('[data-chat-status]');
         const history = room.querySelector('[data-chat-history]');
+        room.querySelectorAll('[data-quick-reply]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const textarea = form.elements.body;
+                if (textarea.readOnly) return;
+                const text = button.dataset.quickReply;
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                if (textarea.value.length - (end - start) + text.length > textarea.maxLength) {
+                    status.textContent = 'La respuesta supera el máximo de caracteres del mensaje.';
+                    return;
+                }
+                textarea.setRangeText(text, start, end, 'end');
+                textarea.focus();
+                textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+        });
         const entries = new Map();
         const nodes = new Map();
         let firstId = null;

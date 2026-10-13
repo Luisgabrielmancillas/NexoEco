@@ -31,6 +31,7 @@
                     <a class="product-seller-card" href="{{ route('tiendas.show', $producto->tienda) }}" aria-label="Visitar tienda {{ $producto->tienda->nombre_tienda }}"><span class="product-seller-logo">@if($logoTienda)<img src="{{ $logoTienda }}" alt="Logo de {{ $producto->tienda->nombre_tienda }}">@else<x-market-icon name="store"/>@endif</span><div><span class="product-small-label">Conoce al vendedor</span><strong>{{ $producto->tienda->nombre_tienda }}</strong><span>Ver su tienda y más productos</span></div><x-market-icon name="chevron"/></a>
                 @endif
                 @include('marketplace.partials.product-contact')
+                @include('marketplace.partials.commercial-offer', ['compact' => false])
                 @if($producto->tienda)@include('marketplace.partials.store-directions', ['tienda' => $producto->tienda])@endif
             </section>
         </div>

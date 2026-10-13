@@ -1,6 +1,7 @@
 @extends('layouts.seller-panel')
 @section('title', 'Mis productos | NexoEco')
 @section('seller-content')
+<p class="seller-help">Haz que tus productos lleguen a más personas. <a class="seller-text-link" href="{{ route('vendedor.suscripcion.index') }}#promociones">Gestionar mis promociones ↗</a></p>
 <div class="seller-heading"><div><span class="buyer-eyebrow">{{ $tienda->nombre_tienda }}</span><h1>Mis productos</h1><p>Tu catálogo, listo para conectar con la comunidad.</p></div><a href="{{ route('vendedor.productos.create') }}" class="seller-button"><x-seller-icon name="plus"/>Agregar producto</a></div>
 <form action="{{ route('vendedor.productos.index') }}" method="GET" class="seller-product-filters seller-form"><input type="search" name="q" value="{{ $search }}" placeholder="Buscar en mis productos" aria-label="Buscar en mis productos" maxlength="150"><select name="categoria" aria-label="Filtrar por categoría"><option value="">Todas las categorías</option>@foreach($categorias as $categoria)<option value="{{ $categoria->getKey() }}" @selected((string)request('categoria') === (string)$categoria->getKey())>{{ $categoria->nombre_categoria }}</option>@endforeach</select><button class="seller-button secondary" type="submit">Buscar</button>@if(request()->filled('q') || request()->filled('categoria'))<a class="seller-text-link" href="{{ route('vendedor.productos.index') }}">Limpiar</a>@endif</form>
 <p class="seller-help seller-results">{{ $productos->total() }} {{ $productos->total() === 1 ? 'producto' : 'productos' }}</p>

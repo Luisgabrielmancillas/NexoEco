@@ -14,11 +14,15 @@
         <a href="{{ route('vendedor.productos.index') }}" class="{{ request()->routeIs('vendedor.productos.*') ? 'active' : '' }}" @if(request()->routeIs('vendedor.productos.*')) aria-current="page" @endif>Productos</a>
         <a href="{{ route('vendedor.mensajes.index') }}" class="{{ request()->routeIs('vendedor.mensajes.*', 'chat.show') ? 'active' : '' }}" @if(request()->routeIs('vendedor.mensajes.*', 'chat.show')) aria-current="page" @endif>Mensajes</a>
         <a href="{{ route('vendedor.apartados.index') }}" class="{{ request()->routeIs('vendedor.apartados.*', 'vendedor.mercadopago.*') ? 'active' : '' }}">Apartados recibidos</a>
+        <a href="{{ route('vendedor.suscripcion.index') }}" class="{{ request()->routeIs('vendedor.suscripcion.*') ? 'active' : '' }}" @if(request()->routeIs('vendedor.suscripcion.*')) aria-current="page" @endif>Planes y promoción</a>
+        <a href="{{ route('vendedor.herramientas.index') }}" class="{{ request()->routeIs('vendedor.herramientas.*', 'vendedor.novedades.*', 'vendedor.calendario') ? 'active' : '' }}">Herramientas</a>
+        <a href="{{ route('vendedor.promociones.index') }}" class="{{ request()->routeIs('vendedor.promociones.*') ? 'active' : '' }}">Ofertas</a>
+        <a href="{{ route('vendedor.estadisticas.index') }}" class="{{ request()->routeIs('vendedor.estadisticas.*') ? 'active' : '' }}">Estadísticas</a>
     </nav>
 </header>
 @endsection
 @section('content')
-<main class="nexo-container seller-page">
+<main class="nexo-container seller-page @yield('seller-class')">
     @if(session('success'))<div class="seller-alert" role="status">{{ session('success') }}</div>@endif
     @if($errors->any())<div class="seller-alert error" role="alert"><strong>Revisa los datos del formulario</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>@if($errors->has('logo') || $errors->has('portada') || $errors->has('imagen'))<p>Vuelve a seleccionar las imágenes antes de guardar.</p>@endif</div>@endif
     @yield('seller-content')

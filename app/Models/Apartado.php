@@ -13,7 +13,9 @@ class Apartado extends Model
 
     protected $attributes = ['estado' => 'pendiente', 'provider' => 'mercadopago'];
 
-    protected $casts = ['monto' => 'decimal:2', 'pagado_at' => 'datetime', 'live_mode' => 'boolean'];
+    protected $casts = ['monto' => 'decimal:2', 'pagado_at' => 'datetime', 'live_mode' => 'boolean', 'delivery_at' => 'datetime', 'follow_up_at' => 'datetime', 'reminded_at' => 'datetime'];
+
+    public const FULFILLMENT_STATES = ['pendiente' => 'Pendiente de entrega', 'completado' => 'Entrega completada', 'cancelado' => 'Entrega cancelada'];
 
     public function producto()
     {

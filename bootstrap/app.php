@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->validateCsrfTokens(except: ['mercadopago/webhook']);
+        $middleware->validateCsrfTokens(except: ['mercadopago/webhook', 'mercadopago/suscripciones/webhook']);
         $middleware->alias(['administrator' => \App\Http\Middleware\EnsureAdministrator::class, 'seller' => \App\Http\Middleware\EnsureSeller::class, 'moderator' => \App\Http\Middleware\EnsureModerator::class]);
         $middleware->web(append: [\App\Http\Middleware\EnsureActiveAccount::class, \App\Http\Middleware\EnsureAccountArea::class, \App\Http\Middleware\RecordStaffActivity::class]);
 

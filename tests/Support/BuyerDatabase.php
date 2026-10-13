@@ -34,6 +34,9 @@ class BuyerDatabase
             'database/migrations/2026_07_18_000000_create_chatify_tables.php',
             'database/migrations/2026_10_09_000000_add_product_chat_and_reservations.php',
             'database/migrations/2026_10_09_010000_add_mercado_pago_accounts.php',
+            'database/migrations/2026_10_11_000000_create_seller_subscriptions.php',
+            'database/migrations/2026_10_11_010000_add_seller_growth_tools.php',
+            'database/migrations/2026_10_11_020000_add_commercial_offer_notifications.php',
         ]]);
     }
 }

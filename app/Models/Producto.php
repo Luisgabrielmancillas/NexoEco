@@ -30,6 +30,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Producto extends Model
 {
+    public function activeOffer()
+    {
+        return $this->hasOne(CommercialOffer::class, 'id_producto')->visible()->orderByDesc('id');
+    }
+
     use \Illuminate\Database\Eloquent\SoftDeletes;
     /*
     |--------------------------------------------------------------------------

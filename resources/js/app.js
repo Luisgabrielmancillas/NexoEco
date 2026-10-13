@@ -12,6 +12,7 @@ import { initializeBuyerLocation } from './buyer-location';
 import { initializeLocalDiscovery } from './local-discovery';
 import '../css/local-discovery.css';
 import { initializeModerator } from './moderator';
+import { initializeSellerExperience } from './seller-experience';
 
 window.Alpine = Alpine;
 
@@ -25,6 +26,7 @@ initializeBuyerLocation();
 initializeLocalDiscovery();
 initializeModerator();
 initializeChatCommerce();
+initializeSellerExperience();
 
 document.querySelectorAll('[data-document-preview]').forEach((documentPanel) => {
     documentPanel.addEventListener('toggle', () => {

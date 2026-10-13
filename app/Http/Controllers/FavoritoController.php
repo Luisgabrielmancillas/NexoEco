@@ -14,7 +14,7 @@ class FavoritoController extends Controller
     public function index(Request $request, string $tipo): View
     {
         $items = $tipo === 'productos'
-            ? $request->user()->productosFavoritos()->publicados()->with(['tienda', 'categoria', 'imagenPrincipal'])->orderByPivot('created_at', 'desc')->paginate(12)
+            ? $request->user()->productosFavoritos()->publicados()->with(['tienda', 'categoria', 'imagenPrincipal', 'activeOffer'])->orderByPivot('created_at', 'desc')->paginate(12)
             : $request->user()->tiendasFavoritas()->withCount(['productos' => fn ($q) => $q->publicados()])->orderByPivot('created_at', 'desc')->paginate(12);
 
         return view('comprador.favoritos', compact('items', 'tipo'));

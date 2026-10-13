@@ -87,9 +87,11 @@ class MarketplaceController extends Controller
             */
 
             ->with([
+                'activeOffer',
                 'tienda' => function ($query) {
                     $query->select([
                         'id_tienda',
+                        'id_vendedor',
                         'nombre_tienda',
                         'logo_tienda',
                     ]);
@@ -201,6 +203,8 @@ class MarketplaceController extends Controller
             */
 
             ->when($seccionSeleccionada, fn ($query) => $query->whereIn('id_categoria', $categoriasDeSeccion))
+            ->selectSub(app(\App\Services\SellerPromotion::class)->productPriority(), 'promotion_priority')
+            ->orderByDesc('promotion_priority')
             ->orderByDesc('fecha_publicacion')
             ->orderByDesc('id_producto')
 
@@ -233,6 +237,24 @@ class MarketplaceController extends Controller
         $ubicacionMapa = $discovery->position($discovery->location($request));
         $tiendasCercanas = $discovery->nearby($discovery->location($request));
 
+        $promotion = app(\App\Services\SellerPromotion::class);
+        $tiendasRecomendadas = Tienda::query()->select('tiendas.*')->selectSub($promotion->storePriority(), 'promotion_priority')
+            ->whereHas('user', fn ($q) => $q->where('activo', true)->whereHas('tipos_usuario', fn ($q) => $q->whereRaw('LOWER(nombre_tipo) = ?', ['vendedor'])))
+            ->whereHas('user', fn ($q) => $q->whereHas('sellerSubscriptions', fn ($q) => $q->entitled()))
+            ->whereHas('productos', fn ($q) => $q->publicados()
+                ->when($categoriaSeleccionada, fn ($q) => $q->where('id_categoria', $categoriaSeleccionada))
+                ->when($seccionSeleccionada, fn ($q) => $q->whereIn('id_categoria', $categoriasDeSeccion)))
+            ->when($busqueda, fn ($q) => $q->where(fn ($q) => $q->where('nombre_tienda', 'like', '%'.$busqueda.'%')->orWhere('descripcion_tienda', 'like', '%'.$busqueda.'%')->orWhereHas('productos', fn ($q) => $q->publicados()->where('nombre_producto', 'like', '%'.$busqueda.'%'))))
+            ->orderByDesc('promotion_priority')->inRandomOrder()->limit(4)->get();
+        foreach ($productos as $product) {
+            if ($product->promotion_priority > 0) {
+                $promotion->record($request, 'product', $product, 'impressions');
+            }
+        }
+        foreach ($tiendasRecomendadas as $store) {
+            $promotion->record($request, 'store', $store, 'impressions');
+        }
+
         return view(
             'marketplace.index',
             compact(
@@ -245,6 +267,7 @@ class MarketplaceController extends Controller
                 'solicitudVendedor',
                 'ubicacionMapa',
                 'tiendasCercanas',
+                'tiendasRecomendadas',
                 'seccionSeleccionada'
             )
         );

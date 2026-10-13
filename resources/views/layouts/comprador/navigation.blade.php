@@ -7,6 +7,7 @@
         @auth
         <a href="{{ route('chat.index') }}" class="buyer-nav-link {{ request()->routeIs('chat.*') ? 'active' : '' }}"><x-market-icon name="chat"/>Mis mensajes</a>
         <a href="{{ route('apartados.index') }}" class="buyer-nav-link {{ request()->routeIs('apartados.*') ? 'active' : '' }}"><x-market-icon name="bookmark"/>Mis apartados</a>
+        <a href="{{ route('comprador.tiendas-seguidas') }}" class="buyer-nav-link {{ request()->routeIs('comprador.tiendas-seguidas') ? 'active' : '' }}"><x-market-icon name="store"/>Tiendas que sigo</a>
         <details data-nav-dropdown>
             <summary class="{{ request()->routeIs('comprador.favoritos*') ? 'active' : '' }}"><x-market-icon name="heart"/>Favoritos<x-market-icon name="chevron-down" class="nav-dropdown-arrow"/></summary>
             <div class="buyer-dropdown">
@@ -32,6 +33,9 @@
                     <a href="{{ route('vendedor.productos.index') }}">Productos de mi tienda</a>
                     <a href="{{ route('vendedor.mensajes.index') }}">Mensajes de mi tienda</a>
                     <a href="{{ route('vendedor.apartados.index') }}">Apartados recibidos</a>
+                    <a href="{{ route('vendedor.suscripcion.index') }}">Planes y promoción</a>
+                    <a href="{{ route('vendedor.herramientas.index') }}">Herramientas del negocio</a>
+                    <a href="{{ route('vendedor.estadisticas.index') }}">Estadísticas del negocio</a>
                 </div>
             </details>
         @endif
