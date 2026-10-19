@@ -87,8 +87,4 @@
 <details class="seller-card"><summary>¿Cuándo se activan los beneficios?</summary><p>Después de que Mercado Pago confirme un pago aprobado. Si una renovación falla, los beneficios terminan al vencer el periodo cubierto. Al cancelar la renovación conservas el tiempo que ya pagaste.</p></details>
 </div></section>
 @if($open && $subscription->status !== 'cancelled')<details class="seller-card subscription-cancel"><summary>{{ $subscription->status === 'pending' ? 'Cancelar solicitud pendiente' : 'Cancelar renovación automática' }}</summary><p class="seller-help">Se detendrán los próximos cobros. Los beneficios de un periodo ya pagado continúan hasta su vencimiento.</p><form method="POST" action="{{ route('vendedor.suscripcion.cancel', $subscription) }}">@csrf<label class="subscription-consent"><input type="checkbox" name="confirmar" value="1" required><span>Confirmo que quiero cancelar la renovación de {{ $currentPlan['name'] }}.</span></label><button class="seller-button secondary small" type="submit">Confirmar cancelación</button></form></details>@endif
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> c08ac48a2b1a27273a1dd16872fe105ad8b980f3
