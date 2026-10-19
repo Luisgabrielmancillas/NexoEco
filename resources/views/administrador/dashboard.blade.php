@@ -1,105 +1,36 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Admin Panel - Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
-            <!-- PANEL PRINCIPAL -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    👋 Bienvenido al panel de administración
-                </div>
-            </div>
-
-            <!-- CRUD USERS -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
-                            👥 Administradores Registrados
-                        </h3>
-
-                        <a href="#"
-                           class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                            + Nuevo usuario
-                        </a>
-                    </div>
-
-                    <div class="overflow-x-auto">
-
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-300">
-
-                            <thead class="text-xs uppercase bg-gray-100 dark:bg-gray-700">
-                                <tr>
-                                    <th class="px-4 py-3">ID</th>
-                                    <th class="px-4 py-3">Nombre</th>
-                                    <th class="px-4 py-3">Email</th>
-                                    <th class="px-4 py-3">Tipo</th>
-                                    <th class="px-4 py-3 text-right">Acciones</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                @forelse($users as $user)
-                                    <tr class="border-b dark:border-gray-700">
-
-                                        <td class="px-4 py-3">
-                                            {{ $user->id }}
-                                        </td>
-
-                                        <td class="px-4 py-3 font-medium text-gray-900 dark:text-white">
-                                            {{ $user->name }}
-                                        </td>
-
-                                        <td class="px-4 py-3">
-                                            {{ $user->email }}
-                                        </td>
-
-                                        <td class="px-4 py-3">
-                                            {{ $user->tipos_usuario->first()->nombre_tipo ?? 'Sin rol' }}
-                                        </td>
-
-                                        <td class="px-4 py-3 text-right space-x-2">
-
-                                            <a href="#" class="text-blue-500 hover:underline">
-                                                Editar
-                                            </a>
-
-                                            <a href="#" class="text-green-500 hover:underline">
-                                                Ver
-                                            </a>
-
-                                            <a href="#" class="text-red-500 hover:underline">
-                                                Eliminar
-                                            </a>
-
-                                        </td>
-
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center py-6 text-gray-400">
-                                            No hay usuarios registrados
-                                        </td>
-                                    </tr>
-                                @endforelse
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-            </div>
-
+@extends('layouts.admin-panel')
+@section('title', 'Administración · NexoEco')
+@section('admin-content')
+<div class="admin-heading"><span class="buyer-eyebrow">Administración de NexoEco</span><h1>Tu comunidad, en un vistazo</h1><p class="buyer-description">Usuarios, consultas, solicitudes y actividad del equipo.</p></div>
+<div class="admin-stats">
+    <a class="admin-stat" href="{{ route('admin.users.index') }}"><span>Usuarios registrados</span><strong>{{ $stats['usuarios'] }}</strong><small>{{ $stats['activos'] }} activos · {{ $stats['inactivos'] }} inactivos</small></a>
+    <a class="admin-stat" href="{{ route('admin.consultas.index') }}"><span>Consultas por atender</span><strong>{{ $stats['consultas'] }}</strong><small>Recibidas o en proceso</small></a>
+    <a class="admin-stat" href="{{ route('admin.solicitudes.index', ['estado' => 'en_revision']) }}"><span>Vendedores en revisión</span><strong>{{ $stats['solicitudes'] }}</strong><small>Documentación enviada</small></a>
+    <div class="admin-stat"><span>Productos publicados</span><strong>{{ $stats['productos'] }}</strong><small>{{ $stats['tiendas'] }} tiendas en el marketplace</small></div>
+</div>
+<div class="admin-columns">
+    <section class="buyer-panel"><h2>Registro de usuarios</h2><p>Altas de los últimos seis meses.</p>
+        @php($max = max(1, $months->max('total')))
+        <div class="admin-bars" role="img" aria-label="{{ $months->map(fn ($month) => $month['mes'].': '.$month['total'].' usuarios')->implode('; ') }}">
+            @foreach($months as $month)<div class="admin-bar"><strong>{{ $month['total'] }}</strong><div class="admin-bar-fill" style="height:{{ round($month['total'] / $max * 160) }}px;"></div><span>{{ $month['mes'] }}</span></div>@endforeach
         </div>
+    </section>
+    <section class="buyer-panel"><h2>Usuarios por rol</h2><p>Abre un rol para consultar sus cuentas.</p>
+        @foreach($roles as $role => $item)<div class="admin-role"><div class="buyer-row"><a class="buyer-text-link" href="{{ route('admin.users.index', ['rol' => $role]) }}">{{ $item['nombre'] }}</a><strong>{{ $item['total'] }}</strong></div><div class="admin-track"><div style="width:{{ $stats['usuarios'] ? min(100, round($item['total'] / $stats['usuarios'] * 100)) : 0 }}%;"></div></div></div>@endforeach
+        <p class="buyer-muted">Una cuenta puede tener varios roles. {{ $stats['sin_verificar'] }} cuentas tienen el correo pendiente de verificar.</p>
+    </section>
+</div>
+<section class="buyer-panel admin-activity-panel" id="acciones-recientes"><div class="buyer-row"><div><h2>Acciones recientes</h2><p>Cambios importantes del equipo · Hora de Ciudad de México.</p></div></div>
+    <div class="admin-activity-list">
+    @forelse($recentActivities as $activity)
+        <article class="admin-activity-item">
+            <span class="admin-activity-marker" aria-hidden="true"></span>
+            <div class="admin-activity-body"><h3>{{ $activity->accion }}</h3><p>{{ $activity->descripcion }}</p><div class="admin-activity-author"><strong>{{ $activity->nombre_actor }}</strong><span>{{ collect($activity->roles_actor)->map(fn ($role) => $role === 'administrador' ? 'Administrador' : 'Moderador')->implode(' · ') }}</span></div></div>
+            @php($fechaActividad = $activity->registrada_en->copy()->timezone('America/Mexico_City'))
+            <time datetime="{{ $fechaActividad->toIso8601String() }}">{{ $fechaActividad->format('d/m/Y') }}<span>{{ $fechaActividad->format('H:i:s') }}</span></time>
+        </article>
+    @empty<p class="buyer-muted">Aún no hay acciones registradas. La actividad del equipo aparecerá aquí a partir de ahora.</p>@endforelse
     </div>
-</x-app-layout>
+    {{ $recentActivities->links() }}
+</section>
+@endsection

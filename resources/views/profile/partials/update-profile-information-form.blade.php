@@ -1,64 +1,26 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+<section class="buyer-panel account-panel" id="datos-cuenta">
+    <div class="account-panel-heading"><span class="account-panel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2" stroke-linecap="round"/></svg></span><h2>Mis datos</h2></div>
+    <p>Actualiza tu nombre y el correo que utilizas para entrar a NexoEco.</p>
+    @if(session('status') === 'profile-updated')<div class="buyer-notice account-success" role="status">Tus datos se actualizaron correctamente.</div>@endif
+    @if(!$user->hasVerifiedEmail())
+        <div class="buyer-notice">
+            <h3>Verifica tu correo electrónico</h3>
+            <p>Introduce el código de 4 dígitos enviado a tu correo para completar la verificación.</p>
+            @if(session('status') === 'verification-code-sent')<p role="status">Enviamos un nuevo código a tu correo.</p>@endif
+            @if(session('status') === 'verification-send-failed')<p role="alert">No pudimos enviar el código. Inténtalo de nuevo.</p>@endif
+            <div class="buyer-row" style="margin-top:12px;">
+                <a class="buyer-button secondary" href="{{ route('verification.notice') }}">Introducir código</a>
+                <form method="POST" action="{{ route('verification.send') }}">@csrf<button type="submit" class="buyer-button secondary">Reenviar código</button></form>
+            </div>
         </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
+    @endif
+    <form method="POST" action="{{ route('profile.update') }}" class="buyer-form">
+        @csrf @method('PATCH')
+        <div class="account-fields">
+            <div class="buyer-field"><label for="name">Nombre completo</label><input id="name" name="name" type="text" value="{{ old('name', $user->nombre_completo ?: $user->name) }}" maxlength="150" required autocomplete="name" @if($errors->has('name')) aria-invalid="true" aria-describedby="name-error" @endif>@error('name')<p id="name-error" class="buyer-field-error" role="alert">{{ $message }}</p>@enderror</div>
+            <div class="buyer-field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" value="{{ old('email', $user->email) }}" maxlength="255" required autocomplete="email" @if($errors->has('email')) aria-invalid="true" aria-describedby="email-error" @endif>@error('email')<p id="email-error" class="buyer-field-error" role="alert">{{ $message }}</p>@enderror</div>
         </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
+        <p class="buyer-muted" style="margin-bottom:20px;">Si cambias tu correo, tendrás que verificar la nueva dirección.</p>
+        <button class="buyer-button" type="submit">Guardar mis datos</button>
     </form>
 </section>

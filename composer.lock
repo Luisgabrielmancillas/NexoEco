@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4f7470e65cfb90cd2662313d19707e8",
+    "content-hash": "a1eaae9ee67026c5e4887e0ab80c0c1b",
     "packages": [
         {
             "name": "brick/math",
@@ -2275,6 +2275,63 @@
                 }
             ],
             "time": "2026-01-02T08:56:05+00:00"
+        },
+        {
+            "name": "munafio/chatify",
+            "version": "2.0.0-beta.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/munafio/chatify.git",
+                "reference": "94ac24cc989ecad6f09c6690a290a0ee14da673b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/munafio/chatify/zipball/94ac24cc989ecad6f09c6690a290a0ee14da673b",
+                "reference": "94ac24cc989ecad6f09c6690a290a0ee14da673b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/sanctum": "^4.0",
+                "orchestra/testbench": "^10.0",
+                "phpunit/phpunit": "^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Chatify": "Chatify\\Facades\\ChatifyMessenger"
+                    },
+                    "providers": [
+                        "Chatify\\ChatifyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Chatify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Munaf A. Mahdi",
+                    "email": "munafaqeelmahdi@gmail.com"
+                }
+            ],
+            "description": "A Laravel package for real-time chat with conversation-based architecture.",
+            "homepage": "https://github.com/munafio/chatify",
+            "support": {
+                "issues": "https://github.com/munafio/chatify/issues",
+                "source": "https://github.com/munafio/chatify/tree/v2.0.0-beta.2"
+            },
+            "time": "2026-07-25T00:18:44+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -9908,7 +9965,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "munafio/chatify": 10
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

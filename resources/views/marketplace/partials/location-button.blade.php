@@ -1,0 +1,2 @@
+@php($locationLabel = $ubicacionComprador ? implode(', ', array_filter([$ubicacionComprador['colonia'] ?? null, $ubicacionComprador['ciudad'] ?? null])) : 'Agrega tu ubicación')
+<button type="button" class="market-location-button" data-dialog-open="buyer-location-dialog" aria-haspopup="dialog" aria-label="{{ $ubicacionComprador ? 'Cambiar ubicación: '.$locationLabel : 'Agregar mi ubicación' }}"><x-seller-icon name="pin"/><span><small>Tu ubicación</small><strong class="market-location-value">{{ $locationLabel }}</strong></span><x-market-icon name="chevron"/></button>

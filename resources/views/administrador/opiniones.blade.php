@@ -1,0 +1,7 @@
+@extends('layouts.admin-panel')
+@section('title', 'Opiniones de la comunidad · NexoEco')
+@section('admin-content')
+<div class="admin-heading"><span class="buyer-eyebrow">Administración · Comunidad</span><h1>Opiniones publicadas</h1><p class="buyer-description">Consulta las experiencias de los usuarios sobre tiendas y productos.</p></div><nav class="buyer-tabs"><a class="{{ !request('tipo') ? 'active' : '' }}" href="{{ route('admin.opiniones') }}">Todas</a>@foreach(['productos' => 'Productos', 'tiendas' => 'Tiendas'] as $tipo => $label)<a class="{{ request('tipo') === $tipo ? 'active' : '' }}" href="{{ route('admin.opiniones', ['tipo' => $tipo]) }}">{{ $label }}</a>@endforeach</nav>
+@forelse($opiniones as $opinion)<article class="buyer-panel"><div class="buyer-row"><div><h2><a href="{{ route($opinion->id_producto ? 'admin.productos.show' : 'admin.tiendas.show', $opinion->id_producto ? $opinion->producto : $opinion->tienda) }}#opiniones">{{ $opinion->producto?->nombre_producto ?? $opinion->tienda?->nombre_tienda }}</a></h2><p>{{ $opinion->usuario->nombre_completo ?: $opinion->usuario->name }} · {{ $opinion->created_at->format('d/m/Y') }}</p></div><span class="opinion-rating">{{ $opinion->calificacion }}/5 ★</span></div><p class="buyer-review-text">{{ $opinion->comentario }}</p></article>@empty<div class="buyer-empty"><h2>Aún no hay opiniones</h2><p>Las reseñas publicadas por los usuarios aparecerán aquí.</p></div>@endforelse
+{{ $opiniones->links() }}
+@endsection

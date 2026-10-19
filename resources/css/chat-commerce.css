@@ -1,0 +1,38 @@
+.commerce-page { padding-top: 28px; padding-bottom: 40px; }
+.commerce-eyebrow { color: #a37953; text-transform: uppercase; letter-spacing: .08em; font-size: 10px; font-weight: 700; }
+.commerce-connection { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; background: #f6faf7; border-color: #dbe8df; }
+.commerce-connection h2 { margin: 8px 0; }.commerce-connection p { max-width: 520px; font-size: 13px; }
+.commerce-connection-status { color: #498064; font-size: 12px; font-weight: 600; }
+.seller-nav { overflow-x: auto; scrollbar-width: thin; }.seller-nav a { flex-shrink: 0; white-space: nowrap; }
+.commerce-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.commerce-heading h1, .commerce-heading h2 { margin: 8px 0; }
+.commerce-heading p, .commerce-card p { color: var(--nexo-muted); line-height: 1.6; }
+.commerce-heading a, .commerce-card a:not(.seller-button) { color: var(--nexo-primary); font-weight: 700; }
+.commerce-list { display: grid; gap: 14px; margin-bottom: 20px; }
+.commerce-card { background: white; padding: 22px; border: 1px solid var(--nexo-border); border-radius: 18px; }
+.commerce-card small { overflow-wrap: anywhere; }
+.commerce-thread { display: flex; align-items: center; justify-content: space-between; gap: 15px; color: var(--nexo-text) !important; }
+.commerce-thread p { margin: 5px 0; }
+.commerce-badge { display: inline-block; border-radius: 30px; padding: 7px 13px; background: var(--nexo-primary-soft); color: var(--nexo-primary); font-size: 12px; font-weight: 700; }
+.commerce-alert { background: #fff0ea; padding: 12px; border-radius: 10px; margin-bottom: 15px; }
+.commerce-preline { white-space: pre-line; overflow-wrap: anywhere; }
+.commerce-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.commerce-consent { display: flex; align-items: flex-start; gap: 9px; margin-top: 14px; font-size: 13px; line-height: 1.6; }
+.commerce-consent input { margin-top: 4px; flex-shrink: 0; }
+.reservation-offer { margin-top: 20px; border-top: 1px solid var(--nexo-border); padding-top: 14px; }
+.reservation-offer h3 { margin: 0 0 8px; }
+.reservation-offer p, .reservation-offer details { font-size: 13px; line-height: 1.6; }
+.reservation-fields { margin-top: 14px; }
+.chat-room { max-width: 960px; margin: 0 auto; }
+.chat-status { font-size: 12px; margin: 0 0 12px; }
+.chat-history { display: block; margin: 0 auto 10px; color: var(--nexo-primary); font-size: 13px; }
+.chat-history[hidden], .reservation-fields[hidden] { display: none; }
+.chat-messages { height: min(55vh, 560px); min-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 14px 4px; }
+.chat-bubble { align-self: flex-start; max-width: 85%; padding: 10px 14px; border-radius: 14px; background: #f4f1eb; overflow-wrap: anywhere; }
+.chat-bubble.mine { align-self: flex-end; background: var(--nexo-primary-soft); }
+.chat-bubble p { white-space: pre-wrap; margin: 0 0 5px; color: var(--nexo-text); }
+.chat-bubble time { font-size: 10px; color: var(--nexo-muted); }
+.chat-compose { display: flex; align-items: flex-end; gap: 10px; padding-top: 16px; border-top: 1px solid var(--nexo-border); }
+.chat-compose textarea { width: 100%; min-width: 0; resize: vertical; border: 1px solid var(--nexo-border); border-radius: 12px; padding: 12px; font: inherit; }
+.chat-compose button:disabled { opacity: .6; }
+@media (max-width: 600px) { .commerce-card { padding: 15px; } .chat-compose { flex-direction: column; align-items: stretch; } .commerce-heading h1 { font-size: 25px; } .seller-nav { gap: 18px; } }

@@ -4,67 +4,66 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\UsuarioRolService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use RuntimeException;
+use Throwable;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
     public function create(): View
     {
         return view('auth.register');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, UsuarioRolService $roles): RedirectResponse
     {
-        $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255'
-            ],
-
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                'unique:' . User::class
-            ],
-
-            'password' => [
-                'required',
-                'confirmed',
-                Rules\Password::defaults()
-            ],
+        $data = $request->validate([
+            'nombre_completo' => ['required', 'string', 'max:150'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'tipo_registro' => ['sometimes', 'in:comprador'],
         ]);
 
-        $user = User::create([
-            'name' => trim($request->name),
+        try {
+            $user = DB::transaction(function () use ($data, $roles) {
+                $user = User::create([
+                    'name' => trim($data['nombre_completo']),
+                    'nombre_completo' => trim($data['nombre_completo']),
+                    'email' => $data['email'],
+                    'password' => $data['password'],
+                    'fecha_registro' => now(),
+                    'activo' => true,
+                ]);
+                $roles->asignarRolesRegistro($user, 'comprador');
 
-            'email' => strtolower(trim($request->email)),
-
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
+                return $user;
+            });
+        } catch (RuntimeException $exception) {
+            report($exception);
+            throw ValidationException::withMessages([
+                'nombre_completo' => 'No fue posible completar el registro. Intenta nuevamente.',
+            ]);
+        }
 
         Auth::login($user);
+        $request->session()->regenerate();
 
-        // Redirige al dashboard del comprador
-        return redirect()->route('comprador.dashboard');
+        try {
+            event(new Registered($user));
+        } catch (Throwable $exception) {
+            report($exception);
+
+            return redirect()->route('verification.notice')->with('status', 'verification-send-failed');
+        }
+
+        return redirect()->route('verification.notice');
     }
 }

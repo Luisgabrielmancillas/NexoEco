@@ -1,0 +1,44 @@
+.location-awareness { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 13px 16px; margin-top: 16px; border: 1px solid #E8E0D4; border-radius: 12px; background: #FFFCF8; }
+.location-awareness > div { flex: 1; display: flex; align-items: center; gap: 9px; min-width: 220px; }
+.location-awareness p { margin: 0; font-size: 11px; line-height: 1.6; color: #746456; }
+.location-awareness-dot { width: 7px; height: 7px; border-radius: 50%; background: #708262; flex-shrink: 0; }
+.location-awareness button { font-size: 11px; }
+.location-awareness [hidden], .store-route-dialog [hidden] { display: none !important; }
+.location-awareness.location-drifted { background: #FFF1DA; border-color: #E8C994; }
+.location-drifted .location-awareness-dot { background: #C27D19; }
+.nearby-section { margin-top: 36px; }
+.nearby-stores-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.nearby-store-card { min-width: 0; background: #FFFDF9; border: 1px solid #E8E0D4; border-radius: 18px; padding: 20px; }
+.nearby-store-heading { display: flex; align-items: center; gap: 14px; }
+.nearby-store-heading > div { min-width: 0; }
+.nearby-store-logo { width: 58px; height: 58px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: #F4EDE3; overflow: hidden; }
+.nearby-store-logo img { width: 100%; height: 100%; object-fit: contain; }
+.nearby-store-logo svg { width: 26px; height: 26px; color: #A77B57; }
+.nearby-distance { font-size: 10px; font-weight: 700; color: #617354; background: #EEF3E8; border-radius: 20px; padding: 4px 8px; display: inline-block; }
+.nearby-store-card h3 { font-size: 14px; font-weight: 750; line-height: 1.5; margin: 8px 0 4px; overflow-wrap: anywhere; }
+.nearby-store-card p { font-size: 11px; line-height: 1.5; color: #867466; margin: 0; }
+.nearby-store-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; border-top: 1px solid #F0E8DC; margin-top: 17px; padding-top: 14px; }
+.nearby-store-actions .buyer-button { min-height: 34px; padding: 8px 12px; font-size: 11px; }
+.nearby-store-actions .buyer-text-link { font-size: 11px; }
+.nearby-empty { display: flex; align-items: flex-start; gap: 18px; border: 1px dashed #DCCDBB; border-radius: 18px; padding: 26px; background: #FCF8F1; }
+.nearby-empty h3 { font-size: 16px; font-weight: 700; margin: 0 0 8px; }
+.nearby-empty p { font-size: 12px; line-height: 1.7; color: #847262; margin: 0 0 18px; }
+.directions-icon { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; flex-shrink: 0; border-radius: 12px; color: #8B694E; background: #EEE3D4; }
+.directions-icon svg { width: 22px; height: 22px; }
+.store-directions-card { display: flex; align-items: flex-start; gap: 16px; border: 1px solid #E6DAC9; border-radius: 16px; background: #FAF5ED; padding: 22px; margin: 22px 0; }
+.directions-content { min-width: 0; flex: 1; }
+.directions-content strong { display: block; font-size: 13px; line-height: 1.6; }
+.directions-content p { font-size: 11px; color: #837362; line-height: 1.7; margin: 5px 0 14px; }
+.directions-actions { display: flex; gap: 12px 18px; align-items: center; flex-wrap: wrap; }
+.directions-actions .buyer-button, .directions-actions .buyer-text-link { font-size: 11px; }
+.store-route-dialog { width: min(800px, calc(100% - 24px)); }
+.route-map { height: 330px; border: 1px solid #E5DACA; border-radius: 14px; background: #F3ECE2; isolation: isolate; }
+.route-status { font-size: 12px; line-height: 1.6; color: #776352; margin: 0 0 16px; }
+.route-summary { padding: 14px 16px; margin-top: 16px; border-radius: 12px; background: #F1F4E9; color: #52643E; font-size: 13px; font-weight: 650; line-height: 1.6; }
+.route-steps { margin-top: 24px; border-top: 1px solid #E8E0D4; padding-top: 18px; }
+.route-steps summary { font-size: 13px; font-weight: 700; cursor: pointer; }
+.route-steps ol { padding-left: 24px; margin: 16px 0 0; max-height: 270px; overflow: auto; }
+.route-steps li { padding: 8px 0 8px 4px; font-size: 12px; line-height: 1.6; color: #66584D; }
+.route-attribution { margin: 18px 0 0; font-size: 10px; color: #988572; }
+@media(max-width:1200px) { .nearby-stores-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width:600px) { .nearby-stores-grid { grid-template-columns: 1fr; } .nearby-store-card { padding: 17px; } .location-awareness { gap: 10px; padding: 12px; } .location-awareness > div { flex-basis: 100%; min-width: 0; } .nearby-empty { padding: 20px; gap: 12px; } .store-directions-card { padding: 17px; gap: 12px; } .directions-icon { width: 35px; height: 35px; } .route-map { height: 245px; } .directions-actions { align-items: flex-start; flex-direction: column; } }

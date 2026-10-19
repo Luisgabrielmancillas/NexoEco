@@ -25,7 +25,6 @@ class MercadoPagoConnectionController extends Controller
         return redirect()->away('https://auth.mercadopago.com/authorization?'.$query);
     }
 
-    
     public function callback(Request $request, MercadoPagoConnection $connection)
     {
         $attempt = $request->session()->pull('mp_oauth');

@@ -1,0 +1,8 @@
+@extends('layouts.admin-panel')
+@section('title', 'Responder consulta · NexoEco')
+@section('admin-content')
+<div class="admin-heading"><span class="buyer-eyebrow">Administración · Soporte</span><h1>Consulta #{{ $solicitud->id }}</h1><p class="buyer-description">{{ $solicitud->usuario->nombre_completo ?: $solicitud->usuario->name }} · {{ $solicitud->usuario->email }}</p></div>
+<div class="admin-columns"><section class="buyer-panel"><h2>{{ $solicitud->asunto }}</h2><p class="buyer-muted">Recibida {{ $solicitud->created_at->format('d/m/Y H:i') }}</p><div class="support-message"><h3>Mensaje del usuario</h3><p>{{ $solicitud->mensaje }}</p></div>@include('comprador.partials.support-messages')</section>
+<section class="buyer-panel"><h2>Responder al usuario</h2><p>La respuesta aparecerá en su consulta y recibirá un aviso en la campana.</p><form class="buyer-form" method="POST" action="{{ route('admin.consultas.reply', $solicitud) }}" style="margin-top:24px;">@csrf<div class="buyer-field"><label for="mensaje">Tu respuesta</label><textarea id="mensaje" name="mensaje" minlength="5" maxlength="4000" required>{{ old('mensaje') }}</textarea></div><div class="buyer-field"><label for="estado">Estado después de responder</label><select id="estado" name="estado"><option value="cerrada" @selected(old('estado', $solicitud->estado) === 'cerrada')>Resuelta</option><option value="en_proceso" @selected(old('estado', $solicitud->estado) === 'en_proceso')>En proceso</option></select></div><button class="buyer-button" type="submit">Enviar respuesta</button></form></section></div>
+<a class="buyer-text-link" href="{{ route('admin.consultas.index') }}">Volver a consultas</a>
+@endsection
