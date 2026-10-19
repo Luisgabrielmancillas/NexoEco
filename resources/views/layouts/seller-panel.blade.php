@@ -1,5 +1,4 @@
 @extends('layouts.base')
-<<<<<<< HEAD
 
 @push('styles')
 <style>
@@ -14,8 +13,6 @@
 </style>
 @endpush
 
-=======
->>>>>>> c08ac48a2b1a27273a1dd16872fe105ad8b980f3
 @section('site-header')
 <header class="market-header seller-header">
     <div class="nexo-container market-header-main">
