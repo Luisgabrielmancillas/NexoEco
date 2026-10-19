@@ -41,7 +41,6 @@
         @endforeach
     </div>
     <p class="subscription-footnote">Puedes cancelar la renovación desde aquí y conservar el periodo pagado. La promoción aumenta la visibilidad; los resultados dependen de las búsquedas y del interés de los compradores.</p>
-<<<<<<< HEAD
     
     <div id="comparar-planes" class="growth-table-wrap growth-section">
         <table class="growth-table growth-plan-comparison">
@@ -67,9 +66,6 @@
         </table>
     </div>
     <p class="growth-scroll-hint"><x-seller-icon name="arrow"/>Desliza la tabla para comparar los planes.</p>
-=======
-    <div id="comparar-planes" class="growth-table-wrap growth-section"><table class="growth-table growth-plan-comparison"><caption>Compara todos los beneficios <span>Elige lo que tu negocio necesita hoy.</span></caption><thead><tr><th scope="col">Funcionalidad</th><th scope="col">Impulso <small>$149 MXN/mes</small></th><th scope="col">Pro <small>$299 MXN/mes</small></th></tr></thead><tbody>@foreach(config('subscriptions.comparison') as [$feature, $impulso, $pro])<tr><th scope="row">{{ $feature }}</th><td>{{ $impulso }}</td><td>{{ $pro }}</td></tr>@endforeach</tbody></table></div><p class="growth-scroll-hint"><x-seller-icon name="arrow"/>Desliza la tabla para comparar los planes.</p>
->>>>>>> c08ac48a2b1a27273a1dd16872fe105ad8b980f3
 </section>
 @if($active)
 <nav class="growth-shortcuts growth-section" aria-label="Beneficios de tu plan"><a href="{{ route('vendedor.herramientas.index') }}">Configurar herramientas de chat y tienda ↗</a><a href="{{ route('vendedor.promociones.index') }}">Crear ofertas ↗</a><a href="{{ route('vendedor.estadisticas.index') }}">Estadísticas de interés comercial ↗</a></nav>
