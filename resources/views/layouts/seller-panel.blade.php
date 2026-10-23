@@ -1,4 +1,18 @@
 @extends('layouts.base')
+
+@push('styles')
+<style>
+    .nav-link-bloqueado {
+        opacity: 0.5 !important;
+        cursor: not-allowed !important;
+    }
+    .nav-link-bloqueado:hover {
+        color: inherit !important;
+        background-color: transparent !important;
+    }
+</style>
+@endpush
+
 @section('site-header')
 <header class="market-header seller-header">
     <div class="nexo-container market-header-main">
@@ -15,9 +29,14 @@
         <a href="{{ route('vendedor.mensajes.index') }}" class="{{ request()->routeIs('vendedor.mensajes.*', 'chat.show') ? 'active' : '' }}" @if(request()->routeIs('vendedor.mensajes.*', 'chat.show')) aria-current="page" @endif>Mensajes</a>
         <a href="{{ route('vendedor.apartados.index') }}" class="{{ request()->routeIs('vendedor.apartados.*', 'vendedor.mercadopago.*') ? 'active' : '' }}">Apartados recibidos</a>
         <a href="{{ route('vendedor.suscripcion.index') }}" class="{{ request()->routeIs('vendedor.suscripcion.*') ? 'active' : '' }}" @if(request()->routeIs('vendedor.suscripcion.*')) aria-current="page" @endif>Planes y promoción</a>
-        <a href="{{ route('vendedor.herramientas.index') }}" class="{{ request()->routeIs('vendedor.herramientas.*', 'vendedor.novedades.*', 'vendedor.calendario') ? 'active' : '' }}">Herramientas</a>
+        
+        @php
+            $tieneSuscripcion = auth()->user()->subscription?->entitled() ?? false;
+        @endphp
+        
+        <a href="{{ $tieneSuscripcion ? route('vendedor.herramientas.index') : '#' }}" class="{{ request()->routeIs('vendedor.herramientas.*', 'vendedor.novedades.*', 'vendedor.calendario') ? 'active' : '' }} {{ !$tieneSuscripcion ? 'nav-link-bloqueado' : '' }}" @if(!$tieneSuscripcion) title="Solo disponible en planes de paga" onclick="event.preventDefault(); alert('Esta herramienta es exclusiva de los planes Impulso y Pro. ¡Mejora tu plan para usarla!');" @endif>Herramientas @if(!$tieneSuscripcion) <span aria-hidden="true" style="font-size: 0.8em; margin-left: 3px;">🔒</span> @endif</a>
         <a href="{{ route('vendedor.promociones.index') }}" class="{{ request()->routeIs('vendedor.promociones.*') ? 'active' : '' }}">Ofertas</a>
-        <a href="{{ route('vendedor.estadisticas.index') }}" class="{{ request()->routeIs('vendedor.estadisticas.*') ? 'active' : '' }}">Estadísticas</a>
+        <a href="{{ $tieneSuscripcion ? route('vendedor.estadisticas.index') : '#' }}" class="{{ request()->routeIs('vendedor.estadisticas.*') ? 'active' : '' }} {{ !$tieneSuscripcion ? 'nav-link-bloqueado' : '' }}" @if(!$tieneSuscripcion) title="Solo disponible en planes de paga" onclick="event.preventDefault(); alert('Esta herramienta es exclusiva de los planes Impulso y Pro. ¡Mejora tu plan para usarla!');" @endif>Estadísticas @if(!$tieneSuscripcion) <span aria-hidden="true" style="font-size: 0.8em; margin-left: 3px;">🔒</span> @endif</a>
     </nav>
 </header>
 @endsection

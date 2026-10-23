@@ -6,6 +6,22 @@ return [
     'webhook_secret' => env('MERCADOPAGO_SUBSCRIPTIONS_WEBHOOK_SECRET'),
     'collector_id' => env('MERCADOPAGO_SUBSCRIPTIONS_COLLECTOR_ID'),
     'plans' => [
+        'gratis' => [
+            'name' => 'Básico',
+            'price' => 0,
+            'product_limit' => 0, // 0 porque no tiene productos promocionados
+            'priority' => 0,
+            'description' => 'Para negocios que apenas comienzan su camino digital.',
+            'quick_reply_limit' => 0,
+            'automation_limit' => 0,
+            'pin_limit' => 0,
+            'offer_limit' => 0,
+            'benefits' => [
+            'Tienda básica en la plataforma',
+            'Límite de catálogo sin costo',
+            'Soporte estándar'
+        ],
+        ],
         'impulso' => [
             'name' => 'Impulso', 'price' => 149, 'product_limit' => 5, 'priority' => 1,
             'description' => 'Para negocios que buscan más clientes.',
@@ -20,12 +36,20 @@ return [
         ],
     ],
     'comparison' => [
-        ['Productos promocionados', '5', '20'], ['Prioridad en búsquedas', 'Media', 'Alta'],
-        ['Tienda en recomendaciones', 'Sí', 'Preferente'], ['Insignia de patrocinado', 'Sí', 'Sí'],
-        ['Estadísticas de visitas', 'Básicas', 'Avanzadas'], ['Estadísticas de contactos por chat', 'Sí', 'Sí'],
-        ['Respuestas rápidas en chat', '5', 'Ilimitadas'], ['Mensajes automáticos', '1 de bienvenida', 'Bienvenida y fuera de horario'],
-        ['Personalización de tienda', 'Básica', 'Avanzada'], ['Productos fijados en tienda', '3', '10'],
-        ['Promociones especiales', '3 activas', 'Ilimitadas'], ['Estadísticas de apartados', 'Básicas', 'Detalladas'],
-        ['Programar promociones y novedades', '—', 'Sí'], ['Reportes descargables', '—', 'Sí'], ['Calendario y recordatorios de apartados', '—', 'Sí'],
-    ],
+            ['Productos promocionados', '0', '5', '20'],
+            ['Prioridad en búsquedas', 'Ninguna', 'Media', 'Alta'],
+            ['Tienda en recomendaciones', 'No', 'Sí', 'Preferente'],
+            ['Insignia de patrocinado', 'No', 'Sí', 'Sí'],
+            ['Estadísticas de visitas', 'Básicas', 'Básicas', 'Avanzadas'],
+            ['Estadísticas de contactos por chat', 'No', 'Sí', 'Sí'],
+            ['Respuestas rápidas en chat', '0', '5', 'Ilimitadas'],
+            ['Mensajes automáticos', 'No', '1 de bienvenida', 'Bienvenida y fuera de horario'],
+            ['Personalización de tienda', 'Básica', 'Básica', 'Avanzada'],
+            ['Productos fijados en tienda', '0', '3', '10'],
+            ['Promociones especiales', '0', '3 activas', 'Ilimitadas'],
+            ['Estadísticas de apartados', 'No', 'Básicas', 'Detalladas'],
+            ['Programar promociones y novedades', 'No', '-', 'Sí'],
+            ['Reportes descargables', 'No', '-', 'Sí'],
+            ['Calendario y recordatorios de apartados', 'No', '-', 'Sí'],
+        ],
 ];

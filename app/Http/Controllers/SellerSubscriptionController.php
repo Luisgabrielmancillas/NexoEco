@@ -132,4 +132,41 @@ class SellerSubscriptionController extends Controller
 
         return response()->json(['received' => true]);
     }
+    public function activarPlanGratuito(Request $request)
+    {
+        // 1. Verificamos que tenga tienda antes de activar el plan (igual que en checkout)
+        if (! $request->user()->tiendas()->exists()) {
+            return redirect()->route('vendedor.tienda.create')->withErrors(['suscripcion' => 'Primero crea tu tienda para activar un plan.']);
+        }
+
+        // 2. Protegemos la base de datos con una transacción
+        DB::transaction(function () use ($request) {
+            User::whereKey($request->user()->id)->lockForUpdate()->firstOrFail();
+            
+            // 3. Revisamos si ya tiene una suscripción que no esté cancelada
+            $open = SellerSubscription::where('user_id', $request->user()->id)
+                ->where(fn ($q) => $q->where('status', '!=', 'cancelled')->orWhere('paid_until', '>', now()))
+                ->latest()
+                ->first();
+
+            if ($open && $open->plan !== 'gratis') {
+                throw ValidationException::withMessages(['suscripcion' => 'Ya tienes una suscripción de pago. Cancela su renovación y espera a que termine el periodo para cambiar al plan gratuito.']);
+            }
+
+            // 4. Si no tiene suscripción activa, le creamos el plan gratis
+            if (! $open) {
+                SellerSubscription::create([
+                    'user_id' => $request->user()->id, 
+                    'plan' => 'gratis', 
+                    'amount' => 0, 
+                    'currency' => 'MXN',
+                    'status' => 'authorized', // Lo marcamos como activo
+                    'paid_until' => now()->addYears(10) // Vigencia de 10 años
+                ]);
+            }
+        });
+
+        // 5. Redirigimos con mensaje de éxito
+        return redirect()->route('vendedor.suscripcion.index')->with('success', '¡Has activado el plan Básico (Gratis) con éxito!');
+    }
 }

@@ -18,25 +18,54 @@
 </section>
 @if(!$available)<div class="subscription-availability" role="status"><x-seller-icon name="clock"/><div><strong>Conoce los planes. Contratación próximamente.</strong><p>Estamos preparando los pagos de suscripciones. Por ahora puedes comparar los beneficios.</p></div></div>@endif
 <section id="planes" aria-labelledby="plans-title">
-    <div class="seller-section-title"><div><span class="buyer-eyebrow">A tu ritmo, con más posibilidades</span><h2 id="plans-title">Un plan para tu siguiente paso</h2><p>Dos opciones claras. Precios en pesos mexicanos, cobro mensual y renovación automática.</p></div><span class="subscription-period"><span class="growth-live-dot" aria-hidden="true"></span>Mensual · MXN</span></div>
+    <div class="seller-section-title"><div><span class="buyer-eyebrow">A tu ritmo, con más posibilidades</span><h2 id="plans-title">Un plan para tu siguiente paso</h2><p>Opciones claras pensadas en ti. Precios en pesos mexicanos.</p></div><span class="subscription-period"><span class="growth-live-dot" aria-hidden="true"></span>Mensual · MXN</span></div>
     <div class="subscription-plans">
         @foreach($plans as $key => $plan)
         <article class="seller-card subscription-plan {{ $key === 'pro' ? 'pro' : '' }}">
-            <div class="subscription-plan-top"><span class="seller-icon"><x-seller-icon name="{{ $key === 'pro' ? 'sparkles' : 'chart' }}"/></span><span class="subscription-tag">{{ $key === 'pro' ? 'Más alcance. Más control.' : 'Tu primer impulso' }}</span></div>
+            <div class="subscription-plan-top"><span class="seller-icon"><x-seller-icon name="{{ $key === 'pro' ? 'sparkles' : 'chart' }}"/></span><span class="subscription-tag">{{ $key === 'pro' ? 'Más alcance. Más control.' : ($key === 'impulso' ? 'Tu primer impulso' : 'Para iniciar') }}</span></div>
             <h3>{{ $plan['name'] }}</h3><p class="subscription-description">{{ $plan['description'] }}</p>
             <div class="subscription-price">${{ number_format($plan['price'], 0) }}<span> MXN / mes</span></div>
-            <div class="subscription-plan-highlight"><strong>{{ $plan['product_limit'] }}</strong><span>productos promocionados<br><small>{{ $key === 'pro' ? 'Prioridad alta en búsquedas' : 'Prioridad media en búsquedas' }}</small></span><x-seller-icon name="arrow"/></div>
+            <div class="subscription-plan-highlight"><strong>{{ $plan['product_limit'] }}</strong><span>productos promocionados<br><small>{{ $key === 'pro' ? 'Prioridad alta en búsquedas' : ($key === 'impulso' ? 'Prioridad media en búsquedas' : 'Sin promociones activas') }}</small></span><x-seller-icon name="arrow"/></div>
             <ul class="subscription-benefits">@foreach($plan['benefits'] as $benefit)<li><span aria-hidden="true"><x-seller-icon name="check"/></span>{{ $benefit }}</li>@endforeach</ul>
-            @if(!$tienda)<a class="seller-button {{ $key === 'impulso' ? 'secondary' : '' }}" href="{{ route('vendedor.tienda.create') }}">Crea tu tienda para comenzar</a>
+            @if(!$tienda)<a class="seller-button {{ $key === 'impulso' || $key === 'gratis' ? 'secondary' : '' }}" href="{{ route('vendedor.tienda.create') }}">Crea tu tienda para comenzar</a>
             @elseif($open)<div class="subscription-plan-current">{{ $subscription->plan === $key ? ($active ? 'Tu plan actual' : 'Solicitud actual') : 'Disponible al terminar tu suscripción actual' }}</div>
                 @if($subscription->plan === $key && $subscription->status === 'pending' && $available)<form method="POST" action="{{ route('vendedor.suscripcion.checkout') }}">@csrf<input type="hidden" name="plan" value="{{ $key }}"><label class="subscription-consent"><input type="checkbox" name="acepto_renovacion" value="1" required><span>Acepto el cobro de ${{ $plan['price'] }} MXN al mes y la renovación automática hasta cancelar.</span></label><button type="submit" class="seller-button">Continuar contratación</button></form>@endif
-            @elseif($available)<form method="POST" action="{{ route('vendedor.suscripcion.checkout') }}">@csrf<input type="hidden" name="plan" value="{{ $key }}"><label class="subscription-consent"><input type="checkbox" name="acepto_renovacion" value="1" required><span>Acepto el cobro de ${{ $plan['price'] }} MXN al mes y la renovación automática hasta cancelar.</span></label><button class="seller-button {{ $key === 'impulso' ? 'secondary' : '' }}" type="submit">Elegir {{ $plan['name'] }} <span aria-hidden="true">↗</span></button></form>
+            @elseif($available)
+                @if($key === 'gratis')
+                    <form method="POST" action="{{ route('vendedor.suscripcion.gratis') }}">@csrf<button class="seller-button secondary" type="submit">Empezar {{ $plan['name'] }}</button></form>
+                @else
+                    <form method="POST" action="{{ route('vendedor.suscripcion.checkout') }}">@csrf<input type="hidden" name="plan" value="{{ $key }}"><label class="subscription-consent"><input type="checkbox" name="acepto_renovacion" value="1" required><span>Acepto el cobro de ${{ $plan['price'] }} MXN al mes y la renovación automática hasta cancelar.</span></label><button class="seller-button {{ $key === 'impulso' ? 'secondary' : '' }}" type="submit">Elegir {{ $plan['name'] }} <span aria-hidden="true">↗</span></button></form>
+                @endif
             @else<button class="seller-button secondary" type="button" disabled>Disponible próximamente</button>@endif
         </article>
         @endforeach
     </div>
     <p class="subscription-footnote">Puedes cancelar la renovación desde aquí y conservar el periodo pagado. La promoción aumenta la visibilidad; los resultados dependen de las búsquedas y del interés de los compradores.</p>
-    <div id="comparar-planes" class="growth-table-wrap growth-section"><table class="growth-table growth-plan-comparison"><caption>Compara todos los beneficios <span>Elige lo que tu negocio necesita hoy.</span></caption><thead><tr><th scope="col">Funcionalidad</th><th scope="col">Impulso <small>$149 MXN/mes</small></th><th scope="col">Pro <small>$299 MXN/mes</small></th></tr></thead><tbody>@foreach(config('subscriptions.comparison') as [$feature, $impulso, $pro])<tr><th scope="row">{{ $feature }}</th><td>{{ $impulso }}</td><td>{{ $pro }}</td></tr>@endforeach</tbody></table></div><p class="growth-scroll-hint"><x-seller-icon name="arrow"/>Desliza la tabla para comparar los planes.</p>
+    
+    <div id="comparar-planes" class="growth-table-wrap growth-section">
+        <table class="growth-table growth-plan-comparison">
+            <caption>Compara todos los beneficios <span>Elige lo que tu negocio necesita hoy.</span></caption>
+            <thead>
+                <tr>
+                    <th scope="col">Funcionalidad</th>
+                    <th scope="col">Básico <small>Gratis</small></th>
+                    <th scope="col">Impulso <small>$149 MXN/mes</small></th>
+                    <th scope="col">Pro <small>$299 MXN/mes</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(config('subscriptions.comparison') as [$feature, $gratis, $impulso, $pro])
+                <tr>
+                    <th scope="row">{{ $feature }}</th>
+                    <td>{{ $gratis }}</td>
+                    <td>{{ $impulso }}</td>
+                    <td>{{ $pro }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <p class="growth-scroll-hint"><x-seller-icon name="arrow"/>Desliza la tabla para comparar los planes.</p>
 </section>
 @if($active)
 <nav class="growth-shortcuts growth-section" aria-label="Beneficios de tu plan"><a href="{{ route('vendedor.herramientas.index') }}">Configurar herramientas de chat y tienda ↗</a><a href="{{ route('vendedor.promociones.index') }}">Crear ofertas ↗</a><a href="{{ route('vendedor.estadisticas.index') }}">Estadísticas de interés comercial ↗</a></nav>
