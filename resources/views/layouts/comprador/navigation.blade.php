@@ -24,6 +24,7 @@
                 <a href="{{ route('comprador.soporte', 'contacto') }}">Contacto</a>
             </div>
         </details>
+        
         <div class="buyer-nav-account-actions">
         @if(auth()->user()->tieneTipo('vendedor'))
             <details data-nav-dropdown class="buyer-store-menu">
@@ -48,6 +49,7 @@
         <a href="{{ route('marketplace.index') }}#tiendas" class="buyer-nav-link"><x-market-icon name="store"/>Explorar tiendas</a>
         <a href="{{ route('marketplace.index') }}#productos" class="buyer-nav-link"><x-market-icon name="bags"/>Ver productos</a>
         <a href="{{ route('vendedor.register') }}" class="buyer-nav-link buyer-store-link"><x-market-icon name="store"/>Vende con nosotros</a>
+        <a href="{{ route('conocenos') }}" class="buyer-nav-link"><x-market-icon name="info"/>Conócenos</a>
         <div class="market-side-guest"><p>Descubre negocios de tu comunidad y guarda tus favoritos.</p><a href="{{ route('login') }}" class="buyer-button">Iniciar sesión</a><a href="{{ route('register') }}" class="buyer-text-link">Crear cuenta</a></div>
         @endauth
         </div>
