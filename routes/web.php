@@ -614,45 +614,72 @@ Route::middleware(['auth'])->group(function () {
     |
     */
 
-    Route::prefix('vendedor')
+Route::prefix('vendedor')
         ->name('vendedor.')
         ->middleware(['verified', 'seller'])
         ->group(function () {
+            
+            // ==========================================
+            // RUTAS GRATUITAS (Disponibles para todos)
+            // ==========================================
             Route::get('/dashboard', [\App\Http\Controllers\SellerStoreController::class, 'dashboard'])->name('dashboard');
+            
+            // Suscripción
             Route::get('/suscripcion', [\App\Http\Controllers\SellerSubscriptionController::class, 'index'])->name('suscripcion.index');
-            Route::get('/herramientas', [\App\Http\Controllers\SellerToolsController::class, 'index'])->name('herramientas.index');
-            Route::post('/herramientas/respuestas', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.store');
-            Route::put('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->whereNumber('reply')->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.update');
-            Route::delete('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'deleteReply'])->whereNumber('reply')->name('herramientas.respuestas.destroy');
-            Route::put('/herramientas/automatizaciones', [\App\Http\Controllers\SellerToolsController::class, 'automation'])->middleware('throttle:20,1,seller-automations')->name('herramientas.automatizaciones');
-            Route::put('/herramientas/personalizacion', [\App\Http\Controllers\SellerToolsController::class, 'design'])->middleware('throttle:20,1,seller-design')->name('herramientas.personalizacion');
-            Route::post('/herramientas/fijados/{producto}', [\App\Http\Controllers\SellerToolsController::class, 'pin'])->whereNumber('producto')->middleware('throttle:30,1,seller-pins')->name('herramientas.fijados');
-            Route::put('/mensajes/{chat}/negociacion', [\App\Http\Controllers\SellerToolsController::class, 'negotiation'])->whereNumber('chat')->middleware('throttle:30,1,seller-negotiations')->name('mensajes.negociacion');
-            Route::put('/apartados/{apartado}/seguimiento', [\App\Http\Controllers\SellerToolsController::class, 'fulfillment'])->middleware('throttle:30,1,seller-fulfillment')->name('apartados.seguimiento');
-            Route::get('/calendario', [\App\Http\Controllers\SellerToolsController::class, 'calendar'])->name('calendario');
-            Route::get('/promociones', [\App\Http\Controllers\SellerOfferController::class, 'index'])->name('promociones.index');
-            Route::post('/promociones', [\App\Http\Controllers\SellerOfferController::class, 'save'])->middleware('throttle:20,1,seller-offers')->name('promociones.store');
-            Route::put('/promociones/{offer}', [\App\Http\Controllers\SellerOfferController::class, 'save'])->whereNumber('offer')->middleware('throttle:20,1,seller-offers')->name('promociones.update');
-            Route::delete('/promociones/{offer}', [\App\Http\Controllers\SellerOfferController::class, 'disable'])->whereNumber('offer')->name('promociones.destroy');
-            Route::get('/estadisticas', [\App\Http\Controllers\SellerAnalyticsController::class, 'index'])->name('estadisticas.index');
-            Route::get('/estadisticas/reporte', [\App\Http\Controllers\SellerAnalyticsController::class, 'export'])->middleware('throttle:5,1,seller-reports')->name('estadisticas.export');
-            Route::get('/novedades', [\App\Http\Controllers\StoreAudienceController::class, 'index'])->name('novedades.index');
-            Route::post('/novedades', [\App\Http\Controllers\StoreAudienceController::class, 'save'])->middleware('throttle:5,1,seller-updates')->name('novedades.store');
-            Route::delete('/novedades/{update}', [\App\Http\Controllers\StoreAudienceController::class, 'destroy'])->whereNumber('update')->name('novedades.destroy');
             Route::post('/suscripcion/contratar', [\App\Http\Controllers\SellerSubscriptionController::class, 'checkout'])->middleware('throttle:5,1,subscription-checkout')->name('suscripcion.checkout');
             Route::get('/suscripcion/{subscription}/retorno', [\App\Http\Controllers\SellerSubscriptionController::class, 'returned'])->middleware('throttle:10,1,subscription-return')->name('suscripcion.return');
             Route::post('/suscripcion/{subscription}/actualizar', [\App\Http\Controllers\SellerSubscriptionController::class, 'sync'])->middleware('throttle:10,1,subscription-sync')->name('suscripcion.sync');
             Route::post('/suscripcion/{subscription}/cancelar', [\App\Http\Controllers\SellerSubscriptionController::class, 'cancel'])->middleware('throttle:5,1,subscription-cancel')->name('suscripcion.cancel');
             Route::post('/suscripcion/productos/{producto}', [\App\Http\Controllers\SellerSubscriptionController::class, 'promote'])->whereNumber('producto')->middleware('throttle:30,1,subscription-products')->name('suscripcion.promote');
+            
+            // Ofertas / Promociones
+            Route::get('/promociones', [\App\Http\Controllers\SellerOfferController::class, 'index'])->name('promociones.index');
+            Route::post('/promociones', [\App\Http\Controllers\SellerOfferController::class, 'save'])->middleware('throttle:20,1,seller-offers')->name('promociones.store');
+            Route::put('/promociones/{offer}', [\App\Http\Controllers\SellerOfferController::class, 'save'])->whereNumber('offer')->middleware('throttle:20,1,seller-offers')->name('promociones.update');
+            Route::delete('/promociones/{offer}', [\App\Http\Controllers\SellerOfferController::class, 'disable'])->whereNumber('offer')->name('promociones.destroy');
+            
+            // Novedades, Calendario y Acciones de Chat/Apartados (Gratis)
+            Route::get('/novedades', [\App\Http\Controllers\StoreAudienceController::class, 'index'])->name('novedades.index');
+            Route::post('/novedades', [\App\Http\Controllers\StoreAudienceController::class, 'save'])->middleware('throttle:5,1,seller-updates')->name('novedades.store');
+            Route::delete('/novedades/{update}', [\App\Http\Controllers\StoreAudienceController::class, 'destroy'])->whereNumber('update')->name('novedades.destroy');
+            Route::get('/calendario', [\App\Http\Controllers\SellerToolsController::class, 'calendar'])->name('calendario');
+            Route::put('/mensajes/{chat}/negociacion', [\App\Http\Controllers\SellerToolsController::class, 'negotiation'])->whereNumber('chat')->middleware('throttle:30,1,seller-negotiations')->name('mensajes.negociacion');
+            Route::put('/apartados/{apartado}/seguimiento', [\App\Http\Controllers\SellerToolsController::class, 'fulfillment'])->middleware('throttle:30,1,seller-fulfillment')->name('apartados.seguimiento');
+            
+            // Tienda
             Route::get('/tienda/crear', [\App\Http\Controllers\SellerStoreController::class, 'create'])->name('tienda.create');
             Route::post('/tienda', [\App\Http\Controllers\SellerStoreController::class, 'store'])->name('tienda.store');
             Route::get('/tienda/editar', [\App\Http\Controllers\SellerStoreController::class, 'edit'])->name('tienda.edit');
             Route::put('/tienda', [\App\Http\Controllers\SellerStoreController::class, 'update'])->name('tienda.update');
+            
+            // Productos
             Route::get('/productos', [\App\Http\Controllers\SellerProductController::class, 'index'])->name('productos.index');
             Route::get('/productos/crear', [\App\Http\Controllers\SellerProductController::class, 'create'])->name('productos.create');
             Route::post('/productos', [\App\Http\Controllers\SellerProductController::class, 'store'])->name('productos.store');
             Route::get('/productos/{producto}/editar', [\App\Http\Controllers\SellerProductController::class, 'edit'])->whereNumber('producto')->name('productos.edit');
             Route::put('/productos/{producto}', [\App\Http\Controllers\SellerProductController::class, 'update'])->whereNumber('producto')->name('productos.update');
+
+
+            // ==========================================
+            // RUTAS DE PAGA (Protegidas por el middleware)
+            // ==========================================
+            Route::middleware(['check.suscripcion'])->group(function () {
+                
+                // SOLO Herramientas
+                Route::get('/herramientas', [\App\Http\Controllers\SellerToolsController::class, 'index'])->name('herramientas.index');
+                Route::post('/herramientas/respuestas', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.store');
+                Route::put('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->whereNumber('reply')->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.update');
+                Route::delete('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'deleteReply'])->whereNumber('reply')->name('herramientas.respuestas.destroy');
+                Route::put('/herramientas/automatizaciones', [\App\Http\Controllers\SellerToolsController::class, 'automation'])->middleware('throttle:20,1,seller-automations')->name('herramientas.automatizaciones');
+                Route::put('/herramientas/personalizacion', [\App\Http\Controllers\SellerToolsController::class, 'design'])->middleware('throttle:20,1,seller-design')->name('herramientas.personalizacion');
+                Route::post('/herramientas/fijados/{producto}', [\App\Http\Controllers\SellerToolsController::class, 'pin'])->whereNumber('producto')->middleware('throttle:30,1,seller-pins')->name('herramientas.fijados');
+                
+                // SOLO Estadísticas
+                Route::get('/estadisticas', [\App\Http\Controllers\SellerAnalyticsController::class, 'index'])->name('estadisticas.index');
+                Route::get('/estadisticas/reporte', [\App\Http\Controllers\SellerAnalyticsController::class, 'export'])->middleware('throttle:5,1,seller-reports')->name('estadisticas.export');
+                
+            });
+
         });
 
     /*
