@@ -1,0 +1,85 @@
+@import './design-tokens.css';
+@import './action-layout.css';
+
+:root {
+    color-scheme: light;
+    --nexo-radius-sm: 10px;
+    --nexo-radius: 16px;
+    --nexo-radius-lg: 22px;
+    --nexo-shadow: 0 3px 12px rgb(var(--color-text-primary-rgb) / .06);
+    --nexo-shadow-hover: 0 8px 24px rgb(var(--color-text-primary-rgb) / .10);
+    --motion-duration: 180ms;
+    --motion-easing: cubic-bezier(.2, .75, .25, 1);
+}
+
+:where(body) { background: var(--color-background); color: var(--color-text-primary); }
+:where(a, button, input, textarea, select, summary) {
+    transition: color var(--motion-duration) var(--motion-easing), background-color var(--motion-duration) var(--motion-easing), border-color var(--motion-duration) var(--motion-easing), box-shadow var(--motion-duration) var(--motion-easing);
+}
+:where(input, textarea, select) { accent-color: var(--color-primary); caret-color: var(--color-primary); }
+:where(input, textarea)::placeholder { color: var(--color-text-muted); opacity: 1; }
+:root body :is(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 2px var(--color-surface);
+}
+:root body :is(button, input, textarea, select):disabled {
+    cursor: not-allowed;
+    opacity: .65;
+}
+:where([aria-busy="true"]) { cursor: progress; }
+:where(dialog)::backdrop { background: rgb(var(--color-text-primary-rgb) / .5); }
+::selection { background: var(--color-primary-subtle); color: var(--color-primary-900); }
+
+/* Preserve the optional dark presentation of the existing Tailwind layouts. */
+.dark { color-scheme: dark; }
+.dark :where(.bg-white) { background-color: var(--color-dark-raised); }
+.dark :where(.text-primary-700) { color: var(--color-primary-300); }
+:root .dark :is(.dark\:text-gray-400, .dark\:text-gray-500) { color: var(--color-dark-muted); }
+.dark :is(input, textarea)::placeholder { color: var(--color-dark-muted); }
+
+/* Shared primitives for the pre-existing Blade/Tailwind components. */
+.ds-primary-button { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-on-primary); }
+.ds-primary-button:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+.ds-primary-button:active { background: var(--color-primary-active); }
+.ds-secondary-button { background: var(--color-surface); border-color: var(--color-border-strong); color: var(--color-text-secondary); }
+.ds-secondary-button:hover { background: var(--color-primary-soft); border-color: var(--color-primary); color: var(--color-primary-text); }
+.ds-secondary-button:active { background: var(--color-primary-subtle); }
+.ds-danger-button { background: var(--color-danger); border-color: var(--color-danger); color: var(--color-on-primary); }
+.ds-danger-button:hover { background: var(--color-danger-hover); border-color: var(--color-danger-hover); }
+.ds-danger-button:active { background: var(--color-danger-hover); }
+.dark .ds-secondary-button { background: var(--color-dark-raised); color: var(--color-dark-text); }
+.buyer-nav .active { font-weight: 750; box-shadow: inset 3px 0 var(--color-primary); }
+.buyer-tabs a.active { box-shadow: inset 0 -2px var(--color-primary); }
+
+.buyer-notice[role="alert"], .commerce-alert[role="alert"], .seller-notice[role="alert"], .mod-notice[role="alert"] {
+    background: var(--color-danger-soft);
+    border-color: var(--color-danger-border);
+    color: var(--color-danger-text);
+}
+.buyer-notice.account-success, .commerce-alert[role="status"] {
+    background: var(--color-success-soft);
+    border-color: var(--color-success-border);
+    color: var(--color-success-text);
+}
+.commerce-alert[role="alert"] p, .commerce-alert[role="status"] p { color: inherit; }
+:root :is(input, textarea, select)[aria-invalid="true"], :root :is(input, textarea, select):user-invalid { border-color: var(--color-danger); }
+
+/* Recolor only the supplied, transparent brand mark; its geometry and file stay intact. */
+.nexo-logo { display: inline-block; }
+.nexo-logo img { display: block; width: 100%; height: auto; }
+@supports (mask-image: url("")) {
+    .nexo-logo { background: var(--color-primary); mask-image: var(--nexo-logo-image); mask-size: contain; mask-position: center; mask-repeat: no-repeat; }
+    .nexo-logo img { opacity: 0; }
+}
+.dark .nexo-navigation-logo .nexo-logo-word { fill: var(--color-dark-text); }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

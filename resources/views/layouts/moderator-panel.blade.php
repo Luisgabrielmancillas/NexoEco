@@ -36,4 +36,11 @@
         @yield('moderator-content')
     </main>
 </div>
+<dialog class="mod-delete-dialog" data-mod-confirm-dialog aria-labelledby="mod-delete-title" aria-describedby="mod-delete-description">
+    <div class="mod-delete-heading"><span class="mod-delete-icon"><x-mod-icon name="flag"/></span><button type="button" data-mod-confirm-cancel aria-label="Cerrar confirmación"><x-mod-icon name="close"/></button></div>
+    <h2 id="mod-delete-title">¿Eliminar este contenido?</h2>
+    <p id="mod-delete-description">Se retirará del marketplace y su autor recibirá una notificación con el motivo que escribiste.</p>
+    <div class="mod-delete-summary"><strong data-mod-confirm-name></strong><span>Motivo de la eliminación</span><p data-mod-confirm-reason></p></div>
+    <div class="mod-delete-actions"><button type="button" class="mod-button secondary" data-mod-confirm-cancel autofocus>Cancelar</button><button type="button" class="mod-button danger" data-mod-confirm-submit>Confirmar eliminación</button></div>
+</dialog>
 @endsection

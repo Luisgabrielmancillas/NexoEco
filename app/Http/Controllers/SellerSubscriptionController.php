@@ -17,7 +17,7 @@ class SellerSubscriptionController extends Controller
 {
     public function index(Request $request, MercadoPagoSubscriptions $payments)
     {
-        $subscriptions = SellerSubscription::where('user_id', $request->user()->id);
+        $subscriptions = SellerSubscription::where('user_id', $request->user()->id)->paid();
         $subscription = (clone $subscriptions)->entitled()->latest()->first()
             ?? (clone $subscriptions)->where('status', '!=', 'cancelled')->latest()->first()
             ?? $subscriptions->latest()->first();
@@ -34,7 +34,7 @@ class SellerSubscriptionController extends Controller
 
     public function checkout(Request $request, MercadoPagoSubscriptions $payments)
     {
-        $data = $request->validate(['plan' => ['required', Rule::in(array_keys(config('subscriptions.plans')))], 'acepto_renovacion' => ['accepted']]);
+        $data = $request->validate(['plan' => ['required', Rule::in(SellerSubscription::PAID_PLANS)], 'acepto_renovacion' => ['accepted']]);
         if (! $request->user()->tiendas()->exists()) {
             return redirect()->route('vendedor.tienda.create')->withErrors(['suscripcion' => 'Primero crea tu tienda para contratar una promoción.']);
         }
@@ -43,7 +43,7 @@ class SellerSubscriptionController extends Controller
         }
         $subscription = DB::transaction(function () use ($request, $data) {
             User::whereKey($request->user()->id)->lockForUpdate()->firstOrFail();
-            $open = SellerSubscription::where('user_id', $request->user()->id)->where(fn ($q) => $q->where('status', '!=', 'cancelled')->orWhere('paid_until', '>', now()))->latest()->first();
+            $open = SellerSubscription::where('user_id', $request->user()->id)->paid()->where(fn ($q) => $q->where('status', '!=', 'cancelled')->orWhere('paid_until', '>', now()))->latest()->first();
             if ($open && ($open->status !== 'pending' || $open->plan !== $data['plan'])) {
                 throw ValidationException::withMessages(['suscripcion' => 'Ya tienes una suscripción. Cancela su renovación y espera a que termine el periodo pagado antes de contratar otro plan. Si está pendiente, cancélala para elegir otro.']);
             }
@@ -134,39 +134,21 @@ class SellerSubscriptionController extends Controller
     }
     public function activarPlanGratuito(Request $request)
     {
-        // 1. Verificamos que tenga tienda antes de activar el plan (igual que en checkout)
         if (! $request->user()->tiendas()->exists()) {
             return redirect()->route('vendedor.tienda.create')->withErrors(['suscripcion' => 'Primero crea tu tienda para activar un plan.']);
         }
 
-        // 2. Protegemos la base de datos con una transacción
         DB::transaction(function () use ($request) {
             User::whereKey($request->user()->id)->lockForUpdate()->firstOrFail();
-            
-            // 3. Revisamos si ya tiene una suscripción que no esté cancelada
-            $open = SellerSubscription::where('user_id', $request->user()->id)
+            $open = SellerSubscription::where('user_id', $request->user()->id)->paid()
                 ->where(fn ($q) => $q->where('status', '!=', 'cancelled')->orWhere('paid_until', '>', now()))
-                ->latest()
-                ->first();
-
-            if ($open && $open->plan !== 'gratis') {
+                ->exists();
+            if ($open) {
                 throw ValidationException::withMessages(['suscripcion' => 'Ya tienes una suscripción de pago. Cancela su renovación y espera a que termine el periodo para cambiar al plan gratuito.']);
             }
-
-            // 4. Si no tiene suscripción activa, le creamos el plan gratis
-            if (! $open) {
-                SellerSubscription::create([
-                    'user_id' => $request->user()->id, 
-                    'plan' => 'gratis', 
-                    'amount' => 0, 
-                    'currency' => 'MXN',
-                    'status' => 'authorized', // Lo marcamos como activo
-                    'paid_until' => now()->addYears(10) // Vigencia de 10 años
-                ]);
-            }
+            // Básico is the default account level, not a paid or renewable subscription.
         });
 
-        // 5. Redirigimos con mensaje de éxito
-        return redirect()->route('vendedor.suscripcion.index')->with('success', '¡Has activado el plan Básico (Gratis) con éxito!');
+        return redirect()->route('vendedor.suscripcion.index')->with('success', 'Tu plan Básico está disponible sin pagos ni renovación. Puedes elegir Impulso o Pro cuando lo necesites.');
     }
 }

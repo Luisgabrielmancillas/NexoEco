@@ -9,6 +9,13 @@ class SellerSubscription extends Model
 {
     use HasUuids;
 
+    public const PAID_PLANS = ['impulso', 'pro'];
+
+    // Mandate states differ from payment states: an approved payment is not a subscription status.
+    public const STATUSES = ['pending', 'authorized', 'paused', 'cancelled'];
+
+    public const ENTITLED_STATUSES = ['authorized', 'cancelled', 'paused'];
+
     protected $guarded = ['id'];
 
     protected $attributes = ['currency' => 'MXN', 'status' => 'pending'];
@@ -32,12 +39,19 @@ class SellerSubscription extends Model
 
     public function scopeEntitled($query)
     {
-        return $query->whereIn('status', ['authorized', 'cancelled', 'paused'])->where('paid_until', '>', now());
+        return $query->paid()->whereIn('status', self::ENTITLED_STATUSES)->where('paid_until', '>', now());
+    }
+
+    public function scopePaid($query)
+    {
+        return $query->whereIn('plan', self::PAID_PLANS);
     }
 
     public function entitled(): bool
     {
-        return in_array($this->status, ['authorized', 'cancelled', 'paused']) && $this->paid_until?->isFuture();
+        return in_array($this->plan, self::PAID_PLANS, true)
+            && in_array($this->status, self::ENTITLED_STATUSES, true)
+            && (bool) $this->paid_until?->isFuture();
     }
 
     public function planDetails(): array

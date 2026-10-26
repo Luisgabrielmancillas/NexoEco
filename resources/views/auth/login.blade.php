@@ -2,12 +2,12 @@
 
 <style>
     :root {
-        --cream: #FAF7F2;
-        --orange: #E85D2F;
-        --orange-dark: #ca542c;
-        --ink: #1C1917;
-        --muted: #8C8279;
-        --border: #E8E0D4;
+        --cream: var(--color-background);
+        --brand-primary: var(--color-primary);
+        --primary-dark: var(--color-primary);
+        --ink: var(--color-text-primary);
+        --muted: var(--color-text-secondary);
+        --border: var(--color-border);
     }
 
     body {
@@ -15,9 +15,9 @@
         padding: 0 !important;
         overflow-x: hidden;
         background:
-            radial-gradient(circle at 10% 20%, rgba(232,93,47,.22), transparent 28%),
-            radial-gradient(circle at 90% 80%, rgba(232,93,47,.10), transparent 30%),
-            linear-gradient(135deg,#fff 0%,#fff7f3 100%) !important;
+            radial-gradient(circle at 10% 20%, rgb(var(--color-primary-rgb) / 0.22), transparent 28%),
+            radial-gradient(circle at 90% 80%, rgb(var(--color-primary-rgb) / 0.1), transparent 30%),
+            linear-gradient(135deg,var(--color-surface) 0%,var(--color-surface) 100%) !important;
     }
 
     body > div > div:first-child {
@@ -64,7 +64,7 @@
         font-size: 34px;
         font-weight: 950;
         letter-spacing: -1px;
-        color: var(--orange);
+        color: var(--brand-primary);
         transition: .25s ease;
     }
 
@@ -76,8 +76,8 @@
         width: 14px;
         height: 14px;
         border-radius: 999px;
-        background: var(--orange);
-        box-shadow: 0 0 18px rgba(232,93,47,.55);
+        background: var(--brand-primary);
+        box-shadow: 0 0 18px rgb(var(--color-text-primary-rgb) / 0.55);
     }
 
     .bubble {
@@ -90,7 +90,7 @@
     .bubble-1 {
         width: 240px;
         height: 240px;
-        background: rgba(232,93,47,.14);
+        background: rgb(var(--color-primary-rgb) / 0.14);
         top: -80px;
         right: 34%;
     }
@@ -98,7 +98,7 @@
     .bubble-2 {
         width: 150px;
         height: 150px;
-        background: rgba(232,93,47,.10);
+        background: rgb(var(--color-primary-rgb) / 0.1);
         bottom: 60px;
         left: 42%;
         animation-delay: 1s;
@@ -107,7 +107,7 @@
     .bubble-3 {
         width: 90px;
         height: 90px;
-        background: rgba(232,93,47,.18);
+        background: rgb(var(--color-primary-rgb) / 0.18);
         top: 110px;
         right: 70px;
         animation-delay: 2s;
@@ -130,11 +130,11 @@
         display: inline-block;
         padding: 11px 18px;
         border-radius: 999px;
-        background: rgba(255,255,255,.82);
-        color: var(--orange);
+        background: rgb(var(--color-surface-rgb) / 0.82);
+        color: var(--brand-primary);
         font-weight: 900;
         margin-bottom: 28px;
-        box-shadow: 0 12px 28px rgba(232,93,47,.10);
+        box-shadow: 0 12px 28px rgb(var(--color-text-primary-rgb) / 0.1);
     }
 
     .nexo-left h1 {
@@ -147,7 +147,7 @@
     }
 
     .nexo-left h1 span {
-        color: var(--orange);
+        color: var(--brand-primary);
     }
 
     .nexo-left p {
@@ -166,12 +166,12 @@
     }
 
     .nexo-mini-card {
-        background: rgba(255,255,255,.86);
-        border: 1px solid rgba(255,255,255,.9);
+        background: rgb(var(--color-surface-rgb) / 0.86);
+        border: 1px solid rgb(var(--color-surface-rgb) / 0.9);
         border-radius: 22px;
         padding: 18px 22px;
         min-width: 150px;
-        box-shadow: 0 15px 35px rgba(232,93,47,.10);
+        box-shadow: 0 15px 35px rgb(var(--color-text-primary-rgb) / 0.1);
         transition: .25s ease;
     }
 
@@ -181,7 +181,7 @@
 
     .nexo-mini-card strong {
         display: block;
-        color: var(--orange);
+        color: var(--brand-primary);
         font-size: 25px;
         font-weight: 900;
     }
@@ -203,12 +203,12 @@
     .login-box {
         width: 100%;
         max-width: 440px;
-        background: rgba(255,255,255,.90);
+        background: rgb(var(--color-surface-rgb) / 0.9);
         backdrop-filter: blur(18px);
         border-radius: 34px;
         padding: 38px;
-        box-shadow: 0 30px 70px rgba(232,93,47,.16);
-        border: 1px solid rgba(255,255,255,.9);
+        box-shadow: 0 30px 70px rgb(var(--color-text-primary-rgb) / 0.16);
+        border: 1px solid rgb(var(--color-surface-rgb) / 0.9);
         animation: slideUp .7s ease both;
     }
 
@@ -249,9 +249,9 @@
     }
 
     .field input:focus {
-        background: #fff;
-        border-color: var(--orange);
-        box-shadow: 0 0 0 5px rgba(232,93,47,.12);
+        background: var(--color-surface);
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 5px rgb(var(--color-text-primary-rgb) / 0.12);
     }
 
     .login-options {
@@ -273,18 +273,18 @@
     }
 
     .remember input {
-        accent-color: var(--orange);
+        accent-color: var(--brand-primary);
     }
 
     .forgot {
-        color: var(--orange);
+        color: var(--brand-primary);
         font-size: 14px;
         font-weight: 850;
         text-decoration: none;
     }
 
     .forgot:hover {
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     .login-btn {
@@ -292,18 +292,19 @@
         border: none;
         border-radius: 999px;
         padding: 16px;
-        background: linear-gradient(135deg, var(--orange), #ff7b47);
-        color: white;
+        background: linear-gradient(135deg, var(--brand-primary), var(--color-primary));
+        color: var(--color-on-primary);
         font-weight: 950;
         font-size: 16px;
         cursor: pointer;
-        box-shadow: 0 18px 35px rgba(232,93,47,.30);
+        box-shadow: var(--nexo-shadow);
         transition: .25s ease;
     }
 
     .login-btn:hover {
+        background: var(--color-primary-hover);
         transform: translateY(-4px);
-        box-shadow: 0 24px 45px rgba(232,93,47,.42);
+        box-shadow: var(--nexo-shadow-hover);
     }
 
     .register-text {
@@ -315,13 +316,13 @@
     }
 
     .register-text a {
-        color: var(--orange);
+        color: var(--brand-primary);
         font-weight: 900;
         text-decoration: none;
     }
 
     .register-text a:hover {
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     @keyframes float {

@@ -13,8 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->validateCsrfTokens(except: ['mercadopago/webhook', 'mercadopago/suscripciones/webhook']);
-        $middleware->alias(['administrator' => \App\Http\Middleware\EnsureAdministrator::class, 'seller' => \App\Http\Middleware\EnsureSeller::class, 'moderator' => \App\Http\Middleware\EnsureModerator::class]);
-        $middleware->web(append: [\App\Http\Middleware\EnsureActiveAccount::class, \App\Http\Middleware\EnsureAccountArea::class, \App\Http\Middleware\RecordStaffActivity::class]);
+        $middleware->alias(['check.suscripcion' => \App\Http\Middleware\CheckSubscription::class, 'administrator' => \App\Http\Middleware\EnsureAdministrator::class, 'seller' => \App\Http\Middleware\EnsureSeller::class, 'moderator' => \App\Http\Middleware\EnsureModerator::class]);
+        $middleware->web(
+            replace: [\Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class => \App\Http\Middleware\ValidateCsrfToken::class],
+            append: [\App\Http\Middleware\EnsureActiveAccount::class, \App\Http\Middleware\EnsureAccountArea::class, \App\Http\Middleware\RecordStaffActivity::class],
+        );
 
         // Redirección para usuarios que ya tienen sesión activa
         $middleware->redirectUsersTo(function (Request $request) {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>NexoEco - El marketplace de los microemprendedores</title>
+    @vite('resources/css/design-system.css')
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
@@ -12,16 +13,16 @@
 
     <style>
         :root {
-            --bg: #F5F0E8;
-            --ink: #1C1917;
-            --cream: #FAF7F2;
-            --accent: #E85D2F;
-            --accent2: #2F7EE8;
-            --muted: #8C8279;
-            --card: #FFFFFF;
-            --border: #E8E0D4;
-            --seller: #E85D2F;
-            --buyer: #2F7EE8;
+            --bg: var(--color-background);
+            --ink: var(--color-text-primary);
+            --cream: var(--color-background);
+            --accent: var(--color-primary);
+            --accent2: var(--color-primary);
+            --muted: var(--color-text-secondary);
+            --card: var(--color-surface);
+            --border: var(--color-border);
+            --seller: var(--color-primary);
+            --buyer: var(--color-primary);
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,7 +45,7 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            background: var(--bg);
+            background: var(--color-surface);
             border-bottom: 1.5px solid var(--border);
             padding: 0 2rem;
             height: 64px;
@@ -53,7 +54,7 @@
             justify-content: space-between;
             transition: box-shadow 0.2s;
         }
-        nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        nav.scrolled { box-shadow: 0 4px 24px rgb(var(--color-text-primary-rgb) / 0.06); }
 
         .nav-logo {
             display: flex;
@@ -96,12 +97,12 @@
         .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.25rem; border-radius: 100px; font-size: 0.875rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s; border: none; font-family: 'DM Sans', sans-serif; }
         .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
         .btn-ghost:hover { border-color: var(--ink); }
-        .btn-ink { background: var(--ink); color: #fff; }
-        .btn-ink:hover { background: #2d2926; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
-        .btn-accent { background: var(--accent); color: #fff; }
-        .btn-accent:hover { background: #d44e22; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(232,93,47,0.3); }
-        .btn-blue { background: var(--accent2); color: #fff; }
-        .btn-blue:hover { background: #1e6dd4; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(47,126,232,0.3); }
+        .btn-ink { background: var(--color-primary); color: var(--color-on-primary); }
+        .btn-ink:hover { background: var(--color-primary-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgb(var(--color-text-primary-rgb) / 0.15); }
+        .btn-accent { background: var(--accent); color: var(--color-on-primary); }
+        .btn-accent:hover { background: var(--color-primary-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgb(var(--color-text-primary-rgb) / 0.3); }
+        .btn-blue { background: var(--accent2); color: var(--color-on-primary); }
+        .btn-blue:hover { background: var(--color-primary-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgb(var(--color-text-primary-rgb) / 0.3); }
         .btn-lg { padding: 0.875rem 2rem; font-size: 1rem; }
 
         /* ── HERO ── */
@@ -135,13 +136,13 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 20% 80%, rgba(47,126,232,0.06) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 20% 80%, rgb(var(--color-primary-rgb) / 0.06) 0%, transparent 60%);
             pointer-events: none;
         }
 
         /* Right side — sellers */
         .hero-seller {
-            background: var(--ink);
+            background: var(--color-primary-soft);
             padding: 5rem 4rem 4rem 3rem;
             display: flex;
             flex-direction: column;
@@ -153,7 +154,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 80% 20%, rgba(232,93,47,0.15) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 80% 20%, rgb(var(--color-primary-rgb) / 0.15) 0%, transparent 60%);
             pointer-events: none;
         }
 
@@ -169,8 +170,8 @@
             padding: 0.35rem 0.875rem;
             border-radius: 100px;
         }
-        .tag-buyer { background: rgba(47,126,232,0.1); color: var(--accent2); }
-        .tag-seller { background: rgba(232,93,47,0.15); color: #F4855A; }
+        .tag-buyer { background: rgb(var(--color-primary-rgb) / 0.1); color: var(--accent2); }
+        .tag-seller { background: var(--color-primary-subtle); color: var(--color-primary-text); }
 
         .hero-title {
             font-size: clamp(2rem, 3.5vw, 3rem);
@@ -179,7 +180,7 @@
             margin-bottom: 1.25rem;
         }
         .hero-buyer .hero-title { color: var(--ink); }
-        .hero-seller .hero-title { color: #fff; }
+        .hero-seller .hero-title { color: var(--color-text-primary); }
 
         .hero-sub {
             font-size: 1.0625rem;
@@ -188,7 +189,7 @@
             max-width: 420px;
         }
         .hero-buyer .hero-sub { color: var(--muted); }
-        .hero-seller .hero-sub { color: #9E9189; }
+        .hero-seller .hero-sub { color: var(--color-text-secondary); }
 
         .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
@@ -201,13 +202,13 @@
         }
 
         .preview-card {
-            background: #fff;
+            background: var(--color-surface);
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border);
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .preview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+        .preview-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgb(var(--color-text-primary-rgb) / 0.08); }
 
         .preview-img {
             height: 80px;
@@ -216,12 +217,12 @@
             justify-content: center;
             font-size: 1.75rem;
         }
-        .preview-img-1 { background: #FFF0EB; }
-        .preview-img-2 { background: #EBF3FF; }
-        .preview-img-3 { background: #EBFFF3; }
-        .preview-img-4 { background: #FFF8EB; }
-        .preview-img-5 { background: #F3EBFF; }
-        .preview-img-6 { background: #FFEBF3; }
+        .preview-img-1 { background: var(--color-primary-soft); }
+        .preview-img-2 { background: var(--color-primary-soft); }
+        .preview-img-3 { background: var(--color-success-soft); }
+        .preview-img-4 { background: var(--color-primary-soft); }
+        .preview-img-5 { background: var(--color-primary-soft); }
+        .preview-img-6 { background: var(--color-danger-soft); }
 
         .preview-info { padding: 0.625rem 0.75rem; }
         .preview-name { font-size: 0.75rem; font-weight: 600; color: var(--ink); }
@@ -231,8 +232,8 @@
         /* Seller dashboard preview */
         .dash-preview {
             margin-top: 2.5rem;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
             border-radius: 16px;
             padding: 1.25rem;
         }
@@ -242,11 +243,11 @@
             justify-content: space-between;
             margin-bottom: 1rem;
             padding-bottom: 0.75rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgb(var(--color-surface-rgb) / 0.08);
         }
-        .dash-title { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.7); font-family: 'Syne', sans-serif; }
-        .dash-live { display: flex; align-items: center; gap: 0.35rem; font-size: 0.7rem; color: #4ade80; }
-        .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+        .dash-title { font-size: 0.8rem; font-weight: 600; color: var(--color-text-secondary); font-family: 'Syne', sans-serif; }
+        .dash-live { display: flex; align-items: center; gap: 0.35rem; font-size: 0.7rem; color: var(--color-success-text); }
+        .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-success); animation: pulse 2s infinite; }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -260,31 +261,31 @@
             margin-bottom: 1rem;
         }
         .dash-stat {
-            background: rgba(255,255,255,0.05);
+            background: var(--color-background-secondary);
             border-radius: 10px;
             padding: 0.75rem;
         }
-        .dash-stat-val { font-size: 1.125rem; font-weight: 700; color: #fff; font-family: 'Syne', sans-serif; }
-        .dash-stat-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+        .dash-stat-val { font-size: 1.125rem; font-weight: 700; color: var(--color-primary-text); font-family: 'Syne', sans-serif; }
+        .dash-stat-lbl { font-size: 0.65rem; color: var(--color-text-secondary); margin-top: 2px; }
 
         .dash-orders { display: flex; flex-direction: column; gap: 0.5rem; }
         .dash-order {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255,255,255,0.05);
+            background: var(--color-background-secondary);
             border-radius: 8px;
             padding: 0.625rem 0.875rem;
         }
-        .order-info { font-size: 0.725rem; color: rgba(255,255,255,0.6); }
-        .order-name { font-size: 0.75rem; font-weight: 600; color: #fff; }
+        .order-info { font-size: 0.725rem; color: var(--color-text-secondary); }
+        .order-name { font-size: 0.75rem; font-weight: 600; color: var(--color-text-primary); }
         .order-badge { font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 100px; }
-        .badge-new { background: rgba(232,93,47,0.2); color: #F4855A; }
-        .badge-done { background: rgba(74,222,128,0.15); color: #4ade80; }
+        .badge-new { background: var(--color-primary-soft); color: var(--color-primary-text); }
+        .badge-done { background: var(--color-success-soft); color: var(--color-success-text); }
 
         /* ── DIVIDER BANNER ── */
         .banner {
-            background: var(--accent);
+            background: var(--color-primary-soft);
             padding: 1.25rem 2rem;
             overflow: hidden;
             position: relative;
@@ -299,7 +300,7 @@
             font-family: 'Comic Sans', sans-serif;
             font-size: 0.875rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--color-primary-text);
             letter-spacing: 0.05em;
             text-transform: uppercase;
             display: flex;
@@ -366,8 +367,8 @@
             justify-content: center;
             font-size: 1rem;
         }
-        .icon-buyer { background: rgba(47,126,232,0.1); color: var(--accent2); }
-        .icon-seller { background: rgba(232,93,47,0.1); color: var(--accent); }
+        .icon-buyer { background: rgb(var(--color-primary-rgb) / 0.1); color: var(--accent2); }
+        .icon-seller { background: rgb(var(--color-primary-rgb) / 0.1); color: var(--accent); }
 
         .steps { display: flex; flex-direction: column; gap: 1.5rem; }
         .step {
@@ -386,8 +387,8 @@
             flex-shrink: 0;
             font-family: 'Comic Sans', sans-serif;
         }
-        .num-buyer { background: rgba(47,126,232,0.12); color: var(--accent2); }
-        .num-seller { background: rgba(232,93,47,0.12); color: var(--accent); }
+        .num-buyer { background: rgb(var(--color-primary-rgb) / 0.12); color: var(--accent2); }
+        .num-seller { background: rgb(var(--color-primary-rgb) / 0.12); color: var(--accent); }
 
         .step-text h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.25rem; }
         .step-text p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
@@ -395,28 +396,28 @@
         /* ── FEATURES ── */
         #caracteristicas {
             padding: 6rem 2rem;
-            background: var(--ink);
+            background: var(--color-surface);
         }
-        #caracteristicas .section-label { color: rgba(255,255,255,0.3); }
-        #caracteristicas .section-title { color: #fff; }
-        #caracteristicas .section-sub { color: rgba(255,255,255,0.5); }
+        #caracteristicas .section-label { color: var(--color-primary-text); }
+        #caracteristicas .section-title { color: var(--color-text-primary); }
+        #caracteristicas .section-sub { color: var(--color-text-secondary); }
 
         .feat-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5px;
             margin-top: 4rem;
-            background: rgba(255,255,255,0.08);
-            border: 1.5px solid rgba(255,255,255,0.08);
+            background: var(--color-border);
+            border: 1.5px solid rgb(var(--color-surface-rgb) / 0.08);
             border-radius: 20px;
             overflow: hidden;
         }
         .feat-card {
-            background: var(--ink);
+            background: var(--color-surface);
             padding: 2rem;
             transition: background 0.2s;
         }
-        .feat-card:hover { background: #252118; }
+        .feat-card:hover { background: var(--color-primary-soft); }
 
         .feat-icon {
             width: 44px; height: 44px;
@@ -427,12 +428,12 @@
             font-size: 1.25rem;
             margin-bottom: 1.25rem;
         }
-        .feat-icon-orange { background: rgba(232,93,47,0.15); color: #F4855A; }
-        .feat-icon-blue { background: rgba(47,126,232,0.15); color: #6BA8F4; }
-        .feat-icon-green { background: rgba(74,222,128,0.1); color: #4ade80; }
+        .feat-icon-primary { background: rgb(var(--color-primary-rgb) / 0.15); color: var(--color-primary-text); }
+        .feat-icon-blue { background: rgb(var(--color-primary-rgb) / 0.15); color: var(--color-primary-text); }
+        .feat-icon-green { background: var(--color-primary-soft); color: var(--color-primary-text); }
 
-        .feat-card h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-        .feat-card p { font-size: 0.875rem; color: rgba(255,255,255,0.45); line-height: 1.65; }
+        .feat-card h3 { font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem; }
+        .feat-card p { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.65; }
         .feat-tag {
             display: inline-block;
             margin-bottom: 0.75rem;
@@ -443,14 +444,14 @@
             padding: 0.2rem 0.5rem;
             border-radius: 100px;
         }
-        .ft-seller { background: rgba(232,93,47,0.15); color: #F4855A; }
-        .ft-buyer { background: rgba(47,126,232,0.15); color: #6BA8F4; }
-        .ft-all { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+        .ft-seller { background: rgb(var(--color-primary-rgb) / 0.15); color: var(--color-primary-text); }
+        .ft-buyer { background: rgb(var(--color-primary-rgb) / 0.15); color: var(--color-primary-text); }
+        .ft-all { background: var(--color-background-secondary); color: var(--color-text-secondary); }
 
         /* ── STATS ── */
         .stats {
             padding: 5rem 2rem;
-            background: var(--accent);
+            background: var(--color-primary-soft);
         }
         .stats-grid {
             display: grid;
@@ -464,11 +465,11 @@
             font-family: 'Comic Sans', sans-serif;
             font-size: 2.75rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--color-primary-text);
             line-height: 1;
             margin-bottom: 0.5rem;
         }
-        .stat-lbl { font-size: 0.875rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+        .stat-lbl { font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 500; }
 
         /* ── TESTIMONIALS ── */
         #testimonios {
@@ -491,7 +492,7 @@
         }
         .testi-card:hover {
             border-color: var(--accent);
-            box-shadow: 0 12px 32px rgba(232,93,47,0.08);
+            box-shadow: 0 12px 32px rgb(var(--color-text-primary-rgb) / 0.08);
             transform: translateY(-2px);
         }
         .testi-role {
@@ -504,13 +505,13 @@
             display: inline-block;
             margin-bottom: 1rem;
         }
-        .role-seller { background: rgba(232,93,47,0.1); color: var(--accent); }
-        .role-buyer { background: rgba(47,126,232,0.1); color: var(--accent2); }
+        .role-seller { background: rgb(var(--color-primary-rgb) / 0.1); color: var(--accent); }
+        .role-buyer { background: rgb(var(--color-primary-rgb) / 0.1); color: var(--accent2); }
 
         .testi-text {
             font-size: 0.9375rem;
             line-height: 1.7;
-            color: #3D3530;
+            color: var(--color-text-primary);
             margin-bottom: 1.25rem;
             font-style: italic;
         }
@@ -526,7 +527,7 @@
         }
         .testi-name { font-size: 0.875rem; font-weight: 600; }
         .testi-business { font-size: 0.75rem; color: var(--muted); }
-        .stars { color: #F5A623; font-size: 0.75rem; letter-spacing: 1px; margin-top: 0.25rem; }
+        .stars { color: var(--color-warning-text); font-size: 0.75rem; letter-spacing: 1px; margin-top: 0.25rem; }
 
         /* ── PRICING ── */
         #precios {
@@ -538,14 +539,14 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(47,126,232,0.08);
+            background: rgb(var(--color-primary-rgb) / 0.08);
             color: var(--accent2);
             font-size: 0.8125rem;
             font-weight: 600;
             padding: 0.5rem 1rem;
             border-radius: 100px;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(47,126,232,0.15);
+            border: 1px solid rgb(var(--color-primary-rgb) / 0.15);
         }
 
         .pricing-grid {
@@ -564,10 +565,10 @@
             position: relative;
             transition: all 0.2s;
         }
-        .price-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.07); transform: translateY(-3px); }
+        .price-card:hover { box-shadow: 0 16px 40px rgb(var(--color-text-primary-rgb) / 0.07); transform: translateY(-3px); }
         .price-card.popular {
             border-color: var(--accent);
-            box-shadow: 0 20px 48px rgba(232,93,47,0.12);
+            box-shadow: 0 20px 48px rgb(var(--color-text-primary-rgb) / 0.12);
         }
 
         .popular-badge {
@@ -575,7 +576,7 @@
             top: -1px;
             right: 1.5rem;
             background: var(--accent);
-            color: #fff;
+            color: var(--color-on-primary);
             font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 0.06em;
@@ -597,7 +598,7 @@
         }
         .price-features li i { color: var(--accent); font-size: 0.75rem; width: 14px; }
         .price-features li.off { color: var(--muted); }
-        .price-features li.off i { color: #C8BFB8; }
+        .price-features li.off i { color: var(--color-text-secondary); }
 
         /* ── CTA ── */
         .cta-section {
@@ -612,7 +613,7 @@
             position: absolute;
             width: 500px; height: 500px;
             border-radius: 50%;
-            background: rgba(232,93,47,0.07);
+            background: rgb(var(--color-primary-rgb) / 0.07);
             top: -200px; left: -100px;
             pointer-events: none;
         }
@@ -621,13 +622,13 @@
             position: absolute;
             width: 400px; height: 400px;
             border-radius: 50%;
-            background: rgba(47,126,232,0.07);
+            background: rgb(var(--color-primary-rgb) / 0.07);
             bottom: -150px; right: -100px;
             pointer-events: none;
         }
 
-        .cta-section .section-title { color: #fff; font-size: clamp(2rem, 4vw, 3rem); max-width: 700px; margin: 0 auto 1.25rem; }
-        .cta-section .section-sub { color: rgba(255,255,255,0.5); margin: 0 auto 3rem; }
+        .cta-section .section-title { color: var(--color-on-primary); font-size: clamp(2rem, 4vw, 3rem); max-width: 700px; margin: 0 auto 1.25rem; }
+        .cta-section .section-sub { color: var(--color-dark-muted); margin: 0 auto 3rem; }
 
         .cta-duo {
             display: flex;
@@ -639,17 +640,17 @@
         }
         .cta-card {
             flex: 1;
-            background: rgba(255,255,255,0.05);
-            border: 1.5px solid rgba(255,255,255,0.1);
+            background: rgb(var(--color-surface-rgb) / 0.05);
+            border: 1.5px solid rgb(var(--color-surface-rgb) / 0.1);
             border-radius: 20px;
             padding: 1.75rem 1.5rem;
             text-align: center;
             transition: all 0.2s;
         }
-        .cta-card:hover { background: rgba(255,255,255,0.08); }
+        .cta-card:hover { background: rgb(var(--color-surface-rgb) / 0.08); }
         .cta-card-icon { font-size: 1.75rem; margin-bottom: 0.875rem; }
-        .cta-card-title { font-family: 'Comic Sans', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.375rem; }
-        .cta-card-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.4); margin-bottom: 1.25rem; }
+        .cta-card-title { font-family: 'Comic Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--color-on-primary); margin-bottom: 0.375rem; }
+        .cta-card-sub { font-size: 0.8125rem; color: var(--color-dark-muted); margin-bottom: 1.25rem; }
 
         /* Container */
         .container { max-width: 1100px; margin: 0 auto; }
@@ -668,9 +669,9 @@
         @media (max-width: 900px) {
             .hero-top { grid-template-columns: 1fr; }
             .hero-buyer { border-right: none; border-bottom: 1.5px solid var(--border); padding: 4rem 2rem 3rem; }
-            .hero-seller { padding: 3rem 2rem 4rem; }
+            .hero-seller { padding: 3rem 2rem 4rem;  background: var(--color-primary-soft); }
             .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-            .feat-grid { grid-template-columns: 1fr 1fr; }
+            .feat-grid { grid-template-columns: 1fr 1fr;  background: var(--color-border); }
             .testi-grid { grid-template-columns: 1fr; max-width: 480px; }
             .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -679,14 +680,15 @@
             .cta-duo { flex-direction: column; }
         }
         @media (max-width: 600px) {
-            nav { padding: 0 1rem; }
+            nav { padding: 0 1rem;  background: var(--color-surface); }
             .nav-links { display: none; }
-            .feat-grid { grid-template-columns: 1fr; }
+            .feat-grid { grid-template-columns: 1fr;  background: var(--color-border); }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 </head>
-<body>
+<body class="nexo-landing">
 
 <!-- NAV -->
 <nav id="navbar">
@@ -784,13 +786,13 @@
         <!-- VENDEDOR -->
         <div class="hero-seller">
             <span class="hero-tag tag-seller"><i class="fas fa-store"></i> Para vendedores</span>
-            <h1 class="hero-title" style="color:#fff">Lanza tu tienda virtual y vende desde hoy</h1>
+            <h1 class="hero-title">Lanza tu tienda virtual y vende desde hoy</h1>
             <p class="hero-sub">Crea tu microtienda, carga tus productos y empieza a vender a miles de compradores registrados. Sin conocimientos técnicos.</p>
             <div class="hero-actions">
                 <a href="{{ route('vendedor.register') }}" class="btn btn-accent btn-lg">
                     <i class="fas fa-store"></i> Crear mi tienda
                 </a>
-                <a href="#precios" class="btn btn-lg" style="border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);background:transparent">Ver planes</a>
+                <a href="#precios" class="btn btn-lg" style="border:1.5px solid var(--color-primary);color:var(--color-primary-text);background:transparent">Ver planes</a>
             </div>
 
             <!-- Dashboard preview -->
@@ -944,7 +946,7 @@
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-seller">Para vendedores</span>
-                <div class="feat-icon feat-icon-orange"><i class="fas fa-cube"></i></div>
+                <div class="feat-icon feat-icon-primary"><i class="fas fa-cube"></i></div>
                 <h3>Gestión de productos</h3>
                 <p>Agrega fotos, variantes, stock y precios. Organiza tu catálogo de forma profesional sin complicaciones.</p>
             </div>
@@ -956,7 +958,7 @@
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-seller">Para vendedores</span>
-                <div class="feat-icon feat-icon-orange"><i class="fas fa-chart-line"></i></div>
+                <div class="feat-icon feat-icon-primary"><i class="fas fa-chart-line"></i></div>
                 <h3>Reportes en tiempo real</h3>
                 <p>Visualiza tus ingresos, tendencias de venta y productos más populares desde tu dashboard.</p>
             </div>
@@ -968,7 +970,7 @@
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-seller">Para vendedores</span>
-                <div class="feat-icon feat-icon-orange"><i class="fas fa-mobile-alt"></i></div>
+                <div class="feat-icon feat-icon-primary"><i class="fas fa-mobile-alt"></i></div>
                 <h3>Gestión desde el celular</h3>
                 <p>Administra tu tienda, responde pedidos y revisa estadísticas desde cualquier dispositivo.</p>
             </div>
@@ -1114,7 +1116,7 @@
 
 <!-- CTA -->
 <section class="cta-section">
-    <div class="section-label" style="color:rgba(255,255,255,0.3)">Únete hoy</div>
+    <div class="section-label" style="color:var(--color-on-primary)">Únete hoy</div>
     <h2 class="section-title">¿Para qué lado del mostrador estás tú?</h2>
     <p class="section-sub">Sea cual sea tu rol, NexoEco tiene un lugar para ti. Únete a la comunidad de microemprendedores y compradores de Latinoamérica.</p>
 

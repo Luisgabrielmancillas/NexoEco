@@ -1,0 +1,2067 @@
+{
+  "method": "Static source, CSS syntax and token-contrast audit. No browser screenshots or layout measurements.",
+  "paletteSource": "resources/design-system/tokens.json",
+  "templatesReviewed": 131,
+  "inventory": [
+    {
+      "file": "resources/css/action-layout.css",
+      "lines": 80,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/admin.css",
+      "lines": 131,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/app-dialogs.css",
+      "lines": 25,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/app.css",
+      "lines": 18,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "lines": 130,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "lines": 155,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "lines": 86,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/design-tokens.css",
+      "lines": 124,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/favorites.css",
+      "lines": 30,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/local-discovery.css",
+      "lines": 45,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "lines": 267,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "lines": 281,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/product-cards.css",
+      "lines": 26,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "lines": 31,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/reviews.css",
+      "lines": 28,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "lines": 376,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/seller-growth.css",
+      "lines": 6,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/seller.css",
+      "lines": 174,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/site-shell.css",
+      "lines": 11,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/subscriptions.css",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/app-dialogs.js",
+      "lines": 87,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/app.js",
+      "lines": 45,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/bootstrap.js",
+      "lines": 5,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/buyer-account.js",
+      "lines": 184,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/buyer-location.js",
+      "lines": 41,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/chat-commerce.js",
+      "lines": 122,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/design-tokens.js",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/discovery-geo.js",
+      "lines": 16,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/local-discovery.js",
+      "lines": 122,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/location-map.js",
+      "lines": 79,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/moderator.js",
+      "lines": 71,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/reviews.js",
+      "lines": 11,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/seller-experience.js",
+      "lines": 138,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/seller-registration.js",
+      "lines": 106,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/seller-store.js",
+      "lines": 40,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/store-dialogs.js",
+      "lines": 25,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/catalogo.blade.php",
+      "lines": 10,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/consultas/index.blade.php",
+      "lines": 10,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/consultas/show.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/dashboard.blade.php",
+      "lines": 37,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/opiniones.blade.php",
+      "lines": 8,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/partials/product-card.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/partials/reviews.blade.php",
+      "lines": 8,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/partials/store-card.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/producto.blade.php",
+      "lines": 11,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/solicitudes/index.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/solicitudes/show.blade.php",
+      "lines": 5,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/tienda.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/usuarios/create.blade.php",
+      "lines": 8,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/usuarios/edit.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/usuarios/index.blade.php",
+      "lines": 51,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/usuarios/partials/create-form.blade.php",
+      "lines": 16,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/administrador/usuarios/show.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/apartados/index.blade.php",
+      "lines": 62,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/auth/confirm-password.blade.php",
+      "lines": 28,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/auth/forgot-password.blade.php",
+      "lines": 26,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/auth/login.blade.php",
+      "lines": 540,
+      "embeddedStyles": 1
+    },
+    {
+      "file": "resources/views/auth/partials/email-verification.blade.php",
+      "lines": 23,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "lines": 68,
+      "embeddedStyles": 1
+    },
+    {
+      "file": "resources/views/auth/register.blade.php",
+      "lines": 1021,
+      "embeddedStyles": 1
+    },
+    {
+      "file": "resources/views/auth/reset-password.blade.php",
+      "lines": 40,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/auth/seller-register.blade.php",
+      "lines": 134,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/auth/verify-email.blade.php",
+      "lines": 19,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/chat/index.blade.php",
+      "lines": 39,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/chat/show.blade.php",
+      "lines": 25,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/application-logo.blade.php",
+      "lines": 4,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/auth-session-status.blade.php",
+      "lines": 8,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/danger-button.blade.php",
+      "lines": 4,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/dropdown-link.blade.php",
+      "lines": 2,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/dropdown.blade.php",
+      "lines": 36,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/input-error.blade.php",
+      "lines": 10,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/input-label.blade.php",
+      "lines": 6,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/market-icon.blade.php",
+      "lines": 25,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/mod-icon.blade.php",
+      "lines": 22,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/modal.blade.php",
+      "lines": 79,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/nav-link.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/navigation-logo.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/notification-bell.blade.php",
+      "lines": 6,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/primary-button.blade.php",
+      "lines": 4,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/responsive-nav-link.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/secondary-button.blade.php",
+      "lines": 4,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/seller-growth-empty.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/seller-growth-hero.blade.php",
+      "lines": 17,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/seller-icon.blade.php",
+      "lines": 28,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/components/text-input.blade.php",
+      "lines": 4,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/consulta.blade.php",
+      "lines": 8,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/dashboard.blade.php",
+      "lines": 2,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/favoritos.blade.php",
+      "lines": 27,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/notificaciones.blade.php",
+      "lines": 28,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/opiniones.blade.php",
+      "lines": 31,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/partials/favorite-store-card.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/partials/support-messages.blade.php",
+      "lines": 3,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/comprador/soporte.blade.php",
+      "lines": 39,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/conocenos.blade.php",
+      "lines": 201,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/emails/seller-documents-ready.blade.php",
+      "lines": 21,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/emails/verify-email.blade.php",
+      "lines": 35,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/errors/419.blade.php",
+      "lines": 23,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/admin-panel.blade.php",
+      "lines": 13,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/administrador/app.blade.php",
+      "lines": 68,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/administrador/guest.blade.php",
+      "lines": 34,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/administrador/navigation.blade.php",
+      "lines": 222,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/administrador/panel-header.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/administrador/panel-navigation.blade.php",
+      "lines": 13,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/app.blade.php",
+      "lines": 29,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/base.blade.php",
+      "lines": 279,
+      "embeddedStyles": 1
+    },
+    {
+      "file": "resources/views/layouts/comprador/app.blade.php",
+      "lines": 2,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/comprador/guest.blade.php",
+      "lines": 34,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/comprador/navigation.blade.php",
+      "lines": 47,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/guest.blade.php",
+      "lines": 34,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/marketplace.blade.php",
+      "lines": 152,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/moderador/app.blade.php",
+      "lines": 41,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/moderador/guest.blade.php",
+      "lines": 34,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/moderador/navigation.blade.php",
+      "lines": 222,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/moderator-panel.blade.php",
+      "lines": 47,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/seller-panel.blade.php",
+      "lines": 38,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/vendedor/app.blade.php",
+      "lines": 41,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/vendedor/guest.blade.php",
+      "lines": 34,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/layouts/vendedor/navigation.blade.php",
+      "lines": 222,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/index.blade.php",
+      "lines": 40,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/business-hours.blade.php",
+      "lines": 2,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/commercial-offer.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/content-report.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/favorite-button.blade.php",
+      "lines": 19,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/location-awareness.blade.php",
+      "lines": 10,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/location-button.blade.php",
+      "lines": 3,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/location-dialog.blade.php",
+      "lines": 22,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/nearby-stores.blade.php",
+      "lines": 18,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/opiniones.blade.php",
+      "lines": 48,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/product-card.blade.php",
+      "lines": 22,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/product-contact.blade.php",
+      "lines": 28,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/review-form.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/route-dialog.blade.php",
+      "lines": 13,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/store-card.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/partials/store-directions.blade.php",
+      "lines": 20,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/producto.blade.php",
+      "lines": 62,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/solicitud-vendedor.blade.php",
+      "lines": 724,
+      "embeddedStyles": 1
+    },
+    {
+      "file": "resources/views/marketplace/tienda.blade.php",
+      "lines": 41,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/analiticas.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/ayuda.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/configuracion.blade.php",
+      "lines": 8,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/dashboard.blade.php",
+      "lines": 71,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/opiniones.blade.php",
+      "lines": 35,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/partials/application-review.blade.php",
+      "lines": 22,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/partials/delete-form.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/partials/status.blade.php",
+      "lines": 3,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/publicaciones.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/reportes.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/solicitud.blade.php",
+      "lines": 6,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/moderador/vendedores.blade.php",
+      "lines": 8,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/profile/edit.blade.php",
+      "lines": 48,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/profile/partials/delete-user-form.blade.php",
+      "lines": 14,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/profile/partials/photo-form.blade.php",
+      "lines": 15,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/profile/partials/update-password-form.blade.php",
+      "lines": 15,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/profile/partials/update-profile-information-form.blade.php",
+      "lines": 27,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/calendario.blade.php",
+      "lines": 45,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/dashboard.blade.php",
+      "lines": 39,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/estadisticas.blade.php",
+      "lines": 22,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/herramientas.blade.php",
+      "lines": 27,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/novedades.blade.php",
+      "lines": 47,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/partials/offer-form.blade.php",
+      "lines": 30,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/productos/card.blade.php",
+      "lines": 3,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/productos/form.blade.php",
+      "lines": 26,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/productos/index.blade.php",
+      "lines": 10,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/promociones.blade.php",
+      "lines": 42,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/suscripcion.blade.php",
+      "lines": 88,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/vendedor/tienda-form.blade.php",
+      "lines": 65,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "lines": 1177,
+      "embeddedStyles": 1
+    }
+  ],
+  "contrast": [
+    {
+      "foreground": "on-primary",
+      "background": "primary",
+      "ratio": 5.17,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "on-primary",
+      "background": "primary-hover",
+      "ratio": 6.7,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "on-primary",
+      "background": "primary-active",
+      "ratio": 8.72,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "on-primary",
+      "background": "danger",
+      "ratio": 4.83,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text-primary",
+      "background": "surface",
+      "ratio": 17.85,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text-secondary",
+      "background": "background",
+      "ratio": 7.24,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text-secondary",
+      "background": "background-secondary",
+      "ratio": 6.92,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text-muted",
+      "background": "surface",
+      "ratio": 4.76,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "primary-text",
+      "background": "primary-soft",
+      "ratio": 6.16,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "primary-text",
+      "background": "primary-subtle",
+      "ratio": 5.49,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "success-text",
+      "background": "success-soft",
+      "ratio": 6.81,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "warning-text",
+      "background": "warning-soft",
+      "ratio": 6.84,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "danger-text",
+      "background": "danger-soft",
+      "ratio": 5.91,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "info-text",
+      "background": "info-soft",
+      "ratio": 7.09,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "dark-text",
+      "background": "dark-surface",
+      "ratio": 17.06,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "dark-muted",
+      "background": "dark-surface",
+      "ratio": 12.02,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "border-strong",
+      "background": "surface",
+      "ratio": 4.76,
+      "minimum": 3
+    },
+    {
+      "foreground": "primary",
+      "background": "surface",
+      "ratio": 5.17,
+      "minimum": 3
+    },
+    {
+      "foreground": "store-terracotta",
+      "background": "store-terracotta-soft",
+      "ratio": 5.16,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "store-forest",
+      "background": "store-forest-soft",
+      "ratio": 5.95,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "store-ocean",
+      "background": "store-ocean-soft",
+      "ratio": 6.19,
+      "minimum": 4.5
+    }
+  ],
+  "directColorPairs": [
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-table th",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-action-button",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-action-button.edit",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-action-button.danger",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-action-button.restore",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-role-tab",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-role-tab:hover, .admin-role-tab.active",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-role-badges span",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/admin.css",
+      "selector": ".admin-avatar",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/app-dialogs.css",
+      "selector": ".app-message-dialog",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/app-dialogs.css",
+      "selector": ".app-message-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-nav-link:hover, .buyer-nav summary:hover, .buyer-nav .active",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-dropdown a:hover, .buyer-dropdown button:hover",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".market-notifications",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".market-notifications:hover, .market-account-button.is-active",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".notification-count",
+      "ratio": 4.83
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-badge",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-tabs a",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-tabs a.active",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-notice",
+      "ratio": 7.09
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-button.secondary",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".favorite-button",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".favorite-button[aria-pressed=\"true\"]",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".favorite-feedback",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-form input, .buyer-form textarea, .buyer-form select",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".account-avatar",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".account-photo-preview",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".buyer-form input[type=\"file\"]::file-selector-button",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".account-pill",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".account-pill.pending",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".account-shortcuts a:hover",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/buyer.css",
+      "selector": ".account-panel-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".commerce-badge",
+      "ratio": 4.75
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".commerce-thread-image, .reservation-product-image",
+      "ratio": 6.12
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".commerce-unread",
+      "ratio": 5.49
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".commerce-person-initial",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".commerce-thread-open",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".chat-room-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".chat-room .chat-status",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".reservation-state",
+      "ratio": 7.09
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".reservation-state[data-tone=success]",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".reservation-state[data-tone=warning]",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/chat-commerce.css",
+      "selector": ".reservation-state[data-tone=danger]",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ":where(body)",
+      "ratio": 17.06
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": "::selection",
+      "ratio": 8.49
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".ds-primary-button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".ds-secondary-button",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".ds-secondary-button:hover",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".ds-danger-button",
+      "ratio": 4.83
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".dark .ds-secondary-button",
+      "ratio": 13.98
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".buyer-notice[role=\"alert\"], .commerce-alert[role=\"alert\"], .seller-notice[role=\"alert\"], .mod-notice[role=\"alert\"]",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".buyer-notice.account-success, .commerce-alert[role=\"status\"]",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/favorites.css",
+      "selector": ".favorite-store-logo",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/local-discovery.css",
+      "selector": ".nearby-distance",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/local-discovery.css",
+      "selector": ".directions-icon",
+      "ratio": 6.21
+    },
+    {
+      "file": "resources/css/local-discovery.css",
+      "selector": ".route-summary",
+      "ratio": 6.51
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".market-department-icon",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".market-filter-summary",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".market-small-empty",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".market-back-button",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".store-tile-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".store-info-dialog",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".store-dialog-heading > button",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".hero-button",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".market-location-button:hover",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": ".market-header-menu-toggle",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/marketplace.css",
+      "selector": "[data-map-status][data-outside=\"true\"]",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".moderation-workspace",
+      "ratio": 17.06
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-sidebar",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-sidebar a:hover",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-sidebar nav a.active",
+      "ratio": 5.49
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-main-nav a b",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-sidebar nav a.active b",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-user .mod-avatar",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-avatar",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-logout button:hover",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-delete-dialog",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-delete-icon",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-alert-button b",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-stat-icon",
+      "ratio": 6.92
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-stat.primary .mod-stat-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-stat.green .mod-stat-icon",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-stat.rose .mod-stat-icon",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-priority > span",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-status.eliminada",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-button.secondary",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-queue-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-tabs a.active",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-tabs a b",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-table th",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-status",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-status.pendiente, .mod-status.en_revision, .mod-status.pendiente_documentos",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-status.rechazada",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-status.abierto, .mod-status.requiere_correccion",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-notice",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-notice.success",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-count",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-sidebar",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/moderator.css",
+      "selector": ".mod-sidebar",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/product-cards.css",
+      "selector": ".product-card .product-offer-ribbon",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-icon-circle",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-category-badge",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-seller-card",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-seller-logo",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-action-chat",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-payment-brand",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-action-payment",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-payment-pending",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-how-it-works li > span",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/product-detail.css",
+      "selector": ".product-community-strip",
+      "ratio": 6.92
+    },
+    {
+      "file": "resources/css/reviews.css",
+      "selector": ".review-icon-button",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/reviews.css",
+      "selector": ".review-icon-button:hover, .review-editor[open] > summary",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/reviews.css",
+      "selector": ".review-icon-button.danger:hover",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-art-icon",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-art-label",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-shortcuts a:hover, .growth-workspace .growth-shortcuts a[aria-current]",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-section-heading .growth-section-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-period",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-empty-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-day-options label:has(input:checked)",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-metric-top > svg",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-metrics article:first-child .growth-metric-top svg",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-table caption",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-table thead th",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-preview-card .growth-preview-pill",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-note",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-offer-accent",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .commerce-badge",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .commerce-badge[data-state=active], .growth-workspace .commerce-badge[data-state=published], .growth-workspace .commerce-badge[data-state=completado]",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .commerce-badge[data-state=scheduled], .growth-workspace .commerce-badge[data-state=pending]",
+      "ratio": 6.84
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .commerce-badge[data-state=blocked], .growth-workspace .commerce-badge[data-state=cancelado]",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-design-preview > span",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-calendar-nav a",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-calendar > a",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-calendar > a.has-deliveries",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .growth-calendar > a[data-selected=true]",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-calendar-filter",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-shop",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-status-icon",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-status-icon.is-active",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-plan .seller-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-tag",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-benefits li > span",
+      "ratio": 6.51
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-plan.pro .subscription-tag",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-plan.pro .seller-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-plan.pro .subscription-benefits li > span",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-plan.pro .seller-button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-plan.pro .subscription-plan-current",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-experience.css",
+      "selector": ".growth-workspace .subscription-plan.pro",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/seller-growth.css",
+      "selector": ".growth-shortcuts a",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/seller-growth.css",
+      "selector": ".growth-table thead th",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller-growth.css",
+      "selector": ".commercial-offer",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller-growth.css",
+      "selector": ".public-store-page .public-store-cover-empty",
+      "ratio": 4.75
+    },
+    {
+      "file": "resources/css/seller-growth.css",
+      "selector": ".public-store-page .store-tile-icon",
+      "ratio": 4.75
+    },
+    {
+      "file": "resources/css/seller-growth.css",
+      "selector": ".public-store-page .product-button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-button.secondary",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-button.secondary:hover",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-alert",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-alert.error",
+      "ratio": 5.91
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-icon.green",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-step",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-form input:not([type=checkbox]):not([type=hidden]), .seller-form select, .seller-form textarea",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-form input[type=file]::file-selector-button",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-hours-times input:disabled",
+      "ratio": 6.92
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-store-logo",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-store-logo > a",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-category",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-category span",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-product-image",
+      "ratio": 6.92
+    },
+    {
+      "file": "resources/css/seller.css",
+      "selector": ".seller-product-favorites",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/subscriptions.css",
+      "selector": ".subscription-shop",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/subscriptions.css",
+      "selector": ".subscription-float",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/subscriptions.css",
+      "selector": ".subscription-availability",
+      "ratio": 7.24
+    },
+    {
+      "file": "resources/css/subscriptions.css",
+      "selector": ".subscription-tag,.promotion-badge",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/css/subscriptions.css",
+      "selector": ".subscription-plan-current",
+      "ratio": 6.92
+    },
+    {
+      "file": "resources/css/subscriptions.css",
+      "selector": ".subscription-product-image",
+      "ratio": 6.92
+    },
+    {
+      "file": "resources/views/auth/login.blade.php",
+      "selector": ".field input",
+      "ratio": 17.06
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-steps [aria-current=\"step\"] .seller-step-number",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-steps .is-complete .seller-step-number",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-field input:not([type=\"checkbox\"]), .seller-field textarea",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-secondary",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-notice",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-success",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-upload input::file-selector-button",
+      "ratio": 7.58
+    },
+    {
+      "file": "resources/views/auth/partials/seller-styles.blade.php",
+      "selector": ".seller-status-icon",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/views/auth/register.blade.php",
+      "selector": ".register-seller-cta a",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/views/auth/register.blade.php",
+      "selector": ".form-input",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/views/auth/register.blade.php",
+      "selector": ".password-toggle:hover",
+      "ratio": 4.94
+    },
+    {
+      "file": "resources/views/auth/register.blade.php",
+      "selector": ".register-submit",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/layouts/base.blade.php",
+      "selector": "body",
+      "ratio": 17.06
+    },
+    {
+      "file": "resources/views/layouts/base.blade.php",
+      "selector": ".market-search button",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/layouts/base.blade.php",
+      "selector": ".market-header-button",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/views/layouts/base.blade.php",
+      "selector": ".market-header-button.primary",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/layouts/base.blade.php",
+      "selector": ".market-header-button.primary:hover",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/views/marketplace/solicitud-vendedor.blade.php",
+      "selector": ".request-input,\n    .request-textarea",
+      "ratio": 17.85
+    },
+    {
+      "file": "resources/views/marketplace/solicitud-vendedor.blade.php",
+      "selector": ".request-security",
+      "ratio": 6.96
+    },
+    {
+      "file": "resources/views/marketplace/solicitud-vendedor.blade.php",
+      "selector": ".request-submit",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": "body",
+      "ratio": 17.06
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".btn-ink",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".btn-accent",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".btn-blue",
+      "ratio": 5.17
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".tag-seller",
+      "ratio": 5.49
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".badge-new",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".badge-done",
+      "ratio": 6.81
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".feat-icon-green",
+      "ratio": 6.16
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".ft-all",
+      "ratio": 6.92
+    },
+    {
+      "file": "resources/views/welcome.blade.php",
+      "selector": ".popular-badge",
+      "ratio": 5.17
+    }
+  ],
+  "residualWarmColors": [
+    {
+      "token": "warning",
+      "value": "#D97706",
+      "classification": "functional-warning"
+    },
+    {
+      "token": "warning-text",
+      "value": "#92400E",
+      "classification": "functional-warning"
+    },
+    {
+      "token": "warning-soft",
+      "value": "#FFFBEB",
+      "classification": "functional-warning"
+    },
+    {
+      "token": "warning-border",
+      "value": "#FDE68A",
+      "classification": "functional-warning"
+    },
+    {
+      "token": "store-terracotta",
+      "value": "#A34D2C",
+      "classification": "seller-selected-store-theme"
+    },
+    {
+      "token": "store-terracotta-soft",
+      "value": "#FFF0E5",
+      "classification": "seller-selected-store-theme"
+    }
+  ],
+  "hardcodedStyleColors": [],
+  "undefinedVariables": [],
+  "visualVerification": "Unavailable: the browser inventory was empty and the in-app browser was unavailable."
+}

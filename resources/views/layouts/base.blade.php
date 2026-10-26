@@ -24,28 +24,6 @@
     ])
 
     <style>
-        :root {
-            --nexo-bg: #FAF7F2;
-            --nexo-white: #FFFFFF;
-            --nexo-text: #1C1917;
-            --nexo-muted: #746C66;
-            --nexo-border: #E8E0D4;
-            --nexo-primary: #E85D2F;
-            --nexo-primary-dark: #D94F25;
-            --nexo-primary-soft: #FFF0EA;
-            --nexo-blue: #2F7EE8;
-            --nexo-yellow: #E9A400;
-
-            --nexo-radius-sm: 10px;
-            --nexo-radius: 16px;
-            --nexo-radius-lg: 22px;
-
-            --nexo-shadow:
-                0 6px 20px rgba(28, 25, 23, 0.06);
-
-            --nexo-shadow-hover:
-                0 14px 30px rgba(232, 93, 47, 0.12);
-        }
 
         * {
             box-sizing: border-box;
@@ -95,7 +73,7 @@
             top: 0;
             z-index: 100;
 
-            background: rgba(255, 255, 255, 0.97);
+            background: rgb(var(--color-surface-rgb) / 0.97);
             border-bottom: 1px solid var(--nexo-border);
 
             backdrop-filter: blur(12px);
@@ -140,7 +118,7 @@
             max-width: 680px;
             margin-inline: auto;
 
-            background: white;
+            background: var(--color-surface);
             border: 2px solid var(--nexo-primary);
             border-radius: 999px;
 
@@ -161,7 +139,7 @@
         }
 
         .market-search input::placeholder {
-            color: #A49C95;
+            color: var(--color-text-secondary);
         }
 
         .market-search button {
@@ -173,7 +151,7 @@
             cursor: pointer;
 
             background: var(--nexo-primary);
-            color: white;
+            color: var(--color-on-primary);
 
             font-weight: 800;
 
@@ -204,7 +182,7 @@
             border: 1px solid var(--nexo-border);
             border-radius: 999px;
 
-            background: white;
+            background: var(--color-surface);
             color: var(--nexo-text);
 
             font-size: 14px;
@@ -224,12 +202,12 @@
         .market-header-button.primary {
             border-color: var(--nexo-primary);
             background: var(--nexo-primary);
-            color: white;
+            color: var(--color-on-primary);
         }
 
         .market-header-button.primary:hover {
             background: var(--nexo-primary-dark);
-            color: white;
+            color: var(--color-on-primary);
         }
 
         .market-mobile-search {
@@ -285,6 +263,7 @@
     </style>
 
     @stack('styles')
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 </head>
 
 <body class="nexo-site @yield('body-class')">

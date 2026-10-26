@@ -63,7 +63,7 @@ export function initializeSellerRegistration(root) {
             if (file && file.size > 5 * 1024 * 1024) message = 'Cada archivo debe pesar como máximo 5 MB.';
             else if (file && !/\.(jpe?g|png|pdf)$/i.test(file.name)) message = 'Solo se permiten archivos JPG, PNG o PDF.';
             input.setCustomValidity(message);
-            if (message) input.reportValidity();
+            if (message) input.checkValidity();
         });
     });
 
@@ -72,7 +72,6 @@ export function initializeSellerRegistration(root) {
         const invalid = Array.from(steps[index].querySelectorAll('input, textarea')).find((input) => !input.checkValidity());
         if (invalid) {
             showStep(index, false);
-            invalid.reportValidity();
             invalid.focus();
             return false;
         }

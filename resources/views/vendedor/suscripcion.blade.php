@@ -25,17 +25,14 @@
             <div class="subscription-plan-top"><span class="seller-icon"><x-seller-icon name="{{ $key === 'pro' ? 'sparkles' : 'chart' }}"/></span><span class="subscription-tag">{{ $key === 'pro' ? 'Más alcance. Más control.' : ($key === 'impulso' ? 'Tu primer impulso' : 'Para iniciar') }}</span></div>
             <h3>{{ $plan['name'] }}</h3><p class="subscription-description">{{ $plan['description'] }}</p>
             <div class="subscription-price">${{ number_format($plan['price'], 0) }}<span> MXN / mes</span></div>
-            <div class="subscription-plan-highlight"><strong>{{ $plan['product_limit'] }}</strong><span>productos promocionados<br><small>{{ $key === 'pro' ? 'Prioridad alta en búsquedas' : ($key === 'impulso' ? 'Prioridad media en búsquedas' : 'Sin promociones activas') }}</small></span><x-seller-icon name="arrow"/></div>
+            <div class="subscription-plan-highlight"><strong>{{ $plan['product_limit'] }}</strong><span>productos promocionados<br><small>{{ $key === 'pro' ? 'Prioridad alta en búsquedas' : ($key === 'impulso' ? 'Prioridad media en búsquedas' : 'Sin promociones activas') }}</small></span></div>
             <ul class="subscription-benefits">@foreach($plan['benefits'] as $benefit)<li><span aria-hidden="true"><x-seller-icon name="check"/></span>{{ $benefit }}</li>@endforeach</ul>
             @if(!$tienda)<a class="seller-button {{ $key === 'impulso' || $key === 'gratis' ? 'secondary' : '' }}" href="{{ route('vendedor.tienda.create') }}">Crea tu tienda para comenzar</a>
             @elseif($open)<div class="subscription-plan-current">{{ $subscription->plan === $key ? ($active ? 'Tu plan actual' : 'Solicitud actual') : 'Disponible al terminar tu suscripción actual' }}</div>
                 @if($subscription->plan === $key && $subscription->status === 'pending' && $available)<form method="POST" action="{{ route('vendedor.suscripcion.checkout') }}">@csrf<input type="hidden" name="plan" value="{{ $key }}"><label class="subscription-consent"><input type="checkbox" name="acepto_renovacion" value="1" required><span>Acepto el cobro de ${{ $plan['price'] }} MXN al mes y la renovación automática hasta cancelar.</span></label><button type="submit" class="seller-button">Continuar contratación</button></form>@endif
+            @elseif($key === 'gratis')<div class="subscription-plan-current">Tu plan actual · sin costo</div>
             @elseif($available)
-                @if($key === 'gratis')
-                    <form method="POST" action="{{ route('vendedor.suscripcion.gratis') }}">@csrf<button class="seller-button secondary" type="submit">Empezar {{ $plan['name'] }}</button></form>
-                @else
                     <form method="POST" action="{{ route('vendedor.suscripcion.checkout') }}">@csrf<input type="hidden" name="plan" value="{{ $key }}"><label class="subscription-consent"><input type="checkbox" name="acepto_renovacion" value="1" required><span>Acepto el cobro de ${{ $plan['price'] }} MXN al mes y la renovación automática hasta cancelar.</span></label><button class="seller-button {{ $key === 'impulso' ? 'secondary' : '' }}" type="submit">Elegir {{ $plan['name'] }} <span aria-hidden="true">↗</span></button></form>
-                @endif
             @else<button class="seller-button secondary" type="button" disabled>Disponible próximamente</button>@endif
         </article>
         @endforeach

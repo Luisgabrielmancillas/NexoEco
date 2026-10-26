@@ -8,7 +8,7 @@
 <section class="mod-stats" aria-label="Resumen de moderación">
     @foreach([
         ['Reportes abiertos', $counts['reportes'], 'flag', 'rose', 'Casos enviados por la comunidad', route('moderador.reportes')],
-        ['Vendedores por verificar', $counts['vendedores'], 'users', 'orange', 'Solicitudes con documentos por revisar', route('moderador.vendedores', ['estado' => 'en_revision'])],
+        ['Vendedores por verificar', $counts['vendedores'], 'users', 'primary', 'Solicitudes con documentos por revisar', route('moderador.vendedores', ['estado' => 'en_revision'])],
         ['Contenido eliminado hoy', $deletedToday, 'close', 'neutral', 'Productos y opiniones retirados', route('moderador.analiticas')],
         ['Reportes resueltos hoy', $resolvedToday, 'check', 'green', 'Casos cerrados con respuesta', route('moderador.reportes', ['estado' => 'resuelto'])],
     ] as [$label, $number, $icon, $color, $hint, $url])

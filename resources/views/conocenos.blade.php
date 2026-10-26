@@ -8,7 +8,7 @@
         
         <div class="space-y-4 text-gray-600 leading-relaxed text-base md:text-lg text-justify">
             <p>
-                Bienvenido a <strong class="text-orange-600 font-semibold">NexoEco</strong>, la plataforma digital diseñada para transformar la forma en que conectamos con el comercio local en Manzanillo, Colima.
+                Bienvenido a <strong class="text-primary-600 font-semibold">NexoEco</strong>, la plataforma digital diseñada para transformar la forma en que conectamos con el comercio local en Manzanillo, Colima.
             </p>
             <p>
                 Nuestra misión es impulsar la economía de la comunidad creando un puente directo entre los consumidores y los comercios locales. Queremos facilitar el descubrimiento de productos y servicios de tu entorno, promoviendo un consumo consciente, ágil y seguro que fortalezca el desarrollo de los emprendedores y negocios de nuestra región.
@@ -57,44 +57,44 @@
             
             <!-- Tarjeta 1: Aviso de Privacidad -->
             <div onclick="openModal('modal-privacidad')" 
-                 class="cursor-pointer bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-orange-500 transition-all group">
+                 class="cursor-pointer bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-primary-500 transition-all group">
                 <div class="flex items-center gap-4 mb-3">
-                    <div class="p-3 bg-orange-100 rounded-lg text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                    <div class="p-3 bg-primary-100 rounded-lg text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-orange-600">Aviso de Privacidad</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600">Aviso de Privacidad</h3>
                         <span class="text-xs text-gray-500">Documento PDF Oficial</span>
                     </div>
                 </div>
                 <p class="text-sm text-gray-600">
                     Consulta cómo protegemos tus datos personales, derechos ARCO y el tratamiento de información bancaria.
                 </p>
-                <div class="mt-4 flex items-center text-sm font-medium text-orange-600">
+                <div class="mt-4 flex items-center text-sm font-medium text-primary-600">
                     Ver documento en pantalla &rarr;
                 </div>
             </div>
 
             <!-- Tarjeta 2: Términos y Condiciones -->
             <div onclick="openModal('modal-terminos')" 
-                 class="cursor-pointer bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-orange-500 transition-all group">
+                 class="cursor-pointer bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-primary-500 transition-all group">
                 <div class="flex items-center gap-4 mb-3">
-                    <div class="p-3 bg-orange-100 rounded-lg text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                    <div class="p-3 bg-primary-100 rounded-lg text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-orange-600">Términos y Condiciones</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600">Términos y Condiciones</h3>
                         <span class="text-xs text-gray-500">Documento PDF Oficial</span>
                     </div>
                 </div>
                 <p class="text-sm text-gray-600">
                     Conoce las reglas de la plataforma, condiciones para compradores, vendedores y políticas de uso.
                 </p>
-                <div class="mt-4 flex items-center text-sm font-medium text-orange-600">
+                <div class="mt-4 flex items-center text-sm font-medium text-primary-600">
                     Ver documento en pantalla &rarr;
                 </div>
             </div>
@@ -114,7 +114,7 @@
                 <p class="text-xs text-gray-500">NEXOECO — Documento PDF</p>
             </div>
             <div class="flex items-center gap-3">
-                <a href="{{ asset('docs/Aviso de privacidad.pdf') }}" target="_blank" download class="text-xs text-orange-600 hover:text-orange-700 font-medium border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-lg transition-colors">
+                <a href="{{ asset('docs/Aviso de privacidad.pdf') }}" target="_blank" download class="text-xs text-primary-600 hover:text-primary-700 font-medium border border-primary-200 bg-primary-50 px-3 py-1.5 rounded-lg transition-colors">
                     Descargar PDF
                 </a>
                 <button onclick="closeModal('modal-privacidad')" class="text-gray-400 hover:text-gray-600 text-2xl font-bold p-1">&times;</button>
@@ -125,7 +125,7 @@
             <iframe src="{{ asset('docs/Aviso de privacidad.pdf') }}#toolbar=0" class="w-full h-full border-0">
                 <p class="p-4 text-center text-gray-600">
                     Tu navegador no soporta la vista previa de PDF. 
-                    <a href="{{ asset('docs/Aviso de privacidad.pdf') }}" target="_blank" class="text-orange-600 underline">Haz clic aquí para descargarlo</a>.
+                    <a href="{{ asset('docs/Aviso de privacidad.pdf') }}" target="_blank" class="text-primary-600 no-underline">Haz clic aquí para descargarlo</a>.
                 </p>
             </iframe>
         </div>
@@ -149,7 +149,7 @@
                 <p class="text-xs text-gray-500">NEXOECO — Documento PDF</p>
             </div>
             <div class="flex items-center gap-3">
-                <a href="{{ asset('docs/Terminos_Condiciones_Nexoeco.pdf') }}" target="_blank" download class="text-xs text-orange-600 hover:text-orange-700 font-medium border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-lg transition-colors">
+                <a href="{{ asset('docs/Terminos_Condiciones_Nexoeco.pdf') }}" target="_blank" download class="text-xs text-primary-600 hover:text-primary-700 font-medium border border-primary-200 bg-primary-50 px-3 py-1.5 rounded-lg transition-colors">
                     Descargar PDF
                 </a>
                 <button onclick="closeModal('modal-terminos')" class="text-gray-400 hover:text-gray-600 text-2xl font-bold p-1">&times;</button>
@@ -160,7 +160,7 @@
             <iframe src="{{ asset('docs/Terminos_Condiciones_Nexoeco.pdf') }}#toolbar=0" class="w-full h-full border-0">
                 <p class="p-4 text-center text-gray-600">
                     Tu navegador no soporta la vista previa de PDF. 
-                    <a href="{{ asset('docs/Terminos_Condiciones_Nexoeco.pdf') }}" target="_blank" class="text-orange-600 underline">Haz clic aquí para descargarlo</a>.
+                    <a href="{{ asset('docs/Terminos_Condiciones_Nexoeco.pdf') }}" target="_blank" class="text-primary-600 no-underline">Haz clic aquí para descargarlo</a>.
                 </p>
             </iframe>
         </div>

@@ -66,6 +66,15 @@ test('product and store favorites persist idempotently and belong to the current
     $this->get(route('comprador.favoritos', $type))->assertOk()->assertViewHas('items', fn ($items) => $items->isEmpty());
 })->with(['productos', 'tiendas']);
 
+test('the retired followed-stores section redirects to favorites without changing saved stores', function () {
+    $this->buyer->tiendasFavoritas()->attach($this->store);
+    $this->actingAs($this->buyer)->get(route('comprador.tiendas-seguidas'))
+        ->assertRedirect(route('comprador.favoritos', 'tiendas'));
+    $this->get(route('comprador.favoritos', 'tiendas'))->assertOk()
+        ->assertViewHas('items', fn ($items) => $items->modelKeys() === [$this->store->getKey()]);
+    $this->assertDatabaseCount('tiendas_favoritas', 1);
+});
+
 test('account sections require authentication and a verified email', function () {
     $routes = [route('comprador.dashboard'), route('comprador.favoritos', 'productos'), route('comprador.opiniones'), route('comprador.notificaciones'), route('comprador.soporte', 'contacto')];
     foreach ($routes as $url) {
@@ -89,11 +98,21 @@ test('reviews can be published updated displayed and deleted only by their autho
     $this->assertDatabaseCount('opiniones', 1);
     $review = $this->buyer->opiniones()->firstOrFail();
     expect($review->calificacion)->toBe(4);
-    $this->get($detail)->assertOk()->assertSee('Mi experiencia actualizada')->assertSee('4.0 de 5')->assertDontSee('pendiente de revisión')->assertSee('Editar mi opinión');
+    $response = $this->get($detail)->assertOk()->assertSee('Mi experiencia actualizada')->assertSee('4.0 de 5')->assertDontSee('pendiente de revisión')
+        ->assertSee('aria-label="Editar mi opinión"', false)->assertSee('aria-label="Eliminar mi opinión"', false);
+    $document = new DOMDocument;
+    @$document->loadHTML('<?xml encoding="utf-8" ?>'.$response->getContent());
+    $xpath = new DOMXPath($document);
+    expect($xpath->query('//details[@class="review-editor" and not(@open)]')->length)->toBe(1);
+    $this->from($detail)->post($url, ['calificacion' => 4, 'comentario' => 'abc'])->assertSessionHasErrors('comentario');
+    $invalid = $this->get($detail)->assertSee('abc');
+    @$document->loadHTML('<?xml encoding="utf-8" ?>'.$invalid->getContent());
+    expect((new DOMXPath($document))->query('//details[@class="review-editor" and @open]')->length)->toBe(1);
     $review->forceFill(['estado_moderacion' => 'aprobada'])->save();
     $this->get($detail)->assertOk()->assertSee('4.0 de 5');
     $this->get(route('comprador.opiniones', ['tipo' => $type]))->assertOk()->assertSee('Mi experiencia actualizada');
     $this->actingAs($this->other)->get(route('comprador.opiniones'))->assertOk()->assertDontSee('Mi experiencia actualizada');
+    $this->get($detail)->assertOk()->assertDontSee('aria-label="Editar mi opinión"', false)->assertDontSee('aria-label="Eliminar mi opinión"', false);
     $this->delete(route('comprador.opiniones.destroy', $review->id))->assertNotFound();
     $this->assertDatabaseCount('opiniones', 1);
     $this->actingAs($this->buyer)->delete(route('comprador.opiniones.destroy', $review->id))->assertRedirect();
@@ -105,6 +124,23 @@ test('reviews validate ratings and text and cannot target nonexistent products',
     $this->post(route('comprador.opiniones.store', ['productos', 99999]), ['calificacion' => 5, 'comentario' => 'Reseña válida'])->assertNotFound();
     $this->postJson(route('comprador.favoritos.store', ['tiendas', 99999]))->assertNotFound();
     expect(\App\Models\Opinion::count())->toBe(0);
+});
+
+test('an older own review remains editable without changing public review pagination', function () {
+    $own = $this->buyer->opiniones()->create(['id_producto' => $this->product->getKey(), 'calificacion' => 5, 'comentario' => 'Mi primera experiencia publicada', 'estado_moderacion' => 'aprobada']);
+    $own->forceFill(['created_at' => now()->subDay()])->save();
+    foreach (range(1, 6) as $number) {
+        $author = User::create(['name' => 'Cliente '.$number, 'email' => 'review-'.$number.'@example.test', 'password' => 'password', 'activo' => true]);
+        $author->opiniones()->create(['id_producto' => $this->product->getKey(), 'calificacion' => 4, 'comentario' => 'Otra experiencia de compra '.$number, 'estado_moderacion' => 'aprobada']);
+    }
+    $url = route('productos.show', $this->product);
+    $this->actingAs($this->buyer)->get($url)->assertOk()->assertSee($own->comentario)
+        ->assertViewHas('opiniones', fn ($page) => $page->count() === 5 && !$page->contains('id', $own->id))
+        ->assertSee('aria-label="Editar mi opinión"', false);
+    $response = $this->get($url.'?editar_opinion='.$own->id)->assertOk();
+    $document = new DOMDocument;
+    @$document->loadHTML('<?xml encoding="utf-8" ?>'.$response->getContent());
+    expect((new DOMXPath($document))->query('//details[@class="review-editor" and @open]')->length)->toBe(1);
 });
 
 test('support persists real tickets and notifies only their owner', function () {

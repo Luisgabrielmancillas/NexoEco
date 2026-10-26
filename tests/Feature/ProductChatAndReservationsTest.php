@@ -76,9 +76,9 @@ test('history is paginated and unread counts belong to the correct seller inbox'
     $this->actingAs($this->buyer)->post(route('chat.start', $this->product));
     $chat = ProductChat::firstOrFail();
     for ($i = 0; $i < 55; $i++) {
-        $chat->conversation->messages()->create(['user_id' => $this->buyer->id, 'body' => 'Mensaje '.$i, 'created_at' => now()->subMinutes(60 - $i)]);
+        $chat->conversation->messages()->forceCreate(['user_id' => $this->buyer->id, 'body' => 'Mensaje '.$i, 'created_at' => now()->subMinutes(60 - $i)]);
     }
-    $this->actingAs($this->seller)->get(route('vendedor.mensajes.index'))->assertViewHas('chats', fn ($chats) => $chats->first()->unread_count === 55);
+    $this->actingAs($this->seller)->get(route('vendedor.mensajes.index'))->assertSee('Mensaje 54')->assertViewHas('chats', fn ($chats) => $chats->first()->unread_count === 55);
     $response = $this->getJson(route('chat.messages', $chat))->assertOk()->assertJsonCount(50, 'messages');
     $this->getJson(route('chat.messages', [$chat, 'before' => $response->json('messages.0.id')]))->assertOk()->assertJsonCount(5, 'messages');
     $this->get(route('vendedor.mensajes.index'))->assertViewHas('chats', fn ($chats) => $chats->first()->unread_count === 0);
@@ -112,9 +112,8 @@ test('seller navigation starts with summary then products and messages', functio
     $nav = substr($html, strpos($html, 'aria-label="Navegación de mi tienda"'));
     expect(strpos($nav, '>Resumen<'))->toBeLessThan(strpos($nav, '>Productos<'));
     expect(strpos($nav, '>Productos<'))->toBeLessThan(strpos($nav, '>Mensajes<'));
-    $response = $this->get(route('chat.index'))->assertOk();
-    $html = $response->getContent();
-    expect(strpos($html, 'Mi tienda</a>'))->toBeLessThan(strpos($html, 'Mensajes de mi tienda</a>'));
+    $this->get(route('chat.index'))->assertOk()->assertSee('Vista Vendedor</a>', false)
+        ->assertDontSee('Mensajes de mi tienda</a>', false);
 });
 
 test('product design keeps chat available and only shows enabled Mercado Pago apartados', function () {

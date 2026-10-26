@@ -14,12 +14,13 @@
             $esProducto = (bool) $opinion->id_producto;
             $destino = $esProducto ? $opinion->producto : $opinion->tienda;
             $url = route($esProducto ? 'productos.show' : 'tiendas.show', $destino).'#opiniones';
+            $editUrl = route($esProducto ? 'productos.show' : 'tiendas.show', [$destino, 'editar_opinion' => $opinion->getKey()]).'#opiniones';
         @endphp
         <article class="buyer-panel">
             <div class="buyer-row"><div><span class="buyer-eyebrow">{{ $esProducto ? 'Producto' : 'Tienda' }}</span><h2 style="margin-top:8px;">@if($esProducto && $destino->trashed()){{ $destino->nombre_producto }}@else<a href="{{ $url }}">{{ $esProducto ? $destino->nombre_producto : $destino->nombre_tienda }}</a>@endif</h2></div><span class="opinion-rating">{{ str_repeat('★', $opinion->calificacion) }}{{ str_repeat('☆', 5 - $opinion->calificacion) }} · {{ $opinion->calificacion }}/5</span></div>
             <p class="buyer-review-text">{{ $opinion->comentario }}</p>
             @if($esProducto && $destino->trashed())<p class="buyer-muted">Este producto fue eliminado del marketplace.</p>@endif
-            <div class="buyer-row" style="margin-top:18px;"><span class="buyer-muted">Publicada el {{ $opinion->created_at->format('d/m/Y') }}</span><div class="buyer-row">@if(!$esProducto || !$destino->trashed())<a class="buyer-text-link" href="{{ $url }}">Editar mi opinión</a>@endif<form method="POST" action="{{ route('comprador.opiniones.destroy', $opinion->id) }}">@csrf @method('DELETE')<button class="buyer-text-link" type="submit">Eliminar</button></form></div></div>
+            <div class="buyer-row" style="margin-top:18px;"><span class="buyer-muted">Publicada el {{ $opinion->created_at->format('d/m/Y') }}</span><div class="review-actions">@if(!$esProducto || !$destino->trashed())<a class="review-icon-button" href="{{ $editUrl }}" aria-label="Editar mi opinión" title="Editar mi opinión"><x-seller-icon name="edit"/></a>@endif<form method="POST" action="{{ route('comprador.opiniones.destroy', $opinion->id) }}">@csrf @method('DELETE')<button class="review-icon-button danger" type="submit" aria-label="Eliminar mi opinión" title="Eliminar mi opinión"><x-seller-icon name="trash"/></button></form></div></div>
         </article>
     @empty
         <div class="buyer-empty"><h2>Aún no has publicado opiniones{{ $tipo ? ' de '.$tipo : '' }}</h2><p>Abre un producto o una tienda para compartir tu experiencia con la comunidad.</p><a class="buyer-button" href="{{ route('comprador.dashboard') }}">Explorar el marketplace</a></div>

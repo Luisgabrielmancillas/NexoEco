@@ -1,3 +1,5 @@
+import { themeColor } from './design-tokens';
+
 // The same INEGI municipal boundary is used by the server and both maps.
 function inRing(x, y, ring) {
     let inside = false;
@@ -43,7 +45,7 @@ export async function initializeLocationMap(form, { container, status, locate, r
         ]);
         const map = L.map(container, { scrollWheelZoom: false }).setView(valid() ? [Number(lat.value), Number(lng.value)] : [19.0522, -104.3158], valid() ? 16 : 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' }).addTo(map);
-        if (restricted && boundary) L.geoJSON(boundary, { interactive: false, style: { color: '#C34722', weight: 2, fillOpacity: 0.06 }, attribution: 'Límite municipal: INEGI, Marco Geoestadístico 2025' }).addTo(map);
+        if (restricted && boundary) L.geoJSON(boundary, { interactive: false, style: { color: themeColor('primary'), weight: 2, fillOpacity: 0.06 }, attribution: 'Límite municipal: INEGI, Marco Geoestadístico 2025' }).addTo(map);
         const icon = L.divIcon({ className: 'seller-map-marker', iconSize: [30, 30], iconAnchor: [15, 30] });
         let marker;
         selectPoint = (point, center = false, updateAddress = false) => {

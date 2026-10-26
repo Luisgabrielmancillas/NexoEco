@@ -1,0 +1,79 @@
+/* Shared action sizing prevents text links and form buttons from drifting apart. */
+:root body a, :root body a:hover, :root body a:active, :root body a:focus-visible { text-decoration: none; }
+:root body :is(.buyer-button, .seller-button, .mod-button, .admin-action-button, .ds-primary-button, .ds-secondary-button, .ds-danger-button, .buyer-text-link, .seller-text-link, .growth-quiet-link, .seller-link) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: var(--action-height, 48px);
+    font-size: var(--action-font-size, 13px);
+    line-height: 1.35;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+}
+.action-label { min-width: 0; text-wrap: balance; }
+:root body :is(.buyer-button, .seller-button, .mod-button, .admin-action-button) > svg { flex-shrink: 0; }
+.growth-empty-actions > .seller-button { flex: 0 1 auto; max-width: 100%; }
+:root body :is(.buyer-text-link, .seller-text-link, .growth-quiet-link, .seller-link) {
+    padding: 10px 14px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: var(--color-primary-text);
+    font-weight: 700;
+    cursor: pointer;
+}
+:root body :is(.buyer-text-link, .seller-text-link, .growth-quiet-link, .seller-link):hover { background: var(--color-primary-soft); border-color: var(--color-primary-border); }
+:root body :is(.buyer-text-link, .seller-text-link, .growth-quiet-link, .seller-link) svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+:root body :is(.action-row, .commerce-actions, .commerce-header-actions, .growth-hero-actions, .growth-empty-actions, .seller-actions, .seller-hero-actions, .seller-product-actions, .seller-form-actions, .admin-actions, .admin-document-actions, .mod-delete-actions, .request-actions, .directions-actions, .nearby-store-actions, .hero-actions, .growth-quick-replies, .growth-shortcuts) {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+:is(.admin-actions, .admin-document-actions, .seller-product-actions) { --action-height: 40px; --action-font-size: 12px; }
+:root body :is(.action-row, .commerce-actions, .commerce-header-actions, .growth-hero-actions, .growth-empty-actions, .seller-actions, .seller-hero-actions, .seller-product-actions, .seller-form-actions, .admin-actions, .admin-document-actions, .mod-delete-actions, .request-actions, .directions-actions, .nearby-store-actions, .hero-actions, .growth-quick-replies, .growth-shortcuts) > :is(a, button, form) {
+    align-self: stretch;
+    margin-block: 0;
+    min-width: 0;
+}
+:root body :is(.action-row, .commerce-actions, .commerce-header-actions, .growth-hero-actions, .growth-empty-actions, .seller-actions, .seller-hero-actions, .seller-product-actions, .seller-form-actions, .admin-actions, .admin-document-actions, .mod-delete-actions, .request-actions, .directions-actions, .nearby-store-actions, .hero-actions, .growth-quick-replies, .growth-shortcuts) > form {
+    display: flex;
+    align-items: stretch;
+}
+:root body :is(.action-row, .commerce-actions, .commerce-header-actions, .growth-hero-actions, .growth-empty-actions, .seller-actions, .seller-hero-actions, .seller-product-actions, .seller-form-actions, .admin-actions, .admin-document-actions, .mod-delete-actions, .request-actions, .directions-actions, .nearby-store-actions, .hero-actions, .growth-quick-replies, .growth-shortcuts) > form > :is(button, a) { flex: 1; }
+.buyer-row:has(> :is(a, button, form)) { align-items: center; }
+.buyer-row > .buyer-row:has(> :is(a, button, form)) { align-items: stretch; gap: 10px; }
+.buyer-row > form:has(> :is(.buyer-button, .buyer-text-link)) { display: flex; align-items: stretch; margin: 0; }
+.buyer-row > form > :is(.buyer-button, .buyer-text-link) { flex: 1; }
+.seller-form-actions > p, .nearby-store-actions > span, .seller-actions > p { align-self: center; }
+.growth-empty-actions { justify-content: center; }
+
+/* Fields and their adjacent submit action share one baseline and control height. */
+:root body :is(.growth-filter, .admin-filters, .seller-product-filters, .mod-filters) { align-items: flex-end; }
+:root body :is(.growth-filter, .admin-filters, .seller-product-filters, .mod-filters) :is(input:not([type=checkbox]):not([type=hidden]), select, button) { min-height: 48px; }
+:root body :is(.growth-filter, .admin-filters, .seller-product-filters, .mod-filters) > button { align-self: flex-end; margin-block: 0; }
+
+/* Equal-height catalog cards keep their action rows level across each grid row. */
+.catalog-card, .seller-product-card { display: flex; flex-direction: column; }
+.catalog-body, .seller-product-body { display: flex; flex-direction: column; flex: 1; }
+:root body .catalog-body > .product-button { margin-top: auto; }
+.seller-product-body > .seller-product-actions { margin-top: auto; padding-top: 18px; }
+
+@media (max-width: 600px) {
+    .commerce-actions > :is(a, button, form), .commerce-header-actions > :is(a, button, form) { flex: 1 1 160px; }
+    .growth-hero-actions > :is(a, button) { flex: 1 1 170px; }
+}
+
+:root body .growth-shortcuts > a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; line-height: 1.35; text-align: center; }
+
+.growth-quick-replies > span { align-self: center; }
+
+@media (max-width: 600px) {
+    :root body :is(.commerce-actions, .commerce-header-actions, .growth-hero-actions, .seller-product-actions) { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); grid-auto-rows: 1fr; }
+}

@@ -1,18 +1,5 @@
 @extends('layouts.base')
 
-@push('styles')
-<style>
-    .nav-link-bloqueado {
-        opacity: 0.5 !important;
-        cursor: not-allowed !important;
-    }
-    .nav-link-bloqueado:hover {
-        color: inherit !important;
-        background-color: transparent !important;
-    }
-</style>
-@endpush
-
 @section('site-header')
 <header class="market-header seller-header">
     <div class="nexo-container market-header-main">
@@ -31,18 +18,19 @@
         <a href="{{ route('vendedor.suscripcion.index') }}" class="{{ request()->routeIs('vendedor.suscripcion.*') ? 'active' : '' }}" @if(request()->routeIs('vendedor.suscripcion.*')) aria-current="page" @endif>Planes y promoción</a>
         
         @php
-            $tieneSuscripcion = auth()->user()->subscription?->entitled() ?? false;
+            $tieneSuscripcion = app(\App\Services\SellerBenefits::class)->subscription(auth()->user()) !== null;
         @endphp
         
-        <a href="{{ $tieneSuscripcion ? route('vendedor.herramientas.index') : '#' }}" class="{{ request()->routeIs('vendedor.herramientas.*', 'vendedor.novedades.*', 'vendedor.calendario') ? 'active' : '' }} {{ !$tieneSuscripcion ? 'nav-link-bloqueado' : '' }}" @if(!$tieneSuscripcion) title="Solo disponible en planes de paga" onclick="event.preventDefault(); alert('Esta herramienta es exclusiva de los planes Impulso y Pro. ¡Mejora tu plan para usarla!');" @endif>Herramientas @if(!$tieneSuscripcion) <span aria-hidden="true" style="font-size: 0.8em; margin-left: 3px;">🔒</span> @endif</a>
+        <a href="{{ route('vendedor.herramientas.index') }}" class="{{ request()->routeIs('vendedor.herramientas.*', 'vendedor.novedades.*', 'vendedor.calendario') ? 'active' : '' }} {{ !$tieneSuscripcion ? 'nav-link-bloqueado' : '' }}" @if(!$tieneSuscripcion) data-plan-locked data-dialog-title="Amplía las posibilidades de tu tienda" data-dialog-message="Esta herramienta requiere un plan Impulso o Pro con un periodo pagado vigente. Si ya pagaste, revisa el estado de tu plan." data-dialog-action="{{ route('vendedor.suscripcion.index') }}" data-dialog-action-label="Ver mi plan" @endif @if(request()->routeIs('vendedor.herramientas.*', 'vendedor.novedades.*', 'vendedor.calendario')) aria-current="page" @endif>Herramientas @if(!$tieneSuscripcion)<span class="seller-nav-lock" aria-label="Requiere plan de pago">&#128274;</span>@endif</a>
         <a href="{{ route('vendedor.promociones.index') }}" class="{{ request()->routeIs('vendedor.promociones.*') ? 'active' : '' }}">Ofertas</a>
-        <a href="{{ $tieneSuscripcion ? route('vendedor.estadisticas.index') : '#' }}" class="{{ request()->routeIs('vendedor.estadisticas.*') ? 'active' : '' }} {{ !$tieneSuscripcion ? 'nav-link-bloqueado' : '' }}" @if(!$tieneSuscripcion) title="Solo disponible en planes de paga" onclick="event.preventDefault(); alert('Esta herramienta es exclusiva de los planes Impulso y Pro. ¡Mejora tu plan para usarla!');" @endif>Estadísticas @if(!$tieneSuscripcion) <span aria-hidden="true" style="font-size: 0.8em; margin-left: 3px;">🔒</span> @endif</a>
+        <a href="{{ route('vendedor.estadisticas.index') }}" class="{{ request()->routeIs('vendedor.estadisticas.*') ? 'active' : '' }} {{ !$tieneSuscripcion ? 'nav-link-bloqueado' : '' }}" @if(!$tieneSuscripcion) data-plan-locked data-dialog-title="Amplía las posibilidades de tu tienda" data-dialog-message="Esta herramienta requiere un plan Impulso o Pro con un periodo pagado vigente. Si ya pagaste, revisa el estado de tu plan." data-dialog-action="{{ route('vendedor.suscripcion.index') }}" data-dialog-action-label="Ver mi plan" @endif @if(request()->routeIs('vendedor.estadisticas.*')) aria-current="page" @endif>Estadísticas @if(!$tieneSuscripcion)<span class="seller-nav-lock" aria-label="Requiere plan de pago">&#128274;</span>@endif</a>
     </nav>
 </header>
 @endsection
 @section('content')
 <main class="nexo-container seller-page @yield('seller-class')">
     @if(session('success'))<div class="seller-alert" role="status">{{ session('success') }}</div>@endif
+    @if(session('error'))<div class="seller-alert error" role="alert">{{ session('error') }}</div>@endif
     @if($errors->any())<div class="seller-alert error" role="alert"><strong>Revisa los datos del formulario</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>@if($errors->has('logo') || $errors->has('portada') || $errors->has('imagen'))<p>Vuelve a seleccionar las imágenes antes de guardar.</p>@endif</div>@endif
     @yield('seller-content')
 </main>

@@ -1,7 +1,7 @@
 @extends('layouts.marketplace')
 @section('title', $tienda->nombre_tienda.' | NexoEco')
 @section('content')
-<main class="nexo-container public-store-page store-theme-{{ $storeDesign && array_key_exists($storeDesign->theme, \App\Models\SellerStoreDesign::THEMES) ? $storeDesign->theme : 'terracota' }} {{ $storeSubscription?->plan === 'pro' && $storeDesign?->layout === 'compacto' ? 'store-layout-compact' : '' }}">
+<main class="nexo-container public-store-page store-theme-{{ $storeDesign && array_key_exists($storeDesign->theme, \App\Models\SellerStoreDesign::THEMES) ? $storeDesign->theme : 'brand' }} {{ $storeSubscription?->plan === 'pro' && $storeDesign?->layout === 'compacto' ? 'store-layout-compact' : '' }}">
     @if(session('success'))<p class="commerce-alert" role="status">{{ session('success') }}</p>@endif
     @php($marketRoute = auth()->check() ? 'comprador.dashboard' : 'marketplace.index')
 

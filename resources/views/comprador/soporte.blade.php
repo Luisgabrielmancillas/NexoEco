@@ -9,7 +9,7 @@
     </nav>
     @if($seccion === 'preguntas-frecuentes')
         @foreach([
-            '¿Cómo guardo productos y tiendas?' => 'Presiona la estrella de un producto o una tienda. Los encontrarás en Favoritos, separados entre tiendas y productos. Presiona de nuevo la estrella para quitarlos.',
+            '¿Cómo guardo productos y tiendas?' => 'Presiona el corazón de un producto o una tienda. Los encontrarás en Favoritos, separados entre tiendas y productos. Presiona de nuevo el corazón para quitarlos.',
             '¿Dónde puedo consultar mis reseñas?' => 'En Mis opiniones encontrarás las reseñas que has publicado. Puedes filtrarlas por productos o tiendas, editarlas desde su página o eliminarlas.',
             '¿Cómo verifico mi correo?' => 'Introduce el código de 4 dígitos que recibiste por correo. El código vence en 10 minutos. Puedes solicitar uno nuevo desde la pantalla de verificación.',
             '¿Por qué mi cuenta de vendedor está en revisión?' => 'Después de enviar tus datos y documentos, tu solicitud de vendedor queda en revisión. Mientras tanto, puedes utilizar tu cuenta como comprador. El acceso de vendedor se habilita cuando se aprueba tu solicitud.',
@@ -18,7 +18,7 @@
         <div class="buyer-notice">¿Tu duda sigue pendiente? <a class="buyer-text-link" href="{{ route('comprador.soporte', 'contacto') }}">Envía una consulta a soporte</a>.</div>
     @elseif($seccion === 'ayuda')
         <div class="buyer-panel"><h2>Encuentra productos y tiendas</h2><p>Busca por nombre, descripción, tienda o categoría en el marketplace. Abre una tarjeta para consultar la información publicada por el vendedor.</p><a class="buyer-text-link" href="{{ route('comprador.dashboard') }}">Explorar el marketplace</a></div>
-        <div class="buyer-panel"><h2>Organiza tu selección</h2><p>Guarda tus productos y tiendas con la estrella. Tus favoritos se conservan en tu cuenta para volver a consultarlos.</p><a class="buyer-text-link" href="{{ route('comprador.favoritos', 'productos') }}">Ver mis favoritos</a></div>
+        <div class="buyer-panel"><h2>Organiza tu selección</h2><p>Guarda tus productos y tiendas con el corazón. Tus favoritos se conservan en tu cuenta para volver a consultarlos.</p><a class="buyer-text-link" href="{{ route('comprador.favoritos', 'productos') }}">Ver mis favoritos</a></div>
         <div class="buyer-panel"><h2>Administra tu cuenta</h2><p>En tu perfil puedes actualizar tus datos y contraseña. Revisa las notificaciones para consultar la actividad de tu cuenta.</p><a class="buyer-text-link" href="{{ route('profile.edit') }}">Abrir mi perfil</a></div>
         <div class="buyer-panel"><h2>Cuéntanos qué necesitas</h2><p>Si encuentras un problema, describe lo ocurrido y el producto o tienda involucrados. No incluyas contraseñas ni datos bancarios.</p><a class="buyer-text-link" href="{{ route('comprador.soporte', 'contacto') }}">Contactar con soporte</a></div>
     @else

@@ -5,13 +5,13 @@
 @push('styles')
 
 <style>
-    .register-seller-cta { margin-top: 32px; padding: 24px; border: 1px solid rgba(255,255,255,.4); border-radius: 18px; background: rgba(255,255,255,.12); }
+    .register-seller-cta { margin-top: 32px; padding: 24px; border: 1px solid rgb(var(--color-surface-rgb) / 0.4); border-radius: 18px; background: rgb(var(--color-surface-rgb) / 0.12); }
     .register-seller-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 1.8px; }
     .register-seller-cta h2 { margin: 10px 0 8px; font-size: 24px; font-weight: 800; }
-    .register-seller-cta p { margin: 0 0 20px; font-size: 13px; line-height: 1.7; color: rgba(255,255,255,.92); }
-    .register-seller-cta a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; background: white; color: #B63C18; border-radius: 11px; font-size: 13px; font-weight: 800; }
-    .register-seller-cta a:hover { background: #FFF0EA; }
-    .register-seller-cta a:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+    .register-seller-cta p { margin: 0 0 20px; font-size: 13px; line-height: 1.7; color: var(--color-on-primary); }
+    .register-seller-cta a { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; background: var(--color-surface); color: var(--color-primary-text); border-radius: 11px; font-size: 13px; font-weight: 800; }
+    .register-seller-cta a:hover { background: var(--color-primary-soft); }
+    .register-seller-cta a:focus-visible { outline: 3px solid var(--color-surface); outline-offset: 4px; }
     /* =========================================================
        REGISTRO NEXOECO
     ========================================================== */
@@ -59,15 +59,15 @@
         background:
             linear-gradient(
                 135deg,
-                #E85D2F 0%,
-                #F06A3F 58%,
-                #FF8759 100%
+                var(--color-primary) 0%,
+                var(--color-primary) 58%,
+                var(--color-primary) 100%
             );
 
-        color: #ffffff;
+        color: var(--color-on-primary);
 
         box-shadow:
-            0 12px 30px rgba(232, 93, 47, .16);
+            0 12px 30px rgb(var(--color-text-primary-rgb) / 0.16);
     }
 
     .register-intro::before {
@@ -84,7 +84,7 @@
         border-radius: 50%;
 
         background:
-            rgba(255, 255, 255, .09);
+            rgb(var(--color-surface-rgb) / 0.09);
     }
 
     .register-intro::after {
@@ -101,7 +101,7 @@
         border-radius: 50%;
 
         background:
-            rgba(255, 255, 255, .07);
+            rgb(var(--color-surface-rgb) / 0.07);
     }
 
     .register-intro-content {
@@ -120,12 +120,12 @@
         padding: 6px 10px;
 
         border:
-            1px solid rgba(255, 255, 255, .2);
+            1px solid rgb(var(--color-surface-rgb) / 0.2);
 
         border-radius: 999px;
 
         background:
-            rgba(255, 255, 255, .12);
+            rgb(var(--color-surface-rgb) / 0.12);
 
         font-size: 11px;
         font-weight: 900;
@@ -149,7 +149,7 @@
         margin: 11px 0 0;
 
         color:
-            rgba(255, 255, 255, .9);
+            var(--color-on-primary);
 
         font-size: 13px;
         line-height: 1.55;
@@ -173,12 +173,12 @@
         padding: 9px 11px;
 
         border:
-            1px solid rgba(255, 255, 255, .16);
+            1px solid rgb(var(--color-surface-rgb) / 0.16);
 
         border-radius: 12px;
 
         background:
-            rgba(255, 255, 255, .09);
+            rgb(var(--color-surface-rgb) / 0.09);
 
         font-size: 11px;
         font-weight: 800;
@@ -197,7 +197,7 @@
         border-radius: 8px;
 
         background:
-            rgba(255, 255, 255, .15);
+            rgb(var(--color-surface-rgb) / 0.15);
 
         font-size: 14px;
     }
@@ -216,10 +216,10 @@
 
         border-radius: 22px;
 
-        background: #ffffff;
+        background: var(--color-surface);
 
         box-shadow:
-            0 8px 28px rgba(28, 25, 23, .055);
+            0 8px 28px rgb(var(--color-text-primary-rgb) / 0.055);
     }
 
     .register-card-header {
@@ -281,7 +281,7 @@
 
         border-radius: 12px;
 
-        background: #ffffff;
+        background: var(--color-surface);
         color: var(--nexo-text);
 
         outline: none;
@@ -296,11 +296,11 @@
     }
 
     .form-input::placeholder {
-        color: #A49B95;
+        color: var(--color-text-secondary);
     }
 
     .form-input:hover {
-        border-color: #DCCFC3;
+        border-color: var(--color-border-strong);
     }
 
     .form-input:focus {
@@ -308,18 +308,18 @@
             var(--nexo-primary);
 
         box-shadow:
-            0 0 0 3px rgba(232, 93, 47, .10);
+            0 0 0 3px rgb(var(--color-text-primary-rgb) / 0.1);
     }
 
     .form-input.has-error {
-        border-color: #DC6868;
-        background: #FFF9F9;
+        border-color: var(--color-danger-border);
+        background: var(--color-danger-soft);
     }
 
     .form-error {
         margin-top: 5px;
 
-        color: #B42318;
+        color: var(--color-danger-text);
 
         font-size: 10px;
         line-height: 1.4;
@@ -373,6 +373,8 @@
         color: var(--nexo-primary);
     }
 
+    .form-hint { margin: 8px 0 0; color: var(--nexo-muted); font-size: 12px; line-height: 1.6; }
+
     /* =========================================================
        BOTÓN
     ========================================================== */
@@ -394,7 +396,7 @@
         background:
             var(--nexo-primary);
 
-        color: #ffffff;
+        color: var(--color-on-primary);
 
         cursor: pointer;
 
@@ -415,7 +417,7 @@
         transform: translateY(-1px);
 
         box-shadow:
-            0 6px 16px rgba(232, 93, 47, .18);
+            0 6px 16px rgb(var(--color-text-primary-rgb) / 0.18);
     }
 
     .register-submit:active {
@@ -443,7 +445,7 @@
     }
 
     .register-login a:hover {
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     .register-terms {
@@ -452,7 +454,7 @@
         margin:
             10px auto 0;
 
-        color: #918882;
+        color: var(--color-text-secondary);
 
         font-size: 9px;
         line-height: 1.45;
@@ -828,6 +830,10 @@
                                     "
                                     placeholder="Crea una contraseña segura"
                                     autocomplete="new-password"
+                                    minlength="8"
+                                    pattern="{{ \App\Support\RegistrationPassword::PATTERN }}"
+                                    title="{{ \App\Support\RegistrationPassword::DESCRIPTION }}"
+                                    aria-describedby="password-requirements"
                                     required
                                 >
 
@@ -843,6 +849,8 @@
 
                             </div>
 
+
+                            <p id="password-requirements" class="form-hint">{{ \App\Support\RegistrationPassword::DESCRIPTION }}</p>
 
                             @error('password')
 

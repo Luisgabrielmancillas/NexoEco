@@ -13,8 +13,13 @@ import { initializeLocalDiscovery } from './local-discovery';
 import '../css/local-discovery.css';
 import { initializeModerator } from './moderator';
 import { initializeSellerExperience } from './seller-experience';
+import { initializeAppDialogs } from './app-dialogs';
+import '../css/app-dialogs.css';
+import { initializeReviews } from './reviews';
 
 window.Alpine = Alpine;
+
+initializeAppDialogs();
 
 Alpine.start();
 
@@ -27,6 +32,7 @@ initializeLocalDiscovery();
 initializeModerator();
 initializeChatCommerce();
 initializeSellerExperience();
+initializeReviews();
 
 document.querySelectorAll('[data-document-preview]').forEach((documentPanel) => {
     documentPanel.addEventListener('toggle', () => {

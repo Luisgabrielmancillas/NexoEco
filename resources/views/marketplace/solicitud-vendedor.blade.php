@@ -19,13 +19,13 @@
     .seller-request-card {
         overflow: hidden;
 
-        background: #ffffff;
+        background: var(--color-surface);
 
         border: 1px solid var(--nexo-border);
         border-radius: 22px;
 
         box-shadow:
-            0 8px 28px rgba(28, 25, 23, .055);
+            0 8px 28px rgb(var(--color-text-primary-rgb) / 0.055);
     }
 
     .seller-request-header {
@@ -34,11 +34,11 @@
         background:
             linear-gradient(
                 135deg,
-                #E85D2F,
-                #F4774D
+                var(--color-primary),
+                var(--color-primary)
             );
 
-        color: white;
+        color: var(--color-on-primary);
     }
 
     .seller-request-badge {
@@ -49,7 +49,7 @@
         border-radius: 999px;
 
         background:
-            rgba(255, 255, 255, .14);
+            rgb(var(--color-surface-rgb) / 0.14);
 
         font-size: 10px;
         font-weight: 900;
@@ -68,7 +68,7 @@
         margin: 7px 0 0;
 
         color:
-            rgba(255, 255, 255, .9);
+            var(--color-on-primary);
 
         font-size: 12px;
         line-height: 1.5;
@@ -83,9 +83,9 @@
 
         border-radius: 14px;
 
-        background: #FFF8E7;
+        background: var(--color-warning-soft);
 
-        border: 1px solid #F4D999;
+        border: 1px solid var(--color-warning-border);
     }
 
     .request-status-title {
@@ -96,7 +96,7 @@
     .request-status-text {
         margin-top: 4px;
 
-        color: #746C66;
+        color: var(--color-warning-text);
 
         font-size: 12px;
         line-height: 1.5;
@@ -124,7 +124,7 @@
         border: 1px solid var(--nexo-border);
         border-radius: 12px;
 
-        background: white;
+        background: var(--color-surface);
 
         color: var(--nexo-text);
 
@@ -153,7 +153,7 @@
         border-color: var(--nexo-primary);
 
         box-shadow:
-            0 0 0 3px rgba(232, 93, 47, .09);
+            0 0 0 3px rgb(var(--color-text-primary-rgb) / 0.09);
     }
 
     .request-help {
@@ -168,7 +168,7 @@
     .request-error {
         margin-top: 4px;
 
-        color: #B42318;
+        color: var(--color-danger-text);
 
         font-size: 10px;
         font-weight: 700;
@@ -197,7 +197,7 @@
 
         background: var(--nexo-primary-soft);
 
-        color: #74605A;
+        color: var(--color-text-secondary);
 
         font-size: 10px;
         line-height: 1.45;
@@ -213,7 +213,7 @@
 
         border-radius: 12px;
 
-        background: #FBF9F7;
+        background: var(--color-surface);
 
         font-family: inherit;
         font-size: 11px;
@@ -229,7 +229,7 @@
         border-radius: 999px;
 
         background: var(--nexo-primary);
-        color: white;
+        color: var(--color-on-primary);
 
         cursor: pointer;
 
