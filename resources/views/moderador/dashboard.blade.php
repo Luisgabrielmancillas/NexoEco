@@ -61,7 +61,11 @@
         <article class="mod-activity-item">
             <span class="mod-queue-icon"><x-mod-icon name="{{ $record->tipo_objeto === 'reporte' ? 'flag' : ($record->tipo_objeto === 'productos' ? 'file' : ($record->tipo_objeto === 'opiniones' ? 'comment' : 'users')) }}"/></span>
             <div><strong>{{ $record->accion }}</strong><p>{{ $record->descripcion }}</p><small>{{ $record->nombre_actor }}</small></div>
-            <time datetime="{{ $record->registrada_en->toIso8601String() }}">{{ $record->registrada_en->format('d/m/Y H:i:s') }}</time>
+            @php($fechaActividad = $record->registrada_en->copy()->timezone('America/Mexico_City'))
+
+        <time datetime="{{ $fechaActividad->toIso8601String() }}">
+            {{ $fechaActividad->format('d/m/Y H:i:s') }}
+        </time>
         </article>
     @empty
         <div class="mod-empty"><x-mod-icon name="clock"/><h3>Aún no hay acciones de moderación</h3><p>Las revisiones de vendedores, las eliminaciones de contenido y las respuestas a reportes quedarán registradas aquí.</p></div>
