@@ -15,7 +15,9 @@
 
         <div class="nexo-container market-header-main">
 
-            <button type="button" class="market-header-menu-toggle" data-mobile-nav-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="buyer-navigation-links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg></button>
+            <button type="button" class="market-header-menu-toggle" data-mobile-nav-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="buyer-navigation-links">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+            </button>
 
             {{-- LOGO --}}
             <a
@@ -82,7 +84,7 @@
                         class="market-header-button market-account-button {{ request()->routeIs('profile.*') ? 'is-active' : '' }}"
                         aria-label="Mi cuenta" title="Mi cuenta"
                     >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2" stroke-linecap="round"/></svg><span class="market-account-label">Mi cuenta</span>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2" stroke-linecap="round"/></svg><span class="market-account-label">Mi cuenta</span>
                     </a>
 
                 @endguest
