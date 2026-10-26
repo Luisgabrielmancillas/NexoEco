@@ -3,31 +3,68 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Http;
 
 class StoreSolicitudVendedorRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return auth()->check();
-    }
-
-    public function rules(): array
+public function rules(): array
     {
         return [
-            'rfc' => [
-                'required',
-                'string',
-                'max:13',
-                'regex:/^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$/i',
-            ],
+    'rfc' => [
+                    'required',
+                    'string',
+                    'max:13',
+                    'regex:/^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$/i',
+                    function ($attribute, $value, $fail) {
+                        try {
+                            sleep(1);
+                            $response = Http::withHeaders([
+                                'x-rapidapi-host' => 'rfc-curp-validator-mexico.p.rapidapi.com',
+                                'x-rapidapi-key'  => '2a4db14020msh10d3da536d9c0f7p17c17ajsn2989acdcde5f',
+                            ])->timeout(5)->get('https://rfc-curp-validator-mexico.p.rapidapi.com/taxid/validate', [
+                                'country' => 'MX',
+                                'number'  => $value,
+                            ]);
+
+                            if ($response->successful()) {
+                                $data = $response->json();
+                                if (!($data['valid'] ?? false) || ($data['type'] ?? '') !== 'RFC') {
+                                    $fail('El RFC ingresado no es válido ante el SAT.');
+                                }
+                            }
+                        } catch (\Exception $e) {
+                            // Si falla la API externa, la validación Regex principal permite continuar
+                        }
+                    },
+                ],
 
             'curp' => [
                 'required',
                 'string',
                 'size:18',
                 'regex:/^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[A-Z0-9][0-9]$/i',
-            ],
+                function ($attribute, $value, $fail) {
+                    try {
+                        sleep(1);
+                        $response = Http::withHeaders([
+                            'x-rapidapi-host' => 'rfc-curp-validator-mexico.p.rapidapi.com',
+                            'x-rapidapi-key'  => '2a4db14020msh10d3da536d9c0f7p17c17ajsn2989acdcde5f',
+                        ])->timeout(5)->get('https://rfc-curp-validator-mexico.p.rapidapi.com/taxid/validate', [
+                            'country' => 'MX',
+                            'number'  => $value,
+                        ]);
 
+                        if ($response->successful()) {
+                            $data = $response->json();
+                            if (!($data['valid'] ?? false) || ($data['type'] ?? '') !== 'CURP') {
+                                $fail('La CURP ingresada no existe en el registro oficial (RENAPO).');
+                            }
+                        }
+                    } catch (\Exception $e) {
+                        // Si falla la API externa, la validación Regex principal permite continuar
+                    }
+                },
+            ],
             'telefono' => [
                 'required',
                 'string',
