@@ -1,7 +1,7 @@
 {
   "method": "Static source, CSS syntax and token-contrast audit. No browser screenshots or layout measurements.",
   "paletteSource": "resources/design-system/tokens.json",
-  "templatesReviewed": 131,
+  "templatesReviewed": 140,
   "inventory": [
     {
       "file": "resources/css/action-layout.css",
@@ -35,7 +35,7 @@
     },
     {
       "file": "resources/css/design-system.css",
-      "lines": 86,
+      "lines": 95,
       "embeddedStyles": 0
     },
     {
@@ -50,7 +50,7 @@
     },
     {
       "file": "resources/css/local-discovery.css",
-      "lines": 45,
+      "lines": 46,
       "embeddedStyles": 0
     },
     {
@@ -65,7 +65,7 @@
     },
     {
       "file": "resources/css/product-cards.css",
-      "lines": 26,
+      "lines": 27,
       "embeddedStyles": 0
     },
     {
@@ -95,7 +95,12 @@
     },
     {
       "file": "resources/css/site-shell.css",
-      "lines": 11,
+      "lines": 15,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/css/store-carousel.css",
+      "lines": 25,
       "embeddedStyles": 0
     },
     {
@@ -105,12 +110,12 @@
     },
     {
       "file": "resources/js/app-dialogs.js",
-      "lines": 87,
+      "lines": 122,
       "embeddedStyles": 0
     },
     {
       "file": "resources/js/app.js",
-      "lines": 45,
+      "lines": 50,
       "embeddedStyles": 0
     },
     {
@@ -130,7 +135,7 @@
     },
     {
       "file": "resources/js/chat-commerce.js",
-      "lines": 122,
+      "lines": 136,
       "embeddedStyles": 0
     },
     {
@@ -141,6 +146,11 @@
     {
       "file": "resources/js/discovery-geo.js",
       "lines": 16,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/form-submission.js",
+      "lines": 22,
       "embeddedStyles": 0
     },
     {
@@ -176,6 +186,11 @@
     {
       "file": "resources/js/seller-store.js",
       "lines": 40,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/js/store-carousel.js",
+      "lines": 71,
       "embeddedStyles": 0
     },
     {
@@ -280,12 +295,12 @@
     },
     {
       "file": "resources/views/auth/forgot-password.blade.php",
-      "lines": 26,
+      "lines": 29,
       "embeddedStyles": 0
     },
     {
       "file": "resources/views/auth/login.blade.php",
-      "lines": 540,
+      "lines": 542,
       "embeddedStyles": 1
     },
     {
@@ -305,7 +320,7 @@
     },
     {
       "file": "resources/views/auth/reset-password.blade.php",
-      "lines": 40,
+      "lines": 43,
       "embeddedStyles": 0
     },
     {
@@ -325,7 +340,7 @@
     },
     {
       "file": "resources/views/chat/show.blade.php",
-      "lines": 25,
+      "lines": 26,
       "embeddedStyles": 0
     },
     {
@@ -424,6 +439,11 @@
       "embeddedStyles": 0
     },
     {
+      "file": "resources/views/components/store-carousel.blade.php",
+      "lines": 10,
+      "embeddedStyles": 0
+    },
+    {
       "file": "resources/views/components/text-input.blade.php",
       "lines": 4,
       "embeddedStyles": 0
@@ -470,7 +490,7 @@
     },
     {
       "file": "resources/views/conocenos.blade.php",
-      "lines": 201,
+      "lines": 178,
       "embeddedStyles": 0
     },
     {
@@ -515,7 +535,7 @@
     },
     {
       "file": "resources/views/layouts/administrador/panel-navigation.blade.php",
-      "lines": 13,
+      "lines": 14,
       "embeddedStyles": 0
     },
     {
@@ -525,7 +545,7 @@
     },
     {
       "file": "resources/views/layouts/base.blade.php",
-      "lines": 279,
+      "lines": 280,
       "embeddedStyles": 1
     },
     {
@@ -545,7 +565,7 @@
     },
     {
       "file": "resources/views/layouts/guest.blade.php",
-      "lines": 34,
+      "lines": 35,
       "embeddedStyles": 0
     },
     {
@@ -595,12 +615,12 @@
     },
     {
       "file": "resources/views/marketplace/index.blade.php",
-      "lines": 40,
+      "lines": 39,
       "embeddedStyles": 0
     },
     {
       "file": "resources/views/marketplace/partials/business-hours.blade.php",
-      "lines": 2,
+      "lines": 6,
       "embeddedStyles": 0
     },
     {
@@ -634,8 +654,13 @@
       "embeddedStyles": 0
     },
     {
+      "file": "resources/views/marketplace/partials/nearby-store-card.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
       "file": "resources/views/marketplace/partials/nearby-stores.blade.php",
-      "lines": 18,
+      "lines": 15,
       "embeddedStyles": 0
     },
     {
@@ -674,6 +699,11 @@
       "embeddedStyles": 0
     },
     {
+      "file": "resources/views/marketplace/partials/store-pagination.blade.php",
+      "lines": 16,
+      "embeddedStyles": 0
+    },
+    {
       "file": "resources/views/marketplace/producto.blade.php",
       "lines": 62,
       "embeddedStyles": 0
@@ -686,6 +716,11 @@
     {
       "file": "resources/views/marketplace/tienda.blade.php",
       "lines": 41,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/marketplace/tiendas.blade.php",
+      "lines": 28,
       "embeddedStyles": 0
     },
     {
@@ -705,7 +740,7 @@
     },
     {
       "file": "resources/views/moderador/dashboard.blade.php",
-      "lines": 71,
+      "lines": 75,
       "embeddedStyles": 0
     },
     {
@@ -774,6 +809,31 @@
       "embeddedStyles": 0
     },
     {
+      "file": "resources/views/tipos_usuario/create.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/tipos_usuario/edit.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/tipos_usuario/index.blade.php",
+      "lines": 12,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/tipos_usuario/partials/form.blade.php",
+      "lines": 7,
+      "embeddedStyles": 0
+    },
+    {
+      "file": "resources/views/tipos_usuario/show.blade.php",
+      "lines": 9,
+      "embeddedStyles": 0
+    },
+    {
       "file": "resources/views/vendedor/calendario.blade.php",
       "lines": 45,
       "embeddedStyles": 0
@@ -835,7 +895,7 @@
     },
     {
       "file": "resources/views/welcome.blade.php",
-      "lines": 1177,
+      "lines": 1145,
       "embeddedStyles": 1
     }
   ],
@@ -1192,6 +1252,16 @@
       "file": "resources/css/design-system.css",
       "selector": ":where(body)",
       "ratio": 17.06
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".skip-link",
+      "ratio": 6.7
+    },
+    {
+      "file": "resources/css/design-system.css",
+      "selector": ".legal-dialog",
+      "ratio": 17.85
     },
     {
       "file": "resources/css/design-system.css",

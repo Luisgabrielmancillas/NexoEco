@@ -94,7 +94,11 @@ class ProductChatController extends Controller
     public function send(Request $request, ProductChat $chat, SendMessage $send)
     {
         $this->authorizeChat($request, $chat);
-        $data = $request->validate(['body' => ['required', 'string', 'max:5000']]);
+        $data = $request->validate(['body' => ['required', 'string', 'max:5000']], [
+            'body.required' => 'Escribe un mensaje antes de enviarlo.',
+            'body.string' => 'El mensaje debe contener texto.',
+            'body.max' => 'El mensaje debe contener como máximo 5000 caracteres.',
+        ]);
         abort_unless($chat->buyer->activo && $chat->seller->activo, 403);
         DB::transaction(function () use ($send, $chat, $request, $data) {
             ProductChat::whereKey($chat->id)->lockForUpdate()->firstOrFail();

@@ -224,18 +224,12 @@ class MarketplaceController extends Controller
         */
 
         $catalogRoute = $request->routeIs('comprador.dashboard') ? 'comprador.dashboard' : 'marketplace.index';
-        $tiendas = Tienda::query()->withCount(['productos' => fn ($q) => $q->publicados()])
-            ->when($busqueda, fn ($query) => $query->where(function ($query) use ($busqueda) {
-                $query->where('nombre_tienda', 'like', '%'.$busqueda.'%')->orWhere('descripcion_tienda', 'like', '%'.$busqueda.'%');
-            }))
-            ->when($categoriaSeleccionada, fn ($query) => $query->whereHas('productos', fn ($query) => $query->where('id_categoria', $categoriaSeleccionada)))
-            ->when($seccionSeleccionada, fn ($query) => $query->whereHas('productos', fn ($query) => $query->whereIn('id_categoria', $categoriasDeSeccion)))
-            ->orderByDesc('fecha_creacion')->orderByDesc('id_tienda')
-            ->paginate(8, ['*'], 'pagina_tiendas')->withQueryString();
+        $tiendas = $this->storeQuery($busqueda, $categoriaSeleccionada, $seccionSeleccionada, $categoriasDeSeccion)
+            ->paginate(24, ['*'], 'pagina_tiendas')->withQueryString();
         $solicitudVendedor = $request->user()?->solicitudVendedor()->first();
         $discovery = app(\App\Services\LocalDiscovery::class);
         $ubicacionMapa = $discovery->position($discovery->location($request));
-        $tiendasCercanas = $discovery->nearby($discovery->location($request));
+        $tiendasCercanas = $discovery->nearby($discovery->location($request), 12);
 
         $promotion = app(\App\Services\SellerPromotion::class);
         $tiendasRecomendadas = Tienda::query()->select('tiendas.*')->selectSub($promotion->storePriority(), 'promotion_priority')
@@ -271,5 +265,39 @@ class MarketplaceController extends Controller
                 'seccionSeleccionada'
             )
         );
+    }
+
+    private function storeQuery(?string $busqueda, ?int $categoriaSeleccionada, ?string $seccionSeleccionada, array $categoriasDeSeccion): Builder
+    {
+        return Tienda::query()->withCount(['productos' => fn ($q) => $q->publicados()])
+            ->when($busqueda, fn ($query) => $query->where(function ($query) use ($busqueda) {
+                $query->where('nombre_tienda', 'like', '%'.$busqueda.'%')->orWhere('descripcion_tienda', 'like', '%'.$busqueda.'%');
+            }))
+            ->when($categoriaSeleccionada, fn ($query) => $query->whereHas('productos', fn ($query) => $query->where('id_categoria', $categoriaSeleccionada)))
+            ->when($seccionSeleccionada, fn ($query) => $query->whereHas('productos', fn ($query) => $query->whereIn('id_categoria', $categoriasDeSeccion)))
+            ->orderByDesc('fecha_creacion')->orderByDesc('id_tienda');
+    }
+
+    public function stores(MarketplaceIndexRequest $request): View
+    {
+        $data = $request->validated();
+        $busqueda = $data['q'] ?? null;
+        $categoriaSeleccionada = isset($data['categoria']) ? (int) $data['categoria'] : null;
+        $seccionSeleccionada = $data['seccion'] ?? null;
+        $cercanas = $request->boolean('cercanas');
+        $categorias = Categoria::orderBy('nombre_categoria')->get();
+        $categoryIds = $seccionSeleccionada ? $categorias->filter(fn ($category) => \App\Support\MarketplaceDepartments::forCategory($category->nombre_categoria) === $seccionSeleccionada)->modelKeys() : [];
+        $query = $this->storeQuery($busqueda, $categoriaSeleccionada, $seccionSeleccionada, $categoryIds);
+        $discovery = app(\App\Services\LocalDiscovery::class);
+        $ubicacionMapa = $discovery->position($discovery->location($request));
+        if ($cercanas) {
+            $nearby = $discovery->nearby($discovery->location($request), null, $query);
+            $page = \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPage();
+            $tiendas = new \Illuminate\Pagination\LengthAwarePaginator($nearby->forPage($page, 24)->values(), $nearby->count(), 24, $page, ['path' => $request->url(), 'query' => $request->query()]);
+        } else {
+            $tiendas = $query->paginate(24)->withQueryString();
+        }
+
+        return view('marketplace.tiendas', compact('tiendas', 'categorias', 'busqueda', 'categoriaSeleccionada', 'seccionSeleccionada', 'cercanas', 'ubicacionMapa'));
     }
 }

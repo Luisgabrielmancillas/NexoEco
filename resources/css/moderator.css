@@ -119,7 +119,7 @@ a.mod-stat:hover { border-color: var(--color-primary); }
 .mod-tabs a { display: flex; align-items: center; gap: 5px; padding: 11px 10px; font-size: 10px; color: var(--color-text-secondary); white-space: nowrap; border-radius: 8px; }
 .mod-tabs a.active { background: var(--color-primary-soft); color: var(--color-primary-text); font-weight: 750; }
 .mod-tabs a b { padding: 1px 5px; background: var(--color-primary); color: var(--color-on-primary); border-radius: 99px; font-size: 9px; }
-.mod-table-wrap { overflow-x: auto; }
+.mod-table-wrap { position: relative; overflow-x: auto; }
 .mod-table { border-collapse: collapse; width: 100%; font-size: 12px; text-align: left; }
 .mod-table th { background: var(--color-surface); color: var(--color-text-secondary); text-transform: uppercase; font-size: 8px; font-weight: 650; letter-spacing: .7px; padding: 16px 14px; border-bottom: 1px solid var(--color-border); }
 .mod-table td { padding: 16px 14px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }

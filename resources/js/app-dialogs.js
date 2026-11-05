@@ -65,22 +65,57 @@ export function initializeAppDialogs() {
         });
     });
 
-    // Prevent native validation popups while retaining constraint validation.
-    // Coalesce a form's invalid events to show only its first invalid field.
+    // Keep validation next to the field, including inside an already-open dialog.
+    // Opening another modal here would make the field and its context inaccessible.
     let invalidField;
     document.addEventListener('invalid', (event) => {
         event.preventDefault();
+        const field = event.target;
+        field.setAttribute('aria-invalid', 'true');
+        const errorId = field.dataset.constraintErrorId ||= field.id ? `${field.id}-constraint-error` : `constraint-error-${++validationSequence}`;
+        let hint = document.getElementById(errorId);
+        if (!hint) {
+            hint = document.createElement('p');
+            hint.id = errorId;
+            hint.className = 'field-constraint-error';
+            hint.dataset.constraintError = '';
+            field.insertAdjacentElement('afterend', hint);
+        }
+        hint.textContent = constraintMessage(field);
+        const descriptions = new Set((field.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+        descriptions.add(errorId);
+        field.setAttribute('aria-describedby', [...descriptions].join(' '));
         if (invalidField) return;
-        invalidField = event.target;
-        queueMicrotask(() => {
+        invalidField = field;
+        requestAnimationFrame(() => {
             const field = invalidField;
             invalidField = null;
-            const label = field.labels?.[0]?.textContent.trim() || field.getAttribute('aria-label');
-            show({
-                trigger: field,
-                title: 'Revisa los datos del formulario',
-                message: `${label ? `${label}: ` : ''}${field.validationMessage}`,
-            });
+            field.focus();
         });
     }, true);
+    document.addEventListener('input', (event) => {
+        const field = event.target;
+        const errorId = field.dataset.constraintErrorId;
+        if (!errorId || !field.validity.valid) return;
+        document.getElementById(errorId)?.remove();
+        field.removeAttribute('aria-invalid');
+        const remaining = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(id => id && id !== errorId);
+        if (remaining.length) field.setAttribute('aria-describedby', remaining.join(' '));
+        else field.removeAttribute('aria-describedby');
+    });
+}
+
+let validationSequence = 0;
+
+export function constraintMessage(field) {
+    const validity = field.validity;
+    if (validity.customError) return field.validationMessage;
+    if (validity.valueMissing) return field.type === 'checkbox' ? 'Marca esta casilla para continuar.' : 'Completa este campo para continuar.';
+    if (validity.typeMismatch) return field.type === 'email' ? 'Escribe un correo electrónico válido.' : 'Escribe una dirección válida.';
+    if (validity.tooShort) return `Escribe al menos ${field.minLength} caracteres.`;
+    if (validity.tooLong) return `Escribe como máximo ${field.maxLength} caracteres.`;
+    if (validity.rangeUnderflow) return `El valor mínimo es ${field.min}.`;
+    if (validity.rangeOverflow) return `El valor máximo es ${field.max}.`;
+    if (validity.badInput || validity.stepMismatch) return 'Escribe un número válido con la precisión indicada.';
+    return 'Revisa el formato de este campo.';
 }

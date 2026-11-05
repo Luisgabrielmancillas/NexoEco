@@ -43,10 +43,10 @@
     }
 
     .nexo-login {
-        position: fixed;
-        inset: 0;
+        position: relative;
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
+        min-height: 100dvh;
         display: grid;
         grid-template-columns: 1.15fr .85fr;
         overflow: hidden;
@@ -475,12 +475,13 @@
                         required
                         autofocus
                         autocomplete="username"
-                        maxlength="120"
+                        maxlength="255"
+                        @if($errors->has('email')) aria-invalid="true" aria-describedby="email-error" @endif
                         spellcheck="false"
                         placeholder="ejemplo@correo.com"
                     >
 
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <x-input-error id="email-error" :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
                 <div class="field">
@@ -492,11 +493,12 @@
                         name="password"
                         required
                         autocomplete="current-password"
+                        @if($errors->has('password')) aria-invalid="true" aria-describedby="password-error" @endif
                         maxlength="255"
                         placeholder="Tu contraseña"
                     >
 
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    <x-input-error id="password-error" :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
                 <div class="login-options">

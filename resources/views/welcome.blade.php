@@ -30,14 +30,14 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Comic Sans', sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
             background: var(--bg);
             color: var(--ink);
             overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Comic Sans', sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
         }
 
         /* ── NAV ── */
@@ -60,7 +60,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Comic Sans', sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
             font-size: 1.25rem;
             font-weight: 800;
             color: var(--ink);
@@ -297,7 +297,7 @@
             animation: marquee 20s linear infinite;
         }
         .banner-item {
-            font-family: 'Comic Sans', sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
             font-size: 0.875rem;
             font-weight: 700;
             color: var(--color-primary-text);
@@ -354,7 +354,7 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-family: 'Comic Sans', sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
             font-size: 1.125rem;
             font-weight: 700;
             margin-bottom: 2rem;
@@ -385,7 +385,7 @@
             font-size: 0.8rem;
             font-weight: 700;
             flex-shrink: 0;
-            font-family: 'Comic Sans', sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
         }
         .num-buyer { background: rgb(var(--color-primary-rgb) / 0.12); color: var(--accent2); }
         .num-seller { background: rgb(var(--color-primary-rgb) / 0.12); color: var(--accent); }
@@ -462,7 +462,7 @@
         }
         .stat-item { text-align: center; }
         .stat-val {
-            font-family: 'Comic Sans', sans-serif;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
             font-size: 2.75rem;
             font-weight: 800;
             color: var(--color-primary-text);
@@ -585,9 +585,9 @@
             border-radius: 0 0 10px 10px;
         }
 
-        .price-name { font-family: 'Comic Sans', sans-serif; font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .price-name { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; }
         .price-desc { font-size: 0.8125rem; color: var(--muted); margin-bottom: 1.5rem; }
-        .price-val { font-family: 'Comic Sans', sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .price-val { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
         .price-val span { font-size: 1rem; font-weight: 400; color: var(--muted); }
         .price-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
         .price-features li {
@@ -649,7 +649,7 @@
         }
         .cta-card:hover { background: rgb(var(--color-surface-rgb) / 0.08); }
         .cta-card-icon { font-size: 1.75rem; margin-bottom: 0.875rem; }
-        .cta-card-title { font-family: 'Comic Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--color-on-primary); margin-bottom: 0.375rem; }
+        .cta-card-title { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 1rem; font-weight: 700; color: var(--color-on-primary); margin-bottom: 0.375rem; }
         .cta-card-sub { font-size: 0.8125rem; color: var(--color-dark-muted); margin-bottom: 1.25rem; }
 
         /* Container */
@@ -685,6 +685,8 @@
             .feat-grid { grid-template-columns: 1fr;  background: var(--color-border); }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
+        .pricing-note, .testi-role { color: var(--color-primary-text); }
+        @media (max-width: 380px) { nav { flex-wrap: wrap; height: auto; gap: 8px; padding-block: 10px; } .nav-actions { flex-wrap: wrap; gap: 8px; } }
     </style>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 </head>
@@ -692,7 +694,7 @@
 
 <!-- NAV -->
 <nav id="navbar">
-    <a href="#" class="nav-logo">
+    <a href="{{ route('marketplace.index') }}" class="nav-logo">
         <span class="nav-logo-dot"></span>
         NexoEco
     </a>
@@ -722,7 +724,7 @@
         <div class="hero-buyer">
             <span class="hero-tag tag-buyer"><i class="fas fa-shopping-bag"></i> Para compradores</span>
             <h1 class="hero-title">Descubre tiendas únicas de emprendedores reales</h1>
-            <p class="hero-sub">Explora miles de productos auténticos de microemprendedores. Apoya el comercio local y encuentra lo que buscas en un solo lugar.</p>
+            <p class="hero-sub">Explora productos de microemprendedores de tu comunidad. Apoya el comercio local y encuentra lo que buscas en un solo lugar.</p>
             <div class="hero-actions">
                 <a href="{{ route('register') }}" class="btn btn-blue btn-lg">
                     <i class="fas fa-search"></i> Explorar tiendas
@@ -787,7 +789,7 @@
         <div class="hero-seller">
             <span class="hero-tag tag-seller"><i class="fas fa-store"></i> Para vendedores</span>
             <h1 class="hero-title">Lanza tu tienda virtual y vende desde hoy</h1>
-            <p class="hero-sub">Crea tu microtienda, carga tus productos y empieza a vender a miles de compradores registrados. Sin conocimientos técnicos.</p>
+            <p class="hero-sub">Crea tu microtienda, carga tus productos y conecta con compradores de tu comunidad. Sin conocimientos técnicos.</p>
             <div class="hero-actions">
                 <a href="{{ route('vendedor.register') }}" class="btn btn-accent btn-lg">
                     <i class="fas fa-store"></i> Crear mi tienda
@@ -840,18 +842,18 @@
 <div class="banner">
     <div class="banner-track">
         <span class="banner-item">🛍️ Compra gratis <span class="banner-sep">·</span></span>
-        <span class="banner-item">🏪 Miles de tiendas <span class="banner-sep">·</span></span>
+        <span class="banner-item">🏪 Comercios locales <span class="banner-sep">·</span></span>
         <span class="banner-item">🚀 Crea tu tienda hoy <span class="banner-sep">·</span></span>
         <span class="banner-item">💳 Pagos seguros <span class="banner-sep">·</span></span>
-        <span class="banner-item">📦 Envíos automatizados <span class="banner-sep">·</span></span>
+        <span class="banner-item">📦 Entrega acordada por chat <span class="banner-sep">·</span></span>
         <span class="banner-item">🌎 Manzanillo <span class="banner-sep">·</span></span>
         <span class="banner-item">✅ Sin comisiones ocultas <span class="banner-sep">·</span></span>
         <!-- duplicate for infinite loop -->
         <span class="banner-item">🛍️ Compra gratis <span class="banner-sep">·</span></span>
-        <span class="banner-item">🏪 Miles de tiendas <span class="banner-sep">·</span></span>
+        <span class="banner-item">🏪 Comercios locales <span class="banner-sep">·</span></span>
         <span class="banner-item">🚀 Crea tu tienda hoy <span class="banner-sep">·</span></span>
         <span class="banner-item">💳 Pagos seguros <span class="banner-sep">·</span></span>
-        <span class="banner-item">📦 Envíos automatizados <span class="banner-sep">·</span></span>
+        <span class="banner-item">📦 Entrega acordada por chat <span class="banner-sep">·</span></span>
         <span class="banner-item">🌎 Manzanillo <span class="banner-sep">·</span></span>
         <span class="banner-item">✅ Sin comisiones ocultas <span class="banner-sep">·</span></span>
     </div>
@@ -883,14 +885,14 @@
                         <div class="step-num num-buyer">2</div>
                         <div class="step-text">
                             <h4>Explora tiendas y productos</h4>
-                            <p>Navega por cientos de microtiendas de emprendedores. Filtra por categoría, precio o ubicación.</p>
+                            <p>Explora comercios locales, busca por nombre o categoría y consulta tiendas cercanas al guardar tu ubicación.</p>
                         </div>
                     </div>
                     <div class="step">
                         <div class="step-num num-buyer">3</div>
                         <div class="step-text">
-                            <h4>Compra con seguridad</h4>
-                            <p>Paga de forma segura y sigue el estado de tu pedido en tiempo real hasta que llegue a tus manos.</p>
+                            <h4>Habla con el vendedor</h4>
+                            <p>Consulta disponibilidad y acuerda la entrega por chat. Si el vendedor ofrece apartados, revisa sus condiciones antes de pagar el anticipo con Mercado Pago.</p>
                         </div>
                     </div>
                 </div>
@@ -907,21 +909,21 @@
                         <div class="step-num num-seller">1</div>
                         <div class="step-text">
                             <h4>Crea tu tienda virtual</h4>
-                            <p>Elige el nombre de tu tienda, personaliza tu perfil y empieza a cargar productos en minutos.</p>
+                            <p>Envía tu solicitud y documentos. Cuando se aprueben, configura tu tienda y publica tus productos.</p>
                         </div>
                     </div>
                     <div class="step">
                         <div class="step-num num-seller">2</div>
                         <div class="step-text">
-                            <h4>Gestiona inventario y pedidos</h4>
-                            <p>Recibe notificaciones de nuevos pedidos, controla tu stock y coordina envíos desde un panel sencillo.</p>
+                            <h4>Gestiona productos y conversaciones</h4>
+                            <p>Edita tu catálogo, responde mensajes y consulta tus apartados recibidos desde el panel de vendedor.</p>
                         </div>
                     </div>
                     <div class="step">
                         <div class="step-num num-seller">3</div>
                         <div class="step-text">
                             <h4>Cobra y haz crecer tu negocio</h4>
-                            <p>Recibe pagos directamente. Accede a reportes de ventas y crece apoyado por miles de compradores en la plataforma.</p>
+                            <p>Conecta Mercado Pago para recibir anticipos. Los planes Impulso y Pro incorporan herramientas de promoción y estadísticas.</p>
                         </div>
                     </div>
                 </div>
@@ -942,44 +944,44 @@
                 <span class="feat-tag ft-buyer">Para compradores</span>
                 <div class="feat-icon feat-icon-blue"><i class="fas fa-search"></i></div>
                 <h3>Búsqueda inteligente</h3>
-                <p>Encuentra exactamente lo que buscas con filtros por categoría, precio, ubicación y valoraciones.</p>
+                <p>Busca productos y tiendas por nombre o categoría y descubre negocios cercanos al guardar tu ubicación.</p>
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-seller">Para vendedores</span>
                 <div class="feat-icon feat-icon-primary"><i class="fas fa-cube"></i></div>
                 <h3>Gestión de productos</h3>
-                <p>Agrega fotos, variantes, stock y precios. Organiza tu catálogo de forma profesional sin complicaciones.</p>
+                <p>Publica fotos, descripciones y precios. Organiza tus productos por categoría y actualízalos desde tu panel.</p>
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-all">Para todos</span>
                 <div class="feat-icon feat-icon-green"><i class="fas fa-shield-alt"></i></div>
                 <h3>Pagos seguros</h3>
-                <p>Transacciones protegidas con cifrado de extremo a extremo. Compradores y vendedores siempre protegidos.</p>
+                <p>Los apartados habilitados se pagan en Mercado Pago. Consulta el importe, las condiciones y el estado confirmado de cada anticipo.</p>
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-seller">Para vendedores</span>
                 <div class="feat-icon feat-icon-primary"><i class="fas fa-chart-line"></i></div>
                 <h3>Reportes en tiempo real</h3>
-                <p>Visualiza tus ingresos, tendencias de venta y productos más populares desde tu dashboard.</p>
+                <p>Consulta las métricas incluidas en tu plan. Los reportes distinguen los anticipos verificados de las ventas declaradas por el vendedor.</p>
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-buyer">Para compradores</span>
                 <div class="feat-icon feat-icon-blue"><i class="fas fa-truck"></i></div>
-                <h3>Seguimiento de pedidos</h3>
-                <p>Sigue tu compra en tiempo real desde que el vendedor la procesa hasta que llega a tu puerta.</p>
+                <h3>Seguimiento de apartados</h3>
+                <p>Consulta el estado de tu anticipo y acuerda con el vendedor la disponibilidad y entrega por chat.</p>
             </div>
             <div class="feat-card">
                 <span class="feat-tag ft-seller">Para vendedores</span>
                 <div class="feat-icon feat-icon-primary"><i class="fas fa-mobile-alt"></i></div>
                 <h3>Gestión desde el celular</h3>
-                <p>Administra tu tienda, responde pedidos y revisa estadísticas desde cualquier dispositivo.</p>
+                <p>Administra tu tienda y responde conversaciones desde el celular. Las estadísticas disponibles dependen de tu plan.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- STATS -->
-<div class="stats">
+<div class="stats"><p style="text-align:center;padding:16px">Cifras ilustrativas del diseño; no representan métricas reales de NexoEco.</p>
     <div class="stats-grid">
         <div class="stat-item">
             <div class="stat-val">+10K</div>
@@ -1001,6 +1003,7 @@
 </div>
 
 <!-- TESTIMONIALS -->
+<p style="text-align:center;padding:16px">Los siguientes testimonios son ejemplos ilustrativos, no reseñas verificadas.</p>
 <section id="testimonios">
     <div class="container">
         <div class="section-label">Testimonios</div>
@@ -1034,7 +1037,7 @@
             </div>
             <div class="testi-card">
                 <span class="testi-role role-seller">Vendedora</span>
-                <p class="testi-text">"El dashboard de ventas es clarísimo. Puedo ver mis ingresos, los pedidos pendientes y las visitas a mi tienda todo en tiempo real."</p>
+                <p class="testi-text">"El dashboard de ventas es clarísimo. Puedo consultar mis productos y conversar con las personas interesadas desde mi panel."</p>
                 <div class="testi-author">
                     <img src="https://randomuser.me/api/portraits/women/68.jpg" class="testi-avatar" alt="Ana García">
                     <div>
@@ -1056,60 +1059,24 @@
 
         <div class="pricing-note">
             <i class="fas fa-info-circle"></i>
-            Registrarse y comprar en NexoEco es siempre <strong>100% gratuito</strong> para compradores
+            Crear una cuenta de comprador es <strong>gratuito</strong>. Los productos y anticipos tienen el precio indicado por cada vendedor.
         </div>
 
-        <p class="section-sub" style="margin-top:0.5rem">Elige el plan que mejor se adapte al tamaño de tu emprendimiento. Sin contratos, cancela cuando quieras.</p>
+        <p class="section-sub" style="margin-top:0.5rem">Compara los precios mensuales en MXN y los beneficios de cada plan antes de contratar.</p>
 
         <div class="pricing-grid">
-            <!-- Básico -->
-            <div class="price-card">
-                <div class="price-name">Básico</div>
-                <div class="price-desc">Para empezar a vender</div>
-                <div class="price-val">$0 <span>/mes</span></div>
+            @foreach(config('subscriptions.plans') as $planKey => $plan)
+            <div class="price-card {{ $planKey === 'impulso' ? 'popular' : '' }}">
+                @if($planKey === 'impulso')<div class="popular-badge">Impulsa tu negocio</div>@endif
+                <div class="price-name">{{ $plan['name'] }}</div>
+                <div class="price-desc">{{ $plan['description'] }}</div>
+                <div class="price-val">${{ number_format($plan['price'], 0) }} <span>MXN/mes</span></div>
                 <ul class="price-features">
-                    <li><i class="fas fa-check"></i> Hasta 10 productos</li>
-                    <li><i class="fas fa-check"></i> Pagos integrados</li>
-                    <li><i class="fas fa-check"></i> Panel de pedidos</li>
-                    <li><i class="fas fa-check"></i> Soporte por email</li>
-                    <li class="off"><i class="fas fa-times"></i> Reportes avanzados</li>
-                    <li class="off"><i class="fas fa-times"></i> Tienda personalizada</li>
+                    @foreach($plan['benefits'] as $benefit)<li><i class="fas fa-check" aria-hidden="true"></i> {{ $benefit }}</li>@endforeach
                 </ul>
-                <a href="{{ route('vendedor.register') }}" class="btn btn-ghost" style="width:100%;justify-content:center">Comenzar gratis</a>
+                <a href="{{ route('vendedor.register') }}" class="btn {{ $planKey === 'impulso' ? 'btn-accent' : 'btn-ghost' }}" style="width:100%;justify-content:center">{{ $planKey === 'gratis' ? 'Comenzar gratis' : 'Registrarme como vendedor' }}</a>
             </div>
-
-            <!-- Profesional -->
-            <div class="price-card popular">
-                <div class="popular-badge">Más popular</div>
-                <div class="price-name">Profesional</div>
-                <div class="price-desc">Para negocios en crecimiento</div>
-                <div class="price-val">$29 <span>/mes</span></div>
-                <ul class="price-features">
-                    <li><i class="fas fa-check"></i> Productos ilimitados</li>
-                    <li><i class="fas fa-check"></i> Reportes avanzados</li>
-                    <li><i class="fas fa-check"></i> Tienda personalizable</li>
-                    <li><i class="fas fa-check"></i> Soporte 24/7</li>
-                    <li><i class="fas fa-check"></i> Acceso a API</li>
-                    <li><i class="fas fa-check"></i> Gestión de envíos</li>
-                </ul>
-                <a href="{{ route('vendedor.register') }}" class="btn btn-accent" style="width:100%;justify-content:center">Prueba 14 días gratis</a>
-            </div>
-
-            <!-- Empresarial -->
-            <div class="price-card">
-                <div class="price-name">Empresarial</div>
-                <div class="price-desc">Para grandes operaciones</div>
-                <div class="price-val">$99 <span>/mes</span></div>
-                <ul class="price-features">
-                    <li><i class="fas fa-check"></i> Todo el plan Pro</li>
-                    <li><i class="fas fa-check"></i> Múltiples usuarios</li>
-                    <li><i class="fas fa-check"></i> Personalización total</li>
-                    <li><i class="fas fa-check"></i> Gerente dedicado</li>
-                    <li><i class="fas fa-check"></i> SLA garantizado</li>
-                    <li><i class="fas fa-check"></i> Integraciones custom</li>
-                </ul>
-                <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center">Contactar ventas</a>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -1130,7 +1097,7 @@
         <div class="cta-card">
             <div class="cta-card-icon">🏪</div>
             <div class="cta-card-title">Quiero vender</div>
-            <div class="cta-card-sub">14 días gratis, sin tarjeta</div>
+            <div class="cta-card-sub">Registro de vendedor sin costo</div>
             <a href="{{ route('vendedor.register') }}" class="btn btn-accent" style="width:100%;justify-content:center">Crear mi tienda</a>
         </div>
     </div>
@@ -1146,10 +1113,11 @@
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
-            const target = document.querySelector(a.getAttribute('href'));
+            const id = a.getAttribute('href').slice(1);
+            const target = id ? document.getElementById(id) : null;
             if (target) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
             }
         });
     });
@@ -1164,7 +1132,7 @@
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.feat-card, .testi-card, .price-card, .step').forEach(el => {
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.feat-card, .testi-card, .price-card, .step').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';

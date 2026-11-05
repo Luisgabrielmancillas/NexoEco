@@ -205,7 +205,7 @@
     .market-header-main { position: relative; min-height: 60px; }
     .market-header-menu-toggle { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; color: var(--color-text-secondary); }
     .market-header-menu-toggle svg { width: 21px; height: 21px; }
-    .market-header-main > .market-brand { position: absolute; left: 50%; transform: translateX(-50%); font-size: 18px; }
+    .market-header:not(.seller-header):not(.admin-header) .market-header-main > .market-brand { position: absolute; left: 50%; transform: translateX(-50%); font-size: 18px; }
     .market-desktop-location, .market-header-main > .market-search { display: none; }
     .market-header .market-actions { gap: 6px; margin-left: auto; }
     .market-header .market-account-label { display: none; }

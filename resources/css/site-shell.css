@@ -7,4 +7,8 @@ body.nexo-site { display: flex; flex-direction: column; min-height: 100vh; min-h
 .notification-toast a { flex: 1; font-size: 13px; line-height: 1.5; font-weight: 600; }
 .notification-toast button { border: 0; border-radius: 50%; width: 30px; height: 30px; flex-shrink: 0; background: var(--color-background-secondary); cursor: pointer; font-size: 22px; }
 .seller-header-actions .market-notifications { flex-shrink: 0; }
+.seller-header .market-header-main { flex-wrap: wrap; padding-block: 10px; }
+.seller-header .market-brand { position: static; transform: none; }
+.seller-header-actions { flex-wrap: wrap; justify-content: flex-end; }
+.seller-back-market { display: inline-flex; align-items: center; min-height: 44px; }
 @media(max-width:600px) { .notification-toast { right: 16px; bottom: 16px; } .seller-header-actions { gap: 8px; } .seller-back-market { max-width: 92px; text-align: center; font-size: 10px; } }

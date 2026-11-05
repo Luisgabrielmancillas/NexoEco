@@ -52,7 +52,7 @@
     .seller-checklist li::before { content: '✓'; color: var(--color-success-text); font-weight: 800; margin-right: 12px; }
     .seller-password { position: relative; }
     .seller-password input { padding-right: 65px !important; }
-    .seller-password button { position: absolute; top: 12px; right: 12px; padding: 2px; border: 0; background: transparent; color: var(--color-primary-text); font-size: 12px; font-weight: 700; cursor: pointer; }
+    .seller-password button { position: absolute; top: 2px; bottom: 2px; right: 8px; min-width: 44px; min-height: 44px; padding: 2px; border: 0; background: transparent; color: var(--color-primary-text); font-size: 12px; font-weight: 700; cursor: pointer; }
     .seller-page [hidden] { display: none !important; }
     .seller-progress { display: flex; justify-content: space-between; margin-bottom: 20px; color: var(--color-text-secondary); font-size: 12px; }
     .seller-progress progress { width: 100px; height: 6px; align-self: center; accent-color: var(--color-primary); }

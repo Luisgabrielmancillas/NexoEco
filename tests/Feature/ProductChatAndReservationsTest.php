@@ -72,6 +72,15 @@ test('chat requires verification and rejects self messages and general Chatify a
     $this->get('/api/chatify/v1/conversations')->assertNotFound();
 });
 
+test('account deletion with commerce history explains the restriction and preserves the session', function () {
+    $this->actingAs($this->buyer)->post(route('chat.start', $this->product))->assertRedirect();
+    $this->from(route('profile.edit'))->delete(route('profile.destroy'), ['password' => 'test-password'])
+        ->assertRedirect(route('profile.edit'))->assertSessionHasErrorsIn('userDeletion', 'password');
+    $this->assertAuthenticatedAs($this->buyer);
+    $this->assertDatabaseHas('users', ['id' => $this->buyer->id]);
+    expect(ProductChat::count())->toBe(1);
+});
+
 test('history is paginated and unread counts belong to the correct seller inbox', function () {
     $this->actingAs($this->buyer)->post(route('chat.start', $this->product));
     $chat = ProductChat::firstOrFail();

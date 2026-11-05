@@ -23,3 +23,4 @@
     :root body .product-card .product-button { min-height: 44px; }
 }
 @media (max-width: 380px) { .favorites-grid.favorites-products { grid-template-columns: minmax(0, 1fr); } }
+.product-shop > a { display: inline-flex; align-items: center; min-height: 24px; }

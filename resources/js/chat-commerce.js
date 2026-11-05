@@ -38,17 +38,26 @@ export function initializeChatCommerce() {
         const nodes = new Map();
         let firstId = null;
         let loading = false;
+        let sending = false;
         let stopped = false;
         let initial = true;
         const request = async (url, options = {}) => {
-            const response = await fetch(url, { credentials: 'same-origin', ...options, headers: {
+            const response = await fetch(url, { credentials: 'same-origin', signal: AbortSignal.timeout(15000), ...options, headers: {
                 'Accept': 'application/json', 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                 ...options.headers,
-            } });
+            } }).catch((error) => {
+                throw new Error(error.name === 'TimeoutError' ? 'La conexión tardó demasiado. Intenta de nuevo; tu borrador sigue aquí.' : 'No pudimos conectar. Revisa tu conexión e intenta de nuevo.');
+            });
             const data = await response.json().catch(() => ({}));
             if (!response.ok) {
-                if ([401, 403, 404, 419].includes(response.status)) stopped = true;
+                if ([401, 403, 404, 419].includes(response.status)) {
+                    stopped = true;
+                    room.querySelector('[data-chat-reconnect]').hidden = false;
+                    form.querySelector('button[type="submit"]').disabled = true;
+                    if ([401, 419].includes(response.status)) throw new Error('Tu sesión expiró. Recarga la página e inicia sesión para continuar. Tu borrador se conserva aquí.');
+                    throw new Error('Esta conversación ya no está disponible para tu cuenta. Vuelve a tus mensajes para continuar.');
+                }
                 throw new Error(Object.values(data.errors ?? {}).flat()[0] ?? data.message ?? 'No pudimos conectar. Reintenta en unos segundos.');
             }
             return data;
@@ -101,9 +110,11 @@ export function initializeChatCommerce() {
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
             const text = form.elements.body.value.trim();
-            if (!text || stopped) return;
+            if (!text || stopped || sending) return;
+            sending = true;
             const button = form.querySelector('button');
             button.disabled = true;
+            button.setAttribute('aria-busy', 'true');
             const textarea = form.elements.body;
             textarea.readOnly = true;
             try {
@@ -111,11 +122,14 @@ export function initializeChatCommerce() {
                 textarea.value = '';
                 await refresh();
             } catch (error) { status.textContent = error.message; }
-            finally { button.disabled = false; textarea.readOnly = false; textarea.focus(); }
+            finally { sending = false; button.disabled = stopped; button.removeAttribute('aria-busy'); textarea.readOnly = false; textarea.focus(); }
         });
         refresh();
-        const timer = window.setInterval(() => refresh(), 3000);
+        let timer = window.setInterval(() => refresh(), 3000);
         document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
-        window.addEventListener('pagehide', () => window.clearInterval(timer), { once: true });
+        window.addEventListener('pagehide', () => { window.clearInterval(timer); timer = null; });
+        window.addEventListener('pageshow', () => {
+            if (timer === null) { timer = window.setInterval(() => refresh(), 3000); refresh(); }
+        });
     });
 }

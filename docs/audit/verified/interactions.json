@@ -1,0 +1,35 @@
+{
+  "passed": [
+    "Visor legal: Enter, diálogo modal, carga diferida, Escape y restitución del foco",
+    "Menú comprador: foco contenido, Escape y estado aria-expanded a 320 px",
+    "Menú moderador: navegación con Tab y retorno del foco al cerrar",
+    "Validación: error asociado en español, primer campo enfocado y limpieza tras corregirlo",
+    "Validación dentro de un diálogo: mantiene un solo modal y enfoca el campo inválido",
+    "Apartados opcionales: campos requeridos solo cuando la opción está activada",
+    "Envíos nativos: bloquea duplicados, conserva el submitter y restaura el estado al regresar",
+    "Chat: evita doble envío, escapa HTML, reanuda polling tras volver y conserva borrador ante 419",
+    "Landing: navegación por anclas sin errores y planes derivados de la configuración",
+    "Orientación horizontal: login, vendedor, moderador y detalle a 844 × 390",
+    "Login con poca altura: el botón de acceso permanece alcanzable a 1024 × 375"
+  ],
+  "errors": [],
+  "landscape": [
+    {
+      "name": "login",
+      "width": 844
+    },
+    {
+      "name": "vendedor.dashboard",
+      "width": 844
+    },
+    {
+      "name": "moderador.publicaciones",
+      "width": 844
+    },
+    {
+      "name": "productos.show",
+      "width": 844
+    }
+  ],
+  "note": "HTML real renderizado con SQLite en memoria. Fetch de chat simulado, sin pagos ni datos de trabajo."
+}

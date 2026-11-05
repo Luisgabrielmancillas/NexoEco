@@ -16,6 +16,9 @@ import { initializeSellerExperience } from './seller-experience';
 import { initializeAppDialogs } from './app-dialogs';
 import '../css/app-dialogs.css';
 import { initializeReviews } from './reviews';
+import { initializeFormSubmission } from './form-submission';
+import { initializeStoreCarousels } from './store-carousel';
+import '../css/store-carousel.css';
 
 window.Alpine = Alpine;
 
@@ -33,6 +36,8 @@ initializeModerator();
 initializeChatCommerce();
 initializeSellerExperience();
 initializeReviews();
+initializeFormSubmission();
+initializeStoreCarousels();
 
 document.querySelectorAll('[data-document-preview]').forEach((documentPanel) => {
     documentPanel.addEventListener('toggle', () => {

@@ -1,0 +1,307 @@
+{
+  "passed": [
+    "Avance automático real a los cinco segundos",
+    "Sin selector visible; Espacio permite pausar el avance durante más de cinco segundos",
+    "Teclado: Inicio, Fin y flechas recorren el carrusel",
+    "Ver todas abre el directorio de cercanas con 24 resultados y paginación",
+    "Una fila y documento sin desbordamiento en nueve anchos, en inicio y ambos directorios",
+    "Movimiento reducido: comienza pausado y no gira automáticamente",
+    "Sin errores JavaScript ni violaciones automáticas de axe en las pantallas probadas"
+  ],
+  "layouts": [
+    {
+      "route": "/comprador/dashboard",
+      "width": 320,
+      "document": 320,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 375,
+      "document": 375,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 390,
+      "document": 390,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 430,
+      "document": 430,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 768,
+      "document": 768,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 1024,
+      "document": 1024,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 1280,
+      "document": 1280,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 1440,
+      "document": 1440,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 1920,
+      "document": 1920,
+      "carousels": [
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        },
+        {
+          "rows": 1,
+          "overflowing": true,
+          "scrollbar": "none"
+        }
+      ]
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 320,
+      "document": 320,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 375,
+      "document": 375,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 390,
+      "document": 390,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 430,
+      "document": 430,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 768,
+      "document": 768,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 1024,
+      "document": 1024,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 1280,
+      "document": 1280,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 1440,
+      "document": 1440,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 1920,
+      "document": 1920,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 320,
+      "document": 320,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 375,
+      "document": 375,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 390,
+      "document": 390,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 430,
+      "document": 430,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 768,
+      "document": 768,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 1024,
+      "document": 1024,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 1280,
+      "document": 1280,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 1440,
+      "document": 1440,
+      "carousels": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 1920,
+      "document": 1920,
+      "carousels": []
+    }
+  ],
+  "accessibility": [
+    {
+      "route": "/comprador/dashboard",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "route": "/comprador/dashboard",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "route": "/comprador/tiendas",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "route": "/comprador/tiendas?cercanas=1",
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "errors": []
+}

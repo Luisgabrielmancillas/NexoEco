@@ -20,8 +20,7 @@
     <section id="tiendas" aria-label="Tiendas del marketplace" class="market-discovery-section">
         <div class="buyer-section-heading"><div><span class="buyer-eyebrow">Conoce a tu comunidad</span><h2>Tiendas locales</h2><p>Encuentra tu próximo negocio favorito.</p></div></div>
         @if($tiendas->count())
-            <div class="market-store-row">@foreach($tiendas as $tienda)@include('marketplace.partials.store-card')@endforeach</div>
-            @if($tiendas->hasPages())<div class="market-pagination">{{ $tiendas->links() }}</div>@endif
+            <x-store-carousel id="local-store-track" label="Tiendas locales" :view-all-url="route('comprador.tiendas', request()->only('q', 'categoria', 'seccion'))">@foreach($tiendas as $tienda)@include('marketplace.partials.store-card')@endforeach</x-store-carousel>
         @else
             <div class="market-small-empty"><x-market-icon name="store"/><p>{{ $busqueda || $categoriaSeleccionada || $seccionSeleccionada ? 'No encontramos tiendas con esos filtros.' : 'Todavía no hay tiendas publicadas.' }}</p></div>
         @endif
@@ -30,7 +29,7 @@
         <div class="buyer-section-heading"><div><span class="buyer-eyebrow">Descubre el catálogo</span><h2>Productos para ti</h2><p>Explora lo que ofrecen los negocios de tu comunidad.</p></div></div>
         @if($productos->count())
             <div class="buyer-grid marketplace-products-grid">@foreach($productos as $producto)@include('marketplace.partials.product-card')@endforeach</div>
-            @if($productos->hasPages())<div class="market-pagination">{{ $productos->links() }}</div>@endif
+            @if($productos->hasPages())<div class="market-pagination">{{ $productos->links('marketplace.partials.store-pagination', ['entity' => 'productos']) }}</div>@endif
         @else
             <div class="buyer-empty"><h2>No encontramos productos</h2><p>Prueba otra categoría o busca algo diferente.</p><a href="{{ route($catalogRoute) }}" class="buyer-button">Ver todos los productos</a></div>
         @endif

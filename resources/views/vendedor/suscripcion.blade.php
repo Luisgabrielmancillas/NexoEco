@@ -39,7 +39,7 @@
     </div>
     <p class="subscription-footnote">Puedes cancelar la renovación desde aquí y conservar el periodo pagado. La promoción aumenta la visibilidad; los resultados dependen de las búsquedas y del interés de los compradores.</p>
     
-    <div id="comparar-planes" class="growth-table-wrap growth-section">
+    <div id="comparar-planes" class="growth-table-wrap growth-section" tabindex="0" role="region" aria-label="Comparación de beneficios de los planes">
         <table class="growth-table growth-plan-comparison">
             <caption>Compara todos los beneficios <span>Elige lo que tu negocio necesita hoy.</span></caption>
             <thead>

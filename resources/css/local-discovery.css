@@ -42,3 +42,4 @@
 .route-attribution { margin: 18px 0 0; font-size: 10px; color: var(--color-text-secondary); }
 @media(max-width:1200px) { .nearby-stores-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media(max-width:600px) { .nearby-stores-grid { grid-template-columns: 1fr; } .nearby-store-card { padding: 17px; } .location-awareness { gap: 10px; padding: 12px; } .location-awareness > div { flex-basis: 100%; min-width: 0; } .nearby-empty { padding: 20px; gap: 12px; } .store-directions-card { padding: 17px; gap: 12px; } .directions-icon { width: 35px; height: 35px; } .route-map { height: 245px; } .directions-actions { align-items: flex-start; flex-direction: column; } }
+:root body .leaflet-control-attribution a { text-decoration: underline; text-underline-offset: 2px; }

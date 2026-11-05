@@ -226,6 +226,7 @@ Route::middleware(['auth'])->group(function () {
             )->middleware('verified')->name('dashboard');
 
             Route::middleware('verified')->group(function () {
+                Route::get('/tiendas', [MarketplaceController::class, 'stores'])->name('tiendas');
                 Route::post('/reportes/{tipo}/{id}', [\App\Http\Controllers\ContentReportController::class, 'store'])->whereIn('tipo', ['productos', 'opiniones'])->whereNumber('id')->middleware('throttle:5,1')->name('reportes.store');
                 Route::get('/favoritos/{tipo}', [FavoritoController::class, 'index'])
                     ->whereIn('tipo', ['productos', 'tiendas'])->name('favoritos');

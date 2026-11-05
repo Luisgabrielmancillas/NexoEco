@@ -1,0 +1,4830 @@
+{
+  "browser": "156.0.4314.58",
+  "widths": [
+    320,
+    375,
+    390,
+    430,
+    768,
+    1024,
+    1280,
+    1440,
+    1920
+  ],
+  "snapshotMode": true,
+  "externalNetworkBlocked": true,
+  "results": [
+    {
+      "id": "00-publico-marketplace.index",
+      "route": "marketplace.index",
+      "url": "http://127.0.0.1:4179",
+      "role": null,
+      "view": "marketplace.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".product-shop > a"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (161.8px by 15px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 3.2px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".product-shop > a"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (161.8px by 15px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 7.8px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01-publico-vender",
+      "route": "vender",
+      "url": "http://127.0.0.1:4179/vender",
+      "role": null,
+      "view": "welcome",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": [
+            {
+              "tag": "DIV",
+              "class": "nav-actions",
+              "text": "Iniciar sesión\n                Registrarse"
+            },
+            {
+              "tag": "A",
+              "class": "btn btn-accent",
+              "text": "Registrarse"
+            }
+          ]
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "nodes": [
+                {
+                  "target": [
+                    ".pricing-note"
+                  ],
+                  "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.43 (foreground color: #2563eb, background color: #e7eefb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "strong"
+                  ],
+                  "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.43 (foreground color: #2563eb, background color: #e7eefb, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "nodes": [
+                {
+                  "target": [
+                    ".pricing-note"
+                  ],
+                  "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.43 (foreground color: #2563eb, background color: #e7eefb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "strong"
+                  ],
+                  "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.43 (foreground color: #2563eb, background color: #e7eefb, font size: 9.8pt (13px), font weight: bold). Expected contrast ratio of 4.5:1"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-publico-conocenos",
+      "route": "conocenos",
+      "url": "http://127.0.0.1:4179/conocenos",
+      "role": null,
+      "view": "conocenos",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "03-publico-login",
+      "route": "login",
+      "url": "http://127.0.0.1:4179/login",
+      "role": null,
+      "view": "auth.login",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-publico-register",
+      "route": "register",
+      "url": "http://127.0.0.1:4179/register",
+      "role": null,
+      "view": "auth.register",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-publico-password.request",
+      "route": "password.request",
+      "url": "http://127.0.0.1:4179/forgot-password",
+      "role": null,
+      "view": "auth.forgot-password",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "bypass"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "bypass"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-publico-vendedor.register",
+      "route": "vendedor.register",
+      "url": "http://127.0.0.1:4179/vendedor/registro",
+      "role": null,
+      "view": "auth.seller-register",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    "button[data-seller-password=\"password\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (22.5px by 22px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 22px instead of at least 24px."
+                },
+                {
+                  "target": [
+                    "button[data-seller-password=\"password_confirmation\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (22.5px by 22px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 22px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    "button[data-seller-password=\"password\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (22.5px by 22px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 22px instead of at least 24px."
+                },
+                {
+                  "target": [
+                    "button[data-seller-password=\"password_confirmation\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (22.5px by 22px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 22px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "07-publico-password.reset",
+      "route": "password.reset",
+      "url": "http://127.0.0.1:4179/reset-password/audit-token?email=comprador%40example.test",
+      "role": null,
+      "view": "auth.reset-password",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "bypass"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "bypass"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-comprador-comprador.dashboard",
+      "route": "comprador.dashboard",
+      "url": "http://127.0.0.1:4179/comprador/dashboard",
+      "role": "comprador",
+      "view": "marketplace.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".product-shop > a"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (161.8px by 15px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 3.2px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".product-shop > a"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (161.8px by 15px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 7.8px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09-comprador-comprador.opiniones",
+      "route": "comprador.opiniones",
+      "url": "http://127.0.0.1:4179/comprador/opiniones",
+      "role": "comprador",
+      "view": "comprador.opiniones",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "10-comprador-comprador.notificaciones",
+      "route": "comprador.notificaciones",
+      "url": "http://127.0.0.1:4179/comprador/notificaciones",
+      "role": "comprador",
+      "view": "comprador.notificaciones",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "11-comprador-chat.index",
+      "route": "chat.index",
+      "url": "http://127.0.0.1:4179/mensajes",
+      "role": "comprador",
+      "view": "chat.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "12-comprador-apartados.index",
+      "route": "apartados.index",
+      "url": "http://127.0.0.1:4179/apartados",
+      "role": "comprador",
+      "view": "apartados.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "13-comprador-profile.edit",
+      "route": "profile.edit",
+      "url": "http://127.0.0.1:4179/profile",
+      "role": "comprador",
+      "view": "profile.edit",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "14-comprador-comprador.favoritos",
+      "route": "comprador.favoritos",
+      "url": "http://127.0.0.1:4179/comprador/favoritos/productos",
+      "role": "comprador",
+      "view": "comprador.favoritos",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15-comprador-comprador.favoritos",
+      "route": "comprador.favoritos",
+      "url": "http://127.0.0.1:4179/comprador/favoritos/tiendas",
+      "role": "comprador",
+      "view": "comprador.favoritos",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "16-comprador-comprador.soporte",
+      "route": "comprador.soporte",
+      "url": "http://127.0.0.1:4179/comprador/soporte/preguntas-frecuentes",
+      "role": "comprador",
+      "view": "comprador.soporte",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "17-comprador-comprador.soporte",
+      "route": "comprador.soporte",
+      "url": "http://127.0.0.1:4179/comprador/soporte/ayuda",
+      "role": "comprador",
+      "view": "comprador.soporte",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "18-comprador-comprador.soporte",
+      "route": "comprador.soporte",
+      "url": "http://127.0.0.1:4179/comprador/soporte/contacto",
+      "role": "comprador",
+      "view": "comprador.soporte",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "19-comprador-comprador.soporte.show",
+      "route": "comprador.soporte.show",
+      "url": "http://127.0.0.1:4179/comprador/soporte/consultas/1",
+      "role": "comprador",
+      "view": "comprador.consulta",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "20-comprador-productos.show",
+      "route": "productos.show",
+      "url": "http://127.0.0.1:4179/productos/1",
+      "role": "comprador",
+      "view": "marketplace.producto",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "21-comprador-tiendas.show",
+      "route": "tiendas.show",
+      "url": "http://127.0.0.1:4179/tiendas/1",
+      "role": "comprador",
+      "view": "marketplace.tienda",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".product-shop > a"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (161.8px by 15px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 3.2px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".product-shop > a"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size (161.8px by 15px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 7.8px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "22-comprador-chat.show",
+      "route": "chat.show",
+      "url": "http://127.0.0.1:4179/mensajes/1",
+      "role": "comprador",
+      "view": "chat.show",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "23-vendedor-vendedor.dashboard",
+      "route": "vendedor.dashboard",
+      "url": "http://127.0.0.1:4179/vendedor/dashboard",
+      "role": "vendedor",
+      "view": "vendedor.dashboard",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "definition-list",
+              "impact": "serious",
+              "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-hours-card > dl"
+                  ],
+                  "summary": "Fix all of the following:\n  dl element has direct children that are not allowed: p"
+                }
+              ]
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "definition-list",
+              "impact": "serious",
+              "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-hours-card > dl"
+                  ],
+                  "summary": "Fix all of the following:\n  dl element has direct children that are not allowed: p"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "24-vendedor-vendedor.tienda.edit",
+      "route": "vendedor.tienda.edit",
+      "url": "http://127.0.0.1:4179/vendedor/tienda/editar",
+      "role": "vendedor",
+      "view": "vendedor.tienda-form",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "help": "Links must be distinguishable without relying on color",
+              "nodes": [
+                {
+                  "target": [
+                    "a[href$=\"leafletjs.com\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  The link has insufficient color contrast of 2.55:1 with the surrounding text. (Minimum contrast is 3:1, link text: #0078a8, surrounding text: #333333)\n  The link has no styling (such as underline) to distinguish it from the surrounding text"
+                },
+                {
+                  "target": [
+                    "a[target=\"_blank\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  The link has insufficient color contrast of 2.55:1 with the surrounding text. (Minimum contrast is 3:1, link text: #0078a8, surrounding text: #333333)\n  The link has no styling (such as underline) to distinguish it from the surrounding text"
+                }
+              ]
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "link-in-text-block",
+              "impact": "serious",
+              "help": "Links must be distinguishable without relying on color",
+              "nodes": [
+                {
+                  "target": [
+                    "a[href$=\"leafletjs.com\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  The link has insufficient color contrast of 2.55:1 with the surrounding text. (Minimum contrast is 3:1, link text: #0078a8, surrounding text: #333333)\n  The link has no styling (such as underline) to distinguish it from the surrounding text"
+                },
+                {
+                  "target": [
+                    "a[target=\"_blank\"]"
+                  ],
+                  "summary": "Fix any of the following:\n  The link has insufficient color contrast of 2.55:1 with the surrounding text. (Minimum contrast is 3:1, link text: #0078a8, surrounding text: #333333)\n  The link has no styling (such as underline) to distinguish it from the surrounding text"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "25-vendedor-vendedor.productos.index",
+      "route": "vendedor.productos.index",
+      "url": "http://127.0.0.1:4179/vendedor/productos",
+      "role": "vendedor",
+      "view": "vendedor.productos.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "help": "Links must have discernible text",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-product-image"
+                  ],
+                  "summary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+                }
+              ]
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [
+            {
+              "id": "link-name",
+              "impact": "serious",
+              "help": "Links must have discernible text",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-product-image"
+                  ],
+                  "summary": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+                }
+              ]
+            }
+          ],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "26-vendedor-vendedor.productos.create",
+      "route": "vendedor.productos.create",
+      "url": "http://127.0.0.1:4179/vendedor/productos/crear",
+      "role": "vendedor",
+      "view": "vendedor.productos.form",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "27-vendedor-vendedor.mensajes.index",
+      "route": "vendedor.mensajes.index",
+      "url": "http://127.0.0.1:4179/vendedor/mensajes",
+      "role": "vendedor",
+      "view": "chat.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "28-vendedor-vendedor.apartados.index",
+      "route": "vendedor.apartados.index",
+      "url": "http://127.0.0.1:4179/vendedor/apartados",
+      "role": "vendedor",
+      "view": "apartados.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "29-vendedor-vendedor.suscripcion.index",
+      "route": "vendedor.suscripcion.index",
+      "url": "http://127.0.0.1:4179/vendedor/suscripcion",
+      "role": "vendedor",
+      "view": "vendedor.suscripcion",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "scrollable-region-focusable",
+              "impact": "serious",
+              "help": "Scrollable region must have keyboard access",
+              "nodes": [
+                {
+                  "target": [
+                    "#comparar-planes"
+                  ],
+                  "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+                }
+              ]
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "30-vendedor-vendedor.herramientas.index",
+      "route": "vendedor.herramientas.index",
+      "url": "http://127.0.0.1:4179/vendedor/herramientas",
+      "role": "vendedor",
+      "view": "vendedor.herramientas",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "31-vendedor-vendedor.calendario",
+      "route": "vendedor.calendario",
+      "url": "http://127.0.0.1:4179/vendedor/calendario",
+      "role": "vendedor",
+      "view": "vendedor.calendario",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "32-vendedor-vendedor.promociones.index",
+      "route": "vendedor.promociones.index",
+      "url": "http://127.0.0.1:4179/vendedor/promociones",
+      "role": "vendedor",
+      "view": "vendedor.promociones",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "33-vendedor-vendedor.novedades.index",
+      "route": "vendedor.novedades.index",
+      "url": "http://127.0.0.1:4179/vendedor/novedades",
+      "role": "vendedor",
+      "view": "vendedor.novedades",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "34-vendedor-vendedor.estadisticas.index",
+      "route": "vendedor.estadisticas.index",
+      "url": "http://127.0.0.1:4179/vendedor/estadisticas",
+      "role": "vendedor",
+      "view": "vendedor.estadisticas",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "scrollable-region-focusable",
+              "impact": "serious",
+              "help": "Scrollable region must have keyboard access",
+              "nodes": [
+                {
+                  "target": [
+                    ".growth-table-wrap"
+                  ],
+                  "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+                }
+              ]
+            },
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "35-vendedor-vendedor.notificaciones",
+      "route": "vendedor.notificaciones",
+      "url": "http://127.0.0.1:4179/vendedor/notificaciones",
+      "role": "vendedor",
+      "view": "comprador.notificaciones",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "36-vendedor-vendedor.productos.edit",
+      "route": "vendedor.productos.edit",
+      "url": "http://127.0.0.1:4179/vendedor/productos/1/editar",
+      "role": "vendedor",
+      "view": "vendedor.productos.form",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "37-vendedor-chat.show",
+      "route": "chat.show",
+      "url": "http://127.0.0.1:4179/mensajes/1",
+      "role": "vendedor",
+      "view": "chat.show",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [
+            {
+              "id": "target-size",
+              "impact": "serious",
+              "help": "All touch targets must be 24px large, or leave sufficient space",
+              "nodes": [
+                {
+                  "target": [
+                    ".seller-back-market"
+                  ],
+                  "summary": "Fix any of the following:\n  Target has insufficient size because it is partially obscured (smallest space is 19.8px by 30px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 1.6px instead of at least 24px."
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "38-moderador-moderador.dashboard",
+      "route": "moderador.dashboard",
+      "url": "http://127.0.0.1:4179/moderador/dashboard",
+      "role": "moderador",
+      "view": "moderador.dashboard",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "39-moderador-moderador.publicaciones",
+      "route": "moderador.publicaciones",
+      "url": "http://127.0.0.1:4179/moderador/publicaciones",
+      "role": "moderador",
+      "view": "moderador.publicaciones",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 492,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 492,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 492,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 492,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "40-moderador-moderador.opiniones",
+      "route": "moderador.opiniones",
+      "url": "http://127.0.0.1:4179/moderador/opiniones",
+      "role": "moderador",
+      "view": "moderador.opiniones",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "41-moderador-moderador.reportes",
+      "route": "moderador.reportes",
+      "url": "http://127.0.0.1:4179/moderador/reportes",
+      "role": "moderador",
+      "view": "moderador.reportes",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "42-moderador-moderador.vendedores",
+      "route": "moderador.vendedores",
+      "url": "http://127.0.0.1:4179/moderador/vendedores",
+      "role": "moderador",
+      "view": "moderador.vendedores",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "43-moderador-moderador.analiticas",
+      "route": "moderador.analiticas",
+      "url": "http://127.0.0.1:4179/moderador/analiticas",
+      "role": "moderador",
+      "view": "moderador.analiticas",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "44-moderador-moderador.configuracion",
+      "route": "moderador.configuracion",
+      "url": "http://127.0.0.1:4179/moderador/configuracion",
+      "role": "moderador",
+      "view": "moderador.configuracion",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "45-moderador-moderador.ayuda",
+      "route": "moderador.ayuda",
+      "url": "http://127.0.0.1:4179/moderador/ayuda",
+      "role": "moderador",
+      "view": "moderador.ayuda",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "46-moderador-moderador.solicitudes.show",
+      "route": "moderador.solicitudes.show",
+      "url": "http://127.0.0.1:4179/moderador/vendedores/1",
+      "role": "moderador",
+      "view": "moderador.solicitud",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "47-administrador-administrador.dashboard",
+      "route": "administrador.dashboard",
+      "url": "http://127.0.0.1:4179/administrador/dashboard",
+      "role": "administrador",
+      "view": "administrador.dashboard",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "48-administrador-admin.users.index",
+      "route": "admin.users.index",
+      "url": "http://127.0.0.1:4179/admin/users",
+      "role": "administrador",
+      "view": "administrador.usuarios.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "49-administrador-admin.users.create",
+      "route": "admin.users.create",
+      "url": "http://127.0.0.1:4179/admin/users/create",
+      "role": "administrador",
+      "view": "administrador.usuarios.create",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "50-administrador-admin.consultas.index",
+      "route": "admin.consultas.index",
+      "url": "http://127.0.0.1:4179/admin/consultas",
+      "role": "administrador",
+      "view": "administrador.consultas.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "51-administrador-admin.solicitudes.index",
+      "route": "admin.solicitudes.index",
+      "url": "http://127.0.0.1:4179/admin/solicitudes-vendedor",
+      "role": "administrador",
+      "view": "administrador.solicitudes.index",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "52-administrador-admin.opiniones",
+      "route": "admin.opiniones",
+      "url": "http://127.0.0.1:4179/admin/opiniones",
+      "role": "administrador",
+      "view": "administrador.opiniones",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "53-administrador-profile.edit",
+      "route": "profile.edit",
+      "url": "http://127.0.0.1:4179/profile",
+      "role": "administrador",
+      "view": "profile.edit",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "54-administrador-admin.users.show",
+      "route": "admin.users.show",
+      "url": "http://127.0.0.1:4179/admin/users/1",
+      "role": "administrador",
+      "view": "administrador.usuarios.show",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "55-administrador-admin.users.edit",
+      "route": "admin.users.edit",
+      "url": "http://127.0.0.1:4179/admin/users/1/edit",
+      "role": "administrador",
+      "view": "administrador.usuarios.edit",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "56-administrador-admin.consultas.show",
+      "route": "admin.consultas.show",
+      "url": "http://127.0.0.1:4179/admin/consultas/1",
+      "role": "administrador",
+      "view": "administrador.consultas.show",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "57-administrador-admin.solicitudes.show",
+      "route": "admin.solicitudes.show",
+      "url": "http://127.0.0.1:4179/admin/solicitudes-vendedor/1",
+      "role": "administrador",
+      "view": "administrador.solicitudes.show",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "58-administrador-admin.productos.show",
+      "route": "admin.productos.show",
+      "url": "http://127.0.0.1:4179/admin/productos/1",
+      "role": "administrador",
+      "view": "administrador.producto",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "59-administrador-admin.tiendas.show",
+      "route": "admin.tiendas.show",
+      "url": "http://127.0.0.1:4179/admin/tiendas/1",
+      "role": "administrador",
+      "view": "administrador.tienda",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "60-administrador-admin.catalogo",
+      "route": "admin.catalogo",
+      "url": "http://127.0.0.1:4179/admin/catalogo/productos",
+      "role": "administrador",
+      "view": "administrador.catalogo",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "id": "61-administrador-admin.catalogo",
+      "route": "admin.catalogo",
+      "url": "http://127.0.0.1:4179/admin/catalogo/tiendas",
+      "role": "administrador",
+      "view": "administrador.catalogo",
+      "errors": [],
+      "layouts": [
+        {
+          "width": 320,
+          "documentWidth": 320,
+          "overflow": []
+        },
+        {
+          "width": 375,
+          "documentWidth": 375,
+          "overflow": []
+        },
+        {
+          "width": 390,
+          "documentWidth": 390,
+          "overflow": []
+        },
+        {
+          "width": 430,
+          "documentWidth": 430,
+          "overflow": []
+        },
+        {
+          "width": 768,
+          "documentWidth": 768,
+          "overflow": []
+        },
+        {
+          "width": 1024,
+          "documentWidth": 1024,
+          "overflow": []
+        },
+        {
+          "width": 1280,
+          "documentWidth": 1280,
+          "overflow": []
+        },
+        {
+          "width": 1440,
+          "documentWidth": 1440,
+          "overflow": []
+        },
+        {
+          "width": 1920,
+          "documentWidth": 1920,
+          "overflow": []
+        }
+      ],
+      "accessibility": [
+        {
+          "width": 375,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "width": 1280,
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+.store-carousel { min-width: 0; margin-top: 8px; }
+.store-carousel-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 6px; }
+.store-carousel-toolbar > a { margin-left: auto; }
+.store-carousel-toolbar > a svg { width: 16px; height: 16px; }
+.store-carousel-track { --carousel-columns: 6; --carousel-gap: 24px; position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - (var(--carousel-columns) - 1) * var(--carousel-gap)) / var(--carousel-columns)); gap: var(--carousel-gap); align-items: stretch; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px 8px 14px; scroll-padding-inline: 8px; }
+.store-carousel-track::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.store-carousel-track > * { min-width: 0; scroll-snap-align: start; }
+.store-carousel-local .market-store-card.catalog-store { width: 100%; }
+.store-carousel-local .market-store-card h3 { max-width: 180px; margin-inline: auto; }
+.store-carousel-nearby .store-carousel-track { --carousel-columns: 3; --carousel-gap: 16px; }
+.store-carousel-nearby .nearby-store-card { display: flex; flex-direction: column; }
+.store-carousel-nearby .nearby-store-actions { margin-top: auto; padding-top: 16px; }
+.store-carousel-nearby .nearby-store-heading { margin-bottom: 18px; }
+.store-directory { padding-block: 28px 48px; }
+.store-directory h1 { font-size: clamp(26px, 3vw, 36px); font-weight: 800; line-height: 1.2; margin-block: 10px; }
+.store-directory-filters { display: flex; align-items: end; flex-wrap: wrap; gap: 14px; margin-block: 24px; padding: 20px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+.store-directory-filters > div { flex: 1 1 220px; min-width: 0; }
+.store-directory-filters label { display: block; font-size: 13px; font-weight: 650; margin-bottom: 8px; }
+.store-directory-filters input, .store-directory-filters select { width: 100%; min-height: 48px; border: 1px solid var(--color-border-strong); border-radius: 10px; background: var(--color-surface); font: inherit; font-size: 14px; padding: 10px 12px; }
+.store-directory-count { margin-bottom: 18px; color: var(--color-text-secondary); font-size: 13px; }
+.store-pagination { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--color-text-secondary); font-size: 13px; }
+.store-pagination-disabled { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; }
+@media (max-width: 1200px) { .store-carousel-local .store-carousel-track { --carousel-columns: 4; } .store-carousel-nearby .store-carousel-track { --carousel-columns: 2; } }
+@media (max-width: 700px) { .store-carousel-local .store-carousel-track { --carousel-columns: 2; --carousel-gap: 16px; } .store-carousel-nearby .store-carousel-track { --carousel-columns: 1; } .store-carousel-toolbar { gap: 4px; } }
