@@ -35,4 +35,27 @@
         @endif
     </section>
 </main>
+
+{-- Modal Vende con Nosotros para Invitados --}}
+@guest
+<div id="vende-con-nosotros-modal" class="market-modal-overlay" style="display: flex; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center;">
+    <div class="market-modal-card" style="background: #fff; padding: 2rem; border-radius: 12px; max-width: 480px; width: 90%; text-align: center; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+        <button type="button" onclick="document.getElementById('vende-con-nosotros-modal').style.display='none'" style="position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.5rem; cursor: pointer;" aria-label="Cerrar">&times;</button>
+        <x-market-icon name="store" style="width: 48px; height: 48px; color: #2563eb; margin-bottom: 1rem;"/>
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">¡Haz crecer tu negocio local!</h2>
+        <p style="color: #4b5563; margin-bottom: 1.5rem;">Únete a NexoEco, publica tus productos y llega a cientos de clientes cerca de ti.</p>
+        <a href="{{ route('vendedor.register') }}" class="buyer-button" style="display: inline-block; width: 100%; padding: 0.75rem; background: #2563eb; color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600;">Comenzar a vender</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('vende-con-nosotros-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+        }
+    });
+</script>
+@endguest
+
 @endsection
