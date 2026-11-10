@@ -1,3 +1,4 @@
+const defaultTheme = require('tailwindcss/defaultTheme'); // 👈 AÑADIDO: Necesario para mantener las fuentes de respaldo
 const designTokens = require('./resources/design-system/tokens.json');
 const color = name => `rgb(var(--color-${name}-rgb) / <alpha-value>)`;
 const primary = Object.fromEntries(Object.keys(designTokens.colors).filter(name => /^primary-\d+$/.test(name)).map(name => [name.split('-')[1], color(name)]));
@@ -14,6 +15,9 @@ module.exports = {
 
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['"Plus Jakarta Sans"', ...defaultTheme.fontFamily.sans],
+            },
             colors: {
                 primary,
                 gray: {
