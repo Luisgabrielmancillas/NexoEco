@@ -14,7 +14,7 @@ beforeEach(function () {
         TiposUsuario::create(['nombre_tipo' => $role]);
     }
     foreach (['admin' => 'administrador', 'moderator' => 'moderador', 'buyer' => 'comprador'] as $property => $role) {
-        $user = User::create(['name' => ucfirst($property).' de prueba', 'email' => $property.'@example.test', 'password' => 'clave-segura-123', 'email_verified_at' => now(), 'activo' => true]);
+        $user = User::create(['name' => ucfirst($property).' de prueba', 'email' => $property.'@example.test', 'password' => 'Clave-segura-123!', 'email_verified_at' => now(), 'activo' => true]);
         $user->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', $role)->value('id_tipo_usuario'));
         $this->{$property} = $user;
     }
@@ -36,13 +36,13 @@ test('summary removes account creation catalog and opinions and moves latest acc
 
 test('staff account changes persist an authenticated actor and timestamp without storing posted credentials', function () {
     $this->travelTo(Carbon::parse('2026-10-08 17:42:35', 'UTC'));
-    $this->actingAs($this->admin)->post(route('admin.users.store'), ['name' => 'Nueva moderadora', 'email' => 'nueva@example.test', 'password' => 'contraseña-no-debe-registrarse', 'rol' => 'moderador', 'id_usuario' => $this->buyer->id, 'staff_activity' => ['accion' => 'Acción falsificada']])->assertSessionHasNoErrors();
+    $this->actingAs($this->admin)->post(route('admin.users.store'), ['name' => 'Nueva moderadora', 'email' => 'nueva@example.test', 'password' => 'Contraseña-no-debe-registrarse1!', 'rol' => 'moderador', 'id_usuario' => $this->buyer->id, 'staff_activity' => ['accion' => 'Acción falsificada']])->assertSessionHasNoErrors();
     $created = User::where('email', 'nueva@example.test')->firstOrFail();
     $activity = RegistroActividad::sole();
     expect($activity->id_usuario)->toBe($this->admin->id)->and($activity->nombre_actor)->toBe($this->admin->name)
         ->and($activity->roles_actor)->toBe(['administrador'])->and($activity->accion)->toBe('Creó una cuenta')
         ->and($activity->descripcion)->toContain('Nueva moderadora')->and($activity->id_objeto)->toBe((string) $created->id)
-        ->and($activity->registrada_en->equalTo(now()))->toBeTrue()->and(json_encode($activity->toArray()))->not->toContain('contraseña-no-debe-registrarse');
+        ->and($activity->registrada_en->equalTo(now()))->toBeTrue()->and(json_encode($activity->toArray()))->not->toContain('Contraseña-no-debe-registrarse1!');
     $this->put(route('admin.users.update', $created), ['name' => 'Nombre corregido', 'email' => 'corregido@example.test'])->assertSessionHasNoErrors();
     $this->delete(route('admin.users.destroy', $created))->assertSessionHas('success');
     $this->delete(route('admin.users.destroy', $created))->assertSessionHas('success');
@@ -59,16 +59,16 @@ test('invalid forbidden and no-op account actions do not appear as completed sta
     $this->get(route('comprador.dashboard'))->assertOk();
     $this->assertDatabaseCount('registros_actividad', 0);
     // A previous validation error must not suppress a later valid action.
-    $this->actingAs($this->admin)->post(route('admin.users.store'), ['name' => 'Válida', 'email' => 'valida@example.test', 'password' => 'clave-segura-123', 'rol' => 'comprador'])->assertSessionHasNoErrors();
+    $this->actingAs($this->admin)->post(route('admin.users.store'), ['name' => 'Válida', 'email' => 'valida@example.test', 'password' => 'Clave-segura-123!', 'rol' => 'comprador'])->assertSessionHasNoErrors();
     $this->assertDatabaseCount('registros_actividad', 1);
 });
 
 test('moderator and administrator personal changes are recorded without navigation or session noise', function (string $property, string $role) {
     $user = $this->{$property};
-    $this->post(route('login'), ['email' => $user->email, 'password' => 'clave-segura-123'])->assertRedirect();
+    $this->post(route('login'), ['email' => $user->email, 'password' => 'Clave-segura-123!'])->assertRedirect();
     $this->get(route($role === 'moderador' ? 'moderador.configuracion' : 'profile.edit'))->assertOk();
     $this->patch(route('profile.update'), ['name' => 'Nombre actualizado', 'email' => $user->email])->assertSessionHasNoErrors();
-    $this->put(route('password.update'), ['current_password' => 'clave-segura-123', 'password' => 'nueva-clave-segura', 'password_confirmation' => 'nueva-clave-segura'])->assertSessionHasNoErrors();
+    $this->put(route('password.update'), ['current_password' => 'Clave-segura-123!', 'password' => 'nueva-clave-segura', 'password_confirmation' => 'nueva-clave-segura'])->assertSessionHasNoErrors();
     $this->post(route('logout'))->assertRedirect(route('marketplace.index'));
     expect(RegistroActividad::orderBy('id')->pluck('accion')->all())->toBe(['Actualizó sus datos personales', 'Cambió su contraseña'])
         ->and(RegistroActividad::where('id_usuario', $user->id)->count())->toBe(2)
@@ -91,7 +91,7 @@ test('activity feed paginates and preserves identity after a staff account is de
     $this->actingAs($this->moderator)->get(route('moderador.configuracion'))->assertOk();
     $originalName = $this->moderator->name;
     $this->patch(route('profile.update'), ['name' => 'Moderador renombrado', 'email' => $this->moderator->email])->assertSessionHasNoErrors();
-    $this->delete(route('profile.destroy'), ['password' => 'clave-segura-123'])->assertRedirect();
+    $this->delete(route('profile.destroy'), ['password' => 'Clave-segura-123!'])->assertRedirect();
     expect(RegistroActividad::orderBy('id')->first()->nombre_actor)->toBe($originalName)
         ->and(RegistroActividad::whereNotNull('id_usuario')->count())->toBe(0)
         ->and(RegistroActividad::latest('id')->first()->accion)->toBe('Eliminó su cuenta');

@@ -1,20 +1,20 @@
 .commerce-page { padding-top: 28px; padding-bottom: 40px; }
-.commerce-eyebrow { color: #a37953; text-transform: uppercase; letter-spacing: .08em; font-size: 10px; font-weight: 700; }
-.commerce-connection { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; background: #f6faf7; border-color: #dbe8df; }
+.commerce-eyebrow { color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .08em; font-size: 10px; font-weight: 700; }
+.commerce-connection { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; background: var(--color-success-soft); border-color: var(--color-success-border); }
 .commerce-connection h2 { margin: 8px 0; }.commerce-connection p { max-width: 520px; font-size: 13px; }
-.commerce-connection-status { color: #498064; font-size: 12px; font-weight: 600; }
+.commerce-connection-status { color: var(--color-success-text); font-size: 12px; font-weight: 600; }
 .seller-nav { overflow-x: auto; scrollbar-width: thin; }.seller-nav a { flex-shrink: 0; white-space: nowrap; }
 .commerce-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
 .commerce-heading h1, .commerce-heading h2 { margin: 8px 0; }
 .commerce-heading p, .commerce-card p { color: var(--nexo-muted); line-height: 1.6; }
-.commerce-heading a, .commerce-card a:not(.seller-button) { color: var(--nexo-primary); font-weight: 700; }
+.commerce-heading a:not(.seller-button), .commerce-card a:not(.seller-button) { color: var(--nexo-primary); font-weight: 700; }
 .commerce-list { display: grid; gap: 14px; margin-bottom: 20px; }
-.commerce-card { background: white; padding: 22px; border: 1px solid var(--nexo-border); border-radius: 18px; }
+.commerce-card { background: var(--color-surface); padding: 22px; border: 1px solid var(--nexo-border); border-radius: 18px; }
 .commerce-card small { overflow-wrap: anywhere; }
 .commerce-thread { display: flex; align-items: center; justify-content: space-between; gap: 15px; color: var(--nexo-text) !important; }
 .commerce-thread p { margin: 5px 0; }
 .commerce-badge { display: inline-block; border-radius: 30px; padding: 7px 13px; background: var(--nexo-primary-soft); color: var(--nexo-primary); font-size: 12px; font-weight: 700; }
-.commerce-alert { background: #fff0ea; padding: 12px; border-radius: 10px; margin-bottom: 15px; }
+.commerce-alert { background: var(--color-primary-soft); padding: 12px; border-radius: 10px; margin-bottom: 15px; }
 .commerce-preline { white-space: pre-line; overflow-wrap: anywhere; }
 .commerce-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
 .commerce-consent { display: flex; align-items: flex-start; gap: 9px; margin-top: 14px; font-size: 13px; line-height: 1.6; }
@@ -28,7 +28,7 @@
 .chat-history { display: block; margin: 0 auto 10px; color: var(--nexo-primary); font-size: 13px; }
 .chat-history[hidden], .reservation-fields[hidden] { display: none; }
 .chat-messages { height: min(55vh, 560px); min-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding: 14px 4px; }
-.chat-bubble { align-self: flex-start; max-width: 85%; padding: 10px 14px; border-radius: 14px; background: #f4f1eb; overflow-wrap: anywhere; }
+.chat-bubble { align-self: flex-start; max-width: 85%; padding: 10px 14px; border-radius: 14px; background: var(--color-background-secondary); overflow-wrap: anywhere; }
 .chat-bubble.mine { align-self: flex-end; background: var(--nexo-primary-soft); }
 .chat-bubble p { white-space: pre-wrap; margin: 0 0 5px; color: var(--nexo-text); }
 .chat-bubble time { font-size: 10px; color: var(--nexo-muted); }
@@ -36,3 +36,119 @@
 .chat-compose textarea { width: 100%; min-width: 0; resize: vertical; border: 1px solid var(--nexo-border); border-radius: 12px; padding: 12px; font: inherit; }
 .chat-compose button:disabled { opacity: .6; }
 @media (max-width: 600px) { .commerce-card { padding: 15px; } .chat-compose { flex-direction: column; align-items: stretch; } .commerce-heading h1 { font-size: 25px; } .seller-nav { gap: 18px; } }
+
+/* Buyer and seller conversations share the same visual language. */
+.commerce-workspace .growth-hero { margin-bottom: 32px; }
+.commerce-workspace .commerce-heading { margin-bottom: 26px; align-items: center; }
+.commerce-workspace .commerce-heading h1 { color: var(--color-text-primary); font-size: clamp(25px, 3vw, 34px); font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
+.commerce-heading > div:first-child { min-width: 0; }
+.commerce-section-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin: 28px 0 20px; }
+.commerce-section-heading h2 { color: var(--color-text-primary); font-size: clamp(20px, 2.4vw, 25px); font-weight: 750; letter-spacing: -.5px; line-height: 1.4; }
+.commerce-section-heading > p { color: var(--color-text-secondary); font-size: 12px; line-height: 1.6; }
+.commerce-filter { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.commerce-filter-field { flex: 1; min-width: min(240px, 100%); }
+.commerce-filter-field label { display: block; margin-bottom: 8px; }
+.commerce-inbox { gap: 16px; }
+.commerce-inbox .commerce-thread { position: relative; padding: 23px; gap: 22px; border-radius: 18px; box-shadow: var(--nexo-shadow); transition: background-color var(--motion-duration), border-color var(--motion-duration), box-shadow var(--motion-duration); }
+.commerce-inbox .commerce-thread:hover { background: var(--color-primary-soft); border-color: var(--color-primary-border); box-shadow: var(--nexo-shadow-hover); }
+.commerce-inbox .commerce-thread.has-unread { border-color: var(--color-primary-border); box-shadow: inset 4px 0 var(--color-primary), var(--nexo-shadow); }
+.commerce-thread-image, .reservation-product-image { display: grid; place-items: center; flex-shrink: 0; width: 82px; height: 82px; border: 1px solid var(--color-border); border-radius: 17px; background: var(--color-background-secondary); color: var(--color-primary-text); overflow: hidden; }
+.commerce-thread-image img, .reservation-product-image img { width: 100%; height: 100%; object-fit: cover; }
+.commerce-thread-image > svg, .reservation-product-image > svg { width: 32px; height: 32px; }
+.commerce-thread-copy { flex: 1; min-width: 0; }
+.commerce-thread-title { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+.commerce-thread-title h3 { margin: 0; color: var(--color-text-primary); font-size: 17px; font-weight: 750; line-height: 1.4; overflow-wrap: anywhere; }
+.commerce-unread { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; padding: 4px 9px; border-radius: 20px; color: var(--color-primary-text); background: var(--color-primary-subtle); font-size: 10px; font-weight: 750; }
+.commerce-unread::before { content: ''; height: 6px; width: 6px; background: var(--color-primary); border-radius: 50%; }
+.commerce-thread-partner { display: flex; align-items: center; gap: 7px; color: var(--color-text-secondary); font-size: 12px; font-weight: 600; }
+.commerce-person-initial { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; color: var(--color-primary-text); background: var(--color-primary-soft); font-size: 10px; font-weight: 800; }
+.commerce-thread .commerce-thread-preview { margin: 10px 0 9px; color: var(--color-text-secondary); font-size: 13px; line-height: 1.65; overflow-wrap: anywhere; }
+.commerce-thread-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.commerce-thread-meta time { color: var(--color-text-secondary); font-size: 11px; font-weight: 400; }
+.commerce-thread-meta .commerce-badge { padding: 3px 8px; font-size: 10px; }
+.commerce-thread-open { display: grid; place-items: center; width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; border: 1px solid var(--color-primary-border); background: var(--color-primary-soft); color: var(--color-primary-text); }
+.commerce-thread-open svg { width: 18px; height: 18px; }
+.commerce-pagination { margin-top: 28px; }
+.commerce-workspace .chat-room { max-width: 100%; padding: 0; border-radius: 22px; box-shadow: var(--nexo-shadow); overflow: hidden; }
+.chat-room-heading { display: flex; align-items: center; gap: 14px; padding: 22px 24px; }
+.chat-room-icon { display: grid; place-items: center; flex-shrink: 0; width: 45px; height: 45px; border-radius: 13px; color: var(--color-primary-text); background: var(--color-primary-soft); }
+.chat-room-icon svg { width: 24px; height: 24px; }
+.chat-room-heading > div { min-width: 0; }
+.chat-room-heading strong { display: block; font-size: 15px; font-weight: 700; overflow-wrap: anywhere; }
+.chat-room-heading p { margin-top: 4px; font-size: 12px; line-height: 1.6; }
+.chat-private-label { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; margin-left: auto; color: var(--color-text-secondary); font-size: 11px; }
+.chat-private-label svg { width: 16px; height: 16px; }
+.chat-room .chat-status { margin: 0; padding: 10px 24px; color: var(--color-primary-text); background: var(--color-primary-soft); border-block: 1px solid var(--color-border); font-size: 11px; line-height: 1.6; }
+.chat-room .chat-history { margin: 12px auto 0; min-height: 40px; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 9px; background: var(--color-surface); }
+.chat-room .chat-messages { padding: 24px; min-height: 300px; }
+.chat-room .chat-bubble { max-width: min(80%, 620px); border: 1px solid var(--color-border); border-radius: 16px 16px 16px 4px; }
+.chat-room .chat-bubble.mine { border-color: var(--color-primary-border); border-radius: 16px 16px 4px 16px; }
+.chat-room .chat-bubble p { font-size: 14px; line-height: 1.7; }
+.chat-room .chat-compose { padding: 20px 24px; background: var(--color-background); }
+.chat-room .chat-compose textarea { border-color: var(--color-border-strong); background: var(--color-surface); font-size: 14px; line-height: 1.6; }
+.chat-room .chat-compose button { gap: 10px; padding-inline: 22px; }
+.chat-room .chat-compose button svg { width: 19px; height: 19px; }
+.chat-room > .growth-quick-replies { padding: 14px 24px; margin: 0; border-top: 1px solid var(--color-border); }
+.chat-room > noscript { display: block; padding: 16px 24px; }
+
+/* Reservation information stays separate from payment and fulfillment actions. */
+.reservation-list { gap: 24px; }
+.reservation-list .reservation-card { padding: 0; border-radius: 20px; box-shadow: var(--nexo-shadow); overflow: hidden; }
+.reservation-header { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 16px 24px; border-bottom: 1px solid var(--color-border); background: var(--color-background); }
+.reservation-reference { display: inline-flex; align-items: center; gap: 8px; min-width: 0; color: var(--color-text-secondary); font-size: 11px; font-weight: 650; overflow-wrap: anywhere; }
+.reservation-reference svg { width: 16px; height: 16px; flex-shrink: 0; }
+.reservation-header time { color: var(--color-text-secondary); font-size: 11px; white-space: nowrap; }
+.reservation-overview { display: grid; grid-template-columns: 82px minmax(0, 1fr) auto; align-items: center; gap: 18px; padding: 24px; }
+.reservation-product-copy { min-width: 0; }
+.reservation-product-copy h2 { margin: 7px 0 6px; color: var(--color-text-primary); font-size: clamp(18px, 2vw, 23px); font-weight: 750; line-height: 1.35; overflow-wrap: anywhere; }
+.reservation-product-copy p { font-size: 13px; overflow-wrap: anywhere; }
+.reservation-state { display: inline-flex; align-items: center; justify-content: center; gap: 6px; max-width: 200px; padding: 8px 11px; border: 1px solid var(--color-info-border); border-radius: 30px; color: var(--color-info-text); background: var(--color-info-soft); font-size: 11px; font-weight: 700; line-height: 1.5; }
+.reservation-state svg { width: 15px; height: 15px; flex-shrink: 0; }
+.reservation-state[data-tone=success] { background: var(--color-success-soft); color: var(--color-success-text); border-color: var(--color-success-border); }
+.reservation-state[data-tone=warning] { background: var(--color-warning-soft); color: var(--color-warning-text); border-color: var(--color-warning-border); }
+.reservation-state[data-tone=danger] { background: var(--color-danger-soft); color: var(--color-danger-text); border-color: var(--color-danger-border); }
+.reservation-summary { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 20px; align-items: center; margin: 0 24px 20px; padding: 20px; border: 1px solid var(--color-primary-border); border-radius: 14px; background: var(--color-primary-soft); }
+.reservation-summary > div { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.reservation-summary > div > span { color: var(--color-text-secondary); font-size: 11px; line-height: 1.6; }
+.reservation-summary strong { color: var(--color-text-primary); font-size: 13px; font-weight: 650; line-height: 1.6; overflow-wrap: anywhere; }
+.reservation-summary .reservation-amount strong { color: var(--color-primary-text); font-size: 27px; font-weight: 800; line-height: 1.2; letter-spacing: -.6px; }
+.reservation-amount small { font-size: 11px; font-weight: 600; letter-spacing: 0; }
+.reservation-terms { margin-inline: 24px; border-top: 1px solid var(--color-border); }
+.reservation-terms > summary { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 56px; padding: 12px 0; list-style: none; cursor: pointer; font-size: 13px; font-weight: 650; }
+.reservation-terms > summary::-webkit-details-marker { display: none; }
+.reservation-terms > summary > span:first-child { display: inline-flex; align-items: center; gap: 8px; }
+.reservation-terms > summary svg { width: 18px; height: 18px; color: var(--color-primary-text); }
+.reservation-details-toggle { color: var(--color-primary-text); font-size: 23px; font-weight: 400; }
+.reservation-terms[open] .reservation-details-toggle { transform: rotate(45deg); }
+.reservation-terms > p { margin: 0 0 22px; padding: 16px; border-radius: 10px; background: var(--color-background); font-size: 13px; line-height: 1.8; }
+.reservation-card > .growth-fulfillment { padding: 18px 24px; border-top: 1px solid var(--color-border); }
+.reservation-card > .commerce-actions { margin: 0; padding: 20px 24px; border-top: 1px solid var(--color-border); background: var(--color-background); }
+
+@media (max-width: 900px) {
+    .reservation-overview { grid-template-columns: 70px minmax(0, 1fr); }
+    .reservation-product-image { width: 70px; height: 70px; }
+    .reservation-state { grid-column: 2; justify-self: start; }
+}
+@media (max-width: 600px) {
+    .commerce-inbox .commerce-thread { gap: 14px; padding: 18px 16px; align-items: flex-start; }
+    .commerce-thread-image { width: 54px; height: 54px; border-radius: 12px; }
+    .commerce-thread-title h3 { font-size: 15px; }
+    .commerce-thread-open { display: none; }
+    .commerce-filter > button { width: 100%; }
+    .commerce-header-actions { width: 100%; }
+    .chat-room-heading { flex-wrap: wrap; gap: 10px; padding: 18px; }
+    .chat-private-label { margin-left: 55px; }
+    .chat-room .chat-status { padding-inline: 18px; }
+    .chat-room .chat-messages { padding: 18px; }
+    .chat-room .chat-bubble { max-width: 92%; }
+    .chat-room .chat-compose { padding: 16px 18px; }
+    .chat-room > .growth-quick-replies { padding-inline: 18px; }
+    .reservation-header { flex-wrap: wrap; gap: 8px; padding: 14px 18px; }
+    .reservation-reference { flex-basis: 100%; }
+    .reservation-overview { padding: 18px; gap: 12px; grid-template-columns: 58px minmax(0, 1fr); }
+    .reservation-product-image { width: 58px; height: 58px; border-radius: 12px; }
+    .reservation-summary { margin-inline: 18px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 17px; gap: 18px; }
+    .reservation-summary > .reservation-amount { grid-column: 1 / -1; }
+    .reservation-terms { margin-inline: 18px; }
+    .reservation-card > .commerce-actions, .reservation-card > .growth-fulfillment { padding: 18px; }
+}

@@ -39,7 +39,7 @@ function createShopFor(User $owner): Tienda
 
 test('only approved sellers see the shop link beside logout and get the initial setup gate', function () {
     $this->actingAs($this->buyer)->get(route('comprador.dashboard'))->assertOk()->assertDontSee('class="buyer-nav-link buyer-store-link"', false);
-    $this->actingAs($this->seller)->get(route('comprador.dashboard'))->assertOk()->assertSeeInOrder(['Resumen de mi tienda</a>', 'Planes y promoción</a>', 'Cerrar sesión</button>'], false);
+    $this->actingAs($this->seller)->get(route('comprador.dashboard'))->assertOk()->assertSeeInOrder(['Vista Vendedor</a>', 'Cerrar sesión</button>'], false)->assertDontSee('buyer-store-menu', false);
     $this->get(route('profile.edit'))->assertOk()->assertDontSee('Panel de vendedor');
     foreach (['vendedor.dashboard', 'vendedor.productos.index', 'vendedor.productos.create'] as $route) {
         $this->get(route($route))->assertRedirect(route('vendedor.tienda.create'));

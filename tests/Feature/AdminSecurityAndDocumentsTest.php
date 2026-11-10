@@ -14,16 +14,16 @@ beforeEach(function () {
     foreach (['vendedor', 'Administrador', 'Comprador', 'Moderador'] as $role) {
         TiposUsuario::create(['nombre_tipo' => $role]);
     }
-    $this->admin = User::create(['name' => 'Administradora de prueba', 'nombre_completo' => 'Administradora de prueba', 'email' => 'admin@example.test', 'password' => 'clave-segura-123', 'email_verified_at' => now(), 'activo' => true]);
+    $this->admin = User::create(['name' => 'Administradora de prueba', 'nombre_completo' => 'Administradora de prueba', 'email' => 'admin@example.test', 'password' => 'Clave-segura-123!', 'email_verified_at' => now(), 'activo' => true]);
     $this->admin->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', 'Administrador')->value('id_tipo_usuario'));
-    $this->buyer = User::create(['name' => 'Comprador de prueba', 'nombre_completo' => 'Comprador de prueba', 'email' => 'buyer@example.test', 'password' => 'clave-segura-123', 'email_verified_at' => now(), 'activo' => true]);
+    $this->buyer = User::create(['name' => 'Comprador de prueba', 'nombre_completo' => 'Comprador de prueba', 'email' => 'buyer@example.test', 'password' => 'Clave-segura-123!', 'email_verified_at' => now(), 'activo' => true]);
     $this->buyer->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', 'Comprador')->value('id_tipo_usuario'));
     $this->application = $this->buyer->solicitudVendedor()->create(['estado' => 'en_revision', 'rfc' => 'LOPM900101AB1']);
 });
 
 function additionalAdmin(int $number, bool $active = true): User
 {
-    $user = User::create(['name' => 'Administrador '.$number, 'email' => 'admin-'.$number.'@example.test', 'password' => 'clave-segura-123', 'email_verified_at' => now(), 'activo' => $active]);
+    $user = User::create(['name' => 'Administrador '.$number, 'email' => 'admin-'.$number.'@example.test', 'password' => 'Clave-segura-123!', 'email_verified_at' => now(), 'activo' => $active]);
     $user->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', 'Administrador')->value('id_tipo_usuario'));
 
     return $user;
@@ -31,7 +31,7 @@ function additionalAdmin(int $number, bool $active = true): User
 
 test('a third administrator can be created but a fourth is rejected including inactive accounts', function () {
     additionalAdmin(2, false);
-    $data = ['name' => 'Tercer administrador', 'email' => 'tercero@example.test', 'password' => 'clave-segura-123', 'rol' => 'administrador'];
+    $data = ['name' => 'Tercer administrador', 'email' => 'tercero@example.test', 'password' => 'Clave-segura-123!', 'rol' => 'administrador'];
     $this->actingAs($this->admin)->post(route('admin.users.store'), $data)->assertSessionHasNoErrors();
     expect(app(AdministratorLimit::class)->count())->toBe(3);
     $this->postJson(route('admin.users.store'), array_replace($data, ['email' => 'cuarto@example.test']))->assertUnprocessable()->assertJsonValidationErrors('rol');
@@ -52,7 +52,7 @@ test('administrator capacity is checked again inside the creation transaction af
             return 2;
         }
     });
-    $this->actingAs($this->admin)->post(route('admin.users.store'), ['name' => 'No debe crearse', 'email' => 'cuarto@example.test', 'password' => 'clave-segura-123', 'rol' => 'administrador'])->assertSessionHasErrors('rol');
+    $this->actingAs($this->admin)->post(route('admin.users.store'), ['name' => 'No debe crearse', 'email' => 'cuarto@example.test', 'password' => 'Clave-segura-123!', 'rol' => 'administrador'])->assertSessionHasErrors('rol');
     expect(User::where('email', 'cuarto@example.test')->exists())->toBeFalse();
     $this->assertDatabaseCount('registros_actividad', 0);
 });
@@ -61,7 +61,7 @@ test('role edits cannot bypass the administrator limit or remove the administrat
     additionalAdmin(2);
     additionalAdmin(3);
     $role = TiposUsuario::where('nombre_tipo', 'Moderador')->firstOrFail();
-    $moderator = User::create(['name' => 'Moderador', 'email' => 'mod@example.test', 'password' => 'clave-segura-123', 'activo' => true]);
+    $moderator = User::create(['name' => 'Moderador', 'email' => 'mod@example.test', 'password' => 'Clave-segura-123!', 'activo' => true]);
     $moderator->tipos_usuario()->attach($role);
     $this->actingAs($this->admin)->put(route('tipos-usuario.update', $role), ['nombre_tipo' => 'ADMINISTRADOR'])->assertSessionHasErrors('nombre_tipo');
     expect($moderator->tieneTipo('administrador'))->toBeFalse()->and($role->fresh()->nombre_tipo)->toBe('Moderador');
@@ -79,7 +79,7 @@ test('deactivation keeps an administrator slot and duplicate administrator roles
     expect(app(AdministratorLimit::class)->count())->toBe(3);
     $this->actingAs($this->admin)->delete(route('admin.users.destroy', $second))->assertSessionHas('success');
     expect(app(AdministratorLimit::class)->count())->toBe(3);
-    $this->post(route('admin.users.store'), ['name' => 'Cuarto', 'email' => 'cuarto@example.test', 'password' => 'clave-segura-123', 'rol' => 'administrador'])->assertSessionHasErrors('rol');
+    $this->post(route('admin.users.store'), ['name' => 'Cuarto', 'email' => 'cuarto@example.test', 'password' => 'Clave-segura-123!', 'rol' => 'administrador'])->assertSessionHasErrors('rol');
 });
 
 test('summary hides old navigation records and duplicate pending sections while keeping important changes', function () {

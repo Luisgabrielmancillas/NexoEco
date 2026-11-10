@@ -1,8 +1,11 @@
 @extends($sellerArea ? 'layouts.seller-panel' : 'layouts.marketplace')
 @section('title', ($sellerArea ? 'Apartados recibidos' : 'Mis apartados') . ' | NexoEco')
 @section($sellerArea ? 'seller-content' : 'content')
-<div class="nexo-container commerce-page">
-    <div class="commerce-heading"><div><span class="commerce-eyebrow">{{ $sellerArea ? 'Mi tienda · anticipos de compradores' : 'Mi actividad como comprador' }}</span><h1>{{ $sellerArea ? 'Apartados recibidos' : 'Mis apartados' }}</h1><p>{{ $sellerArea ? 'Consulta los anticipos para tus productos y coordina la entrega con cada comprador.' : 'Consulta los productos que apartaste y continúa la conversación con sus vendedores.' }}</p></div><a href="{{ route($sellerArea ? 'vendedor.mensajes.index' : 'chat.index') }}">{{ $sellerArea ? 'Mensajes de mi tienda' : 'Mis mensajes' }}</a></div>
+<div class="nexo-container commerce-page commerce-workspace growth-workspace">
+    <x-seller-growth-hero eyebrow="Un paso más cerca de tu compra" :title="$sellerArea ? 'Apartados recibidos' : 'Mis apartados'" :description="$sellerArea ? 'Tus anticipos y entregas, en orden. Consulta cada apartado y coordina los siguientes pasos con tus compradores.' : 'Dale seguimiento a eso que elegiste. Consulta tus anticipos, revisa las condiciones y acuerda la entrega con el vendedor.'" icon="bookmark" badge="Cada compra, en orden">
+        <x-slot:actions><a class="seller-button secondary" href="{{ route($sellerArea ? 'vendedor.mensajes.index' : 'chat.index') }}"><x-seller-icon name="chat"/>{{ $sellerArea ? 'Mensajes de mi tienda' : 'Mis mensajes' }}</a></x-slot:actions>
+        <x-slot:meta><span><x-seller-icon name="bookmark"/>{{ $apartados->total() }} {{ $apartados->total() === 1 ? 'apartado registrado' : 'apartados registrados' }}</span><span><x-seller-icon name="shield"/>Tus condiciones, siempre a la vista</span></x-slot:meta>
+    </x-seller-growth-hero>
     @if(!$sellerArea && session('success'))<p class="commerce-alert" role="status">{{ session('success') }}</p>@endif
     @if(!$sellerArea && $errors->any())<div class="commerce-alert" role="alert">@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>@endif
     @if($sellerArea)
@@ -16,13 +19,22 @@
             @endif
         </section>
     @endif
-    <div class="commerce-list">
+    <div class="commerce-section-heading"><div><span class="buyer-eyebrow">Sin perder los detalles</span><h2>{{ $sellerArea ? 'Apartados de tus compradores' : 'Historial de apartados' }}</h2></div><p>Los más recientes primero</p></div>
+    <div class="commerce-list reservation-list">
         @forelse($apartados as $apartado)
-            <article class="commerce-card">
-                <div class="commerce-heading"><h2>{{ $apartado->producto_nombre }}</h2><span class="commerce-badge">{{ ['pendiente' => 'Pendiente de pago', 'procesando' => 'Pago en proceso', 'pagado' => 'Apartado pagado', 'reembolsado' => 'Reembolsado', 'reembolso_parcial' => 'Reembolso parcial', 'rechazado' => 'Pago rechazado', 'revertido' => 'Pago revertido'][$apartado->estado] ?? $apartado->estado }}</span></div>
-                <p><strong>${{ number_format((float) $apartado->monto, 2) }} {{ $apartado->moneda }}</strong> · {{ $sellerArea ? 'Comprador: '.$apartado->buyer->name : 'Vendedor: '.$apartado->seller->name }}</p>
-                <p><small>{{ $apartado->created_at->format('d/m/Y') }} · Referencia: {{ $apartado->id }}@if($apartado->mp_payment_id) · Pago: {{ $apartado->mp_payment_id }}@endif</small></p>
-                <details><summary>Condiciones acordadas</summary><p class="commerce-preline">{{ $apartado->condiciones }}</p></details>
+            @php
+                $image = $apartado->producto && !$apartado->producto->trashed() ? \App\Support\MarketplaceImage::url($apartado->producto->imagenPrincipal?->imagen_url ?: $apartado->producto->imagen_url) : null;
+                $stateTone = $apartado->estado === 'pagado' ? 'success' : (in_array($apartado->estado, ['pendiente', 'procesando']) ? 'warning' : (in_array($apartado->estado, ['rechazado', 'revertido']) ? 'danger' : 'info'));
+            @endphp
+            <article class="commerce-card reservation-card">
+                <header class="reservation-header"><span class="reservation-reference"><x-seller-icon name="bookmark"/>Apartado #{{ $apartado->id }}</span><time datetime="{{ $apartado->created_at->toIso8601String() }}">{{ $apartado->created_at->format('d/m/Y') }}</time></header>
+                <div class="reservation-overview">
+                    <span class="reservation-product-image">@if($image)<img src="{{ $image }}" alt="" loading="lazy">@else<x-seller-icon name="box"/>@endif</span>
+                    <div class="reservation-product-copy"><span class="commerce-eyebrow">Producto apartado</span><h2>{{ $apartado->producto_nombre }}</h2><p>{{ $sellerArea ? 'Comprador: '.$apartado->buyer->name : 'Vendedor: '.$apartado->seller->name }}</p></div>
+                    <span class="reservation-state" data-tone="{{ $stateTone }}"><x-seller-icon :name="$apartado->estado === 'pagado' ? 'check' : 'clock'"/>{{ ['pendiente' => 'Pendiente de pago', 'procesando' => 'Pago en proceso', 'pagado' => 'Apartado pagado', 'reembolsado' => 'Reembolsado', 'reembolso_parcial' => 'Reembolso parcial', 'rechazado' => 'Pago rechazado', 'revertido' => 'Pago revertido'][$apartado->estado] ?? $apartado->estado }}</span>
+                </div>
+                <div class="reservation-summary"><div class="reservation-amount"><span>Anticipo del apartado</span><strong>${{ number_format((float) $apartado->monto, 2) }} <small>{{ $apartado->moneda }}</small></strong></div><div><span>Método de pago</span><strong>{{ $apartado->provider === 'mercadopago' ? 'Mercado Pago' : 'Método registrado' }}</strong></div><div><span>Referencia de pago</span><strong>{{ $apartado->mp_payment_id ?: 'Aún sin referencia de pago' }}</strong></div></div>
+                <details class="reservation-terms"><summary><span><x-seller-icon name="file"/>Condiciones acordadas</span><span class="reservation-details-toggle" aria-hidden="true">+</span></summary><p class="commerce-preline">{{ $apartado->condiciones }}</p></details>
                 @if($sellerArea)<details class="growth-fulfillment"><summary>Seguimiento de entrega · {{ \App\Models\Apartado::FULFILLMENT_STATES[$apartado->fulfillment_status ?? 'pendiente'] }}</summary><form method="POST" action="{{ route('vendedor.apartados.seguimiento', $apartado) }}" class="seller-form">@csrf @method('PUT')<label for="fulfillment-{{ $apartado->id }}">Estado operativo</label><select id="fulfillment-{{ $apartado->id }}" name="fulfillment_status">@foreach(\App\Models\Apartado::FULFILLMENT_STATES as $key => $label)<option value="{{ $key }}" @selected(($apartado->fulfillment_status ?? 'pendiente') === $key)>{{ $label }}</option>@endforeach</select><label for="fulfillment-notes-{{ $apartado->id }}">Notas privadas del vendedor</label><textarea id="fulfillment-notes-{{ $apartado->id }}" name="seller_notes" maxlength="3000" rows="2">{{ $apartado->seller_notes }}</textarea>@if($subscription?->plan === 'pro')<div class="seller-fields"><div><label for="delivery-{{ $apartado->id }}">Fecha de entrega acordada</label><input id="delivery-{{ $apartado->id }}" name="delivery_at" type="datetime-local" value="{{ $apartado->delivery_at?->timezone('America/Mexico_City')->format('Y-m-d\TH:i') }}"></div><div><label for="followup-{{ $apartado->id }}">Recordatorio privado</label><input id="followup-{{ $apartado->id }}" name="follow_up_at" type="datetime-local" value="{{ $apartado->follow_up_at?->timezone('America/Mexico_City')->format('Y-m-d\TH:i') }}"><p class="seller-help">Recibirás una notificación dentro de NexoEco. No se envía un mensaje al comprador.</p></div></div>@else<p class="seller-help">Pro agrega fechas de entrega, calendario y recordatorios. El seguimiento de entrega está disponible sin suscripción.</p>@endif<p class="seller-help">Hora de Manzanillo. Estos datos no modifican el anticipo ni las condiciones acordadas.</p><button class="seller-button secondary small" type="submit">Guardar seguimiento</button></form></details>@endif
                 <div class="commerce-actions">
                     @if(!$sellerArea && $apartado->producto && !$apartado->producto->trashed())
@@ -41,9 +53,9 @@
                 </div>
             </article>
         @empty
-            <div class="commerce-card"><h2>{{ $sellerArea ? 'Los apartados de tus compradores aparecerán aquí' : 'Todavía no has apartado un producto' }}</h2><p>{{ $sellerArea ? 'Activa esta opción al publicar o editar un producto y define el monto del anticipo.' : 'Busca la opción «Apartar con Mercado Pago» en los productos que aceptan anticipos.' }}</p><a href="{{ route($sellerArea ? 'vendedor.productos.index' : 'marketplace.index') }}">{{ $sellerArea ? 'Administrar mis productos' : 'Explorar productos' }}</a></div>
+            <x-seller-growth-empty icon="bookmark" :title="$sellerArea ? 'Los apartados de tus compradores aparecerán aquí' : 'Todavía no has apartado un producto'" :description="$sellerArea ? 'Activa esta opción al publicar o editar un producto y define el monto del anticipo.' : 'Busca la opción «Apartar con Mercado Pago» en los productos que aceptan anticipos.'" />
         @endforelse
     </div>
-    {{ $apartados->links() }}
+    <div class="commerce-pagination">{{ $apartados->links() }}</div>
 </div>
 @endsection

@@ -6,6 +6,7 @@ use App\Models\SellerSubscription;
 use App\Models\TiposUsuario;
 use App\Models\User;
 use App\Services\MercadoPagoSubscriptions;
+use App\Services\SellerBenefits;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Tests\Support\BuyerDatabase;
@@ -48,6 +49,61 @@ function fakeSubscriptionApi(SellerSubscription $subscription, string $status = 
         'api.mercadopago.com/v1/payments/456' => Http::response(array_replace(['id' => 456, 'collector_id' => 123, 'currency_id' => 'MXN', 'transaction_amount' => (float) $subscription->amount, 'status' => $paymentStatus, 'transaction_amount_refunded' => 0], $overrides)),
     ]);
 }
+
+test('verified Pro payment unlocks navigation and paid tools immediately and expiry locks them again', function () {
+    $subscription = paidSellerPlan($this, 'pro');
+    $subscription->update(['status' => 'pending', 'paid_until' => null]);
+    $this->actingAs($this->seller)->get(route('vendedor.dashboard'))->assertOk()->assertSee('data-plan-locked', false)->assertDontSee('alert(', false)->assertSee('Dale más visibilidad a tu tienda');
+
+    fakeSubscriptionApi($subscription);
+    $this->post(route('vendedor.suscripcion.sync', $subscription))->assertRedirect(route('vendedor.suscripcion.index'))->assertSessionHasNoErrors();
+    $this->get(route('vendedor.dashboard'))->assertOk()->assertDontSee('data-plan-locked', false)->assertDontSee('Dale más visibilidad a tu tienda');
+    $this->get(route('vendedor.herramientas.index'))->assertOk()->assertViewHas('subscription', fn ($plan) => $plan->id === $subscription->id && $plan->plan === 'pro');
+    $this->post(route('vendedor.herramientas.respuestas.store'), ['title' => 'Entrega', 'body' => 'Puedes recoger en tienda.'])->assertSessionHasNoErrors();
+    $this->get(route('vendedor.estadisticas.export'))->assertOk();
+
+    $subscription->refresh()->update(['paid_until' => now()->subSecond()]);
+    $this->get(route('vendedor.dashboard'))->assertOk()->assertSee('data-plan-locked', false)->assertSee('Dale más visibilidad a tu tienda');
+    $this->post(route('vendedor.herramientas.respuestas.store'), ['title' => 'Nueva', 'body' => 'Prueba'])->assertSessionHasErrors('plan');
+    Http::assertSentCount(3);
+});
+
+test('basic accounts and legacy free subscriptions never grant paid benefits or block a Pro checkout', function () {
+    config(['subscriptions.access_token' => null]);
+    $this->actingAs($this->seller)->post(route('vendedor.suscripcion.gratis'))->assertSessionHasNoErrors()->assertRedirect(route('vendedor.suscripcion.index'));
+    $this->assertDatabaseCount('seller_subscriptions', 0);
+    $legacy = SellerSubscription::create(['user_id' => $this->seller->id, 'plan' => 'gratis', 'amount' => 0, 'status' => 'authorized', 'paid_until' => now()->addYears(10)]);
+    expect($legacy->entitled())->toBeFalse()->and(app(SellerBenefits::class)->subscription($this->seller))->toBeNull();
+    $this->post(route('vendedor.herramientas.respuestas.store'), ['title' => 'Entrega', 'body' => 'No permite beneficios de pago.'])->assertSessionHasErrors('plan');
+    $this->get(route('vendedor.suscripcion.index'))->assertOk()->assertViewHas('subscription', null);
+    $this->post(route('vendedor.suscripcion.checkout'), ['plan' => 'gratis', 'acepto_renovacion' => 1])->assertSessionHasErrors('plan');
+
+    config(['subscriptions.access_token' => 'test-platform-token']);
+    // Reuse the existing checkout test's provider shape without making real requests.
+    $pending = SellerSubscription::create(['user_id' => $this->seller->id, 'plan' => 'pro', 'amount' => 299, 'provider_id' => 'abc123', 'checkout_url' => 'https://www.mercadopago.com.mx/subscriptions/checkout?preapproval_id=abc123']);
+    fakeSubscriptionApi($pending, 'pending', 'pending');
+    $this->post(route('vendedor.suscripcion.checkout'), ['plan' => 'pro', 'acepto_renovacion' => 1])->assertRedirect($pending->checkout_url)->assertSessionHasNoErrors();
+    expect($pending->fresh()->entitled())->toBeFalse();
+});
+
+test('cancelled and paused plans preserve paid access only until the verified period ends', function (string $status) {
+    $subscription = paidSellerPlan($this, 'pro');
+    $subscription->update(['status' => $status]);
+    $this->actingAs($this->seller)->get(route('vendedor.dashboard'))->assertOk()->assertDontSee('data-plan-locked', false);
+    expect(app(SellerBenefits::class)->subscription($this->seller)?->id)->toBe($subscription->id);
+    $this->travelTo($subscription->paid_until);
+    expect(app(SellerBenefits::class)->subscription($this->seller))->toBeNull();
+    $this->get(route('vendedor.dashboard'))->assertOk()->assertSee('data-plan-locked', false);
+})->with(['cancelled', 'paused']);
+
+test('payment and unsupported legacy states do not count as an active subscription', function (string $status) {
+    $subscription = paidSellerPlan($this, 'pro');
+    $subscription->update(['status' => $status]);
+    expect($subscription->entitled())->toBeFalse()
+        ->and(SellerSubscription::query()->entitled()->whereKey($subscription->id)->exists())->toBeFalse()
+        ->and(app(SellerBenefits::class)->subscription($this->seller))->toBeNull();
+    $this->actingAs($this->seller)->get(route('vendedor.dashboard'))->assertOk()->assertSee('data-plan-locked', false);
+})->with(['approved', 'active', 'pending']);
 
 test('seller plan comparison is protected and displays two approved prices without requiring a store', function () {
     $this->get(route('vendedor.suscripcion.index'))->assertRedirect(route('login'));

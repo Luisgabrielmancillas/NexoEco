@@ -1,4 +1,4 @@
-@props(['eyebrow', 'title', 'description', 'icon' => 'sparkles', 'tone' => 'peach', 'badge' => 'Espacio de crecimiento'])
+@props(['eyebrow', 'title', 'description', 'icon' => 'sparkles', 'tone' => 'blue', 'badge' => 'Espacio de crecimiento'])
 <section {{ $attributes->class(['growth-hero', 'growth-hero-'.$tone]) }} aria-label="{{ $title }}">
     <div class="growth-hero-copy">
         <span class="growth-kicker"><span aria-hidden="true"></span>{{ $eyebrow }}</span>

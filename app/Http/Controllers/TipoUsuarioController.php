@@ -10,7 +10,7 @@ class TipoUsuarioController extends Controller
 {
     public function index()
     {
-        $tipos = TiposUsuario::orderBy('id_tipo_usuario', 'desc')->get();
+        $tipos = TiposUsuario::withCount('users')->orderBy('id_tipo_usuario', 'desc')->paginate(20);
 
         return view('tipos_usuario.index', compact('tipos'));
     }
@@ -37,6 +37,7 @@ class TipoUsuarioController extends Controller
 
     public function show(TiposUsuario $tiposUsuario)
     {
+        $tiposUsuario->loadCount('users');
         return view('tipos_usuario.show', compact('tiposUsuario'));
     }
 

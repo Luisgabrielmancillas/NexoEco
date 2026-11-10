@@ -188,6 +188,12 @@ test('impulso commercial offers enforce three active offers and preserve price a
     $first = CommercialOffer::firstOrFail();
     expect($first->user_id)->toBe($this->seller->id)->and($this->product->fresh()->precio)->toBe(200.0)->and($this->product->fresh()->apartado_monto)->toBe('50.00')->and($this->product->fresh()->apartado_condiciones)->toBe('Recoger en tienda.');
     $this->get(route('productos.show', $this->product))->assertOk()->assertSee('15% de descuento')->assertSee('Oferta informativa.');
+    $catalog = $this->get(route('marketplace.index'))->assertOk()->assertSee('product-offer-ribbon', false);
+    $document = new DOMDocument;
+    @$document->loadHTML('<?xml encoding="utf-8" ?>'.$catalog->getContent());
+    $xpath = new DOMXPath($document);
+    expect($xpath->query('//div[contains(@class,"catalog-image")]/span[@class="product-offer-ribbon"]')->length)->toBeGreaterThan(0)
+        ->and($xpath->query('//div[contains(@class,"catalog-body")]//span[@class="product-offer-ribbon"]')->length)->toBe(0);
     $this->actingAs($this->other)->delete(route('vendedor.promociones.destroy', $first))->assertNotFound();
     $this->actingAs($this->seller)->delete(route('vendedor.promociones.destroy', $first))->assertSessionHasNoErrors();
     $this->post(route('vendedor.promociones.store'), growthOffer($this, ['id_producto' => $extra->getKey()]))->assertSessionHasNoErrors();
@@ -330,7 +336,7 @@ test('store follows are opt in idempotent and new product notices work for free 
     $this->actingAs($this->buyer)->post(route('tiendas.follow', $this->shop), ['following' => 1])->assertSessionHasNoErrors();
     $this->post(route('tiendas.follow', $this->shop), ['following' => 1])->assertSessionHasNoErrors();
     expect(DB::table('store_follows')->count())->toBe(1);
-    $this->get(route('comprador.tiendas-seguidas'))->assertOk()->assertSee('Taller del puerto');
+    $this->get(route('comprador.tiendas-seguidas'))->assertRedirect(route('comprador.favoritos', 'tiendas'));
     $this->actingAs($this->seller)->post(route('tiendas.follow', $this->shop), ['following' => 1])->assertForbidden();
     $this->post(route('vendedor.productos.store'), ['nombre_producto' => 'Nuevo producto para seguidores', 'descripcion' => 'Un producto recién llegado.', 'precio' => 100, 'id_categoria' => $this->category->getKey(), 'imagen' => UploadedFile::fake()->image('nuevo.jpg', 200, 200)])->assertSessionHasNoErrors();
     expect($this->buyer->notifications()->where('data->event', 'store.product')->count())->toBe(1);

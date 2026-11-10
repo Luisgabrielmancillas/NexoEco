@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\UsuarioRolService;
+use App\Support\RegistrationPassword;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use RuntimeException;
@@ -28,9 +28,9 @@ class RegisteredUserController extends Controller
         $data = $request->validate([
             'nombre_completo' => ['required', 'string', 'max:150'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', ...RegistrationPassword::rules()],
             'tipo_registro' => ['sometimes', 'in:comprador'],
-        ]);
+        ], RegistrationPassword::messages());
 
         try {
             $user = DB::transaction(function () use ($data, $roles) {

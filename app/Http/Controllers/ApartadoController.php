@@ -19,7 +19,7 @@ class ApartadoController extends Controller
     {
         $request->validate(['apartado' => ['nullable', 'uuid']]);
         $sellerArea = $request->routeIs('vendedor.*');
-        $apartados = Apartado::where($sellerArea ? 'seller_id' : 'buyer_id', $request->user()->id)->when($request->filled('apartado'), fn ($q) => $q->whereKey($request->query('apartado')))->with(['buyer', 'seller', 'producto'])->latest()->paginate(20)->withQueryString();
+        $apartados = Apartado::where($sellerArea ? 'seller_id' : 'buyer_id', $request->user()->id)->when($request->filled('apartado'), fn ($q) => $q->whereKey($request->query('apartado')))->with(['buyer', 'seller', 'producto.imagenPrincipal'])->latest()->paginate(20)->withQueryString();
         $account = $sellerArea ? $request->user()->mercadoPagoAccount : null;
         $subscription = $sellerArea ? app(\App\Services\SellerBenefits::class)->subscription($request->user()) : null;
 

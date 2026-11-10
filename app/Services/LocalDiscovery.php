@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Tienda;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 class LocalDiscovery
@@ -32,7 +33,7 @@ class LocalDiscovery
         return 6371.0088 * 2 * asin(sqrt(min(1, max(0, $a))));
     }
 
-    public function nearby(?array $location): Collection
+    public function nearby(?array $location, ?int $limit = 6, ?Builder $query = null): Collection
     {
         $origin = $this->position($location);
         if (! $origin) {
@@ -42,17 +43,19 @@ class LocalDiscovery
         $latDelta = rad2deg($radius / 6371.0088);
         $lngDelta = abs($origin[0]) + $latDelta >= 90 ? 180
             : rad2deg(asin(min(1, sin($radius / 6371.0088) / cos(deg2rad($origin[0])))));
-        $stores = Tienda::whereNotNull('latitud')->whereNotNull('longitud')
+        $stores = ($query ?? Tienda::query())->whereNotNull('latitud')->whereNotNull('longitud')
             ->whereBetween('latitud', [$origin[0] - $latDelta, $origin[0] + $latDelta])
             ->whereBetween('longitud', [$origin[1] - $lngDelta, $origin[1] + $lngDelta])
             ->whereHas('user', fn ($q) => $q->where('activo', true)->whereHas('tipos_usuario', fn ($q) => $q->where('nombre_tipo', 'vendedor')))
             ->get();
 
-        return $stores->map(function ($store) use ($origin) {
+        $sorted = $stores->map(function ($store) use ($origin) {
             $store->setAttribute('distance_km', $this->distance($origin, [$store->latitud, $store->longitud]));
 
             return $store;
-        })->filter(fn ($store) => $store->distance_km <= $radius)->sortBy('distance_km')->take(6)->values();
+        })->filter(fn ($store) => $store->distance_km <= $radius)->sortBy('distance_km')->values();
+
+        return $limit === null ? $sorted : $sorted->take($limit)->values();
     }
 
     public function directionsUrl(Tienda $store, ?array $location): ?string

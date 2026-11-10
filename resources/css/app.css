@@ -1,3 +1,4 @@
+@import './design-system.css';
 @import './buyer.css';
 @import './admin.css';
 @import './seller.css';
@@ -7,6 +8,9 @@
 @import './moderator.css';
 @import './site-shell.css';
 @import './seller-experience.css';
+@import './favorites.css';
+@import './product-cards.css';
+@import './reviews.css';
 
 @tailwind base;
 @tailwind components;

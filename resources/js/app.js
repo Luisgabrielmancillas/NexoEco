@@ -13,8 +13,16 @@ import { initializeLocalDiscovery } from './local-discovery';
 import '../css/local-discovery.css';
 import { initializeModerator } from './moderator';
 import { initializeSellerExperience } from './seller-experience';
+import { initializeAppDialogs } from './app-dialogs';
+import '../css/app-dialogs.css';
+import { initializeReviews } from './reviews';
+import { initializeFormSubmission } from './form-submission';
+import { initializeStoreCarousels } from './store-carousel';
+import '../css/store-carousel.css';
 
 window.Alpine = Alpine;
+
+initializeAppDialogs();
 
 Alpine.start();
 
@@ -27,6 +35,9 @@ initializeLocalDiscovery();
 initializeModerator();
 initializeChatCommerce();
 initializeSellerExperience();
+initializeReviews();
+initializeFormSubmission();
+initializeStoreCarousels();
 
 document.querySelectorAll('[data-document-preview]').forEach((documentPanel) => {
     documentPanel.addEventListener('toggle', () => {

@@ -5,13 +5,10 @@
     @elseif($tiendasCercanas->isEmpty())
         <div class="nearby-empty"><span class="directions-icon"><x-market-icon name="store"/></span><div><h3>Aún no encontramos tiendas a {{ config('discovery.nearby_radius_km') }} km de este punto</h3><p>Puedes cambiar tu ubicación o explorar todos los negocios de Manzanillo más abajo.</p><button type="button" class="buyer-button secondary" data-dialog-open="buyer-location-dialog">Revisar mi ubicación</button></div></div>
     @else
-        <div class="nearby-stores-grid">
+        <x-store-carousel id="nearby-store-track" label="Tiendas cerca de ti" variant="nearby" :view-all-url="route('comprador.tiendas', ['cercanas' => 1])">
             @foreach($tiendasCercanas as $nearbyStore)
-                @php($nearbyLogo = \App\Support\MarketplaceImage::url($nearbyStore->logo_tienda))
-                <article class="nearby-store-card"><div class="nearby-store-heading"><a href="{{ route('tiendas.show', $nearbyStore) }}" class="nearby-store-logo">@if($nearbyLogo)<img src="{{ $nearbyLogo }}" alt="Logo de {{ $nearbyStore->nombre_tienda }}" loading="lazy">@else<x-market-icon name="store"/>@endif</a><div><span class="nearby-distance">A {{ number_format($nearbyStore->distance_km, 1) }} km</span><h3><a href="{{ route('tiendas.show', $nearbyStore) }}">{{ $nearbyStore->nombre_tienda }}</a></h3><p>{{ implode(', ', array_filter([$nearbyStore->colonia, $nearbyStore->ciudad])) }}</p></div></div>
-                    <div class="nearby-store-actions"><a class="buyer-text-link" href="{{ route('tiendas.show', $nearbyStore) }}">Ver tienda</a>@auth<button type="button" class="buyer-button secondary" data-store-route data-route-url="{{ route('tiendas.ruta', $nearbyStore) }}" data-store-name="{{ $nearbyStore->nombre_tienda }}" data-maps-url="{{ app(\App\Services\LocalDiscovery::class)->directionsUrl($nearbyStore, $ubicacionComprador) }}" data-dialog-open="store-route-dialog">Cómo llegar</button>@else<a class="buyer-button secondary" href="{{ route('login') }}">Cómo llegar</a>@endauth</div>
-                </article>
+                @include('marketplace.partials.nearby-store-card')
             @endforeach
-        </div>
+        </x-store-carousel>
     @endif
 </section>

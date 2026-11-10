@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\StoreSolicitudVendedorRequest;
-use Illuminate\Validation\Rules;
+use App\Support\RegistrationPassword;
 
 class StoreSellerRegistrationRequest extends StoreSolicitudVendedorRequest
 {
@@ -17,7 +17,7 @@ class StoreSellerRegistrationRequest extends StoreSolicitudVendedorRequest
         return array_merge(parent::rules(), [
             'nombre_completo' => ['required', 'string', 'max:150'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', ...RegistrationPassword::rules()],
         ]);
     }
 
@@ -32,11 +32,9 @@ class StoreSellerRegistrationRequest extends StoreSolicitudVendedorRequest
 
     public function messages(): array
     {
-        return array_merge(parent::messages(), [
+        return array_merge(parent::messages(), RegistrationPassword::messages(), [
             'email.email' => 'Ingresa un correo electrónico válido.',
             'email.unique' => 'Este correo ya tiene una cuenta. Inicia sesión para continuar tu registro como vendedor.',
-            'password.confirmed' => 'Las contraseñas no coinciden.',
-            'password.min' => 'La contraseña debe contener al menos :min caracteres.',
         ]);
     }
 }

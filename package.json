@@ -3,6 +3,10 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "tokens": "node scripts/build-design-tokens.mjs",
+        "check:design": "node scripts/build-design-tokens.mjs --check && node scripts/check-design-system.mjs",
+        "prebuild": "npm run tokens",
+        "predev": "npm run tokens",
         "build": "vite build",
         "dev": "vite"
     },

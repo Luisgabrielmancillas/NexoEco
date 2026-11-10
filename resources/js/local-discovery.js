@@ -1,4 +1,5 @@
 import { distanceKm, locationHasDrifted, routeDistance } from './discovery-geo';
+import { themeColor } from './design-tokens';
 
 export function initializeLocalDiscovery() {
     const awareness = document.querySelector('[data-location-awareness]');
@@ -104,9 +105,9 @@ export function initializeLocalDiscovery() {
                     layers = L.layerGroup().addTo(map);
                     new ResizeObserver(() => map.invalidateSize()).observe(container);
                 }
-                const line = L.geoJSON(data.geometry, { style: { color: '#C34722', weight: 5, opacity: .9 } }).addTo(layers);
-                L.circleMarker(data.origin, { radius: 8, color: '#FFF', weight: 3, fillColor: '#2F7EE8', fillOpacity: 1 }).bindPopup(markerLabel('Tu ubicación guardada')).addTo(layers);
-                L.circleMarker(data.destination, { radius: 9, color: '#FFF', weight: 3, fillColor: '#C34722', fillOpacity: 1 }).bindPopup(markerLabel(button.dataset.storeName)).addTo(layers);
+                const line = L.geoJSON(data.geometry, { style: { color: themeColor('primary'), weight: 5, opacity: .9 } }).addTo(layers);
+                L.circleMarker(data.origin, { radius: 8, color: themeColor('surface'), weight: 3, fillColor: themeColor('primary-800'), fillOpacity: 1 }).bindPopup(markerLabel('Tu ubicación guardada')).addTo(layers);
+                L.circleMarker(data.destination, { radius: 9, color: themeColor('surface'), weight: 3, fillColor: themeColor('primary'), fillOpacity: 1 }).bindPopup(markerLabel(button.dataset.storeName)).addTo(layers);
                 map.invalidateSize();
                 map.fitBounds(line.getBounds().extend(data.origin).extend(data.destination), { padding: [28, 28], maxZoom: 17 });
             } catch {

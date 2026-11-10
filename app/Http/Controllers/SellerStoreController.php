@@ -7,13 +7,14 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\User;
 use App\Services\ShopMedia;
+use App\Services\SellerBenefits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class SellerStoreController extends Controller
 {
-    public function dashboard(Request $request)
+    public function dashboard(Request $request, SellerBenefits $benefits)
     {
         $tienda = $request->user()->tiendas()->orderBy('id_tienda')->first();
         if (! $tienda) {
@@ -30,8 +31,9 @@ class SellerStoreController extends Controller
             ->select('productos.*')->selectSub(DB::table('productos_favoritos')->selectRaw('COUNT(*)')->whereColumn('productos_favoritos.id_producto', 'productos.id_producto'), 'favoritos_count')
             ->orderByDesc('favoritos_count')->orderByDesc('id_producto')->limit(4)->get();
         $solicitud = $request->user()->solicitudVendedor()->with('documentos')->first();
+        $subscription = $benefits->subscription($request->user());
 
-        return view('vendedor.dashboard', compact('tienda', 'favorites', 'productFavorites', 'productReviews', 'categorias', 'populares', 'solicitud'));
+        return view('vendedor.dashboard', compact('tienda', 'favorites', 'productFavorites', 'productReviews', 'categorias', 'populares', 'solicitud', 'subscription'));
     }
 
     public function create(Request $request)

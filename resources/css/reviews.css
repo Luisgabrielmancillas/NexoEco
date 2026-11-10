@@ -1,0 +1,27 @@
+.reviews-section { margin-top: 32px; scroll-margin-top: 100px; }
+.review-card { position: relative; }
+.review-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px 18px; }
+.review-header strong { display: block; font-size: 15px; line-height: 1.5; }
+.review-header .opinion-rating { font-size: 12px; white-space: nowrap; }
+.review-owner-label { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 11px; }
+.review-card-own .review-header { padding-right: 94px; }
+.review-card .buyer-review-text { margin: 14px 0; font-size: 14px; line-height: 1.7; }
+.review-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 8px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); color: var(--color-text-secondary); cursor: pointer; list-style: none; }
+.review-icon-button::-webkit-details-marker { display: none; }
+.review-icon-button > svg { width: 18px; height: 18px; flex-shrink: 0; }
+.review-icon-button:hover, .review-editor[open] > summary { color: var(--color-primary-text); background: var(--color-primary-soft); border-color: var(--color-primary-border); }
+.review-icon-button.danger:hover { color: var(--color-danger-text); background: var(--color-danger-soft); border-color: var(--color-danger-border); }
+.review-editor > summary { position: absolute; top: 20px; right: 64px; }
+.review-delete { position: absolute; top: 20px; right: 20px; margin: 0; }
+.review-editor-content { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--color-border); }
+.review-editor-content h3 { margin: 0 0 18px; font-size: 16px; font-weight: 750; }
+.review-form .buyer-field textarea { min-height: 110px; }
+.review-form-actions, .review-actions { display: flex; align-items: stretch; flex-wrap: wrap; gap: 10px; }
+.review-actions > form { display: flex; margin: 0; }
+.review-pagination { margin: 20px 0; }
+@media (max-width: 600px) {
+    .review-icon-button { width: 40px; height: 40px; }
+    .review-editor > summary { right: 60px; top: 16px; }
+    .review-delete { right: 12px; top: 16px; }
+    .review-card-own .review-header { padding-right: 92px; }
+}

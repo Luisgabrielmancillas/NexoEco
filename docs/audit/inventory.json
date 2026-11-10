@@ -1,0 +1,3080 @@
+{
+  "routes": [
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "/",
+      "name": "marketplace.index",
+      "action": "App\\Http\\Controllers\\MarketplaceController@index",
+      "middleware": [
+        "web"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "_boost/browser-logs",
+      "name": "boost.browser-logs",
+      "action": "Closure",
+      "middleware": []
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/catalogo/{tipo}",
+      "name": "admin.catalogo",
+      "action": "App\\Http\\Controllers\\AdminCatalogController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/consultas",
+      "name": "admin.consultas.index",
+      "action": "App\\Http\\Controllers\\AdminSupportController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/consultas/{solicitud}",
+      "name": "admin.consultas.show",
+      "action": "App\\Http\\Controllers\\AdminSupportController@show",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "admin/consultas/{solicitud}/responder",
+      "name": "admin.consultas.reply",
+      "action": "App\\Http\\Controllers\\AdminSupportController@reply",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator",
+        "throttle:30,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/opiniones",
+      "name": "admin.opiniones",
+      "action": "App\\Http\\Controllers\\AdminCatalogController@reviews",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/productos/{producto}",
+      "name": "admin.productos.show",
+      "action": "App\\Http\\Controllers\\AdminCatalogController@product",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/solicitudes-vendedor",
+      "name": "admin.solicitudes.index",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/solicitudes-vendedor/{solicitud}",
+      "name": "admin.solicitudes.show",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@show",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/solicitudes-vendedor/{solicitud}/documentos/{documento}",
+      "name": "admin.solicitudes.document",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@document",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/solicitudes-vendedor/{solicitud}/documentos/{documento}/preview",
+      "name": "admin.solicitudes.preview",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@preview",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "admin/solicitudes-vendedor/{solicitud}/revisar",
+      "name": "admin.solicitudes.review",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@review",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator",
+        "throttle:20,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/tiendas/{tienda}",
+      "name": "admin.tiendas.show",
+      "action": "App\\Http\\Controllers\\AdminCatalogController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/users",
+      "name": "admin.users.index",
+      "action": "App\\Http\\Controllers\\AdminUserController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "admin/users",
+      "name": "admin.users.store",
+      "action": "App\\Http\\Controllers\\AdminUserController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/users/create",
+      "name": "admin.users.create",
+      "action": "App\\Http\\Controllers\\AdminUserController@create",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/users/{user}",
+      "name": "admin.users.show",
+      "action": "App\\Http\\Controllers\\AdminUserController@show",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "admin/users/{user}",
+      "name": "admin.users.update",
+      "action": "App\\Http\\Controllers\\AdminUserController@update",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "admin/users/{user}",
+      "name": "admin.users.destroy",
+      "action": "App\\Http\\Controllers\\AdminUserController@destroy",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "admin/users/{user}/edit",
+      "name": "admin.users.edit",
+      "action": "App\\Http\\Controllers\\AdminUserController@edit",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "administrador/dashboard",
+      "name": "administrador.dashboard",
+      "action": "App\\Http\\Controllers\\Dashboard_Admin_Controller@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "apartados",
+      "name": "apartados.index",
+      "action": "App\\Http\\Controllers\\ApartadoController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "apartados/{apartado}/actualizar",
+      "name": "apartados.sync",
+      "action": "App\\Http\\Controllers\\ApartadoController@sync",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "apartados/{apartado}/continuar",
+      "name": "apartados.resume",
+      "action": "App\\Http\\Controllers\\ApartadoController@resume",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "apartados/{apartado}/retorno",
+      "name": "apartados.return",
+      "action": "App\\Http\\Controllers\\ApartadoController@returned",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/attachments/{filename}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\AttachmentController@download",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/blocks",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\BlockController@index",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/blocks/{user}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\BlockController@store",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "api/chatify/v1/blocks/{user}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\BlockController@destroy",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/broadcasting/auth",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\BroadcastAuthController",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/contacts/search",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ContactController@search",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/conversations",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@index",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/direct",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@storeDirect",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/group",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@storeGroup",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "api/chatify/v1/conversations/pin-order",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@reorderPinned",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/conversations/{conversation}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@show",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PATCH",
+      "uri": "api/chatify/v1/conversations/{conversation}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@update",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "api/chatify/v1/conversations/{conversation}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@destroy",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/conversations/{conversation}/attachments",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\AttachmentController@index",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/avatar",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@uploadAvatar",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-uploads"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/clear",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@clear",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/forward",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\MessageController@forward",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-messages"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/hide",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@hide",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/leave",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@leave",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/conversations/{conversation}/messages",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\MessageController@index",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-messages"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/messages",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\MessageController@store",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-messages"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/conversations/{conversation}/messages/search",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\MessageController@search",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-messages"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/participants",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@addParticipants",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/conversations/{conversation}/participants",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\GroupParticipantController@index",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PATCH",
+      "uri": "api/chatify/v1/conversations/{conversation}/participants/{user}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\GroupParticipantController@update",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "api/chatify/v1/conversations/{conversation}/participants/{user}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@removeParticipant",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PATCH",
+      "uri": "api/chatify/v1/conversations/{conversation}/pin",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@pin",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/read",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\ConversationController@markRead",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/transfer-ownership",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\GroupParticipantController@transferOwnership",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/conversations/{conversation}/typing",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\TypingController@store",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-messages"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/favorites",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\FavoriteController@index",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/favorites/{user}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\FavoriteController@toggle",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/link-preview",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\LinkPreviewController@show",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PATCH",
+      "uri": "api/chatify/v1/messages/{message}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\MessageController@update",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-messages"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "api/chatify/v1/messages/{message}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\MessageController@destroy",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/presence/heartbeat",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\PresenceController@heartbeat",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/presence/offline",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\PresenceController@offline",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/settings",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\UserSettingsController@show",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PATCH",
+      "uri": "api/chatify/v1/settings",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\UserSettingsController@update",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-uploads"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/settings/avatar",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\UserSettingsController@updateAvatar",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-uploads"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "api/chatify/v1/settings/chat-background",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\UserSettingsController@updateChatBackground",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi",
+        "throttle:chatify-uploads"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/translations",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\TranslationsController",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "api/chatify/v1/users/{user}",
+      "name": null,
+      "action": "Chatify\\Http\\Controllers\\Api\\UserController@show",
+      "middleware": [
+        "Chatify\\Http\\Middleware\\SetLocaleFromRequest",
+        "web",
+        "auth",
+        "App\\Http\\Middleware\\DisableChatifyApi"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/dashboard",
+      "name": "comprador.dashboard",
+      "action": "App\\Http\\Controllers\\MarketplaceController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/favoritos/{tipo}",
+      "name": "comprador.favoritos",
+      "action": "App\\Http\\Controllers\\FavoritoController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "comprador/favoritos/{tipo}/{id}",
+      "name": "comprador.favoritos.store",
+      "action": "App\\Http\\Controllers\\FavoritoController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "throttle:60,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "comprador/favoritos/{tipo}/{id}",
+      "name": "comprador.favoritos.destroy",
+      "action": "App\\Http\\Controllers\\FavoritoController@destroy",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/notificaciones",
+      "name": "comprador.notificaciones",
+      "action": "App\\Http\\Controllers\\BuyerNotificationController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/notificaciones/conteo",
+      "name": "comprador.notificaciones.count",
+      "action": "App\\Http\\Controllers\\BuyerNotificationController@count",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "comprador/notificaciones/leer-todas",
+      "name": "comprador.notificaciones.readAll",
+      "action": "App\\Http\\Controllers\\BuyerNotificationController@readAll",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "comprador/notificaciones/{notification}/leer",
+      "name": "comprador.notificaciones.read",
+      "action": "App\\Http\\Controllers\\BuyerNotificationController@read",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/opiniones",
+      "name": "comprador.opiniones",
+      "action": "App\\Http\\Controllers\\OpinionController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "comprador/opiniones/{opinion}",
+      "name": "comprador.opiniones.destroy",
+      "action": "App\\Http\\Controllers\\OpinionController@destroy",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "comprador/opiniones/{tipo}/{id}",
+      "name": "comprador.opiniones.store",
+      "action": "App\\Http\\Controllers\\OpinionController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "comprador/reportes/{tipo}/{id}",
+      "name": "comprador.reportes.store",
+      "action": "App\\Http\\Controllers\\ContentReportController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "throttle:5,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/soporte/consultas/{solicitud}",
+      "name": "comprador.soporte.show",
+      "action": "App\\Http\\Controllers\\BuyerSupportController@thread",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "comprador/soporte/consultas/{solicitud}",
+      "name": "comprador.soporte.reply",
+      "action": "App\\Http\\Controllers\\BuyerSupportController@reply",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "comprador/soporte/contacto",
+      "name": "comprador.soporte.store",
+      "action": "App\\Http\\Controllers\\BuyerSupportController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "throttle:5,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/soporte/{seccion}",
+      "name": "comprador.soporte",
+      "action": "App\\Http\\Controllers\\BuyerSupportController@show",
+      "middleware": [
+        "web",
+        "auth",
+        "verified"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "comprador/tiendas-seguidas",
+      "name": "comprador.tiendas-seguidas",
+      "action": "App\\Http\\Controllers\\StoreAudienceController@followed",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "conocenos",
+      "name": "conocenos",
+      "action": "Illuminate\\Routing\\ViewController",
+      "middleware": [
+        "web"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "email/verification-notification",
+      "name": "verification.send",
+      "action": "App\\Http\\Controllers\\Auth\\NexoEmailVerificationController@send",
+      "middleware": [
+        "web",
+        "auth",
+        "throttle:6,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "email/verify",
+      "name": "verification.notice",
+      "action": "App\\Http\\Controllers\\Auth\\NexoEmailVerificationController@notice",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "email/verify",
+      "name": "verification.verify",
+      "action": "App\\Http\\Controllers\\Auth\\NexoEmailVerificationController@verify",
+      "middleware": [
+        "web",
+        "auth",
+        "throttle:6,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "forgot-password",
+      "name": "password.request",
+      "action": "App\\Http\\Controllers\\Auth\\PasswordResetLinkController@create",
+      "middleware": [
+        "web",
+        "guest"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "forgot-password",
+      "name": "password.email",
+      "action": "App\\Http\\Controllers\\Auth\\PasswordResetLinkController@store",
+      "middleware": [
+        "web",
+        "guest",
+        "throttle:5,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "login",
+      "name": "login",
+      "action": "App\\Http\\Controllers\\Auth\\AuthenticatedSessionController@create",
+      "middleware": [
+        "web",
+        "guest"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "login",
+      "name": "login.store",
+      "action": "App\\Http\\Controllers\\Auth\\AuthenticatedSessionController@store",
+      "middleware": [
+        "web",
+        "guest",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "logout",
+      "name": "logout",
+      "action": "App\\Http\\Controllers\\Auth\\AuthenticatedSessionController@destroy",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "media/tiendas/{tienda}/{archivo}",
+      "name": "tiendas.media",
+      "action": "App\\Http\\Controllers\\ShopMediaController@show",
+      "middleware": [
+        "web"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "mensajes",
+      "name": "chat.index",
+      "action": "App\\Http\\Controllers\\ProductChatController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "mensajes/{chat}",
+      "name": "chat.show",
+      "action": "App\\Http\\Controllers\\ProductChatController@show",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "mensajes/{chat}/mensajes",
+      "name": "chat.messages",
+      "action": "App\\Http\\Controllers\\ProductChatController@messages",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:90,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "mensajes/{chat}/mensajes",
+      "name": "chat.send",
+      "action": "App\\Http\\Controllers\\ProductChatController@send",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:30,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "mercadopago/suscripciones/webhook",
+      "name": "suscripciones.webhook",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@webhook",
+      "middleware": [
+        "web",
+        "throttle:120,1,subscription-webhook"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "mercadopago/webhook",
+      "name": "mercadopago.webhook",
+      "action": "App\\Http\\Controllers\\ApartadoController@webhook",
+      "middleware": [
+        "web",
+        "throttle:120,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/analiticas",
+      "name": "moderador.analiticas",
+      "action": "App\\Http\\Controllers\\ModeratorController@analytics",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/ayuda",
+      "name": "moderador.ayuda",
+      "action": "App\\Http\\Controllers\\ModeratorController@help",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/configuracion",
+      "name": "moderador.configuracion",
+      "action": "App\\Http\\Controllers\\ModeratorController@settings",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "moderador/contenido/{tipo}/{id}",
+      "name": "moderador.contenido.destroy",
+      "action": "App\\Http\\Controllers\\ModeratorController@destroy",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator",
+        "throttle:30,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/dashboard",
+      "name": "moderador.dashboard",
+      "action": "App\\Http\\Controllers\\ModeratorController@dashboard",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/opiniones",
+      "name": "moderador.opiniones",
+      "action": "App\\Http\\Controllers\\ModeratorController@opinions",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/publicaciones",
+      "name": "moderador.publicaciones",
+      "action": "App\\Http\\Controllers\\ModeratorController@publications",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/reportes",
+      "name": "moderador.reportes",
+      "action": "App\\Http\\Controllers\\ModeratorController@reports",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "moderador/reportes/{reporte}/resolver",
+      "name": "moderador.reportes.resolve",
+      "action": "App\\Http\\Controllers\\ModeratorController@resolve",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator",
+        "throttle:30,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/vendedores",
+      "name": "moderador.vendedores",
+      "action": "App\\Http\\Controllers\\ModeratorController@sellers",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/vendedores/{solicitud}",
+      "name": "moderador.solicitudes.show",
+      "action": "App\\Http\\Controllers\\ModeratorController@application",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/vendedores/{solicitud}/documentos/{documento}",
+      "name": "moderador.solicitudes.document",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@document",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "moderador/vendedores/{solicitud}/documentos/{documento}/preview",
+      "name": "moderador.solicitudes.preview",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@preview",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "moderador/vendedores/{solicitud}/revisar",
+      "name": "moderador.solicitudes.review",
+      "action": "App\\Http\\Controllers\\AdminSellerApplicationController@review",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "moderator",
+        "throttle:20,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "password",
+      "name": "password.update",
+      "action": "App\\Http\\Controllers\\Auth\\PasswordController@update",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "productos/{producto}",
+      "name": "productos.show",
+      "action": "App\\Http\\Controllers\\ProductoController@show",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "productos/{producto}/apartados",
+      "name": "apartados.store",
+      "action": "App\\Http\\Controllers\\ApartadoController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "productos/{producto}/chat",
+      "name": "chat.start",
+      "action": "App\\Http\\Controllers\\ProductChatController@start",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:20,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "profile",
+      "name": "profile.edit",
+      "action": "App\\Http\\Controllers\\ProfileController@edit",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PATCH",
+      "uri": "profile",
+      "name": "profile.update",
+      "action": "App\\Http\\Controllers\\ProfileController@update",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "profile",
+      "name": "profile.destroy",
+      "action": "App\\Http\\Controllers\\ProfileController@destroy",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "profile/photo",
+      "name": "profile.photo.store",
+      "action": "App\\Http\\Controllers\\ProfilePhotoController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "profile/photo",
+      "name": "profile.photo.destroy",
+      "action": "App\\Http\\Controllers\\ProfilePhotoController@destroy",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "register",
+      "name": "register",
+      "action": "App\\Http\\Controllers\\Auth\\RegisteredUserController@create",
+      "middleware": [
+        "web",
+        "guest"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "register",
+      "name": null,
+      "action": "App\\Http\\Controllers\\Auth\\RegisteredUserController@store",
+      "middleware": [
+        "web",
+        "guest",
+        "throttle:5,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "reset-password",
+      "name": "password.store",
+      "action": "App\\Http\\Controllers\\Auth\\NewPasswordController@store",
+      "middleware": [
+        "web",
+        "guest",
+        "throttle:5,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "reset-password/{token}",
+      "name": "password.reset",
+      "action": "Closure",
+      "middleware": [
+        "web",
+        "guest"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "storage/{path}",
+      "name": "storage.local",
+      "action": "Closure",
+      "middleware": []
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "storage/{path}",
+      "name": "storage.local.upload",
+      "action": "Closure",
+      "middleware": []
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "tiendas/{tienda}",
+      "name": "tiendas.show",
+      "action": "App\\Http\\Controllers\\TiendaController@show",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "tiendas/{tienda}/ruta",
+      "name": "tiendas.ruta",
+      "action": "App\\Http\\Controllers\\StoreRouteController@show",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "tiendas/{tienda}/seguir",
+      "name": "tiendas.follow",
+      "action": "App\\Http\\Controllers\\StoreAudienceController@follow",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "throttle:30,1,store-follow"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "tipos-usuario",
+      "name": "tipos-usuario.index",
+      "action": "App\\Http\\Controllers\\TipoUsuarioController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "tipos-usuario",
+      "name": "tipos-usuario.store",
+      "action": "App\\Http\\Controllers\\TipoUsuarioController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "tipos-usuario/create",
+      "name": "tipos-usuario.create",
+      "action": "App\\Http\\Controllers\\TipoUsuarioController@create",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "tipos-usuario/{tipos_usuario}",
+      "name": "tipos-usuario.show",
+      "action": "App\\Http\\Controllers\\TipoUsuarioController@show",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT|PATCH",
+      "uri": "tipos-usuario/{tipos_usuario}",
+      "name": "tipos-usuario.update",
+      "action": "App\\Http\\Controllers\\TipoUsuarioController@update",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "tipos-usuario/{tipos_usuario}",
+      "name": "tipos-usuario.destroy",
+      "action": "App\\Http\\Controllers\\TipoUsuarioController@destroy",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "tipos-usuario/{tipos_usuario}/edit",
+      "name": "tipos-usuario.edit",
+      "action": "App\\Http\\Controllers\\TipoUsuarioController@edit",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "administrator"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "ubicacion",
+      "name": "marketplace.ubicacion.update",
+      "action": "App\\Http\\Controllers\\BuyerLocationController@update",
+      "middleware": [
+        "web",
+        "throttle:30,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "up",
+      "name": null,
+      "action": "Closure",
+      "middleware": []
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "usuarios/{user}/foto",
+      "name": "profile.photo.show",
+      "action": "App\\Http\\Controllers\\ProfilePhotoController@show",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/apartados",
+      "name": "vendedor.apartados.index",
+      "action": "App\\Http\\Controllers\\ApartadoController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/apartados/{apartado}/seguimiento",
+      "name": "vendedor.apartados.seguimiento",
+      "action": "App\\Http\\Controllers\\SellerToolsController@fulfillment",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:30,1,seller-fulfillment"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/calendario",
+      "name": "vendedor.calendario",
+      "action": "App\\Http\\Controllers\\SellerToolsController@calendar",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/dashboard",
+      "name": "vendedor.dashboard",
+      "action": "App\\Http\\Controllers\\SellerStoreController@dashboard",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/estadisticas",
+      "name": "vendedor.estadisticas.index",
+      "action": "App\\Http\\Controllers\\SellerAnalyticsController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/estadisticas/reporte",
+      "name": "vendedor.estadisticas.export",
+      "action": "App\\Http\\Controllers\\SellerAnalyticsController@export",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:5,1,seller-reports"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/herramientas",
+      "name": "vendedor.herramientas.index",
+      "action": "App\\Http\\Controllers\\SellerToolsController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/herramientas/automatizaciones",
+      "name": "vendedor.herramientas.automatizaciones",
+      "action": "App\\Http\\Controllers\\SellerToolsController@automation",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:20,1,seller-automations"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/herramientas/fijados/{producto}",
+      "name": "vendedor.herramientas.fijados",
+      "action": "App\\Http\\Controllers\\SellerToolsController@pin",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:30,1,seller-pins"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/herramientas/personalizacion",
+      "name": "vendedor.herramientas.personalizacion",
+      "action": "App\\Http\\Controllers\\SellerToolsController@design",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:20,1,seller-design"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/herramientas/respuestas",
+      "name": "vendedor.herramientas.respuestas.store",
+      "action": "App\\Http\\Controllers\\SellerToolsController@saveReply",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:30,1,seller-replies"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/herramientas/respuestas/{reply}",
+      "name": "vendedor.herramientas.respuestas.update",
+      "action": "App\\Http\\Controllers\\SellerToolsController@saveReply",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:30,1,seller-replies"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "vendedor/herramientas/respuestas/{reply}",
+      "name": "vendedor.herramientas.respuestas.destroy",
+      "action": "App\\Http\\Controllers\\SellerToolsController@deleteReply",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/mensajes",
+      "name": "vendedor.mensajes.index",
+      "action": "App\\Http\\Controllers\\ProductChatController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/mensajes/{chat}/negociacion",
+      "name": "vendedor.mensajes.negociacion",
+      "action": "App\\Http\\Controllers\\SellerToolsController@negotiation",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:30,1,seller-negotiations"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/mercadopago/conectar",
+      "name": "vendedor.mercadopago.connect",
+      "action": "App\\Http\\Controllers\\MercadoPagoConnectionController@connect",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "seller",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/mercadopago/retorno",
+      "name": "vendedor.mercadopago.callback",
+      "action": "App\\Http\\Controllers\\MercadoPagoConnectionController@callback",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "seller",
+        "throttle:10,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/notificaciones",
+      "name": "vendedor.notificaciones",
+      "action": "App\\Http\\Controllers\\BuyerNotificationController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "App\\Http\\Middleware\\EnsureMarketplaceMember",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/novedades",
+      "name": "vendedor.novedades.index",
+      "action": "App\\Http\\Controllers\\StoreAudienceController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/novedades",
+      "name": "vendedor.novedades.store",
+      "action": "App\\Http\\Controllers\\StoreAudienceController@save",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:5,1,seller-updates"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "vendedor/novedades/{update}",
+      "name": "vendedor.novedades.destroy",
+      "action": "App\\Http\\Controllers\\StoreAudienceController@destroy",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/productos",
+      "name": "vendedor.productos.index",
+      "action": "App\\Http\\Controllers\\SellerProductController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/productos",
+      "name": "vendedor.productos.store",
+      "action": "App\\Http\\Controllers\\SellerProductController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/productos/crear",
+      "name": "vendedor.productos.create",
+      "action": "App\\Http\\Controllers\\SellerProductController@create",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/productos/{producto}",
+      "name": "vendedor.productos.update",
+      "action": "App\\Http\\Controllers\\SellerProductController@update",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/productos/{producto}/editar",
+      "name": "vendedor.productos.edit",
+      "action": "App\\Http\\Controllers\\SellerProductController@edit",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/promociones",
+      "name": "vendedor.promociones.index",
+      "action": "App\\Http\\Controllers\\SellerOfferController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/promociones",
+      "name": "vendedor.promociones.store",
+      "action": "App\\Http\\Controllers\\SellerOfferController@save",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:20,1,seller-offers"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/promociones/{offer}",
+      "name": "vendedor.promociones.update",
+      "action": "App\\Http\\Controllers\\SellerOfferController@save",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:20,1,seller-offers"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "DELETE",
+      "uri": "vendedor/promociones/{offer}",
+      "name": "vendedor.promociones.destroy",
+      "action": "App\\Http\\Controllers\\SellerOfferController@disable",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/registro",
+      "name": "vendedor.register",
+      "action": "App\\Http\\Controllers\\Auth\\SellerRegistrationController@create",
+      "middleware": [
+        "web"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/registro",
+      "name": null,
+      "action": "App\\Http\\Controllers\\Auth\\SellerRegistrationController@store",
+      "middleware": [
+        "web",
+        "guest",
+        "throttle:5,1"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/suscripcion",
+      "name": "vendedor.suscripcion.index",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@index",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/suscripcion/contratar",
+      "name": "vendedor.suscripcion.checkout",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@checkout",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:5,1,subscription-checkout"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/suscripcion/gratis",
+      "name": "vendedor.suscripcion.gratis",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@activarPlanGratuito",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:5,1,subscription-checkout"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/suscripcion/productos/{producto}",
+      "name": "vendedor.suscripcion.promote",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@promote",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:30,1,subscription-products"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/suscripcion/{subscription}/actualizar",
+      "name": "vendedor.suscripcion.sync",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@sync",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:10,1,subscription-sync"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/suscripcion/{subscription}/cancelar",
+      "name": "vendedor.suscripcion.cancel",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@cancel",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:5,1,subscription-cancel"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/suscripcion/{subscription}/retorno",
+      "name": "vendedor.suscripcion.return",
+      "action": "App\\Http\\Controllers\\SellerSubscriptionController@returned",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller",
+        "throttle:10,1,subscription-return"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vendedor/tienda",
+      "name": "vendedor.tienda.store",
+      "action": "App\\Http\\Controllers\\SellerStoreController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "PUT",
+      "uri": "vendedor/tienda",
+      "name": "vendedor.tienda.update",
+      "action": "App\\Http\\Controllers\\SellerStoreController@update",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/tienda/crear",
+      "name": "vendedor.tienda.create",
+      "action": "App\\Http\\Controllers\\SellerStoreController@create",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vendedor/tienda/editar",
+      "name": "vendedor.tienda.edit",
+      "action": "App\\Http\\Controllers\\SellerStoreController@edit",
+      "middleware": [
+        "web",
+        "auth",
+        "verified",
+        "seller"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vender",
+      "name": "vender",
+      "action": "Closure",
+      "middleware": [
+        "web"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "GET|HEAD",
+      "uri": "vender/solicitud",
+      "name": "vendedor.solicitud.create",
+      "action": "App\\Http\\Controllers\\SolicitudVendedorController@create",
+      "middleware": [
+        "web",
+        "auth"
+      ]
+    },
+    {
+      "domain": null,
+      "method": "POST",
+      "uri": "vender/solicitud",
+      "name": "vendedor.solicitud.store",
+      "action": "App\\Http\\Controllers\\SolicitudVendedorController@store",
+      "middleware": [
+        "web",
+        "auth",
+        "throttle:5,1"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "00-publico-marketplace.index",
+      "route": "marketplace.index",
+      "url": "http://127.0.0.1:4179",
+      "role": null,
+      "view": "marketplace.index"
+    },
+    {
+      "id": "01-publico-vender",
+      "route": "vender",
+      "url": "http://127.0.0.1:4179/vender",
+      "role": null,
+      "view": "welcome"
+    },
+    {
+      "id": "02-publico-conocenos",
+      "route": "conocenos",
+      "url": "http://127.0.0.1:4179/conocenos",
+      "role": null,
+      "view": "conocenos"
+    },
+    {
+      "id": "03-publico-login",
+      "route": "login",
+      "url": "http://127.0.0.1:4179/login",
+      "role": null,
+      "view": "auth.login"
+    },
+    {
+      "id": "04-publico-register",
+      "route": "register",
+      "url": "http://127.0.0.1:4179/register",
+      "role": null,
+      "view": "auth.register"
+    },
+    {
+      "id": "05-publico-password.request",
+      "route": "password.request",
+      "url": "http://127.0.0.1:4179/forgot-password",
+      "role": null,
+      "view": "auth.forgot-password"
+    },
+    {
+      "id": "06-publico-vendedor.register",
+      "route": "vendedor.register",
+      "url": "http://127.0.0.1:4179/vendedor/registro",
+      "role": null,
+      "view": "auth.seller-register"
+    },
+    {
+      "id": "07-publico-password.reset",
+      "route": "password.reset",
+      "url": "http://127.0.0.1:4179/reset-password/audit-token?email=comprador%40example.test",
+      "role": null,
+      "view": "auth.reset-password"
+    },
+    {
+      "id": "08-comprador-comprador.dashboard",
+      "route": "comprador.dashboard",
+      "url": "http://127.0.0.1:4179/comprador/dashboard",
+      "role": "comprador",
+      "view": "marketplace.index"
+    },
+    {
+      "id": "09-comprador-comprador.opiniones",
+      "route": "comprador.opiniones",
+      "url": "http://127.0.0.1:4179/comprador/opiniones",
+      "role": "comprador",
+      "view": "comprador.opiniones"
+    },
+    {
+      "id": "10-comprador-comprador.notificaciones",
+      "route": "comprador.notificaciones",
+      "url": "http://127.0.0.1:4179/comprador/notificaciones",
+      "role": "comprador",
+      "view": "comprador.notificaciones"
+    },
+    {
+      "id": "11-comprador-chat.index",
+      "route": "chat.index",
+      "url": "http://127.0.0.1:4179/mensajes",
+      "role": "comprador",
+      "view": "chat.index"
+    },
+    {
+      "id": "12-comprador-apartados.index",
+      "route": "apartados.index",
+      "url": "http://127.0.0.1:4179/apartados",
+      "role": "comprador",
+      "view": "apartados.index"
+    },
+    {
+      "id": "13-comprador-profile.edit",
+      "route": "profile.edit",
+      "url": "http://127.0.0.1:4179/profile",
+      "role": "comprador",
+      "view": "profile.edit"
+    },
+    {
+      "id": "14-comprador-comprador.favoritos",
+      "route": "comprador.favoritos",
+      "url": "http://127.0.0.1:4179/comprador/favoritos/productos",
+      "role": "comprador",
+      "view": "comprador.favoritos"
+    },
+    {
+      "id": "15-comprador-comprador.favoritos",
+      "route": "comprador.favoritos",
+      "url": "http://127.0.0.1:4179/comprador/favoritos/tiendas",
+      "role": "comprador",
+      "view": "comprador.favoritos"
+    },
+    {
+      "id": "16-comprador-comprador.soporte",
+      "route": "comprador.soporte",
+      "url": "http://127.0.0.1:4179/comprador/soporte/preguntas-frecuentes",
+      "role": "comprador",
+      "view": "comprador.soporte"
+    },
+    {
+      "id": "17-comprador-comprador.soporte",
+      "route": "comprador.soporte",
+      "url": "http://127.0.0.1:4179/comprador/soporte/ayuda",
+      "role": "comprador",
+      "view": "comprador.soporte"
+    },
+    {
+      "id": "18-comprador-comprador.soporte",
+      "route": "comprador.soporte",
+      "url": "http://127.0.0.1:4179/comprador/soporte/contacto",
+      "role": "comprador",
+      "view": "comprador.soporte"
+    },
+    {
+      "id": "19-comprador-comprador.soporte.show",
+      "route": "comprador.soporte.show",
+      "url": "http://127.0.0.1:4179/comprador/soporte/consultas/1",
+      "role": "comprador",
+      "view": "comprador.consulta"
+    },
+    {
+      "id": "20-comprador-productos.show",
+      "route": "productos.show",
+      "url": "http://127.0.0.1:4179/productos/1",
+      "role": "comprador",
+      "view": "marketplace.producto"
+    },
+    {
+      "id": "21-comprador-tiendas.show",
+      "route": "tiendas.show",
+      "url": "http://127.0.0.1:4179/tiendas/1",
+      "role": "comprador",
+      "view": "marketplace.tienda"
+    },
+    {
+      "id": "22-comprador-chat.show",
+      "route": "chat.show",
+      "url": "http://127.0.0.1:4179/mensajes/1",
+      "role": "comprador",
+      "view": "chat.show"
+    },
+    {
+      "id": "23-vendedor-vendedor.dashboard",
+      "route": "vendedor.dashboard",
+      "url": "http://127.0.0.1:4179/vendedor/dashboard",
+      "role": "vendedor",
+      "view": "vendedor.dashboard"
+    },
+    {
+      "id": "24-vendedor-vendedor.tienda.edit",
+      "route": "vendedor.tienda.edit",
+      "url": "http://127.0.0.1:4179/vendedor/tienda/editar",
+      "role": "vendedor",
+      "view": "vendedor.tienda-form"
+    },
+    {
+      "id": "25-vendedor-vendedor.productos.index",
+      "route": "vendedor.productos.index",
+      "url": "http://127.0.0.1:4179/vendedor/productos",
+      "role": "vendedor",
+      "view": "vendedor.productos.index"
+    },
+    {
+      "id": "26-vendedor-vendedor.productos.create",
+      "route": "vendedor.productos.create",
+      "url": "http://127.0.0.1:4179/vendedor/productos/crear",
+      "role": "vendedor",
+      "view": "vendedor.productos.form"
+    },
+    {
+      "id": "27-vendedor-vendedor.mensajes.index",
+      "route": "vendedor.mensajes.index",
+      "url": "http://127.0.0.1:4179/vendedor/mensajes",
+      "role": "vendedor",
+      "view": "chat.index"
+    },
+    {
+      "id": "28-vendedor-vendedor.apartados.index",
+      "route": "vendedor.apartados.index",
+      "url": "http://127.0.0.1:4179/vendedor/apartados",
+      "role": "vendedor",
+      "view": "apartados.index"
+    },
+    {
+      "id": "29-vendedor-vendedor.suscripcion.index",
+      "route": "vendedor.suscripcion.index",
+      "url": "http://127.0.0.1:4179/vendedor/suscripcion",
+      "role": "vendedor",
+      "view": "vendedor.suscripcion"
+    },
+    {
+      "id": "30-vendedor-vendedor.herramientas.index",
+      "route": "vendedor.herramientas.index",
+      "url": "http://127.0.0.1:4179/vendedor/herramientas",
+      "role": "vendedor",
+      "view": "vendedor.herramientas"
+    },
+    {
+      "id": "31-vendedor-vendedor.calendario",
+      "route": "vendedor.calendario",
+      "url": "http://127.0.0.1:4179/vendedor/calendario",
+      "role": "vendedor",
+      "view": "vendedor.calendario"
+    },
+    {
+      "id": "32-vendedor-vendedor.promociones.index",
+      "route": "vendedor.promociones.index",
+      "url": "http://127.0.0.1:4179/vendedor/promociones",
+      "role": "vendedor",
+      "view": "vendedor.promociones"
+    },
+    {
+      "id": "33-vendedor-vendedor.novedades.index",
+      "route": "vendedor.novedades.index",
+      "url": "http://127.0.0.1:4179/vendedor/novedades",
+      "role": "vendedor",
+      "view": "vendedor.novedades"
+    },
+    {
+      "id": "34-vendedor-vendedor.estadisticas.index",
+      "route": "vendedor.estadisticas.index",
+      "url": "http://127.0.0.1:4179/vendedor/estadisticas",
+      "role": "vendedor",
+      "view": "vendedor.estadisticas"
+    },
+    {
+      "id": "35-vendedor-vendedor.notificaciones",
+      "route": "vendedor.notificaciones",
+      "url": "http://127.0.0.1:4179/vendedor/notificaciones",
+      "role": "vendedor",
+      "view": "comprador.notificaciones"
+    },
+    {
+      "id": "36-vendedor-vendedor.productos.edit",
+      "route": "vendedor.productos.edit",
+      "url": "http://127.0.0.1:4179/vendedor/productos/1/editar",
+      "role": "vendedor",
+      "view": "vendedor.productos.form"
+    },
+    {
+      "id": "37-vendedor-chat.show",
+      "route": "chat.show",
+      "url": "http://127.0.0.1:4179/mensajes/1",
+      "role": "vendedor",
+      "view": "chat.show"
+    },
+    {
+      "id": "38-moderador-moderador.dashboard",
+      "route": "moderador.dashboard",
+      "url": "http://127.0.0.1:4179/moderador/dashboard",
+      "role": "moderador",
+      "view": "moderador.dashboard"
+    },
+    {
+      "id": "39-moderador-moderador.publicaciones",
+      "route": "moderador.publicaciones",
+      "url": "http://127.0.0.1:4179/moderador/publicaciones",
+      "role": "moderador",
+      "view": "moderador.publicaciones"
+    },
+    {
+      "id": "40-moderador-moderador.opiniones",
+      "route": "moderador.opiniones",
+      "url": "http://127.0.0.1:4179/moderador/opiniones",
+      "role": "moderador",
+      "view": "moderador.opiniones"
+    },
+    {
+      "id": "41-moderador-moderador.reportes",
+      "route": "moderador.reportes",
+      "url": "http://127.0.0.1:4179/moderador/reportes",
+      "role": "moderador",
+      "view": "moderador.reportes"
+    },
+    {
+      "id": "42-moderador-moderador.vendedores",
+      "route": "moderador.vendedores",
+      "url": "http://127.0.0.1:4179/moderador/vendedores",
+      "role": "moderador",
+      "view": "moderador.vendedores"
+    },
+    {
+      "id": "43-moderador-moderador.analiticas",
+      "route": "moderador.analiticas",
+      "url": "http://127.0.0.1:4179/moderador/analiticas",
+      "role": "moderador",
+      "view": "moderador.analiticas"
+    },
+    {
+      "id": "44-moderador-moderador.configuracion",
+      "route": "moderador.configuracion",
+      "url": "http://127.0.0.1:4179/moderador/configuracion",
+      "role": "moderador",
+      "view": "moderador.configuracion"
+    },
+    {
+      "id": "45-moderador-moderador.ayuda",
+      "route": "moderador.ayuda",
+      "url": "http://127.0.0.1:4179/moderador/ayuda",
+      "role": "moderador",
+      "view": "moderador.ayuda"
+    },
+    {
+      "id": "46-moderador-moderador.solicitudes.show",
+      "route": "moderador.solicitudes.show",
+      "url": "http://127.0.0.1:4179/moderador/vendedores/1",
+      "role": "moderador",
+      "view": "moderador.solicitud"
+    },
+    {
+      "id": "47-administrador-administrador.dashboard",
+      "route": "administrador.dashboard",
+      "url": "http://127.0.0.1:4179/administrador/dashboard",
+      "role": "administrador",
+      "view": "administrador.dashboard"
+    },
+    {
+      "id": "48-administrador-admin.users.index",
+      "route": "admin.users.index",
+      "url": "http://127.0.0.1:4179/admin/users",
+      "role": "administrador",
+      "view": "administrador.usuarios.index"
+    },
+    {
+      "id": "49-administrador-admin.users.create",
+      "route": "admin.users.create",
+      "url": "http://127.0.0.1:4179/admin/users/create",
+      "role": "administrador",
+      "view": "administrador.usuarios.create"
+    },
+    {
+      "id": "50-administrador-admin.consultas.index",
+      "route": "admin.consultas.index",
+      "url": "http://127.0.0.1:4179/admin/consultas",
+      "role": "administrador",
+      "view": "administrador.consultas.index"
+    },
+    {
+      "id": "51-administrador-admin.solicitudes.index",
+      "route": "admin.solicitudes.index",
+      "url": "http://127.0.0.1:4179/admin/solicitudes-vendedor",
+      "role": "administrador",
+      "view": "administrador.solicitudes.index"
+    },
+    {
+      "id": "52-administrador-admin.opiniones",
+      "route": "admin.opiniones",
+      "url": "http://127.0.0.1:4179/admin/opiniones",
+      "role": "administrador",
+      "view": "administrador.opiniones"
+    },
+    {
+      "id": "53-administrador-profile.edit",
+      "route": "profile.edit",
+      "url": "http://127.0.0.1:4179/profile",
+      "role": "administrador",
+      "view": "profile.edit"
+    },
+    {
+      "id": "54-administrador-admin.users.show",
+      "route": "admin.users.show",
+      "url": "http://127.0.0.1:4179/admin/users/1",
+      "role": "administrador",
+      "view": "administrador.usuarios.show"
+    },
+    {
+      "id": "55-administrador-admin.users.edit",
+      "route": "admin.users.edit",
+      "url": "http://127.0.0.1:4179/admin/users/1/edit",
+      "role": "administrador",
+      "view": "administrador.usuarios.edit"
+    },
+    {
+      "id": "56-administrador-admin.consultas.show",
+      "route": "admin.consultas.show",
+      "url": "http://127.0.0.1:4179/admin/consultas/1",
+      "role": "administrador",
+      "view": "administrador.consultas.show"
+    },
+    {
+      "id": "57-administrador-admin.solicitudes.show",
+      "route": "admin.solicitudes.show",
+      "url": "http://127.0.0.1:4179/admin/solicitudes-vendedor/1",
+      "role": "administrador",
+      "view": "administrador.solicitudes.show"
+    },
+    {
+      "id": "58-administrador-admin.productos.show",
+      "route": "admin.productos.show",
+      "url": "http://127.0.0.1:4179/admin/productos/1",
+      "role": "administrador",
+      "view": "administrador.producto"
+    },
+    {
+      "id": "59-administrador-admin.tiendas.show",
+      "route": "admin.tiendas.show",
+      "url": "http://127.0.0.1:4179/admin/tiendas/1",
+      "role": "administrador",
+      "view": "administrador.tienda"
+    },
+    {
+      "id": "60-administrador-admin.catalogo",
+      "route": "admin.catalogo",
+      "url": "http://127.0.0.1:4179/admin/catalogo/productos",
+      "role": "administrador",
+      "view": "administrador.catalogo"
+    },
+    {
+      "id": "61-administrador-admin.catalogo",
+      "route": "admin.catalogo",
+      "url": "http://127.0.0.1:4179/admin/catalogo/tiendas",
+      "role": "administrador",
+      "view": "administrador.catalogo"
+    },
+    {
+      "id": "62-administrador-tipos-usuario.index",
+      "route": "tipos-usuario.index",
+      "url": "http://127.0.0.1:4179/tipos-usuario",
+      "role": "administrador",
+      "view": "tipos_usuario.index"
+    },
+    {
+      "id": "63-administrador-tipos-usuario.create",
+      "route": "tipos-usuario.create",
+      "url": "http://127.0.0.1:4179/tipos-usuario/create",
+      "role": "administrador",
+      "view": "tipos_usuario.create"
+    },
+    {
+      "id": "64-administrador-tipos-usuario.show",
+      "route": "tipos-usuario.show",
+      "url": "http://127.0.0.1:4179/tipos-usuario/1",
+      "role": "administrador",
+      "view": "tipos_usuario.show"
+    },
+    {
+      "id": "65-administrador-tipos-usuario.edit",
+      "route": "tipos-usuario.edit",
+      "url": "http://127.0.0.1:4179/tipos-usuario/1/edit",
+      "role": "administrador",
+      "view": "tipos_usuario.edit"
+    },
+    {
+      "id": "66-sin-verificar-verification.notice",
+      "route": "verification.notice",
+      "url": "http://127.0.0.1:4179/email/verify",
+      "role": "sin-verificar",
+      "view": "auth.verify-email"
+    },
+    {
+      "id": "67-vendedor-nuevo-vendedor.tienda.create",
+      "route": "vendedor.tienda.create",
+      "url": "http://127.0.0.1:4179/vendedor/tienda/crear",
+      "role": "vendedor-nuevo",
+      "view": "vendedor.tienda-form"
+    },
+    {
+      "id": "68-vendedor-nuevo-vendedor.herramientas.index",
+      "route": "vendedor.herramientas.index",
+      "url": "http://127.0.0.1:4179/vendedor/herramientas",
+      "role": "vendedor-nuevo",
+      "view": "vendedor.herramientas"
+    },
+    {
+      "id": "69-vendedor-nuevo-vendedor.suscripcion.index",
+      "route": "vendedor.suscripcion.index",
+      "url": "http://127.0.0.1:4179/vendedor/suscripcion",
+      "role": "vendedor-nuevo",
+      "view": "vendedor.suscripcion"
+    },
+    {
+      "id": "70-comprador-vendedor.register",
+      "route": "vendedor.register",
+      "url": "http://127.0.0.1:4179/vendedor/registro",
+      "role": "comprador",
+      "view": "auth.seller-register"
+    }
+  ],
+  "views": [
+    "administrador.catalogo",
+    "administrador.consultas.index",
+    "administrador.consultas.show",
+    "administrador.dashboard",
+    "administrador.opiniones",
+    "administrador.partials.product-card",
+    "administrador.partials.reviews",
+    "administrador.partials.store-card",
+    "administrador.producto",
+    "administrador.solicitudes.index",
+    "administrador.solicitudes.show",
+    "administrador.tienda",
+    "administrador.usuarios.create",
+    "administrador.usuarios.edit",
+    "administrador.usuarios.index",
+    "administrador.usuarios.partials.create-form",
+    "administrador.usuarios.show",
+    "apartados.index",
+    "auth.confirm-password",
+    "auth.forgot-password",
+    "auth.login",
+    "auth.partials.email-verification",
+    "auth.partials.seller-styles",
+    "auth.register",
+    "auth.reset-password",
+    "auth.seller-register",
+    "auth.verify-email",
+    "chat.index",
+    "chat.show",
+    "components.application-logo",
+    "components.auth-session-status",
+    "components.danger-button",
+    "components.dropdown-link",
+    "components.dropdown",
+    "components.input-error",
+    "components.input-label",
+    "components.market-icon",
+    "components.mod-icon",
+    "components.modal",
+    "components.nav-link",
+    "components.navigation-logo",
+    "components.notification-bell",
+    "components.primary-button",
+    "components.responsive-nav-link",
+    "components.secondary-button",
+    "components.seller-growth-empty",
+    "components.seller-growth-hero",
+    "components.seller-icon",
+    "components.text-input",
+    "comprador.consulta",
+    "comprador.dashboard",
+    "comprador.favoritos",
+    "comprador.notificaciones",
+    "comprador.opiniones",
+    "comprador.partials.favorite-store-card",
+    "comprador.partials.support-messages",
+    "comprador.soporte",
+    "conocenos",
+    "emails.seller-documents-ready",
+    "emails.verify-email",
+    "errors.419",
+    "layouts.admin-panel",
+    "layouts.administrador.app",
+    "layouts.administrador.guest",
+    "layouts.administrador.navigation",
+    "layouts.administrador.panel-header",
+    "layouts.administrador.panel-navigation",
+    "layouts.app",
+    "layouts.base",
+    "layouts.comprador.app",
+    "layouts.comprador.guest",
+    "layouts.comprador.navigation",
+    "layouts.guest",
+    "layouts.marketplace",
+    "layouts.moderador.app",
+    "layouts.moderador.guest",
+    "layouts.moderador.navigation",
+    "layouts.moderator-panel",
+    "layouts.seller-panel",
+    "layouts.vendedor.app",
+    "layouts.vendedor.guest",
+    "layouts.vendedor.navigation",
+    "marketplace.index",
+    "marketplace.partials.business-hours",
+    "marketplace.partials.commercial-offer",
+    "marketplace.partials.content-report",
+    "marketplace.partials.favorite-button",
+    "marketplace.partials.location-awareness",
+    "marketplace.partials.location-button",
+    "marketplace.partials.location-dialog",
+    "marketplace.partials.nearby-stores",
+    "marketplace.partials.opiniones",
+    "marketplace.partials.product-card",
+    "marketplace.partials.product-contact",
+    "marketplace.partials.review-form",
+    "marketplace.partials.route-dialog",
+    "marketplace.partials.store-card",
+    "marketplace.partials.store-directions",
+    "marketplace.producto",
+    "marketplace.solicitud-vendedor",
+    "marketplace.tienda",
+    "moderador.analiticas",
+    "moderador.ayuda",
+    "moderador.configuracion",
+    "moderador.dashboard",
+    "moderador.opiniones",
+    "moderador.partials.application-review",
+    "moderador.partials.delete-form",
+    "moderador.partials.status",
+    "moderador.publicaciones",
+    "moderador.reportes",
+    "moderador.solicitud",
+    "moderador.vendedores",
+    "profile.edit",
+    "profile.partials.delete-user-form",
+    "profile.partials.photo-form",
+    "profile.partials.update-password-form",
+    "profile.partials.update-profile-information-form",
+    "tipos_usuario.create",
+    "tipos_usuario.edit",
+    "tipos_usuario.index",
+    "tipos_usuario.partials.form",
+    "tipos_usuario.show",
+    "vendedor.calendario",
+    "vendedor.dashboard",
+    "vendedor.estadisticas",
+    "vendedor.herramientas",
+    "vendedor.novedades",
+    "vendedor.partials.offer-form",
+    "vendedor.productos.card",
+    "vendedor.productos.form",
+    "vendedor.productos.index",
+    "vendedor.promociones",
+    "vendedor.suscripcion",
+    "vendedor.tienda-form",
+    "welcome"
+  ],
+  "versions": {
+    "laravel/framework": "v12.53.0",
+    "laravel/breeze": "v2.3.8",
+    "munafio/chatify": "2.0.0-beta.2",
+    "pestphp/pest": "v4.4.1",
+    "phpunit/phpunit": "12.5.12",
+    "vite": "7.3.1",
+    "tailwindcss": "3.4.19",
+    "alpinejs": "3.15.8",
+    "axios": "1.13.6",
+    "leaflet": "1.9.4"
+  },
+  "missingLiteralViews": []
+}

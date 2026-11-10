@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }"
-     class="bg-white dark:bg-[#111827] border-b border-gray-200 dark:border-gray-700 shadow-sm">
+     class="bg-white dark:bg-[var(--color-dark-surface)] border-b border-gray-200 dark:border-gray-700 shadow-sm">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -14,75 +14,7 @@
                     <a href="{{ route('moderador.dashboard') }}"
                        class="block w-[220px] h-auto text-gray-900 dark:text-white">
 
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 350 100"
-                             width="100%"
-                             height="100%">
-
-                            <!-- Fondo -->
-                            <rect width="350" height="100" fill="transparent"/>
-
-                            <!-- Isotipo -->
-                            <g transform="translate(15, 15)">
-
-                                <!-- Flecha 1 -->
-                                <path
-                                    d="M 20 40 L 40 20 L 60 40 L 48 40 L 48 60 L 32 60 L 32 40 Z"
-                                    fill="#FF7A00"
-                                    transform="rotate(45 40 40)"
-                                />
-
-                                <!-- Flecha 2 -->
-                                <path
-                                    d="M 20 40 L 40 20 L 60 40 L 48 40 L 48 60 L 32 60 L 32 40 Z"
-                                    fill="#FFFFFF"
-                                    stroke="#FF7A00"
-                                    stroke-width="3"
-                                    transform="rotate(225 40 40)"
-                                />
-
-                            </g>
-
-                            <!-- Texto -->
-                            <text
-                                x="100"
-                                y="65"
-                                font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-                                font-size="46"
-                                font-weight="800"
-                                fill="currentColor">
-
-                                Nexo
-
-                            </text>
-
-                            <text
-                                x="215"
-                                y="65"
-                                font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-                                font-size="46"
-                                font-weight="800"
-                                fill="#FF7A00">
-
-                                Eco
-
-                            </text>
-
-                            <!-- Subtexto -->
-                            <text
-                                x="105"
-                                y="85"
-                                font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-                                font-size="12"
-                                font-weight="600"
-                                fill="#FF7A00"
-                                letter-spacing="2">
-
-                                COMPRA Y VENTA
-
-                            </text>
-
-                        </svg>
+                        <x-navigation-logo/>
 
                     </a>
 
@@ -155,7 +87,7 @@
                     <x-slot name="trigger">
 
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-[#111827] hover:text-orange-500 transition">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-[var(--color-dark-surface)] hover:text-primary-500 transition">
 
                             <div>
                                 {{ Auth::user()->name }}

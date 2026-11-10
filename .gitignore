@@ -18,6 +18,11 @@
 /public/storage
 /storage/*.key
 /storage/pail
+/storage/audit-routes.json
+/storage/framework/audit-pages
+/storage/framework/audit-tools
+/storage/framework/carousel-pages
+/storage/framework/audit-*.mjs
 /vendor
 Homestead.json
 Homestead.yaml

@@ -60,7 +60,7 @@ class MercadoPagoSubscriptions
         $remote = $this->api()->get('/preapproval/'.$subscription->provider_id)->throw()->json();
         $this->validateMandate($subscription, $remote);
         $status = $remote['status'] ?? 'pending';
-        if (! in_array($status, ['pending', 'authorized', 'paused', 'cancelled'])) {
+        if (! in_array($status, SellerSubscription::STATUSES, true)) {
             throw ValidationException::withMessages(['suscripcion' => 'Estado de suscripción no reconocido.']);
         }
         // An authorization is not a payment. Verify the actual monthly invoice and payment.

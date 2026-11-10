@@ -64,13 +64,20 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        Auth::logout();
+        // Commerce history is protected by foreign keys and must remain available
+        // to the other participant. Explain the restriction before attempting a delete.
+        if (\App\Models\ProductChat::forUser($user)->exists() || \App\Models\Apartado::forUser($user)->exists()) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'password' => 'Tu cuenta tiene conversaciones o apartados asociados. Contacta con soporte para solicitar el cierre sin perder el historial de las operaciones.',
+            ])->errorBag('userDeletion');
+        }
 
         $photo = $user->profile_photo_path;
         DB::transaction(function () use ($user) {
             $user->delete();
             $user->notifications()->delete();
         });
+        Auth::logout();
         if ($photo) {
             Storage::disk('local')->delete($photo);
         }

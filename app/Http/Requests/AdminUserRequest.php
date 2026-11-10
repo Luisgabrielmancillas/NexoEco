@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use App\Services\AdministratorLimit;
+use App\Support\RegistrationPassword;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -27,7 +28,7 @@ class AdminUserRequest extends FormRequest
         $rules = ['name' => ['required', 'string', 'max:150'], 'email' => ['required', 'email', 'max:255', Rule::unique(User::class)->ignore($this->route('user')?->id)]];
         if ($this->isMethod('post')) {
             $rules['rol'] = ['required', Rule::in(['comprador', 'moderador', 'administrador'])];
-            $rules['password'] = ['required', 'string', 'min:8', 'max:255'];
+            $rules['password'] = ['required', 'max:255', ...RegistrationPassword::rules()];
         }
 
         return $rules;
@@ -35,7 +36,7 @@ class AdminUserRequest extends FormRequest
 
     public function messages(): array
     {
-        return ['name.required' => 'Escribe el nombre completo.', 'name.max' => 'El nombre debe contener como máximo 150 caracteres.', 'email.required' => 'Escribe el correo electrónico.', 'email.email' => 'Escribe un correo electrónico válido.', 'email.unique' => 'Este correo ya está registrado.', 'rol.in' => 'Puedes crear compradores, moderadores o administradores. Los vendedores requieren documentos.', 'rol.required' => 'Selecciona el rol.', 'password.required' => 'Asigna una contraseña.', 'password.min' => 'La contraseña debe contener al menos 8 caracteres.'];
+        return [...RegistrationPassword::messages(), 'name.required' => 'Escribe el nombre completo.', 'name.max' => 'El nombre debe contener como máximo 150 caracteres.', 'email.required' => 'Escribe el correo electrónico.', 'email.email' => 'Escribe un correo electrónico válido.', 'email.unique' => 'Este correo ya está registrado.', 'rol.in' => 'Puedes crear compradores, moderadores o administradores. Los vendedores requieren documentos.', 'rol.required' => 'Selecciona el rol.', 'password.required' => 'Asigna una contraseña.'];
     }
 
     public function after(): array

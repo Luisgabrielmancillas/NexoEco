@@ -6,6 +6,7 @@ use App\Models\ProductChat;
 use App\Models\Producto;
 use Chatify\Actions\Messages\SendMessage;
 use Chatify\Models\Conversation;
+use Chatify\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,10 @@ class ProductChatController extends Controller
     {
         $sellerArea = $request->routeIs('vendedor.*');
         $request->validate(['estado' => ['nullable', \Illuminate\Validation\Rule::in(array_keys(ProductChat::NEGOTIATION_STATES))]]);
-        $chats = ProductChat::where($sellerArea ? 'seller_id' : 'buyer_id', $request->user()->id)->with(['producto', 'buyer', 'seller'])
+        $chats = ProductChat::where($sellerArea ? 'seller_id' : 'buyer_id', $request->user()->id)
+            ->select('product_chats.*')
+            ->selectSub(Message::select('body')->whereColumn('conversation_id', 'product_chats.conversation_id')->orderByDesc('created_at')->orderByDesc('id')->limit(1), 'last_message_body')
+            ->with(['producto.imagenPrincipal', 'buyer', 'seller'])
             ->when($sellerArea && $request->filled('estado'), fn ($q) => $q->where('negotiation_status', $request->query('estado')))
             ->withCount(['messages as unread_count' => fn ($q) => $q->where('user_id', '!=', $request->user()->id)
                 ->whereRaw('ch_messages.created_at > COALESCE((SELECT last_read_at FROM ch_conversation_participants WHERE conversation_id = product_chats.conversation_id AND user_id = ?), ?)', [$request->user()->id, '1970-01-01 00:00:00'])])
@@ -90,7 +94,11 @@ class ProductChatController extends Controller
     public function send(Request $request, ProductChat $chat, SendMessage $send)
     {
         $this->authorizeChat($request, $chat);
-        $data = $request->validate(['body' => ['required', 'string', 'max:5000']]);
+        $data = $request->validate(['body' => ['required', 'string', 'max:5000']], [
+            'body.required' => 'Escribe un mensaje antes de enviarlo.',
+            'body.string' => 'El mensaje debe contener texto.',
+            'body.max' => 'El mensaje debe contener como máximo 5000 caracteres.',
+        ]);
         abort_unless($chat->buyer->activo && $chat->seller->activo, 403);
         DB::transaction(function () use ($send, $chat, $request, $data) {
             ProductChat::whereKey($chat->id)->lockForUpdate()->firstOrFail();

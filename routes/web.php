@@ -226,6 +226,7 @@ Route::middleware(['auth'])->group(function () {
             )->middleware('verified')->name('dashboard');
 
             Route::middleware('verified')->group(function () {
+                Route::get('/tiendas', [MarketplaceController::class, 'stores'])->name('tiendas');
                 Route::post('/reportes/{tipo}/{id}', [\App\Http\Controllers\ContentReportController::class, 'store'])->whereIn('tipo', ['productos', 'opiniones'])->whereNumber('id')->middleware('throttle:5,1')->name('reportes.store');
                 Route::get('/favoritos/{tipo}', [FavoritoController::class, 'index'])
                     ->whereIn('tipo', ['productos', 'tiendas'])->name('favoritos');
@@ -660,25 +661,18 @@ Route::prefix('vendedor')
             Route::put('/productos/{producto}', [\App\Http\Controllers\SellerProductController::class, 'update'])->whereNumber('producto')->name('productos.update');
 
 
-            // ==========================================
-            // RUTAS DE PAGA (Protegidas por el middleware)
-            // ==========================================
-            Route::middleware(['check.suscripcion'])->group(function () {
-                
-                // SOLO Herramientas
-                Route::get('/herramientas', [\App\Http\Controllers\SellerToolsController::class, 'index'])->name('herramientas.index');
-                Route::post('/herramientas/respuestas', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.store');
-                Route::put('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->whereNumber('reply')->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.update');
-                Route::delete('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'deleteReply'])->whereNumber('reply')->name('herramientas.respuestas.destroy');
-                Route::put('/herramientas/automatizaciones', [\App\Http\Controllers\SellerToolsController::class, 'automation'])->middleware('throttle:20,1,seller-automations')->name('herramientas.automatizaciones');
-                Route::put('/herramientas/personalizacion', [\App\Http\Controllers\SellerToolsController::class, 'design'])->middleware('throttle:20,1,seller-design')->name('herramientas.personalizacion');
-                Route::post('/herramientas/fijados/{producto}', [\App\Http\Controllers\SellerToolsController::class, 'pin'])->whereNumber('producto')->middleware('throttle:30,1,seller-pins')->name('herramientas.fijados');
-                
-                // SOLO Estadísticas
-                Route::get('/estadisticas', [\App\Http\Controllers\SellerAnalyticsController::class, 'index'])->name('estadisticas.index');
-                Route::get('/estadisticas/reporte', [\App\Http\Controllers\SellerAnalyticsController::class, 'export'])->middleware('throttle:5,1,seller-reports')->name('estadisticas.export');
-                
-            });
+            // Screens include plan previews; each paid action checks SellerBenefits in its controller.
+            // SOLO Herramientas
+            Route::get('/herramientas', [\App\Http\Controllers\SellerToolsController::class, 'index'])->name('herramientas.index');
+            Route::post('/herramientas/respuestas', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.store');
+            Route::put('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'saveReply'])->whereNumber('reply')->middleware('throttle:30,1,seller-replies')->name('herramientas.respuestas.update');
+            Route::delete('/herramientas/respuestas/{reply}', [\App\Http\Controllers\SellerToolsController::class, 'deleteReply'])->whereNumber('reply')->name('herramientas.respuestas.destroy');
+            Route::put('/herramientas/automatizaciones', [\App\Http\Controllers\SellerToolsController::class, 'automation'])->middleware('throttle:20,1,seller-automations')->name('herramientas.automatizaciones');
+            Route::put('/herramientas/personalizacion', [\App\Http\Controllers\SellerToolsController::class, 'design'])->middleware('throttle:20,1,seller-design')->name('herramientas.personalizacion');
+            Route::post('/herramientas/fijados/{producto}', [\App\Http\Controllers\SellerToolsController::class, 'pin'])->whereNumber('producto')->middleware('throttle:30,1,seller-pins')->name('herramientas.fijados');
+            // SOLO Estadísticas
+            Route::get('/estadisticas', [\App\Http\Controllers\SellerAnalyticsController::class, 'index'])->name('estadisticas.index');
+            Route::get('/estadisticas/reporte', [\App\Http\Controllers\SellerAnalyticsController::class, 'export'])->middleware('throttle:5,1,seller-reports')->name('estadisticas.export');
 
         });
 

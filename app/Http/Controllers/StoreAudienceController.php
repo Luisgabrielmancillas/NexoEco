@@ -7,17 +7,16 @@ use App\Models\Tienda;
 use App\Services\SellerBenefits;
 use App\Services\StoreAudience;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class StoreAudienceController extends Controller
 {
-    public function followed(Request $request)
+    public function followed(): RedirectResponse
     {
-        $stores = $request->user()->followedStores()->whereHas('user', fn ($q) => $q->where('activo', true))->orderBy('nombre_tienda')->paginate(12);
-
-        return view('comprador.tiendas-seguidas', compact('stores'));
+        return redirect()->route('comprador.favoritos', 'tiendas');
     }
 
     public function follow(Request $request, Tienda $tienda)

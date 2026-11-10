@@ -43,6 +43,7 @@ test('moderator screens use their own workspace with real counts and protected n
 });
 
 test('summary shows open cases and important moderation activity without duplicating the product manager', function () {
+    $this->freezeTime();
     $open = ReporteContenido::create(['id_usuario' => $this->buyer->id, 'tipo' => 'productos', 'id_contenido' => $this->product->getKey(), 'categoria' => 'spam', 'motivo' => 'Reporte abierto que necesita seguimiento.']);
     $closed = ReporteContenido::create(['id_usuario' => $this->buyer->id, 'tipo' => 'opiniones', 'id_contenido' => $this->opinion->getKey(), 'categoria' => 'otro', 'motivo' => 'Reporte cerrado que no debe aparecer en pendientes.']);
     $closed->forceFill(['estado' => 'resuelto', 'fecha_resolucion' => now()])->save();
@@ -52,7 +53,7 @@ test('summary shows open cases and important moderation activity without duplica
     }
     $this->actingAs($this->moderator)->delete(route('moderador.contenido.destroy', ['productos', $this->product->getKey()]), ['version' => 1, 'motivo' => 'Esta publicación contiene información inapropiada.'])->assertSessionHasNoErrors();
     $response = $this->get(route('moderador.dashboard'))->assertOk()->assertViewIs('moderador.dashboard')->assertSee($open->motivo)->assertDontSee($closed->motivo)
-        ->assertSee('Eliminó una publicación')->assertSee($this->moderator->name)->assertSee(now()->format('d/m/Y H:i:s'))->assertDontSee('Acción ajena a moderación')->assertDontSee('data-mod-delete', false);
+        ->assertSee('Eliminó una publicación')->assertSee($this->moderator->name)->assertSee(now()->timezone('America/Mexico_City')->format('d/m/Y H:i:s'))->assertDontSee('Acción ajena a moderación')->assertDontSee('data-mod-delete', false);
     expect($response->viewData('recentReports')->modelKeys())->toBe([$open->id])
         ->and($response->viewData('pendingSellers')->modelKeys())->toBe([$this->application->getKey()])
         ->and($response->viewData('recentActivity')->count())->toBe(1)

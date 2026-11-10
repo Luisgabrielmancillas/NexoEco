@@ -26,8 +26,8 @@ function sellerAccountData(): array
     return [
         'nombre_completo' => 'María López',
         'email' => 'maria@example.test',
-        'password' => 'contraseña-segura',
-        'password_confirmation' => 'contraseña-segura',
+        'password' => 'Contraseña-segura1!',
+        'password_confirmation' => 'Contraseña-segura1!',
     ];
 }
 
@@ -85,6 +85,35 @@ test('buyer registration creates no seller request', function () {
     $this->assertDatabaseCount('solicitudes_vendedor', 0);
     Notification::assertSentTo($user, VerifyNexoEcoEmail::class);
 });
+
+test('registration rejects passwords missing any complexity requirement', function (string $route, string $password) {
+    $data = [...sellerAccountData(), 'password' => $password, 'password_confirmation' => $password];
+    if ($route === 'vendedor.register') {
+        $data = [...$data, ...sellerDocumentData()];
+    }
+
+    $this->post(route($route), $data)->assertSessionHasErrors('password')
+        ->assertSessionMissing('_old_input.password')->assertSessionMissing('_old_input.password_confirmation');
+    $this->assertDatabaseCount('users', 0);
+    $this->assertDatabaseCount('documentos_vendedor', 0);
+})->with(['register', 'vendedor.register'])->with([
+    'too short' => 'Ab1!xyz',
+    'no uppercase' => 'password1!',
+    'no lowercase' => 'PASSWORD1!',
+    'no number' => 'Password!!',
+    'no symbol' => 'Password12',
+    'space is not a sign' => 'Password1 ',
+]);
+
+test('registration accepts complete passwords of exactly eight characters', function (string $route) {
+    $data = [...sellerAccountData(), 'password' => 'Abcdef1!', 'password_confirmation' => 'Abcdef1!'];
+    if ($route === 'vendedor.register') {
+        $data = [...$data, ...sellerDocumentData()];
+    }
+
+    $this->post(route($route), $data)->assertSessionHasNoErrors()->assertRedirect();
+    expect(Hash::check('Abcdef1!', User::firstOrFail()->password))->toBeTrue();
+})->with(['register', 'vendedor.register']);
 
 test('buyer registration rejects attempts to request a seller account', function () {
     $this->post(route('register'), [...sellerAccountData(), 'tipo_registro' => 'vendedor'])
@@ -204,7 +233,7 @@ test('the verification email shows four digits with Spanish branding and no veri
     $message = (new VerifyNexoEcoEmail('0123'))->toMail($user);
     $html = $message->render();
     expect($message->subject)->toBe('Verifica tu correo para vender en NexoEco')
-        ->and((string) $html)->toContain('0123', '#E85D2F', '#FAF7F2', 'María López', 'Tu cuenta de vendedor está en revisión')
+        ->and((string) $html)->toContain('0123', \App\Support\DesignTokens::color('primary'), \App\Support\DesignTokens::color('background'), 'María López', 'Tu cuenta de vendedor está en revisión')
         ->and((string) $html)->not->toContain('signature=', 'Verificar mi correo');
 });
 

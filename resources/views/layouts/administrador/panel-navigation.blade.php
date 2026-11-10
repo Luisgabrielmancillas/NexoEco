@@ -4,6 +4,7 @@
         <div class="buyer-nav-links" id="buyer-navigation-links">
             <a class="buyer-nav-link {{ request()->routeIs('administrador.dashboard') ? 'active' : '' }}" href="{{ route('administrador.dashboard') }}">Resumen</a>
             <a class="buyer-nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">Usuarios</a>
+            <a class="buyer-nav-link {{ request()->routeIs('tipos-usuario.*') ? 'active' : '' }}" href="{{ route('tipos-usuario.index') }}" @if(request()->routeIs('tipos-usuario.*')) aria-current="page" @endif>Tipos de cuenta</a>
             <a class="buyer-nav-link {{ request()->routeIs('admin.consultas.*') ? 'active' : '' }}" href="{{ route('admin.consultas.index') }}">Consultas</a>
             <a class="buyer-nav-link {{ request()->routeIs('admin.solicitudes.*') ? 'active' : '' }}" href="{{ route('admin.solicitudes.index') }}">Solicitudes de vendedor</a>
             <form class="buyer-nav-logout" method="POST" action="{{ route('logout') }}">@csrf<button class="buyer-nav-link" type="submit">Cerrar sesión</button></form>
