@@ -1,4 +1,7 @@
 import './bootstrap';
+import '../css/floating-support.css';
+import { initializeSellerInvitation } from './seller-invitation';
+import './store-usability';
 import '../css/chat-commerce.css';
 import '../css/product-detail.css';
 import { initializeChatCommerce } from './chat-commerce';
@@ -23,6 +26,7 @@ import '../css/store-carousel.css';
 window.Alpine = Alpine;
 
 initializeAppDialogs();
+initializeSellerInvitation();
 
 Alpine.start();
 

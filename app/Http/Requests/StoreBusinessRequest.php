@@ -20,9 +20,9 @@ class StoreBusinessRequest extends FormRequest
     {
         $rules = [
             'nombre_tienda' => ['required', 'string', 'max:120'],
-            'descripcion_tienda' => ['required', 'string', 'min:20', 'max:3000'],
+            'descripcion_tienda' => ['required', 'string', 'min:20', 'max:500'],
             'razon_social' => ['nullable', 'string', 'max:150'],
-            'giro' => ['required', 'string', 'max:100'],
+            'giro' => ['required', 'string', Rule::in(array_keys(config('store-categories')))],
             'tipo_negocio' => ['required', Rule::in(['local', 'servicios', 'en_linea', 'mixto'])],
             'telefono' => ['required', 'string', 'regex:/^[+0-9() .-]{7,30}$/'],
             'email_contacto' => ['required', 'email', 'max:255'],

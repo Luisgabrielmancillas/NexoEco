@@ -36,20 +36,29 @@ test('demo population creates coherent related data and is idempotent without fi
     $options = ['--stores' => 10, '--products' => 5, '--buyers' => 7];
     $this->artisan('demo:populate', $options)->assertSuccessful();
     foreach (['users' => 18, 'tiendas' => 10, 'productos' => 50, 'producto_imagenes' => 50, 'categorias' => 24, 'opiniones' => 30, 'product_chats' => 10, 'ch_conversation_participants' => 20, 'ch_messages' => 30, 'notifications' => 20, 'productos_favoritos' => 30, 'tiendas_favoritas' => 10, 'store_follows' => 10, 'solicitudes_soporte' => 2, 'respuestas_soporte' => 2, 'solicitudes_vendedor' => 2, 'reportes_contenido' => 1, 'seller_quick_replies' => 20, 'seller_automations' => 10, 'seller_store_designs' => 10, 'seller_daily_metrics' => 280, 'apartados' => 0, 'seller_subscriptions' => 0, 'mercado_pago_accounts' => 0] as $table => $count) {
+        if ($table === 'categorias') {
+            $count = collect(config('store-categories'))->flatten()->unique()->count() + count(DemoCatalog::CATEGORIES);
+        }
         $this->assertDatabaseCount($table, $count);
     }
     $seller = User::where('email', DemoCatalog::email('seller', 1))->firstOrFail();
     expect($seller->tieneTipo('vendedor'))->toBeTrue()->and($seller->tieneTipo('comprador'))->toBeTrue()
         ->and(Hash::check(DemoMarketplacePopulator::PASSWORD, $seller->password))->toBeTrue();
-    foreach (DB::table('tiendas')->get() as $shop) expect(app(ManzanilloBoundary::class)->contains((float) $shop->latitud, (float) $shop->longitud))->toBeTrue();
+    foreach (DB::table('tiendas')->get() as $shop) {
+        expect(app(ManzanilloBoundary::class)->contains((float) $shop->latitud, (float) $shop->longitud))->toBeTrue();
+    }
     foreach (DB::table('productos')->get() as $product) {
         expect(is_file(public_path(ltrim($product->imagen_url, '/'))))->toBeTrue();
         $this->assertDatabaseHas('producto_imagenes', ['id_producto' => $product->id_producto, 'es_principal' => true]);
     }
     $counts = [];
-    foreach (DB::connection()->getSchemaBuilder()->getTableListing() as $table) $counts[$table] = DB::table($table)->count();
+    foreach (DB::connection()->getSchemaBuilder()->getTableListing() as $table) {
+        $counts[$table] = DB::table($table)->count();
+    }
     $this->artisan('demo:populate', $options)->assertSuccessful();
-    foreach ($counts as $table => $count) $this->assertDatabaseCount($table, $count);
+    foreach ($counts as $table => $count) {
+        $this->assertDatabaseCount($table, $count);
+    }
     $this->artisan('demo:populate', $options + ['--verify' => true])->assertSuccessful();
     expect(DB::table('users')->where('id', $original->id)->first())->toEqual($originalRow);
     $buyer = User::where('email', DemoCatalog::email('buyer', 1))->firstOrFail();

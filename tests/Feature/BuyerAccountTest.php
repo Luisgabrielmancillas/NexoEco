@@ -16,13 +16,13 @@ beforeEach(function () {
     $this->buyer->tipos_usuario()->attach($role);
     $this->other->tipos_usuario()->attach($role);
     $this->store = Tienda::create(['id_vendedor' => $this->other->id, 'nombre_tienda' => 'Taller del catálogo', 'descripcion_tienda' => 'Productos del vendedor', 'fecha_creacion' => now()]);
-    $this->category = Categoria::create(['nombre_categoria' => 'Artesanía']);
+    $this->category = Categoria::firstOrCreate(['nombre_categoria' => 'Artesanía']);
     $this->product = Producto::create(['id_tienda' => $this->store->getKey(), 'id_categoria' => $this->category->getKey(), 'codigo_producto' => 'CAT-001', 'nombre_producto' => 'Jarrón del catálogo', 'precio' => 275.50, 'fecha_publicacion' => now()]);
 });
 
 test('department shortcuts filter real products and stores consistently for guests and buyers', function () {
-    $pets = Categoria::create(['nombre_categoria' => 'Alimentos para mascotas']);
-    $food = Categoria::create(['nombre_categoria' => 'Comida preparada']);
+    $pets = Categoria::firstOrCreate(['nombre_categoria' => 'Alimentos para mascotas']);
+    $food = Categoria::firstOrCreate(['nombre_categoria' => 'Comida preparada']);
     $petStore = Tienda::create(['id_vendedor' => $this->other->id, 'nombre_tienda' => 'Mascotas del puerto']);
     $pet = $petStore->productos()->create(['id_categoria' => $pets->getKey(), 'codigo_producto' => 'PET-1', 'nombre_producto' => 'Alimento para perro', 'precio' => 250]);
     $this->store->productos()->create(['id_categoria' => $food->getKey(), 'codigo_producto' => 'FOOD-1', 'nombre_producto' => 'Comida del día', 'precio' => 90]);
@@ -135,7 +135,7 @@ test('an older own review remains editable without changing public review pagina
     }
     $url = route('productos.show', $this->product);
     $this->actingAs($this->buyer)->get($url)->assertOk()->assertSee($own->comentario)
-        ->assertViewHas('opiniones', fn ($page) => $page->count() === 5 && !$page->contains('id', $own->id))
+        ->assertViewHas('opiniones', fn ($page) => $page->count() === 5 && ! $page->contains('id', $own->id))
         ->assertSee('aria-label="Editar mi opinión"', false);
     $response = $this->get($url.'?editar_opinion='.$own->id)->assertOk();
     $document = new DOMDocument;

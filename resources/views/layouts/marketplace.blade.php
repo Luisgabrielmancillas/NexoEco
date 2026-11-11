@@ -15,9 +15,7 @@
 
         <div class="nexo-container market-header-main">
 
-            <button type="button" class="market-header-menu-toggle" data-mobile-nav-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="buyer-navigation-links">
-                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
-            </button>
+
 
             {{-- LOGO --}}
             <a
@@ -27,7 +25,10 @@
                 <span class="market-brand-dot"></span>
 
                 <span>NexoEco</span>
-            </a>
+            </a><a class="skip-link" href="#main-content">Saltar al contenido</a>
+            <button type="button" class="market-header-menu-toggle" data-mobile-nav-toggle aria-label="Abrir menú" aria-expanded="false" aria-controls="buyer-navigation-links">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+            </button>
 
 
             <div class="market-desktop-location">@include('marketplace.partials.location-button')</div>

@@ -20,8 +20,8 @@ beforeEach(function () {
     $this->stranger = User::create(['name' => 'Otro usuario', 'email' => 'stranger@example.test', 'password' => 'test-password', 'email_verified_at' => now(), 'activo' => true]);
     $this->sellerRole = TiposUsuario::create(['nombre_tipo' => 'vendedor']);
     $this->seller->tipos_usuario()->attach($this->sellerRole);
-    $shop = $this->seller->tiendas()->create(['nombre_tienda' => 'Taller local']);
-    $category = Categoria::create(['nombre_categoria' => 'Artesanía']);
+    $shop = $this->seller->tiendas()->create(['giro' => 'Artesanías', 'nombre_tienda' => 'Taller local']);
+    $category = Categoria::firstOrCreate(['nombre_categoria' => 'Cerámica']);
     $this->product = $shop->productos()->create(['nombre_producto' => 'Taza artesanal', 'descripcion' => 'Cerámica local', 'codigo_producto' => 'CHAT-TEST', 'id_categoria' => $category->getKey(), 'precio' => 200, 'apartados_activos' => true, 'apartado_monto' => 50, 'apartado_condiciones' => 'Recoger en siete días.']);
     $this->account = MercadoPagoAccount::create(['user_id' => $this->seller->id, 'mp_user_id' => '123456', 'access_token' => 'seller-access-token', 'refresh_token' => 'seller-refresh-token', 'expires_at' => now()->addDays(10), 'live_mode' => false]);
 });

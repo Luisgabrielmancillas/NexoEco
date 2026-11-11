@@ -25,3 +25,6 @@
     .review-delete { right: 12px; top: 16px; }
     .review-card-own .review-header { padding-right: 92px; }
 }
+.description-collapsed { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.public-store-description { overflow-wrap: anywhere; white-space: pre-line; }
+.seller-review-reply { margin-block: 16px; padding: 16px; border-left: 3px solid var(--color-primary); background: var(--color-background); border-radius: 8px; }

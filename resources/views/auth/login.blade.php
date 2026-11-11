@@ -409,6 +409,7 @@
         <span class="dot"></span>
         NexoEco
     </a>
+    <a class="skip-link" href="#login-form">Saltar al formulario</a>
 
     <div class="bubble bubble-1"></div>
     <div class="bubble bubble-2"></div>
@@ -451,7 +452,7 @@
     </section>
 
     <section class="nexo-right">
-        <div class="login-box">
+        <div class="login-box" id="login-form" tabindex="-1">
 
             <h2>Iniciar sesión</h2>
 
@@ -473,7 +474,6 @@
                         name="email"
                         value="{{ old('email') }}"
                         required
-                        autofocus
                         autocomplete="username"
                         maxlength="255"
                         @if($errors->has('email')) aria-invalid="true" aria-describedby="email-error" @endif

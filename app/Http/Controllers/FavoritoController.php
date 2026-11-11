@@ -25,11 +25,15 @@ class FavoritoController extends Controller
         $model = $tipo === 'productos' ? Producto::publicados()->findOrFail($id) : Tienda::findOrFail($id);
         $relation = $tipo === 'productos' ? $request->user()->productosFavoritos() : $request->user()->tiendasFavoritas();
         // Composite primary keys make repeated saves idempotent, including concurrent requests.
-        $request->user()->getConnection()->table($relation->getTable())->insertOrIgnore([
+        $added = $request->user()->getConnection()->table($relation->getTable())->insertOrIgnore([
             'id_usuario' => $request->user()->id,
             $tipo === 'productos' ? 'id_producto' : 'id_tienda' => $model->getKey(),
             'created_at' => now(), 'updated_at' => now(),
         ]);
+        $store = $tipo === 'productos' ? $model->tienda : $model;
+        if ($added && $store->id_vendedor !== $request->user()->id) {
+            $store->user?->notify(new \App\Notifications\BuyerActivityNotification('Nuevo favorito', $tipo === 'productos' ? 'Un comprador guardó '.$model->nombre_producto.' en sus favoritos.' : 'Un comprador guardó tu tienda en sus favoritos.', route('vendedor.dashboard')));
+        }
 
         return $this->response($request, true, 'Agregado a tus favoritos.');
     }

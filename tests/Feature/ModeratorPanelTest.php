@@ -19,8 +19,8 @@ beforeEach(function () {
         $this->{$property} = User::create(['name' => 'Cuenta '.$role, 'email' => $role.'@example.test', 'password' => 'clave-segura-123', 'email_verified_at' => now(), 'activo' => true]);
         $this->{$property}->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', $role)->value('id_tipo_usuario'));
     }
-    $this->shop = $this->seller->tiendas()->create(['nombre_tienda' => 'Tienda local para moderar', 'fecha_creacion' => now()]);
-    $this->category = Categoria::create(['nombre_categoria' => 'Artesanías']);
+    $this->shop = $this->seller->tiendas()->create(['giro' => 'Artesanías', 'nombre_tienda' => 'Tienda local para moderar', 'fecha_creacion' => now()]);
+    $this->category = Categoria::firstOrCreate(['nombre_categoria' => 'Cerámica']);
     $this->product = $this->shop->productos()->create(['nombre_producto' => 'Publicación para revisar', 'descripcion' => 'Producto artesanal de nuestra comunidad.', 'codigo_producto' => 'MOD-TEST', 'precio' => 200, 'id_categoria' => $this->category->getKey(), 'fecha_publicacion' => now()]);
     $this->product->forceFill(['estado_moderacion' => 'pendiente'])->save();
     $this->opinion = $this->buyer->opiniones()->create(['id_tienda' => $this->shop->getKey(), 'calificacion' => 4, 'comentario' => 'Opinión pendiente del comprador']);

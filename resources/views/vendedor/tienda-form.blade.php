@@ -5,7 +5,6 @@
     $editing = (bool) $tienda;
     $fields = [
         'nombre_tienda' => ['Nombre de la tienda', 'text', true, 120, null],
-        'giro' => ['Giro o categoría del negocio', 'text', true, 100, 'Ej. alimentos, artesanías, ropa'],
         'razon_social' => ['Razón social (opcional)', 'text', false, 150, null],
         'telefono' => ['Teléfono de contacto', 'tel', true, 30, 'Ej. 314 123 4567'],
         'email_contacto' => ['Correo de contacto', 'email', true, 255, null],
@@ -22,8 +21,9 @@
 @foreach($fields as $name => [$label, $type, $required, $max, $placeholder])
 <div class="seller-field"><label for="{{ $name }}">{{ $label }}@if($required)<span aria-hidden="true"> *</span>@endif</label><input id="{{ $name }}" name="{{ $name }}" type="{{ $type }}" maxlength="{{ $max }}" value="{{ old($name, $tienda?->$name ?? ($name === 'email_contacto' ? auth()->user()->email : '')) }}" placeholder="{{ $placeholder }}" @required($required)>@error($name)<p class="buyer-field-error">{{ $message }}</p>@enderror</div>
 @endforeach
+<div class="seller-field"><label for="giro">¿De qué giro es tu tienda? *</label><select name="giro" id="giro" required aria-describedby="giro-help"><option value="">Selecciona una categoría</option>@foreach(array_keys(config('store-categories')) as $giro)<option value="{{ $giro }}" @selected(old('giro', $tienda?->giro) === $giro)>{{ $giro }}</option>@endforeach</select><p id="giro-help" class="seller-help">El giro determina las subcategorías disponibles para tus productos.</p></div>
 <div class="seller-field"><label for="tipo_negocio">Tipo de negocio *</label><select name="tipo_negocio" id="tipo_negocio" required><option value="">Selecciona una opción</option>@foreach(['local' => 'Local físico', 'servicios' => 'Servicios', 'en_linea' => 'Tienda en línea', 'mixto' => 'Local físico y venta en línea'] as $value => $label)<option value="{{ $value }}" @selected(old('tipo_negocio', $tienda?->tipo_negocio) === $value)>{{ $label }}</option>@endforeach</select></div>
-<div class="seller-field full"><label for="descripcion_tienda">Descripción de la tienda *</label><textarea name="descripcion_tienda" id="descripcion_tienda" required minlength="20" maxlength="3000" rows="4" placeholder="¿Qué ofreces y qué hace especial a tu negocio?">{{ old('descripcion_tienda', $tienda?->descripcion_tienda) }}</textarea><p class="seller-help">Entre 20 y 3,000 caracteres. Usa una descripción que ayude a conocerte.</p></div>
+<div class="seller-field full"><label for="descripcion_tienda">Descripción de la tienda *</label><textarea name="descripcion_tienda" id="descripcion_tienda" required minlength="20" maxlength="500" data-character-count aria-describedby="description-count" rows="4" placeholder="¿Qué ofreces y qué hace especial a tu negocio?">{{ old('descripcion_tienda', $tienda?->descripcion_tienda) }}</textarea><output id="description-count" for="descripcion_tienda" data-character-output></output><p class="seller-help">Entre 20 y 500 caracteres. Usa una descripción que ayude a conocerte.</p></div>
 </div></section>
 <section class="seller-card" id="imagenes"><div class="seller-section-heading"><span class="seller-step">02</span><div><h2>La imagen de tu tienda</h2><p>Una portada que te represente y un logo fácil de reconocer.</p></div></div>
 <div class="seller-upload-grid">

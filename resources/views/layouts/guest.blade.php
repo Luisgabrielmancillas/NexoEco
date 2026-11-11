@@ -30,5 +30,6 @@
 
         </div>
 
+        <x-floating-support />
     </body>
 </html>

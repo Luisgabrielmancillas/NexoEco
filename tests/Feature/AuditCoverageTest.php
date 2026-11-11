@@ -26,8 +26,8 @@ test('all marketplace workspaces render with isolated realistic audit data', fun
         $users[$key] = User::create(['name' => 'Cuenta QA '.$key, 'email' => $key.'@example.test', 'password' => 'Audit-test-123!', 'activo' => true, 'email_verified_at' => $key === 'sin-verificar' ? null : now()]);
         $users[$key]->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', $role)->first());
     }
-    $shop = $users['vendedor']->tiendas()->create(['nombre_tienda' => 'Artesanías de nuestra comunidad', 'descripcion_tienda' => str_repeat('Descripción de la tienda local. ', 10), 'fecha_creacion' => now()]);
-    $category = Categoria::create(['nombre_categoria' => 'Artesanías']);
+    $shop = $users['vendedor']->tiendas()->create(['giro' => 'Artesanías', 'nombre_tienda' => 'Artesanías de nuestra comunidad', 'descripcion_tienda' => str_repeat('Descripción de la tienda local. ', 10), 'fecha_creacion' => now()]);
+    $category = Categoria::firstOrCreate(['nombre_categoria' => 'Cerámica']);
     $product = $shop->productos()->create(['nombre_producto' => 'Cerámica artesanal '.str_repeat('con detalles únicos ', 6), 'descripcion' => str_repeat('Información sobre materiales y entrega. ', 15), 'precio' => 250, 'codigo_producto' => 'AUDIT-001', 'id_categoria' => $category->getKey(), 'fecha_publicacion' => now()]);
     $ticket = $users['comprador']->solicitudesSoporte()->create(['asunto' => 'Consulta de prueba sobre mi cuenta', 'mensaje' => 'Necesito orientación para utilizar la plataforma.']);
     $application = $users['comprador']->solicitudVendedor()->create(['estado' => 'en_revision', 'fecha_solicitud' => now()]);

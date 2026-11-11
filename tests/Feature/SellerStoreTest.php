@@ -34,8 +34,80 @@ function shopBusinessData(): array
 
 function createShopFor(User $owner): Tienda
 {
-    return $owner->tiendas()->create(['nombre_tienda' => 'Tienda de '.$owner->name, 'fecha_creacion' => now(), 'descripcion_tienda' => 'Productos locales de la comunidad.']);
+    return $owner->tiendas()->create(['giro' => 'Artesanías', 'nombre_tienda' => 'Tienda de '.$owner->name, 'fecha_creacion' => now(), 'descripcion_tienda' => 'Productos locales de la comunidad.']);
 }
+
+test('product form lists only subcategories for the store business', function () {
+    createShopFor($this->seller);
+    $this->actingAs($this->seller)->get(route('vendedor.productos.create'))
+        ->assertOk()->assertSee('Cerámica')->assertDontSee('Celulares y accesorios')->assertDontSee('nueva_categoria');
+});
+
+test('reservation product retries are idempotent and invalid input saves nothing', function () {
+    createShopFor($this->seller);
+    $this->mock(\App\Services\MercadoPagoConnection::class, function ($mock) {
+        $mock->shouldReceive('available')->andReturn(true);
+    });
+    $data = ['creation_token' => (string) \Illuminate\Support\Str::uuid(), 'nombre_producto' => 'Taza con apartado', 'descripcion' => 'Hecha a mano.', 'precio' => '200.00', 'id_categoria' => Categoria::where('nombre_categoria', 'Cerámica')->value('id_categoria'), 'apartados_activos' => 1, 'apartado_monto' => '250.00', 'apartado_condiciones' => 'Recoger en siete días.', 'imagen' => UploadedFile::fake()->image('taza.jpg', 200, 200)];
+    $this->actingAs($this->seller)->post(route('vendedor.productos.store'), $data)->assertSessionHasErrors('apartado_monto');
+    $this->assertDatabaseCount('productos', 0);
+    $data['apartado_monto'] = '50.00';
+    $this->post(route('vendedor.productos.store'), $data)->assertSessionHasNoErrors()->assertRedirect(route('vendedor.productos.index'));
+    $this->assertDatabaseCount('productos', 1);
+    $this->post(route('vendedor.productos.store'), ['creation_token' => $data['creation_token']])->assertRedirect(route('vendedor.productos.index'));
+    $this->assertDatabaseCount('productos', 1);
+    expect(Producto::first()->apartados_activos)->toBeTrue();
+});
+
+test('forged subcategory is rejected and store description is limited', function () {
+    createShopFor($this->seller);
+    $data = ['creation_token' => (string) \Illuminate\Support\Str::uuid(), 'nombre_producto' => 'Producto', 'descripcion' => 'Descripción', 'precio' => 100, 'id_categoria' => Categoria::where('nombre_categoria', 'Computadoras')->value('id_categoria'), 'imagen' => UploadedFile::fake()->image('test.jpg', 200, 200)];
+    $this->actingAs($this->seller)->post(route('vendedor.productos.store'), $data)->assertSessionHasErrors('id_categoria');
+    $this->assertDatabaseCount('productos', 0);
+    $business = shopBusinessData();
+    $business['descripcion_tienda'] = str_repeat('a', 501);
+    $this->put(route('vendedor.tienda.update'), $business)->assertSessionHasErrors('descripcion_tienda');
+});
+
+test('only the store owner can reply and buyer sees the reply in history', function () {
+    $shop = createShopFor($this->seller);
+    $opinion = $shop->opiniones()->create(['id_usuario' => $this->buyer->id, 'calificacion' => 5, 'comentario' => 'Excelente atención']);
+    $this->actingAs($this->buyer)->put(route('vendedor.opiniones.reply', $opinion), ['respuesta_vendedor' => 'Respuesta ajena'])->assertForbidden();
+    $this->buyer->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', 'vendedor')->value('id_tipo_usuario'));
+    $this->put(route('vendedor.opiniones.reply', $opinion), ['respuesta_vendedor' => 'Respuesta de otro vendedor'])->assertForbidden();
+    $this->actingAs($this->seller)->get(route('vendedor.opiniones'))->assertOk()->assertSee('Excelente atención');
+    $this->put(route('vendedor.opiniones.reply', $opinion), ['respuesta_vendedor' => 'Gracias por tu visita'])->assertSessionHasNoErrors();
+    expect($opinion->fresh()->respuesta_vendedor)->toBe('Gracias por tu visita');
+    expect($this->buyer->notifications()->where('data->titulo', 'El vendedor respondió tu opinión')->count())->toBe(1);
+    $this->actingAs($this->buyer)->get(route('comprador.opiniones'))->assertOk()->assertSee('Gracias por tu visita');
+    $this->get(route('tiendas.show', $shop))->assertOk()->assertSee('Gracias por tu visita');
+});
+
+test('favorites and reviews notify sellers without duplicate favorite notices', function () {
+    $shop = createShopFor($this->seller);
+    $this->actingAs($this->buyer);
+    $this->post(route('comprador.favoritos.store', ['tipo' => 'tiendas', 'id' => $shop->getKey()]));
+    $this->post(route('comprador.favoritos.store', ['tipo' => 'tiendas', 'id' => $shop->getKey()]));
+    expect($this->seller->notifications()->where('data->titulo', 'Nuevo favorito')->count())->toBe(1);
+    $this->post(route('comprador.opiniones.store', ['tipo' => 'tiendas', 'id' => $shop->getKey()]), ['calificacion' => 5, 'comentario' => 'Excelente atención'])->assertSessionHasNoErrors();
+    expect($this->seller->notifications()->where('data->titulo', 'Nueva opinión en tu tienda')->count())->toBe(1);
+});
+
+test('failed product publication rolls back the product and uploaded image', function () {
+    createShopFor($this->seller);
+    $this->mock(\App\Services\StoreAudience::class, function ($mock) {
+        $mock->shouldReceive('productPublished')->once()->andThrow(new RuntimeException('Notification failure'));
+    });
+    $this->withoutExceptionHandling();
+    try {
+        $this->actingAs($this->seller)->post(route('vendedor.productos.store'), ['creation_token' => (string) \Illuminate\Support\Str::uuid(), 'nombre_producto' => 'Taza', 'descripcion' => 'Una taza artesanal.', 'precio' => 100, 'id_categoria' => Categoria::where('nombre_categoria', 'Cerámica')->value('id_categoria'), 'imagen' => UploadedFile::fake()->image('taza.jpg', 200, 200)]);
+        $this->fail('Expected publication failure');
+    } catch (RuntimeException $exception) {
+        expect($exception->getMessage())->toBe('Notification failure');
+    }
+    $this->assertDatabaseCount('productos', 0);
+    expect(Storage::disk('local')->allFiles())->toBeEmpty();
+});
 
 test('only approved sellers see the shop link beside logout and get the initial setup gate', function () {
     $this->actingAs($this->buyer)->get(route('comprador.dashboard'))->assertOk()->assertDontSee('class="buyer-nav-link buyer-store-link"', false);
@@ -177,7 +249,7 @@ test('product publication is scoped to the seller and appears in the real public
     $shop = createShopFor($this->seller);
     $other = createShopFor($this->buyer);
     $this->actingAs($this->seller)->get(route('vendedor.productos.create'))->assertOk()->assertDontSee('Navegación del comprador');
-    $this->post(route('vendedor.productos.store'), ['nombre_producto' => 'Taza del puerto', 'descripcion' => 'Una taza artesanal.', 'precio' => '175.50', 'nueva_categoria' => 'Cerámica', 'imagen' => UploadedFile::fake()->image('taza.jpg', 300, 300), 'id_tienda' => $other->getKey(), 'codigo_producto' => 'INJECTED'])->assertRedirect(route('vendedor.productos.index'))->assertSessionHasNoErrors();
+    $this->post(route('vendedor.productos.store'), ['creation_token' => (string) \Illuminate\Support\Str::uuid(), 'nombre_producto' => 'Taza del puerto', 'descripcion' => 'Una taza artesanal.', 'precio' => '175.50', 'id_categoria' => Categoria::where('nombre_categoria', 'Cerámica')->value('id_categoria'), 'imagen' => UploadedFile::fake()->image('taza.jpg', 300, 300), 'id_tienda' => $other->getKey(), 'codigo_producto' => 'INJECTED'])->assertRedirect(route('vendedor.productos.index'))->assertSessionHasNoErrors();
     $product = Producto::firstOrFail();
     expect($product->id_tienda)->toBe($shop->getKey())->and($product->precio)->toBe(175.50)->and($product->codigo_producto)->toStartWith('NE-');
     $this->get(route('vendedor.productos.index'))->assertOk()->assertSee('Taza del puerto');
@@ -193,7 +265,7 @@ test('product publication is scoped to the seller and appears in the real public
 test('product editing is owner protected and replacing images updates the marketplace main image', function () {
     $shop = createShopFor($this->seller);
     $other = createShopFor($this->buyer);
-    $category = Categoria::create(['nombre_categoria' => 'Cerámica']);
+    $category = Categoria::firstOrCreate(['nombre_categoria' => 'Cerámica']);
     $product = $shop->productos()->create(['nombre_producto' => 'Taza', 'codigo_producto' => 'MINE', 'id_categoria' => $category->getKey(), 'precio' => 100]);
     $foreign = $other->productos()->create(['nombre_producto' => 'Producto ajeno', 'codigo_producto' => 'OTHER', 'id_categoria' => $category->getKey(), 'precio' => 999]);
     $product->imagenes()->create(['imagen_url' => '/legacy.jpg', 'es_principal' => true, 'orden' => 0]);
@@ -212,7 +284,7 @@ test('product editing is owner protected and replacing images updates the market
 test('summary metrics and popular products reflect only the current store activity', function () {
     $shop = createShopFor($this->seller);
     $other = createShopFor($this->buyer);
-    $category = Categoria::create(['nombre_categoria' => 'Cerámica']);
+    $category = Categoria::firstOrCreate(['nombre_categoria' => 'Cerámica']);
     $mine = $shop->productos()->create(['nombre_producto' => 'Mi taza', 'codigo_producto' => 'OWN', 'id_categoria' => $category->getKey(), 'precio' => 100]);
     $foreign = $other->productos()->create(['nombre_producto' => 'Ajeno', 'codigo_producto' => 'FOREIGN', 'id_categoria' => $category->getKey(), 'precio' => 900]);
     $this->buyer->productosFavoritos()->attach([$mine->getKey(), $foreign->getKey()]);

@@ -8,7 +8,6 @@ use App\Models\Tienda;
 use App\Services\ShopMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Throwable;
 
@@ -42,14 +41,27 @@ class SellerProductController extends Controller
             return redirect()->route('vendedor.tienda.create');
         }
 
-        return view('vendedor.productos.form', ['tienda' => $tienda, 'producto' => null, 'categorias' => Categoria::orderBy('nombre_categoria')->get()]);
+        if (! array_key_exists($tienda->giro ?? '', config('store-categories'))) {
+            return redirect()->route('vendedor.tienda.edit')->with('success', 'Selecciona el giro de tu tienda antes de publicar productos.');
+        }
+
+        return view('vendedor.productos.form', ['tienda' => $tienda, 'producto' => null, 'categorias' => $this->categories($tienda)]);
     }
 
     public function edit(Request $request, Producto $producto)
     {
         abort_unless($producto->tienda->id_vendedor === $request->user()->id, 403);
 
-        return view('vendedor.productos.form', ['tienda' => $producto->tienda, 'producto' => $producto, 'categorias' => Categoria::orderBy('nombre_categoria')->get()]);
+        if (! array_key_exists($producto->tienda->giro ?? '', config('store-categories'))) {
+            return redirect()->route('vendedor.tienda.edit')->with('success', 'Selecciona el giro de tu tienda antes de editar productos.');
+        }
+
+        return view('vendedor.productos.form', ['tienda' => $producto->tienda, 'producto' => $producto, 'categorias' => $this->categories($producto->tienda)]);
+    }
+
+    private function categories(Tienda $tienda)
+    {
+        return Categoria::whereIn('nombre_categoria', config('store-categories')[$tienda->giro] ?? [])->orderBy('nombre_categoria')->get();
     }
 
     public function store(Request $request, ShopMedia $media)
@@ -71,6 +83,14 @@ class SellerProductController extends Controller
     private function save(Request $request, ShopMedia $media, Tienda $tienda, ?Producto $producto)
     {
         $creating = ! $producto;
+        $request->validate(['creation_token' => [$creating ? 'required' : 'nullable', 'uuid']], [
+            'creation_token.required' => 'Abre de nuevo el formulario de producto para continuar.',
+            'creation_token.uuid' => 'El formulario no es válido. Abre de nuevo la página de creación.',
+        ]);
+        $creationCode = 'NE-'.$tienda->getKey().'-'.$request->input('creation_token');
+        if ($creating && $tienda->productos()->withTrashed()->where('codigo_producto', $creationCode)->exists()) {
+            return redirect()->route('vendedor.productos.index')->with('success', 'Este producto ya se guardó.');
+        }
         $data = $request->validate([
             'nombre_producto' => ['required', 'string', 'max:150'],
             'descripcion' => ['required', 'string', 'max:5000'],
@@ -78,22 +98,27 @@ class SellerProductController extends Controller
             'apartados_activos' => ['sometimes', 'boolean'],
             'apartado_monto' => ['exclude_unless:apartados_activos,1', 'required', 'numeric', 'min:0.01', 'lt:precio', 'decimal:0,2'],
             'apartado_condiciones' => ['exclude_unless:apartados_activos,1', 'required', 'string', 'max:3000'],
-            'id_categoria' => ['required_without:nueva_categoria', 'nullable', 'integer', Rule::exists('categorias', 'id_categoria')],
-            'nueva_categoria' => ['nullable', 'string', 'max:100'],
+            'id_categoria' => ['required', 'integer', Rule::in($this->categories($tienda)->modelKeys())],
             'imagen' => [$producto ? 'nullable' : 'required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120', 'dimensions:min_width=64,min_height=64,max_width=6000,max_height=6000'],
+        ], [
+            'id_categoria.required' => 'Selecciona una subcategoría para el producto.',
+            'id_categoria.in' => 'Selecciona una subcategoría que corresponda al giro de tu tienda.',
+            'apartado_monto.required' => 'Indica el anticipo para permitir apartados.',
+            'apartado_monto.lt' => 'El anticipo debe ser menor que el precio del producto.',
+            'apartado_condiciones.required' => 'Explica las condiciones antes de activar los apartados.',
         ]);
         $uploaded = null;
         if ($request->boolean('apartados_activos') && ! app(\App\Services\MercadoPagoConnection::class)->available($request->user()->mercadoPagoAccount()->first())) {
             throw \Illuminate\Validation\ValidationException::withMessages(['apartados_activos' => 'Conecta tu cuenta de Mercado Pago desde Apartados recibidos antes de activar esta opción.']);
         }
         try {
-            DB::transaction(function () use ($request, $media, $tienda, &$producto, &$uploaded, $data, $creating) {
+            DB::transaction(function () use ($request, $media, $tienda, &$producto, &$uploaded, $data, $creating, $creationCode) {
+                Tienda::whereKey($tienda->getKey())->lockForUpdate()->firstOrFail();
+                if ($creating && $tienda->productos()->withTrashed()->where('codigo_producto', $creationCode)->exists()) {
+                    return;
+                }
                 // Scope every field to the authenticated seller's store; never accept ownership or SKU from the form.
                 $category = $data['id_categoria'] ?? null;
-                if (! empty($data['nueva_categoria'])) {
-                    $name = trim($data['nueva_categoria']);
-                    $category = Categoria::firstOrCreate(['nombre_categoria' => $name])->getKey();
-                }
                 $fields = ['nombre_producto' => $data['nombre_producto'], 'descripcion' => $data['descripcion'], 'precio' => $data['precio'], 'id_categoria' => $category];
                 $fields += [
                     'apartados_activos' => $request->boolean('apartados_activos'),
@@ -112,7 +137,7 @@ class SellerProductController extends Controller
                         $producto->imagenes()->create(['imagen_url' => $uploaded, 'es_principal' => true, 'orden' => 0, 'fecha_creacion' => now()]);
                     }
                 } else {
-                    $producto = $tienda->productos()->create($fields + ['codigo_producto' => 'NE-'.Str::uuid(), 'fecha_publicacion' => now()]);
+                    $producto = $tienda->productos()->create($fields + ['codigo_producto' => $creationCode, 'fecha_publicacion' => now()]);
                 }
                 $producto->forceFill(['estado_moderacion' => 'aprobada', 'motivo_moderacion' => null, 'id_moderador' => null, 'fecha_moderacion' => null, 'revision_contenido' => ($producto->revision_contenido ?? 1) + 1])->save();
                 if ($creating) {

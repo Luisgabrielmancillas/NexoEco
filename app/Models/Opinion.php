@@ -12,7 +12,7 @@ class Opinion extends Model
 
     protected $fillable = ['id_usuario', 'id_producto', 'id_tienda', 'calificacion', 'comentario'];
 
-    protected $casts = ['calificacion' => 'integer', 'fecha_moderacion' => 'datetime', 'revision_contenido' => 'integer'];
+    protected $casts = ['calificacion' => 'integer', 'fecha_moderacion' => 'datetime', 'revision_contenido' => 'integer', 'respuesta_fecha' => 'datetime'];
 
     public function scopePublicadas($query)
     {

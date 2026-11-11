@@ -37,6 +37,7 @@ class BuyerDatabase
             'database/migrations/2026_10_11_000000_create_seller_subscriptions.php',
             'database/migrations/2026_10_11_010000_add_seller_growth_tools.php',
             'database/migrations/2026_10_11_020000_add_commercial_offer_notifications.php',
+            'database/migrations/2026_11_10_000000_add_seller_review_replies.php',
         ]]);
     }
 }

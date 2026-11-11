@@ -1,6 +1,7 @@
-@extends('layouts.marketplace')
+@extends('layouts.auth')
 
 @section('title', 'Crear cuenta - NexoEco')
+@section('body-class', 'auth-page auth-register-page')
 
 @push('styles')
 
@@ -633,48 +634,6 @@
                         </p>
 
 
-                        <div class="register-benefits">
-
-                            <div class="register-benefit">
-
-                                <div class="register-benefit-icon">
-                                    🛍️
-                                </div>
-
-                                <span>
-                                    Compra productos locales
-                                </span>
-
-                            </div>
-
-
-                            <div class="register-benefit">
-
-                                <div class="register-benefit-icon">
-                                    🏪
-                                </div>
-
-                                <span>
-                                    Apoya a los negocios locales
-                                </span>
-
-                            </div>
-
-
-                            <div class="register-benefit">
-
-                                <div class="register-benefit-icon">
-                                    🤝
-                                </div>
-
-                                <span>
-                                    Conecta con tu comunidad
-                                </span>
-
-                            </div>
-
-                        </div>
-
                         <div class="register-seller-cta">
                             <span class="register-seller-eyebrow">PARA EMPRENDEDORES</span>
                             <h2>Vende con nosotros</h2>
@@ -744,7 +703,6 @@
                                 autocomplete="name"
                                 maxlength="150"
                                 required
-                                autofocus
                             >
 
 

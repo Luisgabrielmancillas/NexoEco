@@ -1,0 +1,39 @@
+.floating-actions { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 150; display: flex; flex-direction: row; align-items: center; gap: 14px; pointer-events: none; }
+.floating-action { pointer-events: auto; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 18px; border-radius: 999px; font-size: 13px; font-weight: 750; border: 1px solid var(--color-primary-border); box-shadow: 0 6px 22px rgb(var(--color-text-primary-rgb) / .18); cursor: pointer; text-decoration: none; }
+.floating-action[hidden] { display: none; }
+.floating-action svg { width: 24px; height: 24px; flex-shrink: 0; }
+.floating-actions .floating-whatsapp { width: 58px; height: 58px; min-height: 58px; padding: 0; border: 0; border-radius: 50%; background: var(--color-success); color: var(--color-on-primary); }
+.floating-whatsapp span, .floating-promo span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.floating-whatsapp svg { width: 32px; height: 32px; }
+.floating-whatsapp:hover { filter: brightness(.92); transform: translateY(-3px); }
+.floating-promo { background: var(--color-surface); color: var(--color-primary-text); animation: promo-bounce 3.5s ease-in-out infinite; }
+.floating-actions .floating-promo { width: 58px; height: 58px; min-height: 58px; padding: 0; border-radius: 50%; }
+.floating-promo svg { width: 28px; height: 28px; }
+.floating-promo:hover, .floating-promo:focus-visible { animation-play-state: paused; }
+.floating-promo.is-arriving { visibility: hidden; animation: none; }
+.has-seller-invitation { overflow: hidden; }
+.seller-invitation { width: min(460px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 36px 28px 24px; margin: auto; border: 1px solid var(--color-border); border-radius: 26px; background: var(--color-surface); color: var(--color-text-primary); text-align: center; box-shadow: 0 24px 80px rgb(var(--color-text-primary-rgb) / .22); }
+.seller-invitation[open] { animation: invitation-enter .35s ease-out both; }
+.seller-invitation::backdrop { background: rgb(var(--color-text-primary-rgb) / .5); backdrop-filter: blur(4px); }
+.seller-invitation-close { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-background); color: var(--color-text-secondary); border: 0; cursor: pointer; }
+.seller-invitation-close svg { width: 20px; height: 20px; }
+.seller-invitation-icon { display: grid; place-items: center; width: 70px; height: 70px; margin: 0 auto 18px; background: var(--color-primary-soft); color: var(--color-primary-text); border-radius: 22px; transform: rotate(-6deg); }
+.seller-invitation-icon svg { width: 38px; height: 38px; }
+.seller-invitation-eyebrow { color: var(--color-primary-text); font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
+.seller-invitation h2 { margin: 12px 0; font-size: 28px; line-height: 1.15; font-weight: 850; }
+.seller-invitation p { color: var(--color-text-secondary); line-height: 1.6; font-size: 14px; margin: 0 0 22px; }
+.seller-invitation .buyer-button { width: 100%; justify-content: center; }
+.seller-invitation .seller-invitation-hint { font-size: 11px; margin: 14px 0 0; }
+.seller-invitation.is-minimizing { animation: invitation-minimize .65s cubic-bezier(.5, .05, .75, .4) both; pointer-events: none; transform-origin: center; }
+.seller-invitation.is-minimizing::backdrop { animation: invitation-backdrop-out .65s ease-out both; }
+@keyframes invitation-enter { from { opacity: 0; transform: translateY(22px) scale(.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes invitation-minimize {
+    0% { opacity: 1; transform: translate(0, 0) scale(1); }
+    30% { opacity: 1; transform: translate(0, -16px) scale(.65); border-radius: 40px; }
+    85% { opacity: .9; }
+    100% { opacity: 0; transform: translate(var(--minimize-x), var(--minimize-y)) scale(.08); border-radius: 80px; }
+}
+@keyframes invitation-backdrop-out { to { opacity: 0; } }
+@keyframes promo-bounce { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(-6px); } 90% { transform: translateY(-2px); } }
+@media (max-width: 600px) { .floating-actions { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); gap: 10px; } .floating-action { font-size: 12px; padding: 10px 14px; } }
+@media (prefers-reduced-motion: reduce) { .floating-promo, .seller-invitation[open], .seller-invitation.is-minimizing { animation: none; } .floating-action { transition: none; } }

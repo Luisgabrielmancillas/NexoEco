@@ -17,6 +17,10 @@ beforeEach(function () {
     \Tests\Support\BuyerDatabase::migrate();
     Notification::fake();
     Storage::fake('local');
+    \Illuminate\Support\Facades\Http::preventStrayRequests();
+    \Illuminate\Support\Facades\Http::fake([
+        'rfc-curp-validator-mexico.p.rapidapi.com/*' => fn ($request) => \Illuminate\Support\Facades\Http::response(['valid' => true, 'type' => strlen($request['number'] ?? '') === 18 ? 'CURP' : 'RFC']),
+    ]);
     TiposUsuario::create(['nombre_tipo' => 'comprador']);
     TiposUsuario::create(['nombre_tipo' => 'vendedor']);
 });
@@ -30,6 +34,21 @@ function sellerAccountData(): array
         'password_confirmation' => 'Contraseña-segura1!',
     ];
 }
+
+test('registration screens use the authentication layout without marketplace navigation', function () {
+    foreach (['register', 'vendedor.register'] as $route) {
+        $this->get(route($route))->assertOk()->assertSee('auth-page')
+            ->assertDontSee('class="market-search"', false)->assertDontSee('buyer-navigation-links', false);
+    }
+});
+
+test('document correction recognizes the signed in account and opens documents', function () {
+    $user = sellerTestUser(true);
+    $user->solicitudVendedor()->create(['estado' => SolicitudVendedor::ESTADO_REQUIERE_CORRECCION, 'rfc' => 'ORIGINAL', 'motivo_revision' => 'El documento no es legible']);
+    $this->actingAs($user)->get(route('vendedor.register'))->assertOk()
+        ->assertSee('Sesión iniciada como')->assertSee('El documento no es legible')
+        ->assertSee('data-initial-step="2"', false)->assertDontSee('Inicia sesión');
+});
 
 function sellerDocumentData(): array
 {

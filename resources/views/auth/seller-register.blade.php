@@ -1,11 +1,11 @@
-@extends('layouts.marketplace')
+@extends('layouts.auth')
 @section('title', 'Regístrate como vendedor - NexoEco')
 @include('auth.partials.seller-styles')
 
 @php
     $editable = ! $solicitud || in_array($solicitud->estado, [\App\Models\SolicitudVendedor::ESTADO_PENDIENTE_DOCUMENTOS, \App\Models\SolicitudVendedor::ESTADO_REQUIERE_CORRECCION], true);
     $submitted = $user && (! $editable || $user->tieneTipo('vendedor'));
-    $initialStep = $submitted ? 3 : ($user ? 1 : 0);
+    $initialStep = $submitted ? 3 : ($user ? ($solicitud?->estado === \App\Models\SolicitudVendedor::ESTADO_REQUIERE_CORRECCION ? 2 : 1) : 0);
     if (! $submitted && $errors->any()) {
         foreach ([['nombre_completo', 'email', 'password'], ['rfc', 'curp', 'telefono', 'domicilio_fiscal'], ['identificacion_frente', 'identificacion_reverso', 'constancia_fiscal', 'comprobante_domicilio', 'documentos']] as $index => $fields) {
             if (collect($fields)->contains(fn ($field) => $errors->has($field))) { $initialStep = $index; break; }
@@ -32,9 +32,10 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
                     Tus documentos son privados. Se usan para revisar tu solicitud y no aparecen en tu perfil público.
                 </div>
-                <p class="seller-footnote">¿Ya tienes cuenta? <a class="seller-link" href="{{ route('login') }}">Inicia sesión</a></p>
+                @guest<p class="seller-footnote">¿Ya tienes cuenta? <a class="seller-link" href="{{ route('login') }}">Inicia sesión</a></p>@endguest
             </aside>
             <section class="seller-card">
+                @auth<div class="seller-notice seller-success">Sesión iniciada como <strong>{{ $user->email }}</strong>. Tu cuenta ya está creada; solo completa o corrige la documentación.</div>@endauth
                 @if ($errors->any() && ! $submitted)
                     <div class="seller-notice" role="alert">
                         <strong>Revisa los siguientes datos para continuar:</strong>
@@ -76,7 +77,7 @@
                     @endif
                 @else
                     @if ($solicitud?->estado === \App\Models\SolicitudVendedor::ESTADO_REQUIERE_CORRECCION)
-                        <div class="seller-notice"><strong>Necesitamos que corrijas tu solicitud.</strong><br>{{ $solicitud->motivo_revision }}<br>Revisa tus datos y adjunta nuevamente los documentos.</div>
+                        <div class="seller-notice"><strong>Corrige tus documentos para continuar.</strong><p>{{ $solicitud->motivo_revision }}</p><ol><li>Revisa el motivo de corrección.</li><li>Adjunta los documentos actualizados. Puedes volver a Datos fiscales si necesitas corregirlos.</li><li>Envía tu solicitud a revisión.</li></ol></div>
                     @endif
                     <div class="seller-progress" data-wizard-progress hidden aria-live="polite"><span data-progress-label></span><progress max="4" value="{{ $initialStep + 1 }}" aria-label="Avance del registro"></progress></div>
                     <form method="POST" action="{{ $user ? route('vendedor.solicitud.store') : route('vendedor.register') }}" enctype="multipart/form-data" data-wizard-form>
@@ -95,7 +96,7 @@
                                     <div class="seller-field"><label for="password_confirmation">Confirmar contraseña</label><div class="seller-password"><input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" minlength="8" required><button type="button" data-seller-password="password_confirmation" aria-label="Mostrar confirmación de contraseña">Ver</button></div></div>
                                 </div>
                             @endif
-                            <p class="seller-footnote">¿Ya tienes cuenta de comprador? <a class="seller-link" href="{{ route('login') }}">Inicia sesión y úsala para solicitar acceso como vendedor.</a></p>
+                            @guest<p class="seller-footnote">¿Ya tienes cuenta de comprador? <a class="seller-link" href="{{ route('login') }}">Inicia sesión y úsala para solicitar acceso como vendedor.</a></p>@endguest
                         </section>
                         <section data-wizard-step="1">
                             <span class="seller-eyebrow">Paso 02 · Datos fiscales</span>

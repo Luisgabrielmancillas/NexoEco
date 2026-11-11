@@ -11,6 +11,31 @@ use Illuminate\View\View;
 
 class OpinionController extends Controller
 {
+    public function sellerIndex(Request $request): View
+    {
+        $opiniones = \App\Models\Opinion::with(['usuario', 'producto.tienda', 'tienda'])
+            ->where(function ($query) use ($request) {
+                $query->whereHas('tienda', fn ($q) => $q->where('id_vendedor', $request->user()->id))
+                    ->orWhereHas('producto.tienda', fn ($q) => $q->where('id_vendedor', $request->user()->id));
+            })->latest()->paginate(12);
+
+        return view('vendedor.opiniones', compact('opiniones'));
+    }
+
+    public function reply(Request $request, \App\Models\Opinion $opinion): RedirectResponse
+    {
+        $store = $opinion->tienda ?? $opinion->producto?->tienda;
+        abort_unless($store && $store->id_vendedor === $request->user()->id, 403);
+        abort_if($opinion->id_usuario === $request->user()->id, 403);
+        $data = $request->validate(['respuesta_vendedor' => ['required', 'string', 'min:5', 'max:2000']]);
+        \Illuminate\Support\Facades\DB::transaction(function () use ($opinion, $data, $store) {
+            $opinion->forceFill($data + ['respuesta_fecha' => now()])->save();
+            $opinion->usuario->notify(new BuyerActivityNotification('El vendedor respondió tu opinión', $store->nombre_tienda.' respondió a tu reseña.', route('comprador.opiniones')));
+        });
+
+        return back()->with('success', 'Tu respuesta se publicó.');
+    }
+
     public function index(Request $request): View
     {
         $data = $request->validate(['tipo' => ['nullable', 'in:productos,tiendas']]);
@@ -41,6 +66,10 @@ class OpinionController extends Controller
         ]);
         $opinion->fill($data)->forceFill(['estado_moderacion' => 'aprobada', 'deleted_at' => null, 'motivo_moderacion' => null, 'id_moderador' => null, 'fecha_moderacion' => null, 'revision_contenido' => ($opinion->revision_contenido ?? 1) + 1])->save();
         $url = route($tipo === 'productos' ? 'productos.show' : 'tiendas.show', $model).'#opiniones';
+        $store = $tipo === 'productos' ? $model->tienda : $model;
+        if ($store->id_vendedor !== $request->user()->id) {
+            $store->user?->notify(new BuyerActivityNotification('Nueva opinión en tu tienda', 'Un comprador publicó o actualizó una reseña. Puedes responder desde tu historial.', route('vendedor.opiniones')));
+        }
         $request->user()->notify(new BuyerActivityNotification('Tu opinión fue publicada', 'Puedes consultar y administrar tu reseña en Mis opiniones.', route('comprador.opiniones')));
 
         return redirect($url)->with('status', 'Tu opinión se publicó correctamente.');

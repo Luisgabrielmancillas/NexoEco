@@ -278,3 +278,8 @@ a.mod-stat:hover { border-color: var(--color-primary); }
 @media (prefers-reduced-motion: reduce) { .mod-sidebar, .mod-opinion-review summary svg { transition: none; } }
 
 .mod-button:not(.secondary):not(.danger):active { background: var(--color-primary-active); border-color: var(--color-primary-active); }
+.mod-mobile-brand, .mod-mobile-skip { display: none; }
+@media (max-width: 760px) {
+    .mod-mobile-brand { display: block; padding: 16px 22px 0; font-size: 22px; font-weight: 800; color: var(--color-primary); }
+    .mod-mobile-skip { display: block; }
+}

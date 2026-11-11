@@ -44,7 +44,7 @@ test('dashboard counts and graphs reflect all users and the actual catalog', fun
     $old = User::create(['name' => 'Usuario anterior', 'email' => 'old@example.test', 'password' => 'Clave-segura-123!', 'activo' => false, 'fecha_registro' => now()->startOfMonth()->subMonths(2)]);
     $old->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', 'moderador')->value('id_tipo_usuario'));
     $store = Tienda::create(['id_vendedor' => $this->buyer->id, 'nombre_tienda' => 'Tienda real de prueba']);
-    $category = Categoria::create(['nombre_categoria' => 'Cerámica']);
+    $category = Categoria::firstOrCreate(['nombre_categoria' => 'Cerámica']);
     Producto::create(['id_tienda' => $store->getKey(), 'id_categoria' => $category->getKey(), 'codigo_producto' => 'REAL-001', 'nombre_producto' => 'Producto real de prueba', 'precio' => 100]);
     $response = $this->actingAs($this->admin)->get(route('administrador.dashboard'))->assertOk()->assertSee('Registro de usuarios')->assertDontSee('Ayuda con mi tienda')->assertDontSee('Consultas pendientes')->assertSee('Consultas por atender');
     expect($response->viewData('stats'))->toMatchArray(['usuarios' => 3, 'activos' => 2, 'inactivos' => 1, 'productos' => 1, 'tiendas' => 1, 'consultas' => 1, 'solicitudes' => 1])

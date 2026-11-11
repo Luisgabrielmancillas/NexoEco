@@ -272,12 +272,12 @@
 </head>
 
 <body class="nexo-site @yield('body-class')">
-    <a href="#@yield('skip-target', 'main-content')" class="skip-link">Saltar al contenido</a>
     @yield('site-header')
     <div class="site-content" id="main-content" tabindex="-1">
         @yield('content')
     </div>
 
+    <x-floating-support />
     @stack('scripts')
 
 </body>

@@ -16,6 +16,10 @@
         <article class="buyer-panel review-card {{ $ownReview ? 'review-card-own' : '' }}">
             <div class="review-header"><div><strong>{{ $opinion->usuario->nombre_completo ?: $opinion->usuario->name }}</strong>@if($ownReview)<span class="review-owner-label">Tu opinión</span>@endif</div><span class="opinion-rating" aria-label="{{ $opinion->calificacion }} de 5 estrellas">{{ str_repeat('★', $opinion->calificacion) }}{{ str_repeat('☆', 5 - $opinion->calificacion) }} · {{ $opinion->calificacion }}/5</span></div>
             <p class="buyer-review-text">{{ $opinion->comentario }}</p>
+            @include('marketplace.partials.review-reply')
+            @if(auth()->check() && ($tipo === 'productos' ? $item->tienda->id_vendedor : $item->id_vendedor) === auth()->id())
+                <a class="buyer-text-link" href="{{ route('vendedor.opiniones') }}#opinion-{{ $opinion->id }}">Responder o administrar respuesta</a>
+            @endif
             <time class="buyer-muted" datetime="{{ $opinion->created_at->toDateString() }}">{{ $opinion->created_at->format('d/m/Y') }}</time>
             @if($ownReview)
                 <details class="review-editor" @if($reviewErrors || request()->integer('editar_opinion') === $opinion->getKey()) open @endif>

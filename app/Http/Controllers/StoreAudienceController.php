@@ -25,7 +25,10 @@ class StoreAudienceController extends Controller
         abort_if($tienda->id_vendedor === $request->user()->id, 403);
         if ($request->boolean('following')) {
             abort_unless($tienda->user?->activo && $tienda->user->tieneTipo('vendedor'), 404);
-            DB::table('store_follows')->insertOrIgnore(['user_id' => $request->user()->id, 'id_tienda' => $tienda->getKey(), 'created_at' => now(), 'updated_at' => now()]);
+            $added = DB::table('store_follows')->insertOrIgnore(['user_id' => $request->user()->id, 'id_tienda' => $tienda->getKey(), 'created_at' => now(), 'updated_at' => now()]);
+            if ($added) {
+                $tienda->user->notify(new \App\Notifications\BuyerActivityNotification('Nuevo seguidor', 'Un comprador empezó a seguir tu tienda.', route('vendedor.dashboard')));
+            }
         } else {
             $request->user()->followedStores()->detach($tienda->getKey());
         }

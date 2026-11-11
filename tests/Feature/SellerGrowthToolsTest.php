@@ -35,9 +35,9 @@ beforeEach(function () {
         $seller->tipos_usuario()->attach(TiposUsuario::whereIn('nombre_tipo', ['comprador', 'vendedor'])->pluck('id_tipo_usuario'));
     }
     $this->buyer->tipos_usuario()->attach(TiposUsuario::where('nombre_tipo', 'comprador')->value('id_tipo_usuario'));
-    $this->shop = $this->seller->tiendas()->create(['nombre_tienda' => 'Taller del puerto']);
+    $this->shop = $this->seller->tiendas()->create(['giro' => 'Artesanías', 'nombre_tienda' => 'Taller del puerto']);
     $this->otherShop = $this->other->tiendas()->create(['nombre_tienda' => 'Tienda ajena']);
-    $this->category = Categoria::create(['nombre_categoria' => 'Cerámica']);
+    $this->category = Categoria::firstOrCreate(['nombre_categoria' => 'Cerámica']);
     $this->product = growthProduct($this, 'Taza artesanal');
 });
 
@@ -338,7 +338,7 @@ test('store follows are opt in idempotent and new product notices work for free 
     expect(DB::table('store_follows')->count())->toBe(1);
     $this->get(route('comprador.tiendas-seguidas'))->assertRedirect(route('comprador.favoritos', 'tiendas'));
     $this->actingAs($this->seller)->post(route('tiendas.follow', $this->shop), ['following' => 1])->assertForbidden();
-    $this->post(route('vendedor.productos.store'), ['nombre_producto' => 'Nuevo producto para seguidores', 'descripcion' => 'Un producto recién llegado.', 'precio' => 100, 'id_categoria' => $this->category->getKey(), 'imagen' => UploadedFile::fake()->image('nuevo.jpg', 200, 200)])->assertSessionHasNoErrors();
+    $this->post(route('vendedor.productos.store'), ['creation_token' => (string) \Illuminate\Support\Str::uuid(), 'nombre_producto' => 'Nuevo producto para seguidores', 'descripcion' => 'Un producto recién llegado.', 'precio' => 100, 'id_categoria' => $this->category->getKey(), 'imagen' => UploadedFile::fake()->image('nuevo.jpg', 200, 200)])->assertSessionHasNoErrors();
     expect($this->buyer->notifications()->where('data->event', 'store.product')->count())->toBe(1);
     $this->actingAs($this->buyer)->post(route('tiendas.follow', $this->shop), ['following' => 0])->assertSessionHasNoErrors();
     app(StoreAudience::class)->productPublished($this->product);
